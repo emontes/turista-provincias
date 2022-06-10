@@ -1,0 +1,2426 @@
+{
+  "gen_timestamp": 1654459302.8924934864,
+  "pois": [
+    {
+      "id": 68449,
+      "rating": 0,
+      "category": "airport",
+      "name": "Benito Juarez International Airport",
+      "location": {
+        "lat": 19.435278,
+        "lon": -99.07278
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          -99.07278,
+          19.435278
+        ]
+      },
+      "confirmed": true
+    },
+    {
+      "id": 68688,
+      "rating": 0,
+      "category": "airport",
+      "name": "Toluca International Airport",
+      "location": {
+        "lat": 19.283333,
+        "lon": -99.666664
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          -99.666664,
+          19.283333
+        ]
+      },
+      "confirmed": true
+    },
+    {
+      "id": 325586,
+      "rating": 0,
+      "category": "airport",
+      "name": "General Mariano Matamoros Airport",
+      "location": {
+        "lat": 18.916668,
+        "lon": -99.25
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          -99.25,
+          18.916668
+        ]
+      },
+      "confirmed": true
+    },
+    {
+      "id": 68875,
+      "rating": 0,
+      "category": "airport",
+      "name": "Huejotsingo Airport",
+      "location": {
+        "lat": 19.135,
+        "lon": -98.3675
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          -98.3675,
+          19.135
+        ]
+      },
+      "confirmed": true
+    },
+    {
+      "id": 315980,
+      "rating": 0,
+      "category": "train_station",
+      "name": "Metro Observatorio",
+      "location": {
+        "lat": 19.3981962,
+        "lon": -99.2011149
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          -99.2011149,
+          19.3981962
+        ]
+      },
+      "confirmed": false
+    }
+  ],
+  "hotels": [
+    {
+      "id": 567427,
+      "cityId": 4449,
+      "stars": 0,
+      "pricefrom": 0,
+      "rating": 0,
+      "popularity": 100,
+      "propertyType": 0,
+      "checkIn": null,
+      "checkOut": null,
+      "distance": 2,
+      "photoCount": 1,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h567427_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 25,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        56
+      ],
+      "shortFacilities": [
+        "parking"
+      ],
+      "location": {
+        "lon": -99.22572,
+        "lat": 19.466
+      },
+      "name": {
+        "en": "CLUB EJECUTIVO PREMIUM"
+      },
+      "address": {
+        "en": "Av. Primero Mayo 15, 5to Piso"
+      },
+      "link": "/mx/naucalpan-4449/club_ejecutivo_premium-567427.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 687090,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 85,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 1.4,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687090_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 12,
+        "2": 3,
+        "7": 3,
+        "9": 3
+      },
+      "yearOpened": 2001,
+      "yearRenovated": 2010,
+      "cntRooms": 114,
+      "cntSuites": null,
+      "cntFloors": 4,
+      "facilities": [
+        131,
+        56,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        65,
+        28,
+        13,
+        44,
+        26,
+        7,
+        4,
+        11,
+        3,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "pets",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.2393,
+        "lat": 19.46624
+      },
+      "name": {
+        "de": "Misión Toreo Centro de Convenciones",
+        "th": "มิซิออน โตเรโอ เซนโตร เด กอนเบนซิโอเนส",
+        "en": "Mision Toreo Centro de Convenciones",
+        "it": "Misión Toreo Centro de Convenciones",
+        "fr": "Misión Toreo Centro de Convenciones",
+        "es": "Misión Toreo Centro de Convenciones",
+        "zh": "米西翁特雷欧中心酒店"
+      },
+      "address": {
+        "de": "San Luis Tlatilco 2",
+        "ru": "San Luis Tlatilco # 2 Col. Parque Industrial Naucalpan Estado de mexico Mexico, Экатепек-де-Морелос",
+        "th": "San Luis Tlatilco 2",
+        "en": "San Luis Tlatilco, 2 Colonia Parque Industrial Naucalpan",
+        "it": "San Luis Tlatilco 2",
+        "fr": "San Luis Tlatilco 2",
+        "es": "San Luis Tlatilco 2",
+        "zh": "San Luis Tlatilco 2"
+      },
+      "link": "/mx/naucalpan-4449/mision_toreo_centro_de_convenciones-687090.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 566324,
+      "cityId": 4449,
+      "stars": 0,
+      "pricefrom": 0,
+      "rating": 97,
+      "popularity": 2000,
+      "propertyType": 7,
+      "checkIn": "14:00",
+      "checkOut": "12:30",
+      "distance": 3.9,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h566324_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 6,
+      "cntSuites": null,
+      "cntFloors": 1,
+      "facilities": [
+        56,
+        50,
+        29,
+        9,
+        6,
+        40,
+        65,
+        28,
+        13,
+        44,
+        7,
+        4,
+        11,
+        16,
+        2,
+        136,
+        137,
+        139,
+        141
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "pets",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness"
+      ],
+      "location": {
+        "lon": -99.24441,
+        "lat": 19.51276
+      },
+      "name": {
+        "en": "Casa Roa",
+        "zh": "卡萨罗亚酒店"
+      },
+      "address": {
+        "de": "Fernando González Roa 8 Cto. Juristas,Fernando González Roa, Naucalpan",
+        "ru": "Fernando González Roa 8 Cto. Juristas,Fernando González Roa, Наукальпан",
+        "en": "Fernando Gonzalez Roa, 8 Ciudad Satélite",
+        "fr": "Fernando González Roa 8 Cto. Juristas,Fernando González Roa, Naucalpan"
+      },
+      "link": "/mx/naucalpan-4449/casa_roa-566324.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1863575197,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 87,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 2.9,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1863575197_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 9
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 146,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        131,
+        56,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        13,
+        7,
+        4,
+        11,
+        3,
+        2,
+        134,
+        146,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.22158,
+        "lat": 19.4592
+      },
+      "name": {
+        "de": "Courtyard Mexico City Toreo",
+        "th": "คอร์ตยาร์ด เม็กซิโกซิตี้ โตเรโอ",
+        "en": "Courtyard by Marriott Mexico City Toreo",
+        "fr": "Courtyard Mexico City Toreo",
+        "zh": "墨西哥城托雷奥万怡酒店"
+      },
+      "address": {
+        "de": "Perf. Blvd. Manuel Avila Camacho No 150, Naucalpan",
+        "ru": "Perf. Blvd. Manuel Avila Camacho No 150, Наукальпан",
+        "en": "Periferico Boulevard Manuel Avila Camacho No 150",
+        "fr": "Perf. Blvd. Manuel Avila Camacho No 150, Naucalpan"
+      },
+      "link": "/mx/naucalpan-4449/courtyard_by_marriott_mexico_city_toreo-1863575197.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1912182006,
+      "cityId": 4449,
+      "stars": 3,
+      "pricefrom": 0,
+      "rating": 91,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "13:00",
+      "distance": 1.9,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912182006_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 14,
+        "2": 3,
+        "9": 14,
+        "128": 4,
+        "132": 7
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 168,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        56,
+        50,
+        9,
+        6,
+        28
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "pets"
+      ],
+      "location": {
+        "lon": -99.22681,
+        "lat": 19.46668
+      },
+      "name": {
+        "en": "Novotel Mexico City Toreo"
+      },
+      "address": {
+        "de": "Av Primero De Mayo 120, Naucalpan",
+        "ru": "Av Primero De Mayo 120, Наукальпан",
+        "en": "Av Primero De Mayo 120 Torre 2 San Andres Atoto",
+        "fr": "Av Primero De Mayo 120, Naucalpan"
+      },
+      "link": "/mx/naucalpan-4449/novotel_mexico_city_toreo-1912182006.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1250230340,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 89,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 1.8,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1250230340_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 10,
+        "3": 4,
+        "9": 7,
+        "132": 2
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 106,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        131,
+        56,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        13,
+        26,
+        4,
+        11,
+        27,
+        3,
+        16,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.22964,
+        "lat": 19.46553
+      },
+      "name": {
+        "de": "Holiday Inn Express Mexico - Toreo",
+        "th": "ฮอลิเดย์ อินน์ เอ็กซ์เพรส เม็กซิโก - โตเรโอ",
+        "en": "Holiday Inn Express Mexico- Toreo, an IHG Hotel",
+        "it": "Holiday Inn Express Mexico - Toreo",
+        "fr": "Holiday Inn Express Mexico - Toreo",
+        "es": "Holiday Inn Express Mexico - Toreo",
+        "zh": "墨西哥 - 托雷奥智选假日酒店"
+      },
+      "address": {
+        "de": "Av Primero De Mayo :226 Col San Andres A",
+        "ru": "Av Primero De Mayo 226, Мехико",
+        "th": "Av Primero De Mayo :226 Col San Andres A",
+        "en": "Av. Primero de Mayo 226",
+        "it": "Av Primero De Mayo :226 Col San Andres A",
+        "fr": "Av Primero De Mayo :226 Col San Andres A",
+        "es": "Av Primero De Mayo :226 Col San Andres A",
+        "zh": "Av Primero De Mayo :226 Col San Andres A"
+      },
+      "link": "/mx/naucalpan-4449/holiday_inn_express_mexico_toreo_an_ihg_hotel-1250230340.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1691404340,
+      "cityId": 4449,
+      "stars": 3,
+      "pricefrom": 0,
+      "rating": 0,
+      "popularity": 2000,
+      "propertyType": 6,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 5.8,
+      "photoCount": 29,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1691404340_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": null,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [],
+      "shortFacilities": [],
+      "location": {
+        "lon": -99.22471,
+        "lat": 19.42832
+      },
+      "name": {
+        "en": "JJM Guest House"
+      },
+      "address": {
+        "en": "Fuente de Molinos 2; #103 Lomas de Tecamachalco"
+      },
+      "link": "/mx/naucalpan-4449/jjm_guest_house-1691404340.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 687124,
+      "cityId": 4449,
+      "stars": 0,
+      "pricefrom": 0,
+      "rating": 81,
+      "popularity": 2000,
+      "propertyType": 4,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 5.8,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h687124_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 4,
+        "7": 6,
+        "8": 4,
+        "9": 37,
+        "20": 11,
+        "39": 8,
+        "143": 8
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 31,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        56,
+        50,
+        9,
+        14,
+        6,
+        40,
+        13,
+        26,
+        7,
+        4,
+        11,
+        27,
+        3,
+        2,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness"
+      ],
+      "location": {
+        "lon": -99.22551,
+        "lat": 19.42785
+      },
+      "name": {
+        "en": "Suites Teca Once",
+        "zh": "特卡套房酒店"
+      },
+      "address": {
+        "de": "Av. de Las Fuentes no. 11",
+        "ru": "Av. de Las Fuentes no. 11, Ломас де Текамачалько",
+        "th": "Av. de Las Fuentes no. 11",
+        "en": "Avenida de las Fuentes 11 Lomas de Tecamachalco",
+        "it": "Av. de Las Fuentes no. 11",
+        "fr": "Av. de Las Fuentes no. 11",
+        "es": "Av. de Las Fuentes no. 11",
+        "zh": "Av. de Las Fuentes no. 11"
+      },
+      "link": "/mx/naucalpan-4449/suites_teca_once-687124.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1910554072,
+      "cityId": 4449,
+      "stars": 0,
+      "pricefrom": 0,
+      "rating": 0,
+      "popularity": 500,
+      "propertyType": 0,
+      "checkIn": null,
+      "checkOut": null,
+      "distance": 10.3,
+      "photoCount": 5,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1910554072_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1910554072_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1910554072_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1910554072_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1910554072_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": null,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        14,
+        28,
+        13,
+        7,
+        2,
+        146,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "hairdryer",
+        "pets",
+        "laundry"
+      ],
+      "location": {
+        "lon": -99.298554,
+        "lat": 19.552799
+      },
+      "name": {
+        "en": "Habitaciones con baño privado disponibles"
+      },
+      "address": {
+        "en": "Condoplaza III casa 1, Chiluca y Club de Golf Chiluca"
+      },
+      "link": "/mx/naucalpan-4449/habitaciones_con_bano_privado_disponibles-1910554072.html",
+      "poi_distance": {
+        "68449": 27033,
+        "68688": 48867,
+        "325586": 70917
+      }
+    },
+    {
+      "id": 481989,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 86,
+      "popularity": 100,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "13:00",
+      "distance": 0.9,
+      "photoCount": 1,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h481989_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 7,
+        "7": 5,
+        "9": 5,
+        "75": 2
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 119,
+      "cntSuites": null,
+      "cntFloors": 7,
+      "facilities": [
+        131,
+        56,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        13,
+        44,
+        26,
+        7,
+        4,
+        11,
+        3,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.23101,
+        "lat": 19.47984
+      },
+      "name": {
+        "th": "เฟียสตา อินน์ เนากัลปัน",
+        "en": "Fiesta Inn Naucalpan",
+        "zh": "瑙卡尔潘嘉年华酒店"
+      },
+      "address": {
+        "de": "Periférico Norte, esq. Gustavo Baz",
+        "ru": "Periférico Norte, esq. Gustavo Baz, Наукальпан",
+        "th": "Periférico Norte, esq. Gustavo Baz",
+        "en": "Periferico Norte esquina Gustavo Baz Naucalpan",
+        "it": "Periférico Norte, esq. Gustavo Baz",
+        "fr": "Periférico Norte, esq. Gustavo Baz",
+        "es": "Periférico Norte, esq. Gustavo Baz",
+        "zh": "Periférico Norte, esq. Gustavo Baz"
+      },
+      "link": "/mx/naucalpan-4449/fiesta_inn_naucalpan-481989.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1264706,
+      "cityId": 4449,
+      "stars": 3,
+      "pricefrom": 0,
+      "rating": 78,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 2,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1264706_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 25,
+        "2": 10,
+        "132": 12
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 59,
+      "cntSuites": null,
+      "cntFloors": 12,
+      "facilities": [
+        131,
+        56,
+        50,
+        9,
+        14,
+        6,
+        13,
+        7,
+        4,
+        3,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.22611,
+        "lat": 19.46586
+      },
+      "name": {
+        "de": "Hotel Valle de México",
+        "th": "Hotel Valle de México",
+        "en": "Hotel Valle de Mexico Toreo",
+        "it": "Hotel Valle de México",
+        "fr": "Hotel Valle de México",
+        "es": "Hotel Valle de México",
+        "zh": "墨西哥巴耶酒店"
+      },
+      "address": {
+        "de": "Av Primero De Mayo 15",
+        "ru": "Av Primero De Mayo 15, Наукальпан",
+        "th": "Av Primero De Mayo 15",
+        "en": "Avenida 1o de Mayo No. 15 Colonia San Andres Atoto, Naucalpan",
+        "it": "Av Primero De Mayo 15",
+        "fr": "Av Primero De Mayo 15",
+        "es": "Av Primero De Mayo 15",
+        "zh": "Av Primero De Mayo 15"
+      },
+      "link": "/mx/naucalpan-4449/hotel_valle_de_mexico_toreo-1264706.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1154728986,
+      "cityId": 4449,
+      "stars": 2,
+      "pricefrom": 0,
+      "rating": 57,
+      "popularity": 2000,
+      "propertyType": 2,
+      "checkIn": "15:00",
+      "checkOut": "11:00",
+      "distance": 9.3,
+      "photoCount": 24,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1154728986_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": null,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        50,
+        6,
+        40,
+        13,
+        26,
+        7,
+        4,
+        27,
+        16
+      ],
+      "shortFacilities": [
+        "tv",
+        "laundry",
+        "fitness"
+      ],
+      "location": {
+        "lon": -99.27076,
+        "lat": 19.39996
+      },
+      "name": {
+        "en": "Lo Mas Inn"
+      },
+      "address": {
+        "de": "Circuito Empresarial No. 9 Piso C",
+        "th": "Circuito Empresarial No. 9 Piso C",
+        "en": "Circuito Empresarial No. 9 Piso C; Col. La Herradura",
+        "it": "Circuito Empresarial No. 9 Piso C",
+        "fr": "Circuito Empresarial No. 9 Piso C",
+        "es": "Circuito Empresarial No. 9 Piso C"
+      },
+      "link": "/mx/naucalpan-4449/lo_mas_inn-1154728986.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1912524774,
+      "cityId": 4449,
+      "stars": 0,
+      "pricefrom": 0,
+      "rating": 0,
+      "popularity": 200,
+      "propertyType": 1,
+      "checkIn": "20:00",
+      "checkOut": "12:30",
+      "distance": 2.6,
+      "photoCount": 1,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1912524774_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {},
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 1,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        9,
+        11,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "air conditioning"
+      ],
+      "location": {
+        "lon": -99.21488,
+        "lat": 19.4796
+      },
+      "name": {
+        "en": "Jordan Tower Hotel"
+      },
+      "address": {
+        "en": "Adolfo López Mateos 107 Colonia Ampliación San Pedro Xalpa"
+      },
+      "link": "/mx/naucalpan-4449/jordan_tower_hotel-1912524774.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 44679195,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 84,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "13:00",
+      "distance": 3.6,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h44679195_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 8
+      },
+      "yearOpened": 2014,
+      "yearRenovated": null,
+      "cntRooms": 89,
+      "cntSuites": null,
+      "cntFloors": 5,
+      "facilities": [
+        131,
+        56,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        65,
+        13,
+        7,
+        4,
+        11,
+        3,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "parking",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.23645,
+        "lat": 19.51099
+      },
+      "name": {
+        "de": "City Express Plus Satelite",
+        "th": "City Express Plus Satelite",
+        "en": "City Plus Satelite",
+        "it": "City Express Plus Satelite",
+        "fr": "City Express Plus Satelite",
+        "es": "City Express Plus Satelite",
+        "zh": "普乐斯卫星城市快捷酒店"
+      },
+      "address": {
+        "de": "Circuito Arquitectos No. 3",
+        "ru": "Circuito Arquitectos No. 3, Наукальпан",
+        "th": "Circuito Arquitectos No. 3",
+        "en": "Circuito Arquitectos No 3 Col. Ciudad Satélite",
+        "it": "Circuito Arquitectos No. 3",
+        "fr": "Circuito Arquitectos No. 3",
+        "zh": "Circuito Arquitectos No. 3"
+      },
+      "link": "/mx/naucalpan-4449/city_plus_satelite-44679195.html",
+      "poi_distance": {}
+    },
+    {
+      "id": 1206128,
+      "cityId": 4449,
+      "stars": 4,
+      "pricefrom": 0,
+      "rating": 82,
+      "popularity": 2000,
+      "propertyType": 1,
+      "checkIn": "15:00",
+      "checkOut": "12:00",
+      "distance": 1.7,
+      "photoCount": 50,
+      "photos": [
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_0/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_1/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_2/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_3/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_4/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_5/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_6/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_7/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_8/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_9/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_10/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_11/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_12/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_13/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_14/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_15/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_16/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_17/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_18/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_19/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_20/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_21/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_22/320/240.auto",
+          "width": 320,
+          "height": 240
+        },
+        {
+          "url": "https://photo.hotellook.com/image_v2/limit/h1206128_23/320/240.auto",
+          "width": 320,
+          "height": 240
+        }
+      ],
+      "photosByRoomType": {
+        "1": 5,
+        "9": 7,
+        "13": 6
+      },
+      "yearOpened": null,
+      "yearRenovated": null,
+      "cntRooms": 3,
+      "cntSuites": null,
+      "cntFloors": null,
+      "facilities": [
+        131,
+        50,
+        29,
+        9,
+        14,
+        6,
+        40,
+        13,
+        7,
+        4,
+        11,
+        3,
+        61,
+        2,
+        134,
+        136,
+        139
+      ],
+      "shortFacilities": [
+        "restaurant",
+        "hairdryer",
+        "safe",
+        "tv",
+        "laundry",
+        "air conditioning",
+        "fitness",
+        "wi-fi in public areas"
+      ],
+      "location": {
+        "lon": -99.22647,
+        "lat": 19.46983
+      },
+      "name": {
+        "en": "Hotel Scala Magna",
+        "zh": "斯卡拉麦格纳酒店"
+      },
+      "address": {
+        "de": "Blvd. Manuel Avila Camacho 495",
+        "ru": "Blvd. Manuel Avila Camacho 495, Наукальпан",
+        "th": "Blvd. Manuel Avila Camacho 495",
+        "en": "Boulevard Manuel Avila Camacho, 495",
+        "it": "Blvd. Manuel Avila Camacho 495",
+        "fr": "Blvd. Manuel Avila Camacho 495",
+        "es": "Blvd. Manuel Avila Camacho 495",
+        "zh": "Blvd. Manuel Avila Camacho 495"
+      },
+      "link": "/mx/naucalpan-4449/hotel_scala_magna-1206128.html",
+      "poi_distance": {}
+    }
+  ]
+}

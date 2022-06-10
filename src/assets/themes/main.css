@@ -1,0 +1,44 @@
+/*
+=============== 
+Variables
+===============
+*/
+:root {
+  /* dark shades of primary color*/
+  --clr-primary-1: #294029;
+  --clr-primary-2: #477246;
+  --clr-primary-3: rgb(84, 137, 82);
+  --clr-primary-4: hsl(118, 25%, 43%);
+  --clr-primary-5: hsl(118, 25%, 43%);
+  /* lighter shades of primary color */
+  --clr-primary-6: #ededda;
+  --clr-primary-7: #c0df6c;
+  --clr-primary-8: #f1f7ea;
+  --clr-primary-9: #b4d0a9;
+  --clr-primary-10: #d2edde;
+ /* darkest grey - used for headings */
+  --clr-grey-1: hsl(201, 35%, 9%);
+  --clr-grey-3: hsl(203, 35%, 10%);
+  --clr-grey-4: hsl(209, 28%, 39%);
+  /* grey used for paragraphs */
+  --clr-grey-5: hsl(210, 22%, 49%);
+  --clr-grey-8: hsl(210, 31%, 80%);
+  --clr-grey-9: hsl(212, 33%, 89%);
+  --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-green-dark: hsl(125, 67%, 35%);
+  --clr-red-dark: hsl(360, 67%, 44%);
+  --clr-red-light: hsl(360, 71%, 66%);
+  --clr-black: #222;
+  --clr-white: #fff;
+  --clr-white-transparency-8: rgba(255, 255, 255, 0.8);
+  --ff-primary: "Lato", sans-serif;
+  --ff-secondary: "Open Sans", sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.2rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --max-width: 117rem;
+  --fixed-width: 70rem;
+}
+/*
