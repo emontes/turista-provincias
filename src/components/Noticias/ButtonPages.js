@@ -9,7 +9,7 @@ const ButtonPages = ({ url, description }) => {
 export default ButtonPages
 
 const Wrapper = styled(Link)`
-  border: 1px solid var(--clr-grey-5);
+  border: 1px solid ${(props) => props.theme.colors.primary5};
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
   padding: 1rem;
@@ -18,7 +18,7 @@ const Wrapper = styled(Link)`
   margin-right: 1.5rem;
   transition: var(--transition);
   :hover {
-    background: var(--clr-grey-5);
+    background: ${(props) => props.theme.colors.primary5};
     box-shadow: var(--dark-shadow);
   }
 `

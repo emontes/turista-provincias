@@ -43,6 +43,9 @@ const theme = {
     primary8: '#b9acac', //este debe parecer gris por que es para los <p>
     primary9: '#d6c493',
     primary10: '#fbeded',
+    /* for the gradients */
+    gradientLight: 'rgba(251, 237, 237,0.9)',
+    gradientDark: 'rgba(129, 35, 36, 0.4)',
   },
   images: {
     bodyBg: BodyBg,

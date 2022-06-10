@@ -8,10 +8,11 @@ import BannerAdsense from '../../utilities/BannerAdsense'
 
 const Section = ({ data, pageContext }) => {
   const sectionTitle = data.strapiSection.title
+  const metadata = data.site.siteMetadata
   let sectionParent = ''
   if (data.strapiSection.strapi_parent)
     sectionParent = data.strapiSection.strapi_parent
-  const seoDescription = `Artículos Informativos que hablan de ${sectionTitle} en Chiapas, México`
+  const seoDescription = `Artículos Informativos que hablan de ${sectionTitle} en ${metadata.estado.name}, México`
   const articles = data.articles.nodes
   const sections = data.sections.nodes
 
@@ -103,7 +104,7 @@ const Section = ({ data, pageContext }) => {
 export default Section
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $estadoSlug: String!) {
     strapiSection(slug: { eq: $slug }) {
       title
       strapi_parent {
@@ -121,13 +122,23 @@ export const query = graphql`
     }
     articles: allStrapiSectionArticle(
       filter: {
-        estado: { slug: { eq: "chiapas" } }
+        estado: { slug: { eq: $estadoSlug } }
         sections: { elemMatch: { slug: { eq: $slug } } }
       }
     ) {
       nodes {
         title
         slug
+      }
+    }
+    site {
+      siteMetadata {
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
       }
     }
   }

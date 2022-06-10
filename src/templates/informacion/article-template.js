@@ -22,57 +22,63 @@ const Article = ({ data, pageContext }) => {
   return (
     <Layout linkExterno="/informacion">
       <Seo title={title} description={content.data.content.substring(0, 250)} />
-      <Wrapper className="section">
-        <div className="section-center">
-          <article>
-            <div className="breadcrumb">
-              <Link to="/informacion">Información</Link>
-              {' > '}
-              {sectionParent && (
-                <>
-                  <Link to={`/informacion/${sectionParent.slug}`}>
-                    {sectionParent.title}
+      <Wrapper className="nav_main">
+        <h2 className="nav_main--h2">{title}</h2>
+        <div className="economy_bg">
+          <div className="nav_link_details">
+            <div className="section-center">
+              <article>
+                <div className="breadcrumb">
+                  <Link to="/informacion">Información</Link>
+                  {' > '}
+                  {sectionParent && (
+                    <>
+                      <Link to={`/informacion/${sectionParent.slug}`}>
+                        {sectionParent.title}
+                      </Link>
+                      {' > '}
+                    </>
+                  )}
+                  <Link to={`/informacion/${data.article.sections[0].slug}`}>
+                    {data.article.sections[0].title}
                   </Link>
                   {' > '}
-                </>
-              )}
-              <Link to={`/informacion/${data.article.sections[0].slug}`}>
-                {data.article.sections[0].title}
-              </Link>
-              {' > '}
-              {title}
-            </div>
-            <div className="post-info">
-              <h1>{title}</h1>
+                  {title}
+                </div>
+                <div className="post-info">
+                  <h1>{title}</h1>
 
-              <div className="date-box">
-                <div class="s9-widget-wrapper"></div>
-              </div>
+                  <div className="date-box">
+                    <div class="s9-widget-wrapper"></div>
+                  </div>
 
-              <div className="underline"></div>
-            </div>
+                  <div className="underline"></div>
+                </div>
 
-            <ReactMarkdown children={content.data.content} />
+                <ReactMarkdown children={content.data.content} />
 
-            {sections.map((section) => (
-              <Link
-                key={section.slug}
-                className="category topic"
-                to={`/informacion/${section.slug}`}
+                {sections.map((section) => (
+                  <Link
+                    key={section.slug}
+                    className="category topic"
+                    to={`/informacion/${section.slug}`}
+                  >
+                    {section.title}
+                  </Link>
+                ))}
+              </article>
+              <div
+                className="cont-area"
+                style={{ background: 'var(--clr-grey-10)' }}
               >
-                {section.title}
-              </Link>
-            ))}
-          </article>
-          <div
-            className="cont-area"
-            style={{ background: 'var(--clr-grey-10)' }}
-          >
-            <Banner
-              title="Informacion"
-              description="Articulo de Información sobre el Estado de Chiapas, México"
-              listItems1={listItems1}
-            />
+                <Banner
+                  title="Informacion"
+                  description="&nbsp;"
+                  listItems1={listItems1}
+                />
+              </div>
+            </div>
+            <br />
           </div>
         </div>
         <BannerAdsense style={{ marginTop: '1rem' }} />
@@ -84,14 +90,14 @@ const Article = ({ data, pageContext }) => {
 const Wrapper = styled.section`
   .category {
     color: var(--clr-white);
-    background: var(--clr-grey-4);
+    background: ${(props) => props.theme.colors.primary9};
     border-radius: var(--radius);
     padding: 0.25rem 0.5rem;
     text-transform: uppercase;
     letter-spacing: var(--spacing);
   }
   .topic {
-    background: var(--clr-grey-8);
+    background: ${(props) => props.theme.colors.primary9};
     margin-right: 1rem;
   }
   .post-info {
@@ -129,7 +135,7 @@ const Wrapper = styled.section`
   }
 
   p {
-    color: var(--clr-grey-5);
+    color: ${(props) => props.theme.colors.primary8};
   }
   .underline {
     width: 5rem;

@@ -3,7 +3,7 @@ const path = require('path')
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
   const postPerPage = 16
-  const estadoSlug = 'edomexico'
+  const estadoSlug = 'chiapas'
 
   /* ---------------------------------
      ------------ Hoteles --------------
@@ -151,11 +151,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const resultSections = await graphql(`
     {
       parents: allStrapiSectionArticle(
-        filter: { estado: { Name: { eq: "Chiapas" } } }
+        filter: { estado: { slug: { eq: "${estadoSlug}" } } }
       ) {
         distinct(field: sections___strapi_parent___slug)
       }
-      allStrapiSectionArticle(filter: { estado: { Name: { eq: "Chiapas" } } }) {
+      allStrapiSectionArticle(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
         distinct(field: sections___slug)
       }
     }
@@ -213,6 +213,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         slug: item,
         sections: sections,
         sectionsMaster: sectionsMaster,
+        estadoSlug: estadoSlug,
       },
     })
   })
@@ -227,7 +228,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           slug
         }
         allStrapiSectionArticle(
-          filter: { estado: { slug: { eq: "chiapas" } } }
+          filter: { estado: { slug: { eq: "${estadoSlug}" } } }
         ) {
           nodes {
             id
