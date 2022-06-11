@@ -5,6 +5,7 @@ import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
 import Banner from '../../components/Banner'
 import BannerAdsense from '../../utilities/BannerAdsense'
+import Breadcrumbs from '../../components/Breadcrumbs'
 
 const Section = ({ data, pageContext }) => {
   const sectionTitle = data.strapiSection.title
@@ -22,6 +23,15 @@ const Section = ({ data, pageContext }) => {
     linkTo: 'informacion',
   }
 
+  let tree = []
+  if (sectionParent) {
+    let item = {
+      slug: sectionParent.slug,
+      title: sectionParent.title,
+    }
+    tree.push(item)
+  }
+
   return (
     <Layout seoTitle={sectionTitle} linkExterno="/informacion">
       <Seo
@@ -29,25 +39,17 @@ const Section = ({ data, pageContext }) => {
         description={seoDescription}
       />
       <section className=" nav_main">
-        <h2 className="nav_main--h2">{sectionTitle}</h2>
+        <h2 className="nav_main--h2">Información de {sectionTitle}</h2>
         <div className="economy_bg">
           <div className="nav_link_details">
             <div className="section-center">
               <div>
-                <div className="breadcrumb">
-                  <Link to="/informacion">Información</Link>
-                  {' > '}
-                  {sectionParent && (
-                    <>
-                      <Link to={`/informacion/${sectionParent.slug}`}>
-                        {sectionParent.title}
-                      </Link>
-                      {' > '}
-                    </>
-                  )}
-
-                  {sectionTitle}
-                </div>
+                <Breadcrumbs
+                  homeLink="/informacion"
+                  homeTitle="Información"
+                  tree={tree}
+                  endTitle={sectionTitle}
+                />
 
                 <h3 className="section-title">{sectionTitle}</h3>
                 {sections.length > 0 && (
@@ -69,7 +71,6 @@ const Section = ({ data, pageContext }) => {
                     <br />
                   </>
                 )}
-
                 {articles.length > 0 && (
                   <>
                     <h4>Artículos</h4>
@@ -84,7 +85,6 @@ const Section = ({ data, pageContext }) => {
                     </ul>
                   </>
                 )}
-
                 <BannerAdsense />
               </div>
               <div style={{ padding: '0 1rem 1rem' }}>

@@ -7,9 +7,11 @@ import ReactMarkdown from 'react-markdown'
 import Banner from '../../components/Banner'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
+import Breadcrumbs from '../../components/Breadcrumbs'
 
 const Article = ({ data, pageContext }) => {
   const { title, content, sections } = data.article
+
   let sectionParent = ''
   if (data.article.sections[0].strapi_parent)
     sectionParent = data.article.sections[0].strapi_parent
@@ -19,32 +21,35 @@ const Article = ({ data, pageContext }) => {
     linkTo: 'informacion',
   }
 
+  let tree = []
+  if (sectionParent) {
+    let item = {
+      slug: sectionParent.slug,
+      title: sectionParent.title,
+    }
+    tree.push(item)
+  }
+  tree.push({
+    slug: data.article.sections[0].slug,
+    title: data.article.sections[0].title,
+  })
+
   return (
     <Layout linkExterno="/informacion">
       <Seo title={title} description={content.data.content.substring(0, 250)} />
       <Wrapper className="nav_main">
-        <h2 className="nav_main--h2">{title}</h2>
+        <h2 className="nav_main--h2">Información</h2>
         <div className="economy_bg">
           <div className="nav_link_details">
             <div className="section-center">
               <article>
-                <div className="breadcrumb">
-                  <Link to="/informacion">Información</Link>
-                  {' > '}
-                  {sectionParent && (
-                    <>
-                      <Link to={`/informacion/${sectionParent.slug}`}>
-                        {sectionParent.title}
-                      </Link>
-                      {' > '}
-                    </>
-                  )}
-                  <Link to={`/informacion/${data.article.sections[0].slug}`}>
-                    {data.article.sections[0].title}
-                  </Link>
-                  {' > '}
-                  {title}
-                </div>
+                <Breadcrumbs
+                  homeLink="/informacion"
+                  homeTitle="Información"
+                  tree={tree}
+                  endTitle={title}
+                />
+
                 <div className="post-info">
                   <h1>{title}</h1>
 

@@ -5,7 +5,7 @@ import { FcFolder } from 'react-icons/fc'
 import Banner from '../Banner'
 import LinkCard from './link-card'
 import Title from './Title'
-import Breadcrumbs from './Breadcrumbs'
+import Breadcrumbs from '../Breadcrumbs'
 
 const Links = ({
   category,
@@ -16,6 +16,7 @@ const Links = ({
   subtitle,
   metadata,
 }) => {
+  console.log('El afamado tree en links:', tree)
   return (
     <Wrapper className="nav_main">
       <h2 className="nav_main--h2">{title}</h2>
@@ -24,7 +25,13 @@ const Links = ({
           <div className="section-center">
             <div>
               {category ? (
-                <Breadcrumbs category={category} tree={tree} />
+                <Breadcrumbs
+                  homeLink="/links.html"
+                  homeTitle="Directorio"
+                  tree={tree}
+                  endTitle={title}
+                  singleUrl
+                />
               ) : (
                 <h3 className="section-title">{subtitle}</h3>
               )}

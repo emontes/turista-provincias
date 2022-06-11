@@ -266,6 +266,8 @@ background: ${(props) => props.theme.colors.primary1};
   margin-bottom: 2rem;
   background: var(--clr-grey-10) ;
   border-radius: var(--radius);
+  display: flex;
+  gap: 4px;
 }
 /* social links */
 
