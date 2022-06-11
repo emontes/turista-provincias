@@ -3,7 +3,7 @@ const path = require('path')
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
   const postPerPage = 16
-  const estadoSlug = 'chiapas'
+  const estadoSlug = 'edomexico'
 
   /* ---------------------------------
      ------------ Hoteles --------------
@@ -267,6 +267,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const filtroMexico = 'filter: { estado: {Name: {nin: [ "Chiapas"] }}}' // excluye chiapas
   const filtroChiapas = 'filter: { estado: { Name: { eq: "Chiapas" } } }'
 
+  // ** Crea el ïndice de topics (ddonde lista los topics que hay)
+  createPage({
+    path: `/noticias/tema`,
+    component: path.resolve(`./src/templates/noticias/topic-index-template.js`),
+    context: {
+      estadoSlug: estadoSlug,
+    },
+  })
+
   // *** Create Categories Pages ***
   console.log('Creando páginas de Categorías de noticias')
   const resultCategories = await graphql(`
@@ -329,12 +338,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           slug: item,
           topics: topicsFull,
           categories: categoriesFull,
+          estadoSlug: estadoSlug,
         },
       })
     }
   })
 
   // *** Crea las páginas de los Temas ***
+
   console.log('Creando páginas de Temas de Noticias')
   const resultTopics = await graphql(`
     {
@@ -399,6 +410,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           slug: item,
           topics: topicsFull,
           categories: categoriesFull,
+          estadoSlug: estadoSlug,
         },
       })
     }
@@ -448,7 +460,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       if (article.slugOld) {
         path = article.slugOld
       }
-      // console.log('Creando', path)
+      console.log('Creando', path)
       createPage({
         path: path,
         component: articlePost,
@@ -457,6 +469,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           slug: path,
           topics: topicsFull,
           categories: categoriesFull,
+          estadoSlug: estadoSlug,
         },
       })
     })
@@ -476,6 +489,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           skip: i * postPerPage,
           topics: topicsFull,
           categories: categoriesFull,
+          estadoSlug,
         },
       })
     })

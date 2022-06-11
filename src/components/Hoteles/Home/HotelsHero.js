@@ -5,7 +5,6 @@ import DestinationCard from './destination-card'
 import device from '../../../assets/themes/device'
 
 const Hoteles = ({ topDestinos }) => {
-  console.log('Top destinos en el Hero de hoteles: ', topDestinos)
   return (
     <Wrapper>
       <div className="featured">

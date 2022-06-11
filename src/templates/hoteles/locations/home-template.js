@@ -12,8 +12,9 @@ import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hot
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
+  console.log('Location en home template', location)
   const listItems1 = {
-    title: 'Hoteles en Chiapas',
+    title: `${location.estado.Name}`,
     items: pageContext.destinos,
     linkTo: '',
     linkToSuffix: '.html',

@@ -9,7 +9,7 @@ const Topic = ({ data, pageContext }) => {
   const pageInfo = data.allStrapiNoticia.pageInfo
 
   let titleSeo = `Noticias del Tema: ${data.topic.Title}`
-  let descriptionSeo = `Artículos publicados con el tema ${data.topic.Title} en el Turista Chiapas.`
+  let descriptionSeo = `Artículos publicados con el tema ${data.topic.Title} en el Turista.`
   if (pageInfo.currentPage > 1) {
     titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
     descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
@@ -46,12 +46,12 @@ const Topic = ({ data, pageContext }) => {
 export default Topic
 
 export const query = graphql`
-  query($slug: String!, $skip: Int!, $limit: Int!) {
+  query($slug: String!, $skip: Int!, $limit: Int!, $estadoSlug: String!) {
     allStrapiNoticia(
       limit: $limit
       skip: $skip
       filter: {
-        estado: { slug: { eq: "chiapas" } }
+        estado: { slug: { eq: $estadoSlug } }
         topics: { elemMatch: { slug: { eq: $slug } } }
       }
       sort: { fields: date, order: DESC }

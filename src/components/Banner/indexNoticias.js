@@ -7,7 +7,7 @@ import BannerAdsense from '../../utilities/BannerAdsense'
 
 const index = ({
   title,
-  description = 'Noticias de Turismo en Chiapas',
+  description = 'Noticias de Turismo',
   isHome,
   topics,
   categories,

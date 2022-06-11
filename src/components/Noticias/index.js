@@ -6,7 +6,7 @@ const Noticias = ({
   noticias,
   isHome,
   title = 'Noticias',
-  description = 'Noticias de Turismo en Chiapas',
+  description = 'Noticias de Turismo',
   pageInfo,
   url,
   topics,

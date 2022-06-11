@@ -13,7 +13,7 @@ const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
   const listItems1 = {
-    title: 'Hoteles en Chiapas',
+    title: 'Otros Destinos',
     items: pageContext.destinos,
     linkTo: '',
     linkToSuffix: '-grandes.html',

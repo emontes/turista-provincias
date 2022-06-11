@@ -13,7 +13,7 @@ const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const hoteles = data.hoteles
   const listItems1 = {
-    title: 'Hoteles en Chiapas',
+    title: `${location.estado.Name}`,
     items: pageContext.destinos,
     linkTo: '',
     linkToSuffix: '-lista.html',

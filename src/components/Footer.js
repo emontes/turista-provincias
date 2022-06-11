@@ -17,7 +17,7 @@ const Footer = ({ title = 'El Turista', estado, linkExterno = '' }) => {
     <Wrapper>
       <div className="footer-1">
         <div className="foot">
-          <SocialLinks styleClass="footer-icons" />
+          <SocialLinks styleClass="footer-icons" slugEstado={slugEstado} />
           <a href="https://turista.com.mx">{themeContext.images.logoSmal2}</a>
 
           <div className="privacy">
@@ -67,8 +67,8 @@ const Footer = ({ title = 'El Turista', estado, linkExterno = '' }) => {
 
       <div className="footer-2">
         <Link to="/">Home</Link> | <Link to="/hoteles">Hoteles</Link> |&nbsp;
-        {TuristaExternos.map((link, i) => {
-          const rowLen = TuristaExternos.length
+        {TuristaExternos[slugEstado].map((link, i) => {
+          const rowLen = TuristaExternos[slugEstado].length
           return (
             <span key={link.id}>
               <a key={link.id} href={`${link.url}${linkExterno}`}>

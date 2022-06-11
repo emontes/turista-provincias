@@ -30,7 +30,7 @@ export const query = graphql`
   query {
     allStrapiNoticia(
       limit: 7
-      filter: { estado: { slug: { eq: "chiapas" } } }
+      filter: { estado: { slug: { eq: "edomexico" } } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {

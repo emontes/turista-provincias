@@ -9,7 +9,6 @@ const Lista = ({ metadata, locations }) => {
       <h3>Destinos con Hoteles en {metadata.estado.name}</h3>
       <div className="destinos">
         {locations.map((item) => {
-          console.log('El item: ', item)
           return (
             <Link
               to={`/${item.hotel_location.slug}.html`}
@@ -19,7 +18,8 @@ const Lista = ({ metadata, locations }) => {
                 image={getImage(
                   item.hotel_location.image.localFile.childImageSharp,
                 )}
-                alt="Turista Chiapas"
+                alt={`Hoteles en ${item.name}`}
+                title={`Hoteles en ${item.name}`}
                 className="hero-img"
                 placeholder="tracedSVG"
                 layout="constrained"

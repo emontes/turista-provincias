@@ -5,7 +5,6 @@ import OurHotelSearch from './OurHotelSearch'
 import ListaLocations from './location-list'
 
 const Hoteles = ({ metadata, locations }) => {
-  console.log('Locations en hoteles/home/index: ', locations)
   return (
     <section>
       <Map metadata={metadata} />

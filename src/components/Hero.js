@@ -18,7 +18,7 @@ const Hero = ({
       <div className="hero">
         <GatsbyImage
           image={getImage(image)}
-          alt="Turista Chiapas"
+          alt="Turista"
           className="hero-img"
           placeholder="tracedSVG"
           layout="constrained"
@@ -29,7 +29,7 @@ const Hero = ({
             {main && (
               <h1 className="heading-primary">
                 <span className="heading-primary--main">
-                  {main || 'Chiapas'}
+                  {main || 'Turista'}
                 </span>
                 {sub && <span className="heading-primary--sub">{sub}</span>}
               </h1>

@@ -8,7 +8,7 @@ const Category = ({ data, pageContext }) => {
   const pageInfo = data.allStrapiNoticia.pageInfo
 
   let titleSeo = `Noticias de ${data.location.name}`
-  let descriptionSeo = `La categoría de noticias de ${data.location.name} se refiere a noticias relacionadas con el turismo en ${data.location.name}, Chiapas`
+  let descriptionSeo = `La categoría de noticias de ${data.location.name} se refiere a noticias relacionadas con el turismo en ${data.location.name}`
   if (pageInfo.currentPage > 1) {
     titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
     descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
@@ -33,12 +33,12 @@ const Category = ({ data, pageContext }) => {
 export default Category
 
 export const query = graphql`
-  query($slug: String!, $skip: Int!, $limit: Int!) {
+  query($slug: String!, $skip: Int!, $limit: Int!, $estadoSlug: String!) {
     allStrapiNoticia(
       limit: $limit
       skip: $skip
       filter: {
-        estado: { slug: { eq: "chiapas" } }
+        estado: { slug: { eq: $estadoSlug } }
         location: { slug: { eq: $slug } }
       }
       sort: { fields: date, order: DESC }

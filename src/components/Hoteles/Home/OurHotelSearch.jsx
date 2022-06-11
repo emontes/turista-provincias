@@ -50,8 +50,8 @@ const OurHotelSearch = () => {
             </div>
             <div className="find-item__text">
               Recopilamos comentarios de múltiples sistemas de reservación de
-              hoteles, haciendo que las Calificaciones de Turista Chiapas sean
-              más precisas.
+              hoteles, haciendo que las Calificaciones del Turista sean más
+              precisas.
             </div>
           </div>
         </li>

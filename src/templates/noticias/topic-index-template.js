@@ -7,16 +7,17 @@ import BannerAdsense from '../../utilities/BannerAdsense'
 import ButtonPages from '../../components/Noticias/ButtonPages'
 const Tema = ({ data }) => {
   const topics = data.allStrapiNoticia.distinct
+  const metadata = data.site.siteMetadata
   return (
     <Layout
       heroImg={data.image.localFile.childImageSharp}
       main="Temas de Noticias"
-      sub="sobre Chiapas"
+      sub={`sobre ${metadata.estado.name}`}
       linkExterno="/noticias/tema"
     >
       <Seo
-        title="Temas de Noticias en Turista Chiapas"
-        description="Muestra los diferentes temas de noticias que se encuentran registrados en Turista Chiapas."
+        title={`Temas de Noticias en Turista ${metadata.estado.name}`}
+        description={`Muestra los diferentes temas de noticias que se encuentran registrados en Turista ${metadata.estado.name}.`}
       />
       <div
         className="cont-area"
@@ -43,12 +44,23 @@ const Tema = ({ data }) => {
 export default Tema
 
 export const query = graphql`
-  {
-    allStrapiNoticia(filter: { estado: { Name: { eq: "Chiapas" } } }) {
+  query($estadoSlug: String!) {
+    allStrapiNoticia(filter: { estado: { slug: { eq: $estadoSlug } } }) {
       distinct(field: topics___slug)
     }
 
-    image: strapiMedia(name: { eq: "noticia-chiapas-c2c.jpg" }) {
+    site {
+      siteMetadata {
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+
+    image: strapiMedia(name: { eq: "noticias.jpg" }) {
       name
       localFile {
         childImageSharp {

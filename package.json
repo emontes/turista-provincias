@@ -1,8 +1,8 @@
 {
-  "name": "turista-chiapas",
+  "name": "turista-provincias",
   "version": "1.0.0",
   "private": true,
-  "description": "Turista Chiapas",
+  "description": "Turista Privincias",
   "author": "emontes",
   "keywords": [
     "gatsby"

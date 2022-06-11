@@ -8,7 +8,7 @@ const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
     <Wrapper className="bannerVista ">
       <GatsbyImage
         image={getImage(image.localFile)}
-        alt="Turista Chiapas"
+        alt="Turista"
         className="hero-img"
         placeholder="tracedSVG"
         layout="constrained"

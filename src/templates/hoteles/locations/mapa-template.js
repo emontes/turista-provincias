@@ -12,7 +12,7 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image, numhoteles } = data.location
   const listItems1 = {
-    title: 'Hoteles en Chiapas',
+    title: `${location.estado.Name}`,
     items: pageContext.destinos,
     linkTo: '',
     linkToSuffix: '-mapa.html',

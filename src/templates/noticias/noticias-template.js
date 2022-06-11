@@ -7,10 +7,9 @@ import { getSrc } from 'gatsby-plugin-image'
 
 const noticias = ({ data, pageContext }) => {
   const pageInfo = data.allStrapiNoticia.pageInfo
-
-  let titleSeo = 'Noticias de Chiapas'
-  let descriptionSeo =
-    'Artículos Informativos y de Noticias en Turista Chiapas. Nos enfocamos principalmente en noticias de turismo en Chiapas.'
+  const metadata = data.site.siteMetadata
+  let titleSeo = `Noticias de ${metadata.estado.name}`
+  let descriptionSeo = `Artículos Informativos y de Noticias en Turista ${metadata.estado.name}. Nos enfocamos principalmente en noticias de turismo en ${metadata.estado.name}.`
   if (pageInfo.currentPage > 1) {
     titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
     descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
@@ -20,7 +19,7 @@ const noticias = ({ data, pageContext }) => {
     <Layout
       heroImg={data.image.localFile.childImageSharp}
       main="Noticias"
-      sub="sobre Chiapas"
+      sub={`sobre ${metadata.estado.name}`}
       seoTitle={titleSeo}
       linkExterno="/noticias"
     >
@@ -46,11 +45,11 @@ const noticias = ({ data, pageContext }) => {
 export default noticias
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
+  query($skip: Int!, $limit: Int!, $estadoSlug: String!) {
     allStrapiNoticia(
       limit: $limit
       skip: $skip
-      filter: { estado: { slug: { eq: "chiapas" } } }
+      filter: { estado: { slug: { eq: $estadoSlug } } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {
@@ -66,8 +65,17 @@ export const query = graphql`
         currentPage
       }
     }
-
-    image: strapiMedia(name: { eq: "noticia-chiapas-c2c.jpg" }) {
+    site {
+      siteMetadata {
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+    image: strapiMedia(name: { eq: "noticias.jpg" }) {
       name
       localFile {
         childImageSharp {
