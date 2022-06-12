@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
-  console.log('El afamado tree en Bradcrumbs: ', tree)
   return (
     <div
       className="breadcrumb"

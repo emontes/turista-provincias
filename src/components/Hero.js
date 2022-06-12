@@ -90,7 +90,8 @@ const Wrapper = styled.header`
     text-align: center;
   }
   .heading-primary {
-    color: ${(props) => props.theme.colors.primary10};
+    /* color: ${(props) => props.theme.colors.primary8}; */
+    color: var(--clr-white);
     text-shadow: 1px 1px 2px black;
     text-transform: uppercase;
     backface-visibility: hidden;

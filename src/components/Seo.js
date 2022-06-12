@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
+import { getSrc } from 'gatsby-plugin-image'
 
 const SEO = ({ title, description, image, article }) => {
   const { pathname } = useLocation()
-  const { site } = useStaticQuery(query)
+  const { site, imageSeo } = useStaticQuery(query)
+  const imgSrc = getSrc(imageSeo.childImageSharp)
 
   const {
     defaultTitle,
@@ -20,7 +22,7 @@ const SEO = ({ title, description, image, article }) => {
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || defaultImage}`,
+    image: `${siteUrl}${image || imgSrc}`,
     url: `${siteUrl}${pathname}`,
   }
 
@@ -88,6 +90,11 @@ const query = graphql`
           name
           slug
         }
+      }
+    }
+    imageSeo: file(relativePath: { eq: "portada-1.jpg" }) {
+      childImageSharp {
+        gatsbyImageData
       }
     }
   }

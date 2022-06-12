@@ -16,7 +16,6 @@ const Links = ({
   subtitle,
   metadata,
 }) => {
-  console.log('El afamado tree en links:', tree)
   return (
     <Wrapper className="nav_main">
       <h2 className="nav_main--h2">{title}</h2>

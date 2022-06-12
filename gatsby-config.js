@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const siteData = require('./src/constants/configs/edomexico/siteData')
+const siteData = require('./src/constants/configs/chiapas/siteData')
 
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,

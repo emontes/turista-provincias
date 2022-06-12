@@ -2,8 +2,19 @@ const path = require('path')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+  const { createRedirect } = actions
+
   const postPerPage = 16
-  const estadoSlug = 'edomexico'
+  const estadoSlug = 'chiapas'
+
+  // ** crea el index
+  createPage({
+    path: `/`,
+    component: path.resolve(`./src/templates/index-template.js`),
+    context: {
+      estadoSlug: estadoSlug,
+    },
+  })
 
   /* ---------------------------------
      ------------ Hoteles --------------
@@ -16,6 +27,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     context: {
       estadoSlug: estadoSlug,
     },
+  })
+
+  const globalPages = ['economicos', 'grandes']
+
+  globalPages.map(async (item) => {
+    createPage({
+      path: `/hoteles/${item}`,
+      component: path.resolve(`./src/templates/hoteles/global-template.js`),
+      context: {
+        item: item,
+        estadoSlug: estadoSlug,
+      },
+    })
+  })
+
+  const globalPagesRedirect = [
+    'economicos',
+    'grandes',
+    'mapa',
+    'ofertas',
+    'completos',
+  ]
+
+  console.log('Creando redirects....')
+  globalPagesRedirect.map(async (item) => {
+    createRedirect({
+      fromPath: `/hoteles/${item}/global`,
+      toPath: `/hoteles/${item}`,
+      isPermanent: true,
+    })
   })
 
   const resultDestinos = await graphql(`

@@ -27,10 +27,10 @@ const index = ({ data }) => {
 export default index
 
 export const query = graphql`
-  query {
+  query($estadoSlug: String!) {
     allStrapiNoticia(
       limit: 7
-      filter: { estado: { slug: { eq: "edomexico" } } }
+      filter: { estado: { slug: { eq: $estadoSlug } } }
       sort: { fields: date, order: DESC }
     ) {
       nodes {
