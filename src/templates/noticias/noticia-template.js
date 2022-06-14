@@ -73,7 +73,15 @@ const Article = ({ data, pageContext }) => {
                     dangerouslySetInnerHTML={{ __html: hometext.data.hometext }}
                   />
                 )}
-                <BannerAdsense slot="3662873871" />
+                <div style={{ width: '90%' }}>
+                  <BannerAdsense
+                    slot="2384751841"
+                    style={{ display: 'block', textAlign: 'center' }}
+                    format="fluid"
+                    layout="in-article"
+                    responsive="false"
+                  />
+                </div>
                 {bodytext && (
                   <p
                     dangerouslySetInnerHTML={{ __html: bodytext.data.bodytext }}
@@ -83,7 +91,15 @@ const Article = ({ data, pageContext }) => {
             ) : (
               <>
                 <ReactMarkdown children={hometext.data.hometext} />
-                <BannerAdsense slot="3662873871" />
+                <div style={{ width: '90%' }}>
+                  <BannerAdsense
+                    slot="2384751841"
+                    style={{ display: 'block', textAlign: 'center' }}
+                    format="fluid"
+                    layout="in-article"
+                    responsive="false"
+                  />
+                </div>
                 <ReactMarkdown children={bodytext.data.bodytext} />
               </>
             )}
@@ -108,7 +124,7 @@ const Article = ({ data, pageContext }) => {
             />
           </div>
         </div>
-        <BannerAdsense style={{ marginTop: '1rem' }} />
+        {/* <BannerAdsense /> */}
       </Wrapper>
     </Layout>
   )

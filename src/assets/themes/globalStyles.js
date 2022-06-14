@@ -261,14 +261,6 @@ background: ${(props) => props.theme.colors.primary1};
     background: ${(props) => props.theme.colors.primary7};
   }
 
-.breadcrumb {
-  padding: .8rem 1.5rem;
-  margin-bottom: 2rem;
-  background: var(--clr-grey-10) ;
-  border-radius: var(--radius);
-  display: flex;
-  gap: 4px;
-}
 /* social links */
 
 .footer-icons {

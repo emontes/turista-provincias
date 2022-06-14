@@ -86,8 +86,8 @@ const Article = ({ data, pageContext }) => {
             <br />
           </div>
         </div>
-        <BannerAdsense style={{ marginTop: '1rem' }} />
       </Wrapper>
+      <BannerAdsense />
     </Layout>
   )
 }
