@@ -10,24 +10,25 @@ const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
           <span property="name">{homeTitle}</span>
         </Link>
         <meta property="position" content="1" />
-        {' > '}
       </span>
       {tree.map((item, index) => {
         let linkTo = `${homeLink}/${item.slug}`
         if (singleUrl) linkTo = `/${item.slug}`
         return (
-          <>
-            <div key={index} property="itemListElement" typeof="ListItem">
-              <Link property="item" typeof="WebPage" to={linkTo}>
-                <span property="name">{item.title}</span>
-              </Link>
-              <meta property="position" content={index + 2} />
-            </div>
-            {' > '}
-          </>
+          <div
+            key={index}
+            className="breadcrumb"
+            property="itemListElement"
+            typeof="ListItem"
+          >
+            <Link property="item" typeof="WebPage" to={linkTo}>
+              <span property="name">{item.title}</span>
+            </Link>
+            <meta property="position" content={index + 2} />
+          </div>
         )
       })}
-      <span>{endTitle}</span>
+      <span className="breadcrumb">{endTitle}</span>
     </Wrapper>
   )
 }
@@ -35,10 +36,21 @@ const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
 export default Breadcrumbs
 
 const Wrapper = styled.div`
-  padding: 0.8rem 1.5rem;
-  margin-bottom: 2rem;
-  background: var(--clr-grey-10);
-  border-radius: var(--radius);
   display: flex;
-  gap: 4px;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: var(--clr-grey-10);
+  border-radius: 0.25rem;
+
+  .breadcrumb {
+    ::before {
+      display: inline-block;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      color: #6c757d;
+      content: '/';
+    }
+  }
 `

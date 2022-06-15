@@ -7,56 +7,63 @@ const Hotel = ({ hotel }) => {
       ? hotel.photos.strapi_json_value[0].url
       : ''
   return (
-    <Wrapper itemscope itemtype="http://schema.org/Hotel">
-      <div className="list-item">
-        <a
-          href={`//jet.turista.com.mx${hotel.link}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={imagen} alt={hotel.name.en} className="image" />
-        </a>
-      </div>
-      <div className="tipos">
-        {hotel.stars > 0 && <div className="stars">{hotel.stars}★</div>}
-
-        {hotel.rating > 0 && (
-          <div className="rating-number">{hotel.rating / 10}</div>
-        )}
-      </div>
-      <div className="body">
-        <div className="izquierda">
-          <div className="hotel-name" itemprop="name">
-            {hotel.name.en}
-          </div>
-          <div className="address" itemprop="address">
-            {hotel.address.en.substring(0, 45)}
-          </div>
-        </div>
-
-        <div className="derecha">
-          {hotel.pricefrom > 0 && (
-            <div className="price">
-              <span className="currency-text">MXN</span>
-              <br />
-              {new Intl.NumberFormat('es-MX', {
-                style: 'currency',
-                currency: 'MXN',
-              }).format(hotel.pricefrom * 24)}
-            </div>
-          )}
-
+    <div itemScope itemtype="https://schema.org/Hotel">
+      <Wrapper>
+        <div className="list-item">
           <a
             href={`//jet.turista.com.mx${hotel.link}`}
             target="_blank"
             rel="noreferrer"
-            className="reservar"
           >
-            Reservar Ahora{' '}
+            <img
+              src={imagen}
+              alt={hotel.name.en}
+              className="image"
+              itemprop="image"
+            />
           </a>
         </div>
-      </div>
-    </Wrapper>
+        <div className="tipos">
+          {hotel.stars > 0 && <div className="stars">{hotel.stars}★</div>}
+
+          {hotel.rating > 0 && (
+            <div className="rating-number">{hotel.rating / 10}</div>
+          )}
+        </div>
+        <div className="body">
+          <div className="izquierda">
+            <div className="hotel-name" itemprop="name">
+              {hotel.name.en}
+            </div>
+            <div className="address" itemprop="address">
+              {hotel.address.en.substring(0, 45)}
+            </div>
+          </div>
+
+          <div className="derecha">
+            {hotel.pricefrom > 0 && (
+              <div className="price">
+                <span className="currency-text">MXN</span>
+                <br />
+                {new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(hotel.pricefrom * 24)}
+              </div>
+            )}
+
+            <a
+              href={`//jet.turista.com.mx${hotel.link}`}
+              target="_blank"
+              rel="noreferrer"
+              className="reservar"
+            >
+              Reservar Ahora{' '}
+            </a>
+          </div>
+        </div>
+      </Wrapper>
+    </div>
   )
 }
 
@@ -72,9 +79,14 @@ const Wrapper = styled.div`
   :hover {
     box-shadow: var(--dark-shadow);
   }
+
   .image {
     width: 100%;
     height: 240px;
+    transition: var(--transition);
+    :hover {
+      transform: scale(1.1);
+    }
   }
   .list-item {
     background: #efefef;
@@ -162,5 +174,8 @@ const Wrapper = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 46px;
+    :hover {
+      box-shadow: 0 4px 12px rgba(254, 186, 49, 0.5);
+    }
   }
 `

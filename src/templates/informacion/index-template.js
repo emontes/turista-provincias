@@ -46,9 +46,12 @@ const Informacion = ({ data, pageContext }) => {
                 ))}
               </div>
 
-              <Banner
-                description={`Información sobre el Estado de ${metadata.estado.name}, México`}
-              />
+              <div style={{ padding: '0 1rem' }}>
+                <Banner
+                  description={`Información sobre el Estado de ${metadata.estado.name}, México`}
+                />
+                <BannnerAdsense />
+              </div>
             </div>
           </div>
         </div>

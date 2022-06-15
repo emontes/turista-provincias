@@ -60,6 +60,14 @@ const Article = ({ data, pageContext }) => {
                   <div className="underline"></div>
                 </div>
 
+                <BannerAdsense
+                  slot="2384751841"
+                  style={{ display: 'block', textAlign: 'center' }}
+                  format="fluid"
+                  layout="in-article"
+                  responsive="false"
+                />
+
                 <ReactMarkdown children={content.data.content} />
 
                 {sections.map((section) => (
@@ -72,15 +80,13 @@ const Article = ({ data, pageContext }) => {
                   </Link>
                 ))}
               </article>
-              <div
-                className="cont-area"
-                style={{ background: 'var(--clr-grey-10)' }}
-              >
+              <div style={{ padding: '0 1rem' }}>
                 <Banner
                   title="Informacion"
                   description="&nbsp;"
                   listItems1={listItems1}
                 />
+                <BannerAdsense />
               </div>
             </div>
             <br />

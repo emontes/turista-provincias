@@ -29,33 +29,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   })
 
-  const globalPages = ['economicos', 'grandes']
+  const globalPages1 = ['mapa', 'ofertas', 'economicos', 'completos', 'grandes']
+  const globalPages = [
+    { slug: 'mapa', filter: 'pricefrom', order: 'ASC' },
+    { slug: 'economicos', filter: 'pricefrom', order: 'ASC' },
+    { slug: 'grandes', filter: 'cuartos', order: 'DESC' },
+  ]
 
   globalPages.map(async (item) => {
     createPage({
-      path: `/hoteles/${item}`,
+      path: `/hoteles/${item.slug}/global`,
       component: path.resolve(`./src/templates/hoteles/global-template.js`),
       context: {
         item: item,
+        filter: item.filter,
+        order: item.order,
         estadoSlug: estadoSlug,
       },
-    })
-  })
-
-  const globalPagesRedirect = [
-    'economicos',
-    'grandes',
-    'mapa',
-    'ofertas',
-    'completos',
-  ]
-
-  console.log('Creando redirects....')
-  globalPagesRedirect.map(async (item) => {
-    createRedirect({
-      fromPath: `/hoteles/${item}/global`,
-      toPath: `/hoteles/${item}`,
-      isPermanent: true,
     })
   })
 
