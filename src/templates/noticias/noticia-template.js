@@ -39,7 +39,9 @@ const Article = ({ data, pageContext }) => {
           displayImage ? getSrc(displayImage.localFile.childImageSharp) : ''
         }
       />
+
       <Wrapper className="section">
+        <BannerAdsense />
         <div className="section-center">
           <article className="article">
             <div className="post-info">
@@ -58,6 +60,7 @@ const Article = ({ data, pageContext }) => {
 
               <div className="underline"></div>
             </div>
+
             {image && (
               <GatsbyImage
                 image={getImage(image.localFile)}
@@ -73,33 +76,31 @@ const Article = ({ data, pageContext }) => {
                     dangerouslySetInnerHTML={{ __html: hometext.data.hometext }}
                   />
                 )}
-                <div style={{ width: '90%' }}>
-                  <BannerAdsense
-                    slot="2384751841"
-                    style={{ display: 'block', textAlign: 'center' }}
-                    format="fluid"
-                    layout="in-article"
-                    responsive="false"
-                  />
-                </div>
+                <BannerAdsense
+                  slot="2384751841"
+                  style={{ display: 'block', textAlign: 'center' }}
+                  format="fluid"
+                  layout="in-article"
+                  responsive="false"
+                />
                 {bodytext && (
-                  <p
-                    dangerouslySetInnerHTML={{ __html: bodytext.data.bodytext }}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: bodytext.data.bodytext,
+                    }}
                   />
                 )}
               </>
             ) : (
               <>
                 <ReactMarkdown children={hometext.data.hometext} />
-                <div style={{ width: '90%' }}>
-                  <BannerAdsense
-                    slot="2384751841"
-                    style={{ display: 'block', textAlign: 'center' }}
-                    format="fluid"
-                    layout="in-article"
-                    responsive="false"
-                  />
-                </div>
+                <BannerAdsense
+                  slot="2384751841"
+                  style={{ display: 'block', textAlign: 'center' }}
+                  format="fluid"
+                  layout="in-article"
+                  responsive="false"
+                />
                 <ReactMarkdown children={bodytext.data.bodytext} />
               </>
             )}
@@ -124,8 +125,8 @@ const Article = ({ data, pageContext }) => {
             />
           </div>
         </div>
-        {/* <BannerAdsense /> */}
       </Wrapper>
+      <BannerAdsense />
     </Layout>
   )
 }

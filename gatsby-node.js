@@ -2,11 +2,11 @@ const path = require('path')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const { createRedirect } = actions
 
   const postPerPage = 16
-  const estadoSlug = 'chiapas'
+  const estadoSlug = process.env.ESTADO_SLUG
 
+  console.log('Creando estrucutra para: ', estadoSlug)
   // ** crea el index
   createPage({
     path: `/`,
@@ -127,6 +127,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id
           title
           slug
+          slugOld
           link_categories {
             strapi_id
             slug
@@ -147,6 +148,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   links.map(async (item) => {
     let slug = item.slug
     // Esto para los links de provincia (por ejemplo chiapas, se les pone old slug y el slug como link-chis-1)
+    // if (item.slugOld) slug = item.slugOld /* Desechamos esta opcion por que no vale la pena el esfuerzo para recupear tan pocas categoráis
 
     console.log('Creando página de Links: ', slug)
     createPage({

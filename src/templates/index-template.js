@@ -1,12 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Noticias from '../components/Noticias'
+import Noticias from '../components/Noticias/noticias-list'
 
 import Seo from '../components/Seo'
 import Mapa from '../components/Home/mapa'
+import BlockGrey from '../components/BlockGrey'
+import BannerAdsense from '../utilities/BannerAdsense'
 
 const index = ({ data }) => {
+  const metadata = data.site.siteMetadata
   return (
     <Layout
       heroImg={data.image.childImageSharp}
@@ -15,11 +18,19 @@ const index = ({ data }) => {
     >
       <Seo />
       <Mapa metadata={data.site.siteMetadata} />
-      <Noticias
-        noticias={data.allStrapiNoticia.nodes}
-        title="Últimas Noticias"
-        isHome="si"
-      />
+      <div className="section-center">
+        <Noticias
+          noticias={data.allStrapiNoticia.nodes}
+          title="Últimas Noticias"
+          isHome="si"
+        />
+        <div>
+          <BannerAdsense />
+          <BlockGrey title={`Acerca de Turista ${metadata.estado.name}`}>
+            {metadata.description}
+          </BlockGrey>
+        </div>
+      </div>
     </Layout>
   )
 }

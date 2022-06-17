@@ -211,40 +211,7 @@ th {
 a {color: #039be5; :hover{color: var(--clr-red-light);}}
 }
 
-.nav_main {
-  
-background: ${(props) => props.theme.colors.primary1};
 
-  padding-bottom: 10px;
-  margin-bottom: 12px;
-  border-radius: 5px;
-  position: relative;
-  
-  
-}
-.nav_main--h2 {
-  background: url(${(props) => props.theme.images.headingBg}) repeat-x left top;
-    margin:0px 0 .65rem 0;
-    font-size: 2.2rem;
-    font-weight: normal;
-    line-height: 62px;
-    color: var(--clr-white);
-    padding: 0 0 0 18px;
-    text-transform: uppercase;
-    border-radius: 5px 5px 0px 0px;
-    position: relative;
-    }
-
-.economy_bg {
-  background: ${(props) => props.theme.colors.primary10};
-  margin: 0 10px 0 10px;
-  padding: 5px;
-}
-.nav_link_details{
-  background: var(--clr-white);
-  padding: 10px 0 0 15px;
-}
-  
   
 
 .category-menu {

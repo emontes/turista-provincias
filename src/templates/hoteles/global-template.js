@@ -2,21 +2,27 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { graphql } from 'gatsby'
 import Seo from '../../components/Seo'
+import HotelsList from '../../components/Hoteles/Global/hotels-list'
+import LeyendaPrecios from '../../components/Hoteles/Destination/leyenda-precios'
+import ContainerGrecas from '../../components/ContainerGrecas'
 
 const Global = ({ data, pageContext }) => {
   console.log('DAta from global template: ', data)
   console.log('El pageContext:', pageContext)
+  const metadata = data.site.siteMetadata
+  const seoTitle = `Hoteles económicos en ${metadata.estado.name}`
+  const seoDescription = `Lista con los hoteles más económicos del Estado de ${metadata.estado.name}`
   return (
-    <Layout>
-      <Seo />
-      <section className=" nav_main">
-        <h2 className="nav_main--h2">{pageContext.estadoSlug}</h2>
-        <div className="economy_bg">
-          <div className="nav_link_details">
-            Global {pageContext.item.slug} {pageContext.estadoSlug}
-          </div>
-        </div>
-      </section>
+    <Layout seoTitle={seoTitle}>
+      <Seo title={seoTitle} description={seoDescription} />
+      <ContainerGrecas
+        title={`Los Hoteles más Económicos de ${metadata.estado.name}`}
+      >
+        <HotelsList hoteles={data.hoteles.nodes} title={seoTitle} />
+        <br />
+        <LeyendaPrecios />
+        <p style={{ marginBottom: '0' }}>{seoDescription}</p>
+      </ContainerGrecas>
     </Layout>
   )
 }
@@ -36,6 +42,16 @@ export const pageQuery = graphql`
     ) {
       nodes {
         ...ListaHoteles
+      }
+    }
+
+    site {
+      siteMetadata {
+        estado {
+          name
+          slug
+          slogan
+        }
       }
     }
   }

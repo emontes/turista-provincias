@@ -6,6 +6,7 @@ import Banner from '../Banner'
 import LinkCard from './link-card'
 import Title from './Title'
 import Breadcrumbs from '../Breadcrumbs'
+import ContainerGrecas from '../ContainerGrecas'
 
 const Links = ({
   category,
@@ -17,70 +18,61 @@ const Links = ({
   metadata,
 }) => {
   return (
-    <Wrapper className="nav_main">
-      <h2 className="nav_main--h2">{title}</h2>
-      <div className="economy_bg">
-        <div className="nav_link_details">
-          <div className="section-center">
-            <div>
-              {category ? (
-                <Breadcrumbs
-                  homeLink="/links.html"
-                  homeTitle="Directorio"
-                  tree={tree}
-                  endTitle={title}
-                  singleUrl
-                />
-              ) : (
-                <h3 className="section-title">{subtitle}</h3>
-              )}
+    <ContainerGrecas title={title}>
+      <Wrapper className="section-center">
+        <div>
+          {category ? (
+            <Breadcrumbs
+              homeLink="/links.html"
+              homeTitle="Directorio"
+              tree={tree}
+              endTitle={title}
+              singleUrl
+            />
+          ) : (
+            <h3 className="section-title">{subtitle}</h3>
+          )}
 
-              {linksCategories.length > 0 && (
-                <>
-                  <p style={{ margin: '0 0 -2.2rem' }}>
-                    Seleccione una categoría.
-                  </p>
-                  <ul>
-                    {linksCategories.map((item) => {
-                      let slug = item.slug
+          {linksCategories.length > 0 && (
+            <>
+              <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
+              <ul>
+                {linksCategories.map((item) => {
+                  let slug = item.slug
 
-                      return (
-                        <li key={item.slug}>
-                          <Link
-                            className={`category ${
-                              item.featured ? 'featured' : ''
-                            }`}
-                            to={`/${slug}`}
-                          >
-                            <FcFolder /> {item.title}
-                          </Link>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  {links.length > 0 && <Title title="Listado de Sitios Web" />}
-                </>
-              )}
-              {links.length > 0 &&
-                links.map((item, index) => (
-                  <LinkCard key={index} link={item} />
-                ))}
+                  return (
+                    <li key={item.slug}>
+                      <Link
+                        className={`category ${
+                          item.featured ? 'featured' : ''
+                        }`}
+                        to={`/${slug}`}
+                      >
+                        <FcFolder /> {item.title}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+              {links.length > 0 && <Title title="Listado de Sitios Web" />}
+            </>
+          )}
+          {links.length > 0 &&
+            links.map((item, index) => <LinkCard key={index} link={item} />)}
 
-              <h4>El directorio de enlaces web de {metadata.estado.name}</h4>
-            </div>
-            <div style={{ padding: '0 1rem' }}>
-              <Banner title={title} description={subtitle} />
-            </div>
-          </div>
+          <h4>El directorio de enlaces web de {metadata.estado.name}</h4>
         </div>
-      </div>
-    </Wrapper>
+        <div style={{ padding: '0 1rem' }}>
+          <Banner title={title} description={subtitle} />
+        </div>
+      </Wrapper>
+    </ContainerGrecas>
   )
 }
 
 export default Links
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   ul {
     display: flex;
     flex-wrap: wrap;

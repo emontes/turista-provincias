@@ -6,6 +6,8 @@ import BannnerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import ButtonPages from '../../components/Noticias/ButtonPages'
 import Banner from '../../components/Banner'
+import ContainerGrecas from '../../components/ContainerGrecas'
+
 const Informacion = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
   return (
@@ -21,41 +23,36 @@ const Informacion = ({ data, pageContext }) => {
         description={`Artículos Informativos sobre el Estado de ${metadata.estado.name}, México`}
         image={getSrc(data.image.localFile.childImageSharp)}
       />
-      <section className=" nav_main">
-        <h2 className="nav_main--h2">Información de {metadata.estado.name}</h2>
-        <div className="economy_bg">
-          <div className="nav_link_details">
-            <h3 className="section-title">Secciones</h3>
-            <br />
-            <div className="section-center">
-              <div
-                className="cont-area"
-                style={{
-                  padding: '2rem',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '2rem',
-                }}
-              >
-                {pageContext.sections.map((item) => (
-                  <p key={item.slug}>
-                    <ButtonPages url={item.slug} description={item.title} />
-                  </p>
-                ))}
-              </div>
+      <ContainerGrecas title={`Información de ${metadata.estado.name}`}>
+        <h3 className="section-title">Secciones</h3>
+        <br />
+        <div className="section-center">
+          <div
+            className="cont-area"
+            style={{
+              padding: '2rem',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '2rem',
+            }}
+          >
+            {pageContext.sections.map((item) => (
+              <p key={item.slug}>
+                <ButtonPages url={item.slug} description={item.title} />
+              </p>
+            ))}
+          </div>
 
-              <div style={{ padding: '0 1rem' }}>
-                <Banner
-                  description={`Información sobre el Estado de ${metadata.estado.name}, México`}
-                />
-                <BannnerAdsense />
-              </div>
-            </div>
+          <div style={{ padding: '0 1rem' }}>
+            <Banner
+              description={`Información sobre el Estado de ${metadata.estado.name}, México`}
+            />
+            <BannnerAdsense />
           </div>
         </div>
-      </section>
+      </ContainerGrecas>
       <BannnerAdsense />
     </Layout>
   )

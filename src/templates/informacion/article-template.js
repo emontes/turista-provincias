@@ -8,6 +8,7 @@ import Banner from '../../components/Banner'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import Breadcrumbs from '../../components/Breadcrumbs'
+import ContainerGrecas from '../../components/ContainerGrecas'
 
 const Article = ({ data, pageContext }) => {
   const { title, content, sections } = data.article
@@ -37,68 +38,63 @@ const Article = ({ data, pageContext }) => {
   return (
     <Layout linkExterno="/informacion">
       <Seo title={title} description={content.data.content.substring(0, 250)} />
-      <Wrapper className="nav_main">
-        <h2 className="nav_main--h2">Información</h2>
-        <div className="economy_bg">
-          <div className="nav_link_details">
-            <div className="section-center">
-              <article>
-                <Breadcrumbs
-                  homeLink="/informacion"
-                  homeTitle="Información"
-                  tree={tree}
-                  endTitle={title}
-                />
+      <Wrapper title="Información">
+        <div className="section-center">
+          <article>
+            <Breadcrumbs
+              homeLink="/informacion"
+              homeTitle="Información"
+              tree={tree}
+              endTitle={title}
+            />
 
-                <div className="post-info">
-                  <h1>{title}</h1>
+            <div className="post-info">
+              <h1>{title}</h1>
 
-                  <div className="date-box">
-                    <div class="s9-widget-wrapper"></div>
-                  </div>
-
-                  <div className="underline"></div>
-                </div>
-
-                <BannerAdsense
-                  slot="2384751841"
-                  style={{ display: 'block', textAlign: 'center' }}
-                  format="fluid"
-                  layout="in-article"
-                  responsive="false"
-                />
-
-                <ReactMarkdown children={content.data.content} />
-
-                {sections.map((section) => (
-                  <Link
-                    key={section.slug}
-                    className="category topic"
-                    to={`/informacion/${section.slug}`}
-                  >
-                    {section.title}
-                  </Link>
-                ))}
-              </article>
-              <div style={{ padding: '0 1rem' }}>
-                <Banner
-                  title="Informacion"
-                  description="&nbsp;"
-                  listItems1={listItems1}
-                />
-                <BannerAdsense />
+              <div className="date-box">
+                <div class="s9-widget-wrapper"></div>
               </div>
+
+              <div className="underline"></div>
             </div>
-            <br />
+
+            <BannerAdsense
+              slot="2384751841"
+              style={{ display: 'block', textAlign: 'center' }}
+              format="fluid"
+              layout="in-article"
+              responsive="false"
+            />
+
+            <ReactMarkdown children={content.data.content} />
+
+            {sections.map((section) => (
+              <Link
+                key={section.slug}
+                className="category topic"
+                to={`/informacion/${section.slug}`}
+              >
+                {section.title}
+              </Link>
+            ))}
+          </article>
+          <div style={{ padding: '0 1rem' }}>
+            <Banner
+              title="Informacion"
+              description="&nbsp;"
+              listItems1={listItems1}
+            />
+            <BannerAdsense />
           </div>
         </div>
+        <br />
       </Wrapper>
       <BannerAdsense />
     </Layout>
   )
 }
 
-const Wrapper = styled.section`
+const Wrapper = styled(ContainerGrecas)`
   .category {
     color: var(--clr-white);
     background: ${(props) => props.theme.colors.primary9};

@@ -127,5 +127,13 @@ export const query = graphql`
         url
       }
     }
+    hotel_location {
+      location {
+        name
+        estado {
+          Name
+        }
+      }
+    }
   }
 `
