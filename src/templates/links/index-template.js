@@ -26,6 +26,7 @@ const Directorio = ({ data, pageContext }) => {
         subtitle="Bienvenido a nuestro directorio"
         linksCategories={pageContext.linksRoot}
         metadata={metadata}
+        sideNavSec
       />
       <BannnerAdsense />
     </Layout>

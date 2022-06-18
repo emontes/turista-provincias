@@ -7,6 +7,8 @@ import Seo from '../components/Seo'
 import Mapa from '../components/Home/mapa'
 import BlockGrey from '../components/atoms/BlockGrey'
 import BannerAdsense from '../utilities/BannerAdsense'
+import ContainerGrecas from '../components/molecules/ContainerGrecas'
+import ListaDestinos from '../components/Hoteles/Home/location-list'
 
 const index = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -18,6 +20,12 @@ const index = ({ data }) => {
     >
       <Seo />
       <Mapa metadata={data.site.siteMetadata} />
+
+      <ContainerGrecas title={metadata.title} sideNavSec>
+        <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
+      </ContainerGrecas>
+
+      {/* Noticias */}
       <div className="section-center">
         <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
           <Noticias
@@ -44,6 +52,30 @@ export default index
 
 export const query = graphql`
   query($estadoSlug: String!) {
+    locations: allStrapiLocation(
+      filter: {
+        estado: { slug: { eq: $estadoSlug } }
+        hotel_location: { slug: { ne: null } }
+      }
+    ) {
+      totalCount
+      sum(field: hotel_location___numhoteles)
+      nodes {
+        name
+        hotel_location {
+          slug
+          numhoteles
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
+      }
+    }
+
     allStrapiNoticia(
       limit: 5
       filter: { estado: { slug: { eq: $estadoSlug } } }
@@ -56,6 +88,7 @@ export const query = graphql`
 
     site {
       siteMetadata {
+        title
         description
         estado {
           name

@@ -2,11 +2,16 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Title from '../../atoms/Title'
+import device from '../../../assets/themes/device'
 
 const Lista = ({ metadata, locations }) => {
   return (
     <Wrapper>
-      <h3>Destinos con Hoteles en {metadata.estado.name}</h3>
+      <Title
+        title="Destinos con"
+        subtitle={`Hoteles en ${metadata.estado.name}`}
+      />
       <div className="destinos">
         {locations.map((item) => {
           return (
@@ -29,8 +34,6 @@ const Lista = ({ metadata, locations }) => {
           )
         })}
       </div>
-      <br />
-      <p>{metadata.description}</p>
     </Wrapper>
   )
 }
@@ -38,7 +41,6 @@ const Lista = ({ metadata, locations }) => {
 export default Lista
 
 const Wrapper = styled.section`
-  background: var(--clr-grey-10);
   padding: 2rem;
   text-align: center;
 
@@ -49,8 +51,12 @@ const Wrapper = styled.section`
     justify-content: center;
   }
   .hero-img {
-    width: 26rem;
-    height: 9rem;
+    width: 90vw;
+    height: 20vh;
+
+    @media ${device.tablet} {
+      width: 35rem;
+    }
   }
 
   .name {
@@ -58,5 +64,8 @@ const Wrapper = styled.section`
     color: var(--clr-white);
     background: var(--clr-grey-1);
     font-size: 2rem;
+    @media ${device.tablet} {
+      font-size: 2rem;
+    }
   }
 `

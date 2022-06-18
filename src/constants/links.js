@@ -7,18 +7,18 @@ const data = [
   {
     id: 2,
     text: 'hoteles',
-    url: '/hoteles/',
+    url: '/hoteles',
   },
 
   {
     id: 3,
     text: 'noticias',
-    url: '/noticias/',
+    url: '/noticias',
   },
   {
     id: 4,
     text: 'información',
-    url: '/informacion/',
+    url: '/informacion',
   },
   {
     id: 5,

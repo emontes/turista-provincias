@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import SideNavSec from '../atoms/SideNavSec'
+import device from '../../assets/themes/device'
 
-const ContainerGrecas = ({ title, children }) => {
+const ContainerGrecas = ({ title, children, sideNavSec }) => {
   return (
     <Wrapper className="nav_main">
       <h2 className="nav_main--h2">{title}</h2>
       <div className="economy_bg">
+        {sideNavSec && <SideNavSec />}
+
         <div className="nav_link_details">{children}</div>
       </div>
     </Wrapper>
@@ -39,9 +43,15 @@ const Wrapper = styled.div`
     background: ${(props) => props.theme.colors.primary10};
     margin: 0 10px 0 10px;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+    @media ${device.tablet} {
+      flex-direction: row;
+    }
   }
   .nav_link_details {
     background: var(--clr-white);
     padding: 1rem;
+    width: 100%;
   }
 `

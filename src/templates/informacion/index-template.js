@@ -6,7 +6,7 @@ import BannnerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import ButtonPages from '../../components/Noticias/ButtonPages'
 import Banner from '../../components/Banner'
-import ContainerGrecas from '../../components/atoms/ContainerGrecas'
+import ContainerGrecas from '../../components/molecules/ContainerGrecas'
 
 const Informacion = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
@@ -23,7 +23,10 @@ const Informacion = ({ data, pageContext }) => {
         description={`Artículos Informativos sobre el Estado de ${metadata.estado.name}, México`}
         image={getSrc(data.image.localFile.childImageSharp)}
       />
-      <ContainerGrecas title={`Información de ${metadata.estado.name}`}>
+      <ContainerGrecas
+        title={`Información de ${metadata.estado.name}`}
+        sideNavSec
+      >
         <h3 className="section-title">Secciones</h3>
         <br />
         <div className="section-center">

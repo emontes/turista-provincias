@@ -6,7 +6,7 @@ import Banner from '../Banner'
 import LinkCard from './link-card'
 import Title from './Title'
 import Breadcrumbs from '../atoms/Breadcrumbs'
-import ContainerGrecas from '../atoms/ContainerGrecas'
+import ContainerGrecas from '../molecules/ContainerGrecas'
 
 const Links = ({
   category,
@@ -16,9 +16,10 @@ const Links = ({
   title,
   subtitle,
   metadata,
+  sideNavSec,
 }) => {
   return (
-    <ContainerGrecas title={title}>
+    <ContainerGrecas title={title} sideNavSec={sideNavSec}>
       <Wrapper className="section-center">
         <div>
           {category ? (
