@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import Seo from '../../components/Seo'
 import HotelsList from '../../components/Hoteles/Global/hotels-list'
 import LeyendaPrecios from '../../components/Hoteles/Destination/leyenda-precios'
-import ContainerGrecas from '../../components/ContainerGrecas'
+import ContainerGrecas from '../../components/atoms/ContainerGrecas'
 
 const Global = ({ data, pageContext }) => {
   console.log('DAta from global template: ', data)

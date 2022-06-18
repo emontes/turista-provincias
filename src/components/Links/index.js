@@ -5,8 +5,8 @@ import { FcFolder } from 'react-icons/fc'
 import Banner from '../Banner'
 import LinkCard from './link-card'
 import Title from './Title'
-import Breadcrumbs from '../Breadcrumbs'
-import ContainerGrecas from '../ContainerGrecas'
+import Breadcrumbs from '../atoms/Breadcrumbs'
+import ContainerGrecas from '../atoms/ContainerGrecas'
 
 const Links = ({
   category,

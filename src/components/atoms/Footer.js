@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 
 import styled from 'styled-components'
-import TuristaExternos from '../constants/turista_externos'
+import TuristaExternos from '../../constants/turista_externos'
 import { Link } from 'gatsby'
 
-import SocialLinks from '../constants/social_links'
-import destacados from '../constants/footer_destacados'
-import otrosDestinos from '../constants/footer_otros_destinos'
+import SocialLinks from '../../constants/social_links'
+import destacados from '../../constants/footer_destacados'
+import otrosDestinos from '../../constants/footer_otros_destinos'
 import { BiChevronRightCircle } from 'react-icons/bi'
 
 const Footer = ({ title = 'El Turista', estado, linkExterno = '' }) => {

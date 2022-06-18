@@ -7,8 +7,8 @@ import ReactMarkdown from 'react-markdown'
 import Banner from '../../components/Banner'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
-import Breadcrumbs from '../../components/Breadcrumbs'
-import ContainerGrecas from '../../components/ContainerGrecas'
+import Breadcrumbs from '../../components/atoms/Breadcrumbs'
+import ContainerGrecas from '../../components/atoms/ContainerGrecas'
 
 const Article = ({ data, pageContext }) => {
   const { title, content, sections } = data.article

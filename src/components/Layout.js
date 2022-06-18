@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import styled from 'styled-components'
 
-import Footer from '../components/Footer'
+import Footer from '../components/atoms/Footer'
 import Hero from '../components/Hero'
 import device from '../assets/themes/device'
 

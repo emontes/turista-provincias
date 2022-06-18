@@ -5,7 +5,7 @@ import Noticias from '../components/Noticias/noticias-list'
 
 import Seo from '../components/Seo'
 import Mapa from '../components/Home/mapa'
-import BlockGrey from '../components/BlockGrey'
+import BlockGrey from '../components/atoms/BlockGrey'
 import BannerAdsense from '../utilities/BannerAdsense'
 
 const index = ({ data }) => {
@@ -19,12 +19,17 @@ const index = ({ data }) => {
       <Seo />
       <Mapa metadata={data.site.siteMetadata} />
       <div className="section-center">
-        <Noticias
-          noticias={data.allStrapiNoticia.nodes}
-          title="Últimas Noticias"
-          isHome="si"
-        />
+        <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
+          <Noticias
+            noticias={data.allStrapiNoticia.nodes}
+            title="Últimas Noticias"
+            isHome="si"
+          />
+        </div>
         <div>
+          <BlockGrey title="Compartir">
+            <div class="s9-widget-wrapper"></div>
+          </BlockGrey>
           <BannerAdsense />
           <BlockGrey title={`Acerca de Turista ${metadata.estado.name}`}>
             {metadata.description}
@@ -40,7 +45,7 @@ export default index
 export const query = graphql`
   query($estadoSlug: String!) {
     allStrapiNoticia(
-      limit: 7
+      limit: 5
       filter: { estado: { slug: { eq: $estadoSlug } } }
       sort: { fields: date, order: DESC }
     ) {

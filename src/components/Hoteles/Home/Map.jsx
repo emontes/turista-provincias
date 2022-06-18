@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import InsertaScript from '../../../utilities/InsertaScript'
-import Title from '../../Title'
+import Title from '../../atoms/Title'
 
 const ligas = {
   chiapas:

@@ -4,6 +4,7 @@ import About from './About'
 import Topics from '../Noticias/Topics'
 import Categories from '../Noticias/Categories'
 import BannerAdsense from '../../utilities/BannerAdsense'
+import BlockGrey from '../atoms/BlockGrey'
 
 const index = ({
   title,
@@ -14,14 +15,16 @@ const index = ({
   image,
 }) => {
   return (
-    <Wrapper>
-      {!isHome && (
-        <About title={title} description={description} image={image} />
-      )}
-      {categories && <Categories items={categories} />}
-      {topics && <Topics topics={topics} />}
-      <BannerAdsense />
-    </Wrapper>
+    <BlockGrey>
+      <Wrapper>
+        {!isHome && (
+          <About title={title} description={description} image={image} />
+        )}
+        {categories && <Categories items={categories} />}
+        {topics && <Topics topics={topics} />}
+        <BannerAdsense />
+      </Wrapper>
+    </BlockGrey>
   )
 }
 
@@ -30,8 +33,6 @@ const Wrapper = styled.aside`
   grid-template-columns: 90%;
   justify-content: center;
   row-gap: 1rem;
-  background: var(--clr-grey-10);
-  border-radius: var(--radius);
   padding: 1rem 0;
 
   @media (min-width: 576px) {

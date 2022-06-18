@@ -5,8 +5,8 @@ import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
 import Banner from '../../components/Banner'
 import BannerAdsense from '../../utilities/BannerAdsense'
-import Breadcrumbs from '../../components/Breadcrumbs'
-import ContainerGrecas from '../../components/ContainerGrecas'
+import Breadcrumbs from '../../components/atoms/Breadcrumbs'
+import ContainerGrecas from '../../components/atoms/ContainerGrecas'
 
 const Section = ({ data, pageContext }) => {
   const sectionTitle = data.strapiSection.title

@@ -1,5 +1,5 @@
 import React from 'react'
-import Title from '../../Title'
+import Title from '../../atoms/Title'
 import styled from 'styled-components'
 import { FaBalanceScale, FaSearch } from 'react-icons/fa'
 import { BsChatSquareQuote } from 'react-icons/bs'

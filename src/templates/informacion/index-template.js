@@ -6,7 +6,7 @@ import BannnerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import ButtonPages from '../../components/Noticias/ButtonPages'
 import Banner from '../../components/Banner'
-import ContainerGrecas from '../../components/ContainerGrecas'
+import ContainerGrecas from '../../components/atoms/ContainerGrecas'
 
 const Informacion = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
