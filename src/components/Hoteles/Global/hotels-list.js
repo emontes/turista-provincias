@@ -52,15 +52,19 @@ const HotelsList = ({ hoteles }) => {
               </div>
             </div>
             <div className="price">
-              Desde
-              <br />
-              <div className="price-number">
-                {new Intl.NumberFormat('es-MX', {
-                  style: 'currency',
-                  currency: 'MXN',
-                }).format(hotel.pricefrom * 24)}
-              </div>
-              por Noche
+              {hotel.pricefrom > 0 && (
+                <>
+                  Desde
+                  <br />
+                  <div className="price-number">
+                    {new Intl.NumberFormat('es-MX', {
+                      style: 'currency',
+                      currency: 'MXN',
+                    }).format(hotel.pricefrom * 24)}
+                  </div>
+                  por Noche
+                </>
+              )}
             </div>
           </div>
         )

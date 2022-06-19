@@ -6,6 +6,8 @@ import { getSrc } from 'gatsby-plugin-image'
 import Banner from '../../../components/Hoteles/Destination/Banner'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
+import footerList1 from '../../../constants/Hoteles/global-hotels-links'
+import footerList2 from '../../../constants/especialistas-links'
 
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import SideBanner from '../../../components/Banner'
@@ -23,6 +25,8 @@ const Locations = ({ data, pageContext }) => {
     <Layout
       linkExterno="/hoteles"
       seoTitle={`${location.name} Hoteles Económicos`}
+      footerList1={footerList1}
+      footerList2={footerList2}
     >
       <Seo
         title={`Hoteles económicos en ${location.name}`}

@@ -6,13 +6,18 @@ import TuristaExternos from '../../constants/turista_externos'
 import { Link } from 'gatsby'
 
 import SocialLinks from '../../constants/social_links'
-import destacados from '../../constants/footer_destacados'
-import otrosDestinos from '../../constants/footer_otros_destinos'
 import { BiChevronRightCircle } from 'react-icons/bi'
 
-const Footer = ({ title = 'El Turista', estado, linkExterno = '' }) => {
+const Footer = ({
+  title = 'El Turista',
+  estado,
+  linkExterno = '',
+  footerList1,
+  footerList2,
+}) => {
   const themeContext = useContext(ThemeContext)
   const slugEstado = estado.slug
+  console.log('Footer list en footer: ', footerList1)
   return (
     <Wrapper>
       <div className="footer-1">
@@ -27,43 +32,47 @@ const Footer = ({ title = 'El Turista', estado, linkExterno = '' }) => {
             Derechos Reservados
           </div>
         </div>
+        <div>
+          <h1>{title}</h1>
+          <div className="enlaces">
+            {footerList1 && (
+              <div className="foot">
+                <h4>{footerList1.title}</h4>
+                <ul className="ftr-list">
+                  {footerList1.elements.map((link) => {
+                    return (
+                      <li key={link.id}>
+                        <Link to={link.url}>
+                          <BiChevronRightCircle /> {link.title}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            )}
 
-        <div className="enlaces">
-          <div className="foot">
-            <h4>Destacados en {estado.name}</h4>
-            <ul className="ftr-list">
-              {destacados[slugEstado].map((link) => {
-                return (
-                  <li key={link.id}>
-                    <Link to={link.url}>
-                      <BiChevronRightCircle /> {link.text}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          <div className="foot">
-            <h4>Otros Destinos</h4>
-            <ul className="ftr-list">
-              {otrosDestinos[slugEstado].map((link) => {
-                return (
-                  <li key={link.id}>
-                    <a href={link.url}>
-                      <BiChevronRightCircle /> {link.text}
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
+            {footerList2 && (
+              <div className="foot">
+                <h4>{footerList2.title}</h4>
+                <ul className="ftr-list">
+                  {footerList2.elements.map((link) => {
+                    return (
+                      <li key={link.id}>
+                        <Link to={link.url}>
+                          <BiChevronRightCircle /> {link.title}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
         <div className="foot">{themeContext.images.logoSmal}</div>
       </div>
-
-      <h1>{title}</h1>
 
       <div className="footer-2">
         <Link to="/">Home</Link> | <Link to="/hoteles">Hoteles</Link> |&nbsp;
@@ -90,14 +99,14 @@ const Wrapper = styled.footer`
   background-color: ${(props) => props.theme.colors.primary9};
 
   h1 {
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
     text-align: center;
     text-transform: capitalize;
   }
   h4 {
     color: ${(props) => props.theme.colors.primary2};
-
     text-transform: capitalize;
+    margin: 10px 0 -7px;
   }
 
   /* social links */
@@ -119,17 +128,19 @@ const Wrapper = styled.footer`
     font-size: 1rem;
   }
   .footer-1 {
-    padding: 6rem 3rem 3rem;
+    padding: 2rem 3rem 3rem;
     display: flex;
 
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: space-evenly;
+    align-items: center;
   }
 
   .enlaces {
     display: flex;
     gap: 3rem;
+    justify-content: space-evenly;
   }
 
   .ftr-list {

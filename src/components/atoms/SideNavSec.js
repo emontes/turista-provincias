@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import links from '../../constants/links'
 import device from '../../assets/themes/device'
-import menuBg from '../../assets/images/chiapas/menu_bg.png'
+import menuBg from '../../assets/images/menu_bg.png'
 
 const SideNavSec = () => {
   return (

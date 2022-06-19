@@ -30,20 +30,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   const globalPages1 = ['mapa', 'ofertas', 'economicos', 'completos', 'grandes']
-  const globalPages = [
-    { slug: 'mapa', filter: 'pricefrom', order: 'ASC' },
-    { slug: 'economicos', filter: 'pricefrom', order: 'ASC' },
-    { slug: 'grandes', filter: 'cuartos', order: 'DESC' },
-  ]
+  const globalPages = ['economicos', 'grandes']
 
   globalPages.map(async (item) => {
     createPage({
-      path: `/hoteles/${item.slug}/global`,
-      component: path.resolve(`./src/templates/hoteles/global-template.js`),
+      path: `/hoteles/${item}/global`,
+      component: path.resolve(
+        `./src/templates/hoteles/global/${item}-template.js`,
+      ),
       context: {
         item: item,
-        filter: item.filter,
-        order: item.order,
         estadoSlug: estadoSlug,
       },
     })

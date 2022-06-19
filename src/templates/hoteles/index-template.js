@@ -7,16 +7,21 @@ import Hoteles from '../../components/Hoteles/Home'
 import { getSrc } from 'gatsby-plugin-image'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import BlockGrey from '../../components/atoms/BlockGrey'
+import footerList1 from '../../constants/Hoteles/global-hotels-links'
+import footerList2 from '../../constants/especialistas-links'
 
 const hoteles = ({ data }) => {
   const src = getSrc(data.image.childImageSharp)
   const metadata = data.site.siteMetadata
+
   return (
     <Layout
-      seoTitle={`Hoteles en ${metadata.estado.name}`}
+      seoTitle={`Destinos con Hoteles en ${metadata.estado.name}`}
       linkExterno="/hoteles"
       heroImg={data.image}
       heroComponent={<HotelesHero topDestinos={data.topDestinos.nodes} />}
+      footerList1={footerList1}
+      footerList2={footerList2}
     >
       <Seo
         title={`Destinos con Hoteles en ${metadata.estado.name}`}

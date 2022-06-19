@@ -8,12 +8,19 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import Lista from '../../../components/Hoteles/Destination/lista-hoteles'
 import SideBanner from '../../../components/Banner'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
+import footerList1 from '../../../constants/Hoteles/global-hotels-links'
+import footerList2 from '../../../constants/especialistas-links'
 
 const Locations = ({ data }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
   return (
-    <Layout linkExterno="/hoteles" seoTitle={`Hoteles en ${location.name}`}>
+    <Layout
+      linkExterno="/hoteles"
+      seoTitle={`Hoteles en ${location.name}`}
+      footerList1={footerList1}
+      footerList2={footerList2}
+    >
       <Seo
         title={`Los más completos hoteles en ${location.name}`}
         description={`Lista ordenada a partir del mayor número de Facilidades para Hoteles en ${location.name}. Encuentre el hotel más completo de ${location.name}`}

@@ -23,6 +23,8 @@ const Layout = ({
   seoTitle, //title for The h1 in footer
   linkExterno, // is Added to the external sites
   sinFondo, //define no background and no padding for the children
+  footerList1,
+  footerList2,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => {
@@ -61,6 +63,8 @@ const Layout = ({
         title={seoTitle ? seoTitle : `Turista ${estado.name}`}
         linkExterno={linkExterno}
         estado={estado}
+        footerList1={footerList1}
+        footerList2={footerList2}
       />
     </ThemeProvider>
   )

@@ -8,6 +8,8 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import SideBanner from '../../../components/Banner'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
+import footerList1 from '../../../constants/Hoteles/global-hotels-links'
+import footerList2 from '../../../constants/especialistas-links'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -22,6 +24,8 @@ const Locations = ({ data, pageContext }) => {
     <Layout
       linkExterno="/hoteles"
       seoTitle={`Los Hoteles más populares de ${location.name}`}
+      footerList1={footerList1}
+      footerList2={footerList2}
     >
       <Seo
         title={`Los hoteles más Populares de ${location.name}`}
