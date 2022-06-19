@@ -35,9 +35,33 @@ const Hotel = ({ hotel }) => {
             <div className="hotel-name" itemprop="name">
               {hotel.name.en}
             </div>
-            <div className="address" itemprop="address">
-              {hotel.address.en.substring(0, 45)}
-            </div>
+            <p>
+              {hotel.cntRooms && (
+                <>
+                  Cuartos: {hotel.cntRooms}
+                  <br />
+                </>
+              )}
+              {hotel.cntFloors && (
+                <>
+                  Pisos: {hotel.cntFloors}
+                  <br />
+                </>
+              )}
+              {hotel.cntSuites && (
+                <>
+                  Suites: {hotel.cntSuites}
+                  <br />
+                </>
+              )}
+              {hotel.yearOpened && (
+                <>
+                  Apertura: {hotel.yearOpened}
+                  <br />
+                </>
+              )}
+              {hotel.yearRenovated && <>Renovación: {hotel.yearRenovated}</>}
+            </p>
           </div>
 
           <div className="derecha">
@@ -62,6 +86,9 @@ const Hotel = ({ hotel }) => {
             </a>
           </div>
         </div>
+        <div className="address" itemprop="address">
+          {hotel.address.en.substring(0, 45)}
+        </div>
       </Wrapper>
     </div>
   )
@@ -70,6 +97,7 @@ const Hotel = ({ hotel }) => {
 export default Hotel
 
 const Wrapper = styled.div`
+  background: #f2f2f2;
   box-shadow: var(--light-shadow);
   max-width: 320px;
   display: flex;
@@ -87,6 +115,7 @@ const Wrapper = styled.div`
     :hover {
       transform: scale(1.1);
     }
+    border: 1px solid green;
   }
   .list-item {
     background: #efefef;
@@ -95,7 +124,6 @@ const Wrapper = styled.div`
     position: relative;
   }
   .body {
-    background: #f2f2f2;
     width: 100%;
     height: 11rem;
     font-family: 'Open Sans';
@@ -104,6 +132,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     display: flex;
   }
+
   .tipos {
     display: flex;
     justify-content: flex-end;
@@ -137,13 +166,18 @@ const Wrapper = styled.div`
     font-size: 1.2rem;
     font-weight: 700;
   }
+  p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
   .address {
     color: var(--clr-grey-5);
     width: 100%;
-    padding: 10px 15px;
+    padding: 0 0 0.8rem;
     font-family: 'Open Sans';
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 15px;
+    text-align: center;
   }
 
   .derecha {

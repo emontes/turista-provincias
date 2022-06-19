@@ -128,6 +128,7 @@ export const query = graphql`
       }
     }
     hotel_location {
+      slug
       location {
         name
         estado {

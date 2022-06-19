@@ -31,7 +31,7 @@ const Locations = ({ data, pageContext }) => {
     >
       <Seo
         title={`Guía de Hoteles en ${location.name}`}
-        description={`Listado de hoteles en ${location.name} agrupados por categoría del hotel en ${location.name}, mostrando precios, fotos e información`}
+        description={`Guía de hoteles en ${location.name}, ${location.estado.Name} con opciones para reservación en línea, fotografías, categorías, calificaciones y lo necesario  para encontrar su hotel en ${location.name}`}
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 

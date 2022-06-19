@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
+import { Link } from 'gatsby'
 
 const HotelsList = ({ hoteles }) => {
   return (
@@ -45,9 +46,14 @@ const HotelsList = ({ hoteles }) => {
                   {hotel.rating > 0 && (
                     <div className="rating-number">{hotel.rating / 10}</div>
                   )}
+                  {hotel.cntRooms && (
+                    <div className="cuartos">{hotel.cntRooms} Cuartos</div>
+                  )}
                 </div>
                 <div className="location">
-                  {hotel.hotel_location.location.name}
+                  <Link to={`/${hotel.hotel_location.slug}.html`}>
+                    {hotel.hotel_location.location.name}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -152,5 +158,10 @@ const Wrapper = styled.section`
     border-radius: 2px;
     font-size: 1rem;
     font-weight: 700;
+  }
+  .cuartos {
+    padding: 5px;
+    color: var(--clr-grey-8);
+    font-size: 0.8rem;
   }
 `

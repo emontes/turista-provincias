@@ -8,9 +8,7 @@ import ContainerGrecas from '../../../components/molecules/ContainerGrecas'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 
-const Global = ({ data, pageContext }) => {
-  console.log('DAta from global template: ', data)
-  console.log('El pageContext:', pageContext)
+const Global = ({ data }) => {
   const metadata = data.site.siteMetadata
   const seoTitle = `Hoteles económicos en ${metadata.estado.name}`
   const seoDescription = `Lista con los hoteles más económicos del Estado de ${metadata.estado.name}`

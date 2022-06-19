@@ -20,6 +20,7 @@ const Locations = ({ data, pageContext }) => {
     linkTo: '',
     linkToSuffix: '-grandes.html',
   }
+
   return (
     <Layout
       linkExterno="/hoteles"

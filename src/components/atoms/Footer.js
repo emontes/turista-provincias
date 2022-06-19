@@ -17,7 +17,7 @@ const Footer = ({
 }) => {
   const themeContext = useContext(ThemeContext)
   const slugEstado = estado.slug
-  console.log('Footer list en footer: ', footerList1)
+
   return (
     <Wrapper>
       <div className="footer-1">

@@ -8,10 +8,11 @@ import ContainerGrecas from '../../../components/molecules/ContainerGrecas'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 
-const Global = ({ data, pageContext }) => {
+const Global = ({ data }) => {
   const metadata = data.site.siteMetadata
   const seoTitle = `Los hoteles más grandes de ${metadata.estado.name}`
   const seoDescription = `Entérate cuáles son los hoteles que tienen un mayor número de cuartos del Estado de ${metadata.estado.name}`
+  console.log('Data en grandes-template: ', data)
   return (
     <Layout
       seoTitle={`Hoteles con más cuartos en ${metadata.estado.name}`}
@@ -41,7 +42,7 @@ export const pageQuery = graphql`
         cntRooms: { gt: 0 }
         photoCount: { gt: 0 }
       }
-      sort: { fields: cntRooms, order: ASC }
+      sort: { fields: cntRooms, order: DESC }
       limit: 60
     ) {
       nodes {
