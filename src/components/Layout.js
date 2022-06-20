@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import GlobalStyles from '../assets/themes/globalStyles'
 import Chiapas from '../assets/themes/chiapas'
 import EdoMexico from '../assets/themes/edomexico'
+import Yucatan from '../assets/themes/yucatan'
 
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
@@ -36,6 +37,7 @@ const Layout = ({
 
   let themeSel = Chiapas
   if (estado.slug === 'edomexico') themeSel = EdoMexico
+  if (estado.slug === 'yucatan') themeSel = Yucatan
 
   return (
     <ThemeProvider theme={themeSel}>
