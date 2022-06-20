@@ -5,7 +5,7 @@ const HotelBreadCrumbs = ({ location, endTitle }) => {
   const tree = [
     { slug: `${location.hotel_location.slug}.html`, title: location.name },
   ]
-  console.log('Location en ele map bueno este: ', location)
+
   return (
     <Breadcrumbs
       homeLink="/hoteles"

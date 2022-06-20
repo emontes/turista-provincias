@@ -4,17 +4,20 @@ import HotelBox from './hotel-box'
 
 const Lista = ({ hoteles }) => {
   let hotelStars = ''
-  console.log('Hotel desde las boxes estrellas: ', hoteles)
+
   return (
     <Wrapper>
       {hoteles.map((hotel) => {
         if (hotelStars !== hotel.stars) {
           hotelStars = hotel.stars
           return (
-            <h3>
-              <i>Hoteles en {hotel.hotel_location.location.name}</i>{' '}
-              {hotel.stars} Estrellas
-            </h3>
+            <>
+              <h3>
+                <i>Hoteles en {hotel.hotel_location.location.name}</i>{' '}
+                {hotel.stars} Estrellas
+              </h3>
+              <HotelBox key={hotel.strapi_id} hotel={hotel} />
+            </>
           )
         } else {
           hotelStars = hotel.stars

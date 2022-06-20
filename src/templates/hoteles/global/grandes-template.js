@@ -12,7 +12,7 @@ const Global = ({ data }) => {
   const metadata = data.site.siteMetadata
   const seoTitle = `Los hoteles más grandes de ${metadata.estado.name}`
   const seoDescription = `Entérate cuáles son los hoteles que tienen un mayor número de cuartos del Estado de ${metadata.estado.name}`
-  console.log('Data en grandes-template: ', data)
+
   return (
     <Layout
       seoTitle={`Hoteles con más cuartos en ${metadata.estado.name}`}
