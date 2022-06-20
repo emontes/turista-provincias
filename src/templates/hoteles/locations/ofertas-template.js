@@ -8,7 +8,7 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
-
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 const Locations = ({ data }) => {
   const { location, banner, image, numhoteles } = data.location
   return (
@@ -32,6 +32,7 @@ const Locations = ({ data }) => {
         title={`${location.name} Hoteles`}
       />
       <section className="section">
+        <HotelBreadCrumbs location={location} endTitle="Ofertas" />
         <NavTabs url={data.location.slug} />
         <h1>Hoteles en Oferta en {location.name}</h1>
         <Leyenda location={location.name} />
@@ -75,6 +76,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }

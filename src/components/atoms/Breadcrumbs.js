@@ -1,11 +1,16 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { ImHome } from 'react-icons/im'
+import breadLine from '../../assets/images/breadcrumb.png'
 
 const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
   return (
     <Wrapper vocab="http://schema.org/" typeof="BreadcrumbList">
-      <span property="itemListElement" typeof="ListItem">
+      <Link to="/" title="Home" className="home">
+        <ImHome />
+      </Link>
+      <span property="itemListElement" typeof="ListItem" className="breadcrumb">
         <Link property="item" typeof="WebPage" to={homeLink}>
           <span property="name">{homeTitle}</span>
         </Link>
@@ -29,6 +34,7 @@ const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
         )
       })}
       <span className="breadcrumb">{endTitle}</span>
+      <div className="brlines"></div>
     </Wrapper>
   )
 }
@@ -38,11 +44,8 @@ export default Breadcrumbs
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
   list-style: none;
-  background-color: var(--clr-grey-10);
-  border-radius: 0.25rem;
+  padding: 1rem;
 
   .breadcrumb {
     ::before {
@@ -52,5 +55,25 @@ const Wrapper = styled.div`
       color: #6c757d;
       content: '/';
     }
+  }
+
+  .home {
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 100px;
+    padding: 2px 3px 0;
+    transition: 0.3s;
+    :hover {
+      background-color: #222;
+      color: #fff;
+    }
+  }
+
+  .brlines {
+    height: 8px;
+    width: 100%;
+    margin: 10px 0 1rem;
+    background: url(${breadLine});
   }
 `

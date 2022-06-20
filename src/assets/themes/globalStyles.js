@@ -29,7 +29,7 @@ Variables
   /* grey used for paragraphs */
   --clr-grey-5: hsl(210, 22%, 49%);
   --clr-grey-8: hsl(210, 31%, 80%);
-  --clr-grey-9: hsl(212, 33%, 89%);
+  --clr-grey-9: #d7dadb;
   --clr-grey-10: hsl(210, 36%, 96%);
   --clr-green-dark: hsl(125, 67%, 35%);
   --clr-red-dark: hsl(356, 80%, 46%);
@@ -171,6 +171,9 @@ h4 {
     column-gap: 1rem;
   }
 }
+.back-grey-8 { background-color: var(--clr-grey-8); }
+.back-grey-9 { background-color: var(--clr-grey-9); }
+.back-grey-10 { background-color: var(--clr-grey-10); }
 
 .section-title {
   

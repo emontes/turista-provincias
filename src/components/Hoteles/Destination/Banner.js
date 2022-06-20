@@ -9,9 +9,8 @@ const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
       <GatsbyImage
         image={getImage(image.localFile)}
         alt="Turista"
-        className="hero-img"
         placeholder="tracedSVG"
-        layout="constrained"
+        className="hero-img"
       />
 
       <div className="hoteles">
@@ -19,7 +18,6 @@ const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
         <div className="ciudad">{vistaDesc}</div>
         <div className="estado">{estado}</div>
       </div>
-      <h2>{title}</h2>
     </Wrapper>
   )
 }
@@ -28,30 +26,19 @@ export default Banner
 
 const Wrapper = styled.div`
   position: relative;
-  width: 100%;
   overflow: hidden;
 
+  @media ${device.tablet} {
+    margin: -1rem auto 0.5rem;
+  }
   .hero-img {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     width: 100%;
   }
   .hoteles {
     top: 0;
     position: absolute;
-  }
-
-  h2 {
-    color: var(--clr-white);
-    top: 1rem;
-    text-align: center;
-    font-size: 2.5rem;
-    /* background: rgba(24, 24, 24, 0.3); */
-    position: absolute;
-    right: 15%;
-    width: 30%;
-    display: none;
-    @media ${device.laptopL} {
-      display: block;
-    }
   }
 
   .ciudad {

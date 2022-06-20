@@ -10,6 +10,7 @@ import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hot
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -33,31 +34,32 @@ const Locations = ({ data, pageContext }) => {
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
-      <Banner
-        image={banner}
-        vistaDesc={location.name}
-        estado={location.estado.Name}
-        subTitle={`Los ${numhoteles} hoteles más poulares de `}
-        title="Populares"
-      />
-      <section className="section">
-        <NavTabs url={data.location.slug} />
-        <h3>Hoteles populares en {location.name}</h3>
-        <div className="section-center">
+      <section className="section-center">
+        <div className="back-grey-10">
+          <Banner
+            image={banner}
+            vistaDesc={location.name}
+            estado={location.estado.Name}
+            subTitle={`Los ${numhoteles} hoteles más poulares de `}
+            title="Populares"
+          />
+          <HotelBreadCrumbs location={location} endTitle="Populares" />
+          <NavTabs url={data.location.slug} />
+
           <ListaHotelesBoxes
             location={data.location}
             hoteles={data.hoteles.nodes}
           />
-          <div>
-            <SideBanner
-              title={location.name}
-              description={`Los hoteles más populares de ${location.name}, basado en el número de visitas que ha tenido cada hotel`}
-              image={image ? image : ''}
-              listItems1={listItems1}
-            />
-          </div>
+          <Leyenda location={location.name} />
         </div>
-        <Leyenda location={location.name} />
+        <div>
+          <SideBanner
+            title={location.name}
+            description={`Los hoteles más populares de ${location.name}, basado en el número de visitas que ha tenido cada hotel`}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
       </section>
     </Layout>
   )
@@ -99,6 +101,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }

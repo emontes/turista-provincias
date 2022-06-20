@@ -10,10 +10,11 @@ import SideBanner from '../../../components/Banner'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
-
+import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
+  let tree = []
 
   const listItems1 = {
     title: `${location.estado.Name}`,
@@ -35,17 +36,22 @@ const Locations = ({ data, pageContext }) => {
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
-      <Banner
-        image={banner}
-        vistaDesc={location.name}
-        estado={location.estado.Name}
-        subTitle={`${numhoteles} hoteles en `}
-        title={`${location.name} Hoteles`}
-      />
-      <section className="section">
-        <NavTabs url={data.location.slug} />
-
-        <div className="section-center">
+      <section className="section-center">
+        <div className="back-grey-10">
+          <Banner
+            image={banner}
+            vistaDesc={location.name}
+            estado={location.estado.Name}
+            subTitle={`${numhoteles} hoteles en `}
+            title={`${location.name} Hoteles`}
+          />
+          <Breadcrumbs
+            homeLink="/hoteles"
+            homeTitle="Hoteles"
+            tree={tree}
+            endTitle={location.name}
+          />
+          <NavTabs url={data.location.slug} />
           <div>
             {numhoteles > 20 ? (
               <>
@@ -66,17 +72,18 @@ const Locations = ({ data, pageContext }) => {
               />
             )}
           </div>
-          <div>
-            <SideBanner
-              title={location.name}
-              description="Guía de Hoteles"
-              image={image ? image : ''}
-              showHotelsBox={true}
-              listItems1={listItems1}
-            />
-          </div>
+
+          <Leyenda location={location.name} />
         </div>
-        <Leyenda location={location.name} />
+        <div>
+          <SideBanner
+            title={location.name}
+            description="Guía de Hoteles"
+            image={image ? image : ''}
+            showHotelsBox={true}
+            listItems1={listItems1}
+          />
+        </div>
       </section>
     </Layout>
   )

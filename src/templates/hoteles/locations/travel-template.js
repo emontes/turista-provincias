@@ -7,6 +7,7 @@ import Banner from '../../../components/Hoteles/Destination/Banner'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 
 const Locations = ({ data }) => {
   const hotelsUrl = `https://jet.turista.com.mx/hotels?cityId=${data.location.hotellookId}&currency=mxn`
@@ -32,6 +33,7 @@ const Locations = ({ data }) => {
         title={`${location.name} Hoteles`}
       />
       <section className="section">
+        <HotelBreadCrumbs location={location} endTitle="Travel" />
         <NavTabs url={data.location.slug} />
         <iframe
           title="jetTurista"
@@ -78,6 +80,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }

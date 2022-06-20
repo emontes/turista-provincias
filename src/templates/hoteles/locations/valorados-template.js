@@ -10,7 +10,7 @@ import SideBanner from '../../../components/Banner'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
-
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
@@ -33,28 +33,28 @@ const Locations = ({ data, pageContext }) => {
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
-      <Banner
-        image={banner}
-        vistaDesc={location.name}
-        estado={location.estado.Name}
-        subTitle={`${numhoteles} hoteles en `}
-        title={`${location.name} Hoteles`}
-      />
-      <section className="section">
-        <NavTabs url={data.location.slug} />
-        <h3>Los hoteles mejor calificados de {location.name}</h3>
-        <div className="section-center">
+      <section className="section-center">
+        <div className="back-grey-10">
+          <Banner
+            image={banner}
+            vistaDesc={location.name}
+            estado={location.estado.Name}
+            subTitle={`${numhoteles} hoteles en `}
+            title={`${location.name} Hoteles`}
+          />
+          <HotelBreadCrumbs location={location} endTitle="Mejor Valorados" />
+          <NavTabs url={data.location.slug} />
           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
-          <div>
-            <SideBanner
-              title={location.name}
-              description={`Los hoteles mejor calificados ${location.name}, basado en el promedio de calificaciones que ha tenido cada hotel`}
-              image={image ? image : ''}
-              listItems1={listItems1}
-            />
-          </div>
+          <Leyenda location={location.name} />
         </div>
-        <Leyenda location={location.name} />
+        <div>
+          <SideBanner
+            title={location.name}
+            description={`Los hoteles mejor calificados ${location.name}, basado en el promedio de calificaciones que ha tenido cada hotel`}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
       </section>
     </Layout>
   )
@@ -96,6 +96,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }

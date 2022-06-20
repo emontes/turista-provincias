@@ -8,9 +8,9 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
-
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import SideBanner from '../../../components/Banner'
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -34,29 +34,29 @@ const Locations = ({ data, pageContext }) => {
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
-      <Banner
-        image={banner}
-        vistaDesc={location.name}
-        estado={location.estado.Name}
-        subTitle={`Los ${numhoteles} hoteles más económicos de `}
-        title="Económicos"
-      />
-      <section className="section">
-        <NavTabs url={data.location.slug} />
-        <h3>Hoteles económicos en {location.name}</h3>
-        <div className="section-center">
-          <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+      <section className="section-center">
+        <div className="back-grey-10">
+          <Banner
+            image={banner}
+            vistaDesc={location.name}
+            estado={location.estado.Name}
+            subTitle={`Los ${numhoteles} hoteles más económicos de `}
+            title="Económicos"
+          />
+          <HotelBreadCrumbs location={location} endTitle="Económicos" />
+          <NavTabs url={data.location.slug} />
 
-          <div>
-            <SideBanner
-              title={location.name}
-              description={`Los hoteles más económicos de ${location.name},  ordenados de Menor a Mayor precio`}
-              image={image ? image : ''}
-              listItems1={listItems1}
-            />
-          </div>
+          <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+          <Leyenda location={location.name} />
         </div>
-        <Leyenda location={location.name} />
+        <div>
+          <SideBanner
+            title={location.name}
+            description={`Los hoteles más económicos de ${location.name},  ordenados de Menor a Mayor precio`}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
       </section>
     </Layout>
   )
@@ -101,6 +101,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }

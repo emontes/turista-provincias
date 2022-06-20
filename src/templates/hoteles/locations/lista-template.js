@@ -10,6 +10,7 @@ import SideBanner from '../../../components/Banner'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
+import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -34,29 +35,29 @@ const Locations = ({ data, pageContext }) => {
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
-      <Banner
-        image={banner}
-        vistaDesc={location.name}
-        estado={location.estado.Name}
-        subTitle={`${hoteles.nodes.length} hoteles en `}
-        title={`${location.name} Lista de Hoteles`}
-      />
-
-      <section className="section">
-        <NavTabs url={data.location.slug} />
-        <div className="section-center">
+      <section className="section-center">
+        <div className="back-grey-10">
+          <Banner
+            image={banner}
+            vistaDesc={location.name}
+            estado={location.estado.Name}
+            subTitle={`${hoteles.nodes.length} hoteles en `}
+            title={`${location.name} Lista de Hoteles`}
+          />
+          <HotelBreadCrumbs location={location} endTitle="Listado" />
+          <NavTabs url={data.location.slug} />
           <Lista location={data.location} hoteles={hoteles.nodes} />
-          <div>
-            <SideBanner
-              title={location.name}
-              description={`Lista de todos los Hoteles que tenemos registrados en ${location.name} ordenados por orden alfabético`}
-              image={image ? image : ''}
-              showHotelsBox={true}
-              listItems1={listItems1}
-            />
-          </div>
+          <Leyenda location={location.name} />
         </div>
-        <Leyenda location={location.name} />
+        <div>
+          <SideBanner
+            title={location.name}
+            description={`Lista de todos los Hoteles que tenemos registrados en ${location.name} ordenados por orden alfabético`}
+            image={image ? image : ''}
+            showHotelsBox={true}
+            listItems1={listItems1}
+          />
+        </div>
       </section>
     </Layout>
   )
@@ -98,6 +99,9 @@ export const pageQuery = graphql`
         name
         latitude
         longitude
+        hotel_location {
+          slug
+        }
         estado {
           Name
         }
