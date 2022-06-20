@@ -115,7 +115,6 @@ const Wrapper = styled.div`
     :hover {
       transform: scale(1.1);
     }
-    border: 1px solid green;
   }
   .list-item {
     background: #efefef;

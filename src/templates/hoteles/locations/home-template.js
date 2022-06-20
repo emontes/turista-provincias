@@ -7,10 +7,12 @@ import Banner from '../../../components/Hoteles/Destination/Banner'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
-import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
+import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes-estrellas'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
+import BlockGrey from '../../../components/atoms/BlockGrey'
+import ListaHotelesUl from '../../../components/Hoteles/Destination/lista-hoteles-ul'
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
@@ -53,29 +55,38 @@ const Locations = ({ data, pageContext }) => {
           />
           <NavTabs url={data.location.slug} />
           <div>
-            {numhoteles > 20 ? (
-              <>
-                <h3>Los Hoteles más Populares de {location.name}</h3>
-                <ListaHotelesBoxes hoteles={data.toppopular.nodes} />
-
-                <h3>Los Hoteles mejor Valorados de {location.name}</h3>
-                <ListaHotelesBoxes hoteles={data.toprated.nodes} />
-                <h3>Los Hoteles más Económicos de {location.name}</h3>
-                <ListaHotelesBoxes hoteles={data.topecono.nodes} />
-                <h3>Los Hoteles más Grandes de {location.name}</h3>
-                <ListaHotelesBoxes hoteles={data.topgrandes.nodes} />
-              </>
-            ) : (
-              <ListaHotelesBoxes
-                location={data.location}
-                hoteles={data.hoteles.nodes}
-              />
-            )}
+            <ListaHotelesBoxes
+              location={data.location}
+              hoteles={data.hoteles.nodes}
+            />
           </div>
 
           <Leyenda location={location.name} />
         </div>
         <div>
+          {numhoteles > 20 && (
+            <BlockGrey title={`Top Hoteles ${location.name}`}>
+              <ListaHotelesUl
+                title={`Los Hoteles más Económicos de ${location.name}`}
+                hoteles={data.topecono.nodes}
+              />
+
+              <ListaHotelesUl
+                title={`Los Hoteles más Populares de ${location.name}`}
+                hoteles={data.toppopular.nodes}
+              />
+
+              <ListaHotelesUl
+                title={`Los Hoteles mejor Valorados de ${location.name}`}
+                hoteles={data.toprated.nodes}
+              />
+
+              <ListaHotelesUl
+                title={`Los Hoteles más Grandes de ${location.name}`}
+                hoteles={data.topgrandes.nodes}
+              />
+            </BlockGrey>
+          )}
           <SideBanner
             title={location.name}
             description="Guía de Hoteles"
@@ -101,7 +112,7 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: pricefrom, order: ASC }
-      limit: 3
+      limit: 5
     ) {
       nodes {
         ...ListaHoteles
@@ -115,7 +126,7 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: popularity, order: DESC }
-      limit: 3
+      limit: 5
     ) {
       nodes {
         ...ListaHoteles
@@ -129,7 +140,7 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: cntRooms, order: DESC }
-      limit: 3
+      limit: 5
     ) {
       nodes {
         ...ListaHoteles
@@ -144,7 +155,7 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: rating, order: DESC }
-      limit: 3
+      limit: 5
     ) {
       nodes {
         ...ListaHoteles

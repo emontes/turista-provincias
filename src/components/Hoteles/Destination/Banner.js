@@ -29,11 +29,11 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   @media ${device.tablet} {
-    margin: -1rem auto 0.5rem;
+    margin: -5px auto 0.5rem;
   }
   .hero-img {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     width: 100%;
   }
   .hoteles {
