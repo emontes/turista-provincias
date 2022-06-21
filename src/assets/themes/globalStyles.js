@@ -171,9 +171,16 @@ h4 {
     column-gap: 1rem;
   }
 }
+
+.back-white { background-color: var(--clr-white); }
 .back-grey-8 { background-color: var(--clr-grey-8); }
 .back-grey-9 { background-color: var(--clr-grey-9); }
 .back-grey-10 { background-color: var(--clr-grey-10); }
+
+.back-primary-8 { background-color: ${(props) => props.theme.colors.primary8} }
+.back-primary-9 { background-color: ${(props) => props.theme.colors.primary9} }
+.back-primary-10 { background-color: ${(props) =>
+  props.theme.colors.primary10} }
 
 .section-title {
   

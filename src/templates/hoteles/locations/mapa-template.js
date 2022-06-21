@@ -34,7 +34,7 @@ const Locations = ({ data, pageContext }) => {
       />
 
       <section className="section-center">
-        <div className="back-grey-10">
+        <div className="back-white">
           <Banner
             image={banner}
             vistaDesc={location.name}

@@ -83,18 +83,50 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   destinos.map(async (item) => {
-    // Crea la página principal del destion (pjemplo hoteles-palenque-5)
-    createPage({
-      path: `/${item.slug}.html`,
-      component: path.resolve(
-        './src/templates/hoteles/locations/home-template.js',
-      ),
-      context: {
-        id: item.id,
-        slug: item.slug,
-        destinos: destinosBlock,
-      },
-    })
+    /* Crea la página principal del destion 
+       (pjemplo hoteles-palenque-5)                */
+
+    // Primero hace un query para saber cuántas páginas (pagina 1, 2 ...) por cada destino
+    const hotelPerPage = 14
+    const resultHotelesHome = await graphql(`
+      {
+        hoteles: allStrapiHotelHotellook(
+          limit: ${hotelPerPage}
+          filter: {
+            cityId: { eq: "${item.id}" }
+            stars: { gt: 0 }
+            photoCount: { gt: 0 }
+          }
+          sort: { fields: stars, order: DESC }
+        ) {
+          pageInfo {
+            pageCount
+          }
+        }
+      }
+    `)
+
+    const hotelHomePages = resultHotelesHome.data.hoteles.pageInfo.pageCount
+
+    console.log('Hoteles zona', item.slug)
+
+    // ** Pagina home del destino con paginación
+    for (var i = 0; i < hotelHomePages; i++) {
+      createPage({
+        path: i === 0 ? `/${item.slug}.html` : `/${item.slug}-p${i + 1}.html`,
+        component: path.resolve(
+          './src/templates/hoteles/locations/home-template.js',
+        ),
+        context: {
+          id: item.id,
+          limit: hotelPerPage,
+          skip: i * hotelPerPage,
+          slug: item.slug,
+          destinos: destinosBlock,
+        },
+      })
+    }
+
     // Crea las páginas específicas (listado, mapa, económicos, etc)
     locationPages.map(async (page) => {
       createPage({

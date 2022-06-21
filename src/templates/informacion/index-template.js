@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import Seo from '../../components/Seo'
 import BannnerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
-import ButtonPages from '../../components/Noticias/ButtonPages'
+import ButtonPages from '../../components/atoms/ButtonPages'
 import Banner from '../../components/Banner'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
 

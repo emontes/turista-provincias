@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
 
-import ButtonPages from '../../components/Noticias/ButtonPages'
+import ButtonPages from '../../components/atoms/ButtonPages'
 const Tema = ({ data }) => {
   const topics = data.allStrapiNoticia.distinct
   const metadata = data.site.siteMetadata

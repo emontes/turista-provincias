@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonPages from './ButtonPages'
+import ButtonPages from '../atoms/ButtonPages'
 import styled from 'styled-components'
 const Pagination = ({ pageInfo, url }) => {
   let nextPage

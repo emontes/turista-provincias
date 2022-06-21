@@ -10,7 +10,7 @@ export default ButtonPages
 
 const Wrapper = styled(Link)`
   border: 1px solid ${(props) => props.theme.colors.primary5};
-  border-radius: var(--radius);
+  border-radius: 50px;
   box-shadow: var(--light-shadow);
   padding: 1rem;
   background: var(--clr-white);

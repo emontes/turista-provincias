@@ -13,11 +13,20 @@ import footerList2 from '../../../constants/especialistas-links'
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import BlockGrey from '../../../components/atoms/BlockGrey'
 import ListaHotelesUl from '../../../components/Hoteles/Destination/lista-hoteles-ul'
+import Pagination from '../../../components/Hoteles/Destination/Pagination'
+
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
-  const numhoteles = data.hoteles.nodes.length
+
+  const pageInfo = data.hoteles.pageInfo
+  const numhoteles = pageInfo.totalCount
   let tree = []
 
+  if (pageInfo.currentPage > 1) {
+    tree.push({ slug: `${data.location.slug}.html`, title: location.name })
+  }
+
+  // Para el sideBanner que liste las ciudades del estado
   const listItems1 = {
     title: `${location.estado.Name}`,
     items: pageContext.destinos,
@@ -25,21 +34,29 @@ const Locations = ({ data, pageContext }) => {
     linkToSuffix: '.html',
   }
 
+  let titleSeo = `Guía de Hoteles en ${location.name}`
+  let descriptionSeo = `Encuentre su Hotel en ${location.name}, ${location.estado.Name} y resérvelo en línea  con las diferentes opiones de esta guía de Hoteles en ${location.name}`
+  if (pageInfo.currentPage > 1) {
+    titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
+    descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
+  }
   return (
     <Layout
       linkExterno="/hoteles"
-      seoTitle={`Hoteles en ${location.name}`}
+      seoTitle={`Hoteles en ${location.name} ${
+        pageInfo.currentPage > 1 ? `Página ${pageInfo.currentPage}` : ''
+      }`}
       footerList1={footerList1}
       footerList2={footerList2}
     >
       <Seo
-        title={`Guía de Hoteles en ${location.name}`}
-        description={`Guía de hoteles en ${location.name}, ${location.estado.Name} con opciones para reservación en línea, fotografías, categorías, calificaciones y lo necesario  para encontrar su hotel en ${location.name}`}
+        title={titleSeo}
+        description={descriptionSeo}
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
       <section className="section-center">
-        <div className="back-grey-10">
+        <div className="back-white">
           <Banner
             image={banner}
             vistaDesc={location.name}
@@ -47,24 +64,27 @@ const Locations = ({ data, pageContext }) => {
             subTitle={`${numhoteles} hoteles en `}
             title={`${location.name} Hoteles`}
           />
+
           <Breadcrumbs
             homeLink="/hoteles"
             homeTitle="Hoteles"
             tree={tree}
-            endTitle={location.name}
+            endTitle={
+              pageInfo.currentPage > 1
+                ? `Página ${pageInfo.currentPage}`
+                : location.name
+            }
+            singleUrl
           />
           <NavTabs url={data.location.slug} />
-          <div>
-            <ListaHotelesBoxes
-              location={data.location}
-              hoteles={data.hoteles.nodes}
-            />
+          <div className="back-white">
+            <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
           </div>
-
+          <Pagination url={data.location.slug} pageInfo={pageInfo} />
           <Leyenda location={location.name} />
         </div>
         <div>
-          {numhoteles > 20 && (
+          {pageInfo.totalCount > pageInfo.perPage && (
             <BlockGrey title={`Top Hoteles ${location.name}`}>
               <ListaHotelesUl
                 title={`Los Hoteles más Económicos de ${location.name}`}
@@ -87,9 +107,10 @@ const Locations = ({ data, pageContext }) => {
               />
             </BlockGrey>
           )}
+
           <SideBanner
-            title={location.name}
-            description="Guía de Hoteles"
+            title={titleSeo}
+            description={descriptionSeo}
             image={image ? image : ''}
             showHotelsBox={true}
             listItems1={listItems1}
@@ -103,7 +124,7 @@ const Locations = ({ data, pageContext }) => {
 export default Locations
 
 export const pageQuery = graphql`
-  query($id: String) {
+  query($id: String, $skip: Int, $limit: Int) {
     topecono: allStrapiHotelHotellook(
       filter: {
         cityId: { eq: $id }
@@ -163,11 +184,22 @@ export const pageQuery = graphql`
     }
 
     hoteles: allStrapiHotelHotellook(
+      limit: $limit
+      skip: $skip
       filter: { cityId: { eq: $id }, stars: { gt: 0 }, photoCount: { gt: 0 } }
       sort: { fields: stars, order: DESC }
     ) {
       nodes {
         ...ListaHoteles
+      }
+      pageInfo {
+        pageCount
+        itemCount
+        perPage
+        totalCount
+        hasPreviousPage
+        hasNextPage
+        currentPage
       }
     }
 
