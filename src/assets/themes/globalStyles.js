@@ -172,6 +172,9 @@ h4 {
   }
 }
 
+.padding-1 {padding: 1rem}
+.green-text {color: var(--clr-green-dark);}
+
 .back-white { background-color: var(--clr-white); }
 .back-grey-8 { background-color: var(--clr-grey-8); }
 .back-grey-9 { background-color: var(--clr-grey-9); }

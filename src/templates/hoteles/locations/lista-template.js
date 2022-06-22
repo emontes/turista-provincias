@@ -22,6 +22,16 @@ const Locations = ({ data, pageContext }) => {
     linkToSuffix: '-lista.html',
   }
 
+  let cuantosTienenPrecio = 0
+  let sumaPrecios = 0
+  data.hoteles.nodes.map((item) => {
+    if (item.pricefrom > 0) {
+      cuantosTienenPrecio = cuantosTienenPrecio + 1
+      sumaPrecios = sumaPrecios + item.pricefrom
+    }
+  })
+  const precioPromedio = sumaPrecios / cuantosTienenPrecio
+
   return (
     <Layout
       linkExterno="/hoteles"
@@ -45,6 +55,19 @@ const Locations = ({ data, pageContext }) => {
             title={`${location.name} Lista de Hoteles`}
           />
           <HotelBreadCrumbs location={location} endTitle="Listado" />
+          <div className="padding-1">
+            <h2>Lista de Hoteles de {location.name}</h2>
+            <p>
+              Una noche de hospedaje en {location.name} promedia{' '}
+              <span className="green-text">
+                {new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(precioPromedio * 24)}
+              </span>{' '}
+              pesos.
+            </p>
+          </div>
           <NavTabs url={data.location.slug} />
           <Lista location={data.location} hoteles={hoteles.nodes} />
           <Leyenda location={location.name} />

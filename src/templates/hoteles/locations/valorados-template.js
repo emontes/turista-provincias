@@ -43,6 +43,16 @@ const Locations = ({ data, pageContext }) => {
             title={`${location.name} Hoteles`}
           />
           <HotelBreadCrumbs location={location} endTitle="Mejor Valorados" />
+          <div className="padding-1">
+            <h2>Hoteles mejor valorados en {location.name}</h2>
+
+            <p>
+              La Calificación promedio es de{' '}
+              <span className="green-text">
+                {(data.hoteles.sum / data.hoteles.nodes.length / 10).toFixed(2)}
+              </span>
+            </p>
+          </div>
           <NavTabs url={data.location.slug} />
           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
           <Leyenda location={location.name} />
@@ -67,11 +77,13 @@ export const pageQuery = graphql`
     hoteles: allStrapiHotelHotellook(
       filter: { cityId: { eq: $id }, cntRooms: { gt: 0 } }
       sort: { fields: rating, order: DESC }
-      limit: 30
+      limit: 35
     ) {
       nodes {
         ...ListaHoteles
       }
+      sum(field: rating)
+      totalCount
     }
 
     location: strapiHotelLocation(hotellookId: { eq: $id }) {

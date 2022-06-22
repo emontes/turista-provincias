@@ -44,6 +44,15 @@ const Locations = ({ data, pageContext }) => {
             title="Populares"
           />
           <HotelBreadCrumbs location={location} endTitle="Populares" />
+          <div className="padding-1">
+            <h2>Los Hoteles más poulares de {location.name}</h2>
+            <p>
+              La popularidad más alta es de{' '}
+              <span className="green-text">
+                {data.hoteles.nodes[0].popularity}
+              </span>
+            </p>
+          </div>
           <NavTabs url={data.location.slug} />
 
           <ListaHotelesBoxes
@@ -72,7 +81,7 @@ export const pageQuery = graphql`
     hoteles: allStrapiHotelHotellook(
       filter: { cityId: { eq: $id }, cntRooms: { gt: 0 } }
       sort: { fields: popularity, order: DESC }
-      limit: 30
+      limit: 36
     ) {
       nodes {
         ...ListaHoteles

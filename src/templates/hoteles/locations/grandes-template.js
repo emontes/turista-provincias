@@ -45,6 +45,17 @@ const Locations = ({ data, pageContext }) => {
             title={`${location.name} Hoteles`}
           />
           <HotelBreadCrumbs location={location} endTitle="Grandes" />
+          <div className="padding-1">
+            <h2>Los Hoteles más grandes de {location.name}</h2>
+            <p>
+              {data.hoteles.nodes.length} Hoteles mostrados con un total de{' '}
+              {data.hoteles.sum} cuartos. En promedio los hoteles tienen{' '}
+              <span className="green-text">
+                {(data.hoteles.sum / data.hoteles.nodes.length).toFixed(0)}
+              </span>{' '}
+              cuartos.
+            </p>
+          </div>
           <NavTabs url={data.location.slug} />
           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
           <Leyenda location={location.name} />
@@ -69,11 +80,12 @@ export const pageQuery = graphql`
     hoteles: allStrapiHotelHotellook(
       filter: { cityId: { eq: $id }, cntRooms: { gt: 0 } }
       sort: { fields: cntRooms, order: DESC }
-      limit: 30
+      limit: 36
     ) {
       nodes {
         ...ListaHoteles
       }
+      sum(field: cntRooms)
     }
 
     location: strapiHotelLocation(hotellookId: { eq: $id }) {

@@ -40,6 +40,17 @@ const Locations = ({ data, pageContext }) => {
     titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
     descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
   }
+
+  let cuantosTienenPrecio = 0
+  let sumaPrecios = 0
+  data.hoteles.nodes.map((item) => {
+    if (item.pricefrom > 0) {
+      cuantosTienenPrecio = cuantosTienenPrecio + 1
+      sumaPrecios = sumaPrecios + item.pricefrom
+    }
+  })
+  const precioPromedio = sumaPrecios / cuantosTienenPrecio
+
   return (
     <Layout
       linkExterno="/hoteles"
@@ -64,7 +75,6 @@ const Locations = ({ data, pageContext }) => {
             subTitle={`${numhoteles} hoteles en `}
             title={`${location.name} Hoteles`}
           />
-
           <Breadcrumbs
             homeLink="/hoteles"
             homeTitle="Hoteles"
@@ -76,6 +86,20 @@ const Locations = ({ data, pageContext }) => {
             }
             singleUrl
           />
+          <div className="padding-1">
+            <h2>Hoteles en {location.name}</h2>
+            <p>
+              Precio promedio por noche{' '}
+              <span className="green-text">
+                {new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(precioPromedio * 24)}
+              </span>{' '}
+              pesos.
+            </p>
+          </div>
+
           <NavTabs url={data.location.slug} />
           <div className="back-white">
             <ListaHotelesBoxes hoteles={data.hoteles.nodes} />

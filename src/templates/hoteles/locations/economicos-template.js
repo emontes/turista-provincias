@@ -21,16 +21,18 @@ const Locations = ({ data, pageContext }) => {
     linkTo: '',
     linkToSuffix: '-economicos.html',
   }
+  let descriptionSeo = `Encuentre hoteles económicos en ${location.name} con esta lista ordenada a partir del precio más barato para su hotel en ${location.name}`
+
   return (
     <Layout
       linkExterno="/hoteles"
-      seoTitle={`${location.name} Hoteles Económicos`}
+      seoTitle={`Hoteles ${location.name} Económicos`}
       footerList1={footerList1}
       footerList2={footerList2}
     >
       <Seo
         title={`Hoteles económicos en ${location.name}`}
-        description={`Encuentre hoteles económicos en ${location.name}, ${location.estado.Name} con esta lista ordenada a partir del precio más barato para su hotel en ${location.name}`}
+        description={descriptionSeo}
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 
@@ -44,15 +46,28 @@ const Locations = ({ data, pageContext }) => {
             title="Económicos"
           />
           <HotelBreadCrumbs location={location} endTitle="Económicos" />
-          <NavTabs url={data.location.slug} />
 
+          <div className="padding-1">
+            <h2>Hoteles económicos en {location.name}</h2>
+            <p>
+              Hoteles desde{' '}
+              <span className="green-text">
+                {new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(data.hoteles.nodes[0].pricefrom * 24)}
+              </span>
+            </p>
+          </div>
+
+          <NavTabs url={data.location.slug} />
           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
           <Leyenda location={location.name} />
         </div>
         <div>
           <SideBanner
             title={location.name}
-            description={`Los hoteles más económicos de ${location.name},  ordenados de Menor a Mayor precio`}
+            description={descriptionSeo}
             image={image ? image : ''}
             listItems1={listItems1}
           />
@@ -73,7 +88,7 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: pricefrom, order: ASC }
-      limit: 60
+      limit: 36
     ) {
       nodes {
         ...ListaHoteles

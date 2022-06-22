@@ -43,6 +43,13 @@ const Locations = ({ data, pageContext }) => {
             title={`Mapa de Hoteles en ${location.name}`}
           />
           <HotelBreadCrumbs location={location} endTitle="Mapa" />
+          <div className="padding-1">
+            <h2>Mapa de Hoteles en {location.name}</h2>
+            <p>
+              En este mapa te presentamos los hoteles disponibles en{' '}
+              <b>{location.name}</b>
+            </p>
+          </div>
           <NavTabs url={data.location.slug} />
           <Map location={data.location} />
         </div>

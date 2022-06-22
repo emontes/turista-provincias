@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   .brlines {
     height: 8px;
     width: 100%;
-    margin: 10px 0 1rem;
+    margin: 10px 0 0;
     background: url(${breadLine});
   }
 `
