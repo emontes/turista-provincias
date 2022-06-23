@@ -11,9 +11,9 @@ import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hot
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
-import BlockGrey from '../../../components/atoms/BlockGrey'
-import ListaHotelesUl from '../../../components/Hoteles/Destination/lista-hoteles-ul'
+import BlockTopHotels from '../../../components/Hoteles/Destination/block-tophotels'
 import Pagination from '../../../components/Hoteles/Destination/Pagination'
+import BlockStars from '../../../components/Hoteles/Destination/block-stars'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -43,7 +43,7 @@ const Locations = ({ data, pageContext }) => {
 
   let cuantosTienenPrecio = 0
   let sumaPrecios = 0
-  data.hoteles.nodes.map((item) => {
+  data.hoteles.nodes.forEach((item) => {
     if (item.pricefrom > 0) {
       cuantosTienenPrecio = cuantosTienenPrecio + 1
       sumaPrecios = sumaPrecios + item.pricefrom
@@ -109,27 +109,13 @@ const Locations = ({ data, pageContext }) => {
         </div>
         <div>
           {pageInfo.totalCount > pageInfo.perPage && (
-            <BlockGrey title={`Top Hoteles ${location.name}`}>
-              <ListaHotelesUl
-                title={`Los Hoteles más Económicos de ${location.name}`}
-                hoteles={data.topecono.nodes}
+            <>
+              <BlockTopHotels data={data} location={location} />
+              <BlockStars
+                estrellas={pageContext.estrellas}
+                slug={pageContext.slug}
               />
-
-              <ListaHotelesUl
-                title={`Los Hoteles más Populares de ${location.name}`}
-                hoteles={data.toppopular.nodes}
-              />
-
-              <ListaHotelesUl
-                title={`Los Hoteles mejor Valorados de ${location.name}`}
-                hoteles={data.toprated.nodes}
-              />
-
-              <ListaHotelesUl
-                title={`Los Hoteles más Grandes de ${location.name}`}
-                hoteles={data.topgrandes.nodes}
-              />
-            </BlockGrey>
+            </>
           )}
 
           <SideBanner

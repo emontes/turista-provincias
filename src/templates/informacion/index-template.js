@@ -28,32 +28,24 @@ const Informacion = ({ data, pageContext }) => {
         sideNavSec
       >
         <h3 className="section-title">Secciones</h3>
-        <br />
-        <div className="section-center">
-          <div
-            className="cont-area"
-            style={{
-              padding: '2rem',
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '2rem',
-            }}
-          >
-            {pageContext.sections.map((item) => (
-              <p key={item.slug}>
-                <ButtonPages url={item.slug} description={item.title} />
-              </p>
-            ))}
-          </div>
+        <BannnerAdsense />
 
-          <div style={{ padding: '0 1rem' }}>
-            <Banner
-              description={`Información sobre el Estado de ${metadata.estado.name}, México`}
-            />
-            <BannnerAdsense />
-          </div>
+        <div
+          className="cont-area"
+          style={{
+            padding: '2rem',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '2rem',
+          }}
+        >
+          {pageContext.sections.map((item) => (
+            <p key={item.slug}>
+              <ButtonPages url={item.slug} description={item.title} />
+            </p>
+          ))}
         </div>
       </ContainerGrecas>
       <BannnerAdsense />

@@ -48,8 +48,8 @@ const Locations = ({ data, pageContext }) => {
           <div className="padding-1">
             <h2>Los Hoteles más grandes de {location.name}</h2>
             <p>
-              {data.hoteles.nodes.length} Hoteles mostrados con un total de{' '}
-              {data.hoteles.sum} cuartos. En promedio los hoteles tienen{' '}
+              Los Hoteles mostrados suman {data.hoteles.sum} cuartos. En
+              promedio un hotel tiene{' '}
               <span className="green-text">
                 {(data.hoteles.sum / data.hoteles.nodes.length).toFixed(0)}
               </span>{' '}

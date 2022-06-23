@@ -49,15 +49,18 @@ const Locations = ({ data, pageContext }) => {
 
           <div className="padding-1">
             <h2>Hoteles económicos en {location.name}</h2>
-            <p>
-              Hoteles desde{' '}
-              <span className="green-text">
-                {new Intl.NumberFormat('es-MX', {
-                  style: 'currency',
-                  currency: 'MXN',
-                }).format(data.hoteles.nodes[0].pricefrom * 24)}
-              </span>
-            </p>
+
+            {data.hoteles.nodes[0] && (
+              <p>
+                Hoteles desde{' '}
+                <span className="green-text">
+                  {new Intl.NumberFormat('es-MX', {
+                    style: 'currency',
+                    currency: 'MXN',
+                  }).format(data.hoteles.nodes[0].pricefrom * 24)}
+                </span>
+              </p>
+            )}
           </div>
 
           <NavTabs url={data.location.slug} />

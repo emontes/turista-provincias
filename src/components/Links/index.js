@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { FcFolder } from 'react-icons/fc'
-import Banner from '../Banner'
 import LinkCard from './link-card'
 import Title from './Title'
 import Breadcrumbs from '../atoms/Breadcrumbs'
@@ -20,52 +19,45 @@ const Links = ({
 }) => {
   return (
     <ContainerGrecas title={title} sideNavSec={sideNavSec}>
-      <Wrapper className="section-center">
-        <div>
-          {category ? (
-            <Breadcrumbs
-              homeLink="/links.html"
-              homeTitle="Directorio"
-              tree={tree}
-              endTitle={title}
-              singleUrl
-            />
-          ) : (
-            <h3 className="section-title">{subtitle}</h3>
-          )}
+      <Wrapper>
+        {category ? (
+          <Breadcrumbs
+            homeLink="/links.html"
+            homeTitle="Directorio"
+            tree={tree}
+            endTitle={title}
+            singleUrl
+          />
+        ) : (
+          <h3 className="section-title">{subtitle}</h3>
+        )}
 
-          {linksCategories.length > 0 && (
-            <>
-              <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
-              <ul>
-                {linksCategories.map((item) => {
-                  let slug = item.slug
+        {linksCategories.length > 0 && (
+          <>
+            <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
+            <ul>
+              {linksCategories.map((item) => {
+                let slug = item.slug
 
-                  return (
-                    <li key={item.slug}>
-                      <Link
-                        className={`category ${
-                          item.featured ? 'featured' : ''
-                        }`}
-                        to={`/${slug}`}
-                      >
-                        <FcFolder /> {item.title}
-                      </Link>
-                    </li>
-                  )
-                })}
-              </ul>
-              {links.length > 0 && <Title title="Listado de Sitios Web" />}
-            </>
-          )}
-          {links.length > 0 &&
-            links.map((item, index) => <LinkCard key={index} link={item} />)}
+                return (
+                  <li key={item.slug}>
+                    <Link
+                      className={`category ${item.featured ? 'featured' : ''}`}
+                      to={`/${slug}`}
+                    >
+                      <FcFolder /> {item.title}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+            {links.length > 0 && <Title title="Listado de Sitios Web" />}
+          </>
+        )}
+        {links.length > 0 &&
+          links.map((item, index) => <LinkCard key={index} link={item} />)}
 
-          <h4>El directorio de enlaces web de {metadata.estado.name}</h4>
-        </div>
-        <div style={{ padding: '0 1rem' }}>
-          <Banner title={title} description={subtitle} />
-        </div>
+        <h4>El directorio de enlaces web de {metadata.estado.name}</h4>
       </Wrapper>
     </ContainerGrecas>
   )

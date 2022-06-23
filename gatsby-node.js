@@ -87,7 +87,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
        (pjemplo hoteles-palenque-5)                */
 
     // Primero hace un query para saber cuántas páginas (pagina 1, 2 ...) por cada destino
-    const hotelPerPage = 14
+    const hotelPerPage = 14 //tomamos 14 por que es lo que usa google hotels, pero vamos a ver si luego funciona mejor con 20
     const resultHotelesHome = await graphql(`
       {
         hoteles: allStrapiHotelHotellook(
@@ -99,6 +99,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
           sort: { fields: stars, order: DESC }
         ) {
+          distinct(field: stars)
           pageInfo {
             pageCount
           }
@@ -107,6 +108,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     `)
 
     const hotelHomePages = resultHotelesHome.data.hoteles.pageInfo.pageCount
+
+    // Query para sabar cuantos tipos y cuales de estrellas hay en cada destino
+    const resultEstrellas = await graphql(`
+      {
+        hoteles: allStrapiHotelHotellook(          
+          filter: {
+            cityId: { eq: "${item.id}" }
+            stars: { gt: 0 }            
+          }          
+        ) {
+          distinct(field: stars)          
+        }
+      }
+    `)
+    const diferentesEstrellas = resultEstrellas.data.hoteles.distinct
 
     console.log('Hoteles zona', item.slug)
 
@@ -123,9 +139,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           skip: i * hotelPerPage,
           slug: item.slug,
           destinos: destinosBlock,
+          estrellas: diferentesEstrellas,
         },
       })
     }
+
+    // ** Paginas de estrellitas
+
+    diferentesEstrellas.forEach(async (estrellas) => {
+      createPage({
+        path: `${item.slug}-estrellas-${estrellas}.html`,
+        component: path.resolve(
+          './src/templates/hoteles/locations/estrellas-template.js',
+        ),
+        context: {
+          id: item.id,
+          slug: item.slug,
+          destinos: destinosBlock,
+          estrellas: parseInt(estrellas),
+          diferentesEstrellas: diferentesEstrellas,
+        },
+      })
+    })
 
     // Crea las páginas específicas (listado, mapa, económicos, etc)
     locationPages.map(async (page) => {

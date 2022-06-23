@@ -24,7 +24,7 @@ const Locations = ({ data, pageContext }) => {
 
   let cuantosTienenPrecio = 0
   let sumaPrecios = 0
-  data.hoteles.nodes.map((item) => {
+  data.hoteles.nodes.forEach((item) => {
     if (item.pricefrom > 0) {
       cuantosTienenPrecio = cuantosTienenPrecio + 1
       sumaPrecios = sumaPrecios + item.pricefrom
@@ -40,8 +40,8 @@ const Locations = ({ data, pageContext }) => {
       footerList2={footerList2}
     >
       <Seo
-        title={`Lista de Hoteles en ${location.name} con Precios aproximados`}
-        description={`Lista de Hoteles de ${location.name}, ${location.estado.Name} con nombre de hotel, Dirección, categoría y costo aproximado por noche para guiarlo a la mejor opción para reservar su hotel en ${location.name}.`}
+        title={`Lista de Hoteles en ${location.name}, ${location.estado.Name}`}
+        description={`Directorio de Hoteles en ${location.name} con nombre de hotel, Dirección, categoría y costo aproximado por noche para guiarlo a la mejor opción para reservar su hotel en ${location.name}.`}
         image={image ? getSrc(image.localFile.childImageSharp) : ''}
       />
 

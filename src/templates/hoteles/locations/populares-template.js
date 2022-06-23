@@ -46,12 +46,14 @@ const Locations = ({ data, pageContext }) => {
           <HotelBreadCrumbs location={location} endTitle="Populares" />
           <div className="padding-1">
             <h2>Los Hoteles más poulares de {location.name}</h2>
-            <p>
-              La popularidad más alta es de{' '}
-              <span className="green-text">
-                {data.hoteles.nodes[0].popularity}
-              </span>
-            </p>
+            {data.hoteles.nodes[0] && (
+              <p>
+                La popularidad más alta es de{' '}
+                <span className="green-text">
+                  {data.hoteles.nodes[0].popularity}
+                </span>
+              </p>
+            )}
           </div>
           <NavTabs url={data.location.slug} />
 

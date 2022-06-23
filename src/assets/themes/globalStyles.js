@@ -165,7 +165,7 @@ h4 {
 }
 
 .section-center {
-  @media screen and (min-width: 1170px) {
+  @media ${device.laptopL} {
     display: grid;
     grid-template-columns: 1fr 30rem;
     column-gap: 1rem;

@@ -14,7 +14,7 @@ const Pagination = ({ pageInfo, url }) => {
       previousPage = `/${url}.html`
     }
   }
-  console.log('PageInfo from Pagination de hoteles: ', pageInfo)
+
   return (
     <Wrapper>
       <div className="paginas">
