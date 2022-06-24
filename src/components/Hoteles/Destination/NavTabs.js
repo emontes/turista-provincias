@@ -10,13 +10,18 @@ const NavTabs = ({ url, estrellas }) => {
       <ul>
         {estrellas
           ? estrellas.map((item) => {
+              let estrellitas = ''
+              let i
+              for (i = 0; i < item; i++) estrellitas += '★'
               return (
                 <li key={item}>
                   <Link
                     to={`/${url}-estrellas-${item}.html`}
                     activeClassName="active"
+                    className="stars"
+                    title={`Hoteles ${item} estrellas`}
                   >
-                    {item} Estrellas
+                    {item} {estrellitas}
                   </Link>
                 </li>
               )
@@ -43,6 +48,12 @@ const Wrapper = styled.div`
   ul {
     display: flex;
     justify-content: space-around;
+  }
+
+  .stars {
+    background: var(--clr-white-transparency-8);
+    color: #f9c40a;
+    font-size: 1.2rem;
   }
 
   a {

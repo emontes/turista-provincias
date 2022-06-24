@@ -8,13 +8,18 @@ const Stars = ({ estrellas, slug }) => {
     <BlockGrey title="Hoteles por Categoría">
       <Wrapper>
         {estrellas.map((item) => {
+          let estrellitas = ''
+          let i
+          for (i = 0; i < item; i++) estrellitas += '★'
           return (
             <li key={item}>
               <Link
                 to={`/${slug}-estrellas-${item}.html`}
                 activeClassName="active"
+                className="stars"
+                title={`Hoteles ${item} estrellas`}
               >
-                {item} Estrellas
+                {item} {estrellitas}
               </Link>
             </li>
           )
@@ -28,8 +33,12 @@ export default Stars
 
 const Wrapper = styled.ul`
   display: flex;
-  gap: 1rem;
+  justify-content: space-around;
 
+  .stars {
+    color: #f9c40a;
+    font-size: 1.2rem;
+  }
   li {
     height: 22px;
     line-height: 22px;
