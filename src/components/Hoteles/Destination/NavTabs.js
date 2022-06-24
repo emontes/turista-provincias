@@ -4,20 +4,33 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
 
-const NavTabs = ({ url }) => {
+const NavTabs = ({ url, estrellas }) => {
   return (
     <Wrapper>
       <ul>
-        {tabs.map((tab) => {
-          return (
-            <li key={tab.url}>
-              <Link to={`/${url}-${tab.url}.html`} activeClassName="active">
-                {tab.icon}
-                <span className="tab-title">{tab.title}</span>
-              </Link>
-            </li>
-          )
-        })}
+        {estrellas
+          ? estrellas.map((item) => {
+              return (
+                <li key={item}>
+                  <Link
+                    to={`/${url}-estrellas-${item}.html`}
+                    activeClassName="active"
+                  >
+                    {item} Estrellas
+                  </Link>
+                </li>
+              )
+            })
+          : tabs.map((tab) => {
+              return (
+                <li key={tab.url}>
+                  <Link to={`/${url}-${tab.url}.html`} activeClassName="active">
+                    {tab.icon}
+                    <span className="tab-title">{tab.title}</span>
+                  </Link>
+                </li>
+              )
+            })}
       </ul>
       <div className="line"></div>
     </Wrapper>

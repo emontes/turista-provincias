@@ -8,7 +8,6 @@ import footerList2 from '../../../constants/especialistas-links'
 import Banner from '../../../components/Hoteles/Destination/Banner'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
-import BlockStars from '../../../components/Hoteles/Destination/block-stars'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes-estrellas'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
@@ -23,11 +22,18 @@ const Estrellas = ({ data, pageContext }) => {
   const estrellas = pageContext.estrellas
 
   // Para el sideBanner que liste las ciudades del estado
+
+  let items = []
+  pageContext.destinos.forEach((item) => {
+    if (data.destinosMismasEstrellas.distinct.indexOf(item.id) > -1)
+      items.push(item)
+  })
+
   const listItems1 = {
     title: `${location.estado.Name}`,
-    items: pageContext.destinos,
+    items: items,
     linkTo: '',
-    linkToSuffix: '.html',
+    linkToSuffix: `-estrellas-${estrellas}.html`,
   }
 
   let titleSeo = `Hoteles ${estrellas} Estrellas en ${location.name}`
@@ -75,18 +81,16 @@ const Estrellas = ({ data, pageContext }) => {
             <h2>Hoteles {estrellas} estrellas</h2>
             <p>{description1}</p>
           </div>
-          <NavTabs url={data.location.slug} />
+          <NavTabs
+            url={data.location.slug}
+            estrellas={pageContext.diferentesEstrellas}
+          />
           <div className="back-white">
             <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
             <Leyenda location={location.name} />
           </div>
         </div>
         <div>
-          <BlockStars
-            estrellas={pageContext.diferentesEstrellas}
-            slug={pageContext.slug}
-          />
-
           <SideBanner
             title={location.name}
             description={`Hoteles ${estrellas} estrellas en ${location.name}`}
@@ -102,7 +106,7 @@ const Estrellas = ({ data, pageContext }) => {
 export default Estrellas
 
 export const pageQuery = graphql`
-  query($id: String, $estrellas: Int) {
+  query($id: String, $estrellas: Int, $estadoSlug: String) {
     hoteles: allStrapiHotelHotellook(
       filter: {
         cityId: { eq: $id }
@@ -123,6 +127,17 @@ export const pageQuery = graphql`
         hasNextPage
         currentPage
       }
+    }
+
+    destinosMismasEstrellas: allStrapiHotelHotellook(
+      filter: {
+        stars: { eq: $estrellas }
+        photoCount: { gt: 0 }
+        hotel_location: { location: { estado: { slug: { eq: $estadoSlug } } } }
+      }
+      sort: { fields: pricefrom, order: DESC }
+    ) {
+      distinct(field: cityId)
     }
 
     location: strapiHotelLocation(hotellookId: { eq: $id }) {

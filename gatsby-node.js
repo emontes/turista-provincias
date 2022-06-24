@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   let destinosBlock = []
   destinos.map((item) => {
-    let destino = { title: item.location.name, slug: item.slug }
+    let destino = { title: item.location.name, slug: item.slug, id: item.id }
     destinosBlock.push(destino)
   })
 
@@ -122,7 +122,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     `)
-    const diferentesEstrellas = resultEstrellas.data.hoteles.distinct
+    const diferentesEstrellas = resultEstrellas.data.hoteles.distinct.reverse()
 
     console.log('Hoteles zona', item.slug)
 
@@ -158,6 +158,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           destinos: destinosBlock,
           estrellas: parseInt(estrellas),
           diferentesEstrellas: diferentesEstrellas,
+          estadoSlug: estadoSlug,
         },
       })
     })
