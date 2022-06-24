@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Title from '../../atoms/Title'
-import device from '../../../assets/themes/device'
 
 const Lista = ({ metadata, locations }) => {
   return (
@@ -15,21 +14,21 @@ const Lista = ({ metadata, locations }) => {
       <div className="destinos">
         {locations.map((item) => {
           return (
-            <Link
-              to={`/${item.hotel_location.slug}.html`}
-              style={{ postion: 'relative' }}
-            >
-              <GatsbyImage
-                image={getImage(
-                  item.hotel_location.image.localFile.childImageSharp,
-                )}
-                alt={`Hoteles en ${item.name}`}
-                title={`Hoteles en ${item.name}`}
-                className="hero-img"
-                placeholder="tracedSVG"
-                layout="constrained"
-              />
-              <div className="name">{item.name}</div>
+            <Link to={`/${item.hotel_location.slug}.html`}>
+              <div className="hero">
+                <GatsbyImage
+                  image={getImage(
+                    item.hotel_location.banner.localFile.childImageSharp,
+                  )}
+                  alt={`Hoteles en ${item.name}`}
+                  title={`Hoteles en ${item.name}`}
+                  className="hero-img"
+                  placeholder="tracedSVG"
+                  layout="constrained"
+                />
+
+                <div className="name">{item.name}</div>
+              </div>
             </Link>
           )
         })}
@@ -50,22 +49,23 @@ const Wrapper = styled.section`
     gap: 1rem;
     justify-content: center;
   }
+  .hero {
+    background-color: ${(props) => props.theme.colors.primary9};
+    background-size: cover;
+    background-position: top;
+    position: relative;
+  }
   .hero-img {
-    width: 90vw;
-    height: 20vh;
-
-    @media ${device.tablet} {
-      width: 35rem;
-    }
+    width: 350px;
+    height: 45px;
   }
 
   .name {
+    position: absolute;
+    top: 0;
+    left: 1%;
     padding: 0.5rem;
-    color: var(--clr-white);
-    background: var(--clr-grey-1);
-    font-size: 2rem;
-    @media ${device.tablet} {
-      font-size: 2rem;
-    }
+    color: ${(props) => props.theme.colors.primary5} }  
+    font-size: 1.5rem;
   }
 `

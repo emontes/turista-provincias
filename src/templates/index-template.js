@@ -8,7 +8,7 @@ import Mapa from '../components/Home/mapa'
 import BlockGrey from '../components/atoms/BlockGrey'
 import BannerAdsense from '../utilities/BannerAdsense'
 import ContainerGrecas from '../components/molecules/ContainerGrecas'
-import ListaDestinos from '../components/Hoteles/Home/location-list'
+import ListaDestinos from '../components/Home/location-list'
 
 const index = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -66,6 +66,13 @@ export const query = graphql`
           slug
           numhoteles
           image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+          banner {
             localFile {
               childImageSharp {
                 gatsbyImageData

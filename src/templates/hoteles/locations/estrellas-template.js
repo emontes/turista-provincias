@@ -13,9 +13,6 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
 
 const Estrellas = ({ data, pageContext }) => {
-  console.log('PageContext en home-template: ', pageContext)
-  console.log(data)
-
   const { location, banner, image } = data.location
   const pageInfo = data.hoteles.pageInfo
   const numhoteles = pageInfo.totalCount

@@ -71,6 +71,13 @@ export const query = graphql`
               }
             }
           }
+          banner {
+            localFile {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
         }
       }
     }
@@ -94,6 +101,7 @@ export const query = graphql`
             }
           }
         }
+
         location {
           name
         }
