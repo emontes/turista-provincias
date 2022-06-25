@@ -41,8 +41,16 @@ const Wrapper = styled.section`
     justify-content: space-evenly;
   }
   .name {
+    padding: 0 1rem;
+    box-shadow: var(--light-shadow);
     color: ${(props) => props.theme.colors.primary8};
+    border-bottom-left-radius: 8px;
     border-bottom: 1px solid ${(props) => props.theme.colors.primary8};
+    border-left: 1px solid ${(props) => props.theme.colors.primary8};
     font-size: 2rem;
+    transition: var(--transition);
+    :hover {
+      color: ${(props) => props.theme.colors.primary10};
+    }
   }
 `

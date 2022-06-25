@@ -8,22 +8,15 @@ class Google extends Component {
 
   render() {
     return (
-      <>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5136877882943908"
-          crossorigin="anonymous"
-        ></script>
-        <ins
-          className={`${this.props.className} adsbygoogle`}
-          style={this.props.style}
-          data-ad-layout={this.props.layout}
-          data-ad-format={this.props.format}
-          data-full-width-responsive={this.props.responsive}
-          data-ad-client={this.props.client}
-          data-ad-slot={this.props.slot}
-        ></ins>
-      </>
+      <ins
+        className={`${this.props.className} adsbygoogle`}
+        style={this.props.style}
+        data-ad-layout={this.props.layout}
+        data-ad-format={this.props.format}
+        data-full-width-responsive={this.props.responsive}
+        data-ad-client={this.props.client}
+        data-ad-slot={this.props.slot}
+      ></ins>
     )
   }
 }

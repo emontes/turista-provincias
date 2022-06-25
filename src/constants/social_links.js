@@ -8,6 +8,10 @@ const SocialLinks = ({ styleClass, slugEstado }) => {
     faceLink = 'turistamexico'
     flickrLink = 'turistaedomexico'
   }
+  if (slugEstado === 'yucatan') {
+    faceLink = 'turistamexico'
+    flickrLink = 'turistayucatan'
+  }
 
   return (
     <ul className={styleClass}>

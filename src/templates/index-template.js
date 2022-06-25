@@ -65,20 +65,6 @@ export const query = graphql`
         hotel_location {
           slug
           numhoteles
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData
-              }
-            }
-          }
-          banner {
-            localFile {
-              childImageSharp {
-                gatsbyImageData
-              }
-            }
-          }
         }
       }
     }

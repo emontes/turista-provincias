@@ -205,6 +205,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const estadoRoots = {
     chiapas: 'link-40.html',
     edomexico: 'link-41.html',
+    yucatan: 'link-18.html',
   }
 
   let linksRoot = []
