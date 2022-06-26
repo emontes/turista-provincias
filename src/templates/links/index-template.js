@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
-import BannnerAdsense from '../../utilities/BannerAdsense'
+import BannerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import Links from '../../components/Links'
 
@@ -28,7 +28,7 @@ const Directorio = ({ data, pageContext }) => {
         metadata={metadata}
         sideNavSec
       />
-      <BannnerAdsense />
+      <BannerAdsense />
     </Layout>
   )
 }

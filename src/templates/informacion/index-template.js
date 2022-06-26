@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { graphql } from 'gatsby'
 import Seo from '../../components/Seo'
-import BannnerAdsense from '../../utilities/BannerAdsense'
+import BannerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import ButtonPages from '../../components/atoms/ButtonPages'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
@@ -27,8 +27,7 @@ const Informacion = ({ data, pageContext }) => {
         sideNavSec
       >
         <h3 className="section-title">Secciones</h3>
-        <BannnerAdsense />
-
+        <BannerAdsense />
         <div
           className="cont-area"
           style={{
@@ -47,7 +46,7 @@ const Informacion = ({ data, pageContext }) => {
           ))}
         </div>
       </ContainerGrecas>
-      <BannnerAdsense />
+      <BannerAdsense />
     </Layout>
   )
 }

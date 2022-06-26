@@ -67,7 +67,6 @@ const LinksPage = ({ data }) => {
         description={seoDescription}
         image={getSrc(image.localFile.childImageSharp)}
       />
-
       <Links
         title={category.title}
         subtitle={seoDescription}
@@ -77,8 +76,6 @@ const LinksPage = ({ data }) => {
         links={links.nodes}
         metadata={metadata}
       />
-
-      <BannerAdsense />
     </Layout>
   )
 }

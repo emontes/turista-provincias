@@ -21,7 +21,15 @@ const Locations = ({ data, pageContext }) => {
     linkTo: '',
     linkToSuffix: '-economicos.html',
   }
-  let descriptionSeo = `Encuentre hoteles económicos en ${location.name} con esta lista ordenada a partir del precio más barato para su hotel en ${location.name}`
+
+  let letreroPricefrom = ''
+  if (data.hoteles.nodes[0]) {
+    letreroPricefrom = new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+    }).format(data.hoteles.nodes[0].pricefrom * 24)
+  }
+  let descriptionSeo = `Encuentre hoteles económicos en ${location.name} con esta lista ordenada a partir del precio más barato para su hotel en ${location.name}. Hospedaje desde ${letreroPricefrom} Pesos prom/noche`
 
   return (
     <Layout
@@ -53,12 +61,7 @@ const Locations = ({ data, pageContext }) => {
             {data.hoteles.nodes[0] && (
               <p>
                 Hoteles desde{' '}
-                <span className="green-text">
-                  {new Intl.NumberFormat('es-MX', {
-                    style: 'currency',
-                    currency: 'MXN',
-                  }).format(data.hoteles.nodes[0].pricefrom * 24)}
-                </span>
+                <span className="green-text">{letreroPricefrom}</span>
               </p>
             )}
           </div>

@@ -94,6 +94,7 @@ const Section = ({ data, pageContext }) => {
           </div>
         </div>
       </ContainerGrecas>
+      <BannerAdsense />
     </Layout>
   )
 }

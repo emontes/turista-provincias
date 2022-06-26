@@ -6,6 +6,7 @@ import LinkCard from './link-card'
 import Title from './Title'
 import Breadcrumbs from '../atoms/Breadcrumbs'
 import ContainerGrecas from '../molecules/ContainerGrecas'
+import BannerAdsense from '../../utilities/BannerAdsense'
 
 const Links = ({
   category,
@@ -31,7 +32,7 @@ const Links = ({
         ) : (
           <h3 className="section-title">{subtitle}</h3>
         )}
-
+        <BannerAdsense />
         {linksCategories.length > 0 && (
           <>
             <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
@@ -56,7 +57,6 @@ const Links = ({
         )}
         {links.length > 0 &&
           links.map((item, index) => <LinkCard key={index} link={item} />)}
-
         <h4>El directorio de enlaces web de {metadata.estado.name}</h4>
       </Wrapper>
     </ContainerGrecas>

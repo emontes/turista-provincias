@@ -39,7 +39,6 @@ const Article = ({ data, pageContext }) => {
           displayImage ? getSrc(displayImage.localFile.childImageSharp) : ''
         }
       />
-
       <Wrapper className="section">
         <BannerAdsense />
         <div className="section-center">
