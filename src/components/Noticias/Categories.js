@@ -8,17 +8,19 @@ const Categories = ({ items }) => {
       <Title title="Categorias" />
       <ul>
         {items.map((item, index) => {
-          return (
-            <li key={index}>
-              <Link
-                to={`/noticias/${item.slug}`}
-                className="category-menu"
-                activeStyle={{ color: 'var(--clr-red-dark)' }}
-              >
-                {item.name}
-              </Link>
-            </li>
-          )
+          if (item.slug) {
+            return (
+              <li key={index}>
+                <Link
+                  to={`/noticias/${item.slug}`}
+                  className="category-menu"
+                  activeStyle={{ color: 'var(--clr-red-dark)' }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            )
+          }
         })}
       </ul>
     </div>

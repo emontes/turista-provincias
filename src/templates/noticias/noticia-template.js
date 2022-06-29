@@ -34,7 +34,9 @@ const Article = ({ data, pageContext }) => {
     <Layout linkExterno="/noticias">
       <Seo
         title={title}
-        description={hometext.data.hometext.substring(0, 250)}
+        description={
+          hometext.data.hometext ? hometext.data.hometext.substring(0, 250) : ''
+        }
         image={
           displayImage ? getSrc(displayImage.localFile.childImageSharp) : ''
         }

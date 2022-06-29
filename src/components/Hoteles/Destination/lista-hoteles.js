@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
+import HotelType from '../../atoms/hotelType'
 
 const Lista = ({ hoteles }) => {
   return (
@@ -25,12 +26,15 @@ const Lista = ({ hoteles }) => {
                   >
                     {hotel.name.en}
                   </a>
-                  {hotel.rating > 0 && (
-                    <span className="rating-number">{hotel.rating / 10}</span>
-                  )}
-                  {hotel.stars > 0 && (
-                    <span className="stars">{hotel.stars}☆</span>
-                  )}
+                  <div style={{ float: 'right' }}>
+                    <HotelType type={hotel.propertyType} />
+                    {hotel.rating > 0 && (
+                      <span className="rating-number">{hotel.rating / 10}</span>
+                    )}
+                    {hotel.stars > 0 && (
+                      <span className="stars">{hotel.stars}☆</span>
+                    )}
+                  </div>
                 </td>
                 <td className="direccion">{hotel.address.en}</td>
 
@@ -70,12 +74,10 @@ const Wrapper = styled.div`
     font-weight: 500;
   }
   .stars {
-    float: right;
     color: #f9c40a;
     margin-left: 5px;
   }
   .rating-number {
-    float: right;
     margin-left: 5px;
 
     color: #fff;

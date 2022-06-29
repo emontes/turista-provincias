@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import Title from '../atoms/Title'
 
 const Lista = ({ metadata, locations }) => {
-  console.log('Metadata: ', metadata)
-  console.log('Locations: ', locations)
   return (
     <Wrapper>
       <Title

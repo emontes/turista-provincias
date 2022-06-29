@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import HotelType from '../../atoms/hotelType'
 
 const Hotel = ({ hotel }) => {
+  console.log('Datos del Hotel: ', hotel)
   const imagen =
     hotel.photos.strapi_json_value.length > 0
       ? hotel.photos.strapi_json_value[0].url
@@ -32,6 +34,8 @@ const Hotel = ({ hotel }) => {
         </div>
         <div className="body">
           <div className="izquierda">
+            <HotelType type={hotel.propertyType} />
+
             <div className="hotel-name" itemprop="name">
               {hotel.name.en}
             </div>
@@ -165,6 +169,7 @@ const Wrapper = styled.div`
     font-size: 1.2rem;
     font-weight: 700;
   }
+
   p {
     margin-top: 10px;
     font-size: 0.9rem;
