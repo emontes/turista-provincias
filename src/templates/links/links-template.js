@@ -2,7 +2,6 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
-import BannerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import Links from '../../components/Links'
 

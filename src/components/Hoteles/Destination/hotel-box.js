@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import HotelType from '../../atoms/hotelType'
+import device from '../../../assets/themes/device'
 
 const Hotel = ({ hotel }) => {
-  console.log('Datos del Hotel: ', hotel)
   const imagen =
     hotel.photos.strapi_json_value.length > 0
       ? hotel.photos.strapi_json_value[0].url
@@ -34,8 +34,6 @@ const Hotel = ({ hotel }) => {
         </div>
         <div className="body">
           <div className="izquierda">
-            <HotelType type={hotel.propertyType} />
-
             <div className="hotel-name" itemprop="name">
               {hotel.name.en}
             </div>
@@ -69,6 +67,7 @@ const Hotel = ({ hotel }) => {
           </div>
 
           <div className="derecha">
+            <HotelType type={hotel.propertyType} />
             {hotel.pricefrom > 0 && (
               <div className="price">
                 <span className="currency-text">MXN</span>
@@ -77,6 +76,8 @@ const Hotel = ({ hotel }) => {
                   style: 'currency',
                   currency: 'MXN',
                 }).format(hotel.pricefrom * 24)}
+                <br />
+                <span className="currency-text">prom/noche</span>
               </div>
             )}
 
@@ -101,39 +102,41 @@ const Hotel = ({ hotel }) => {
 export default Hotel
 
 const Wrapper = styled.div`
-  background: #f2f2f2;
+  background: #efefef;
   box-shadow: var(--light-shadow);
-  max-width: 320px;
+  width: 320px;
+
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   transition: var(--transition);
   :hover {
     box-shadow: var(--dark-shadow);
   }
 
   .image {
-    width: 100%;
+    width: 320px;
     height: 240px;
+
     transition: var(--transition);
     :hover {
       transform: scale(1.1);
     }
   }
   .list-item {
-    background: #efefef;
     width: 100%;
     overflow: hidden;
     position: relative;
   }
   .body {
     width: 100%;
-    height: 11rem;
     font-family: 'Open Sans';
     font-size: 13px;
     line-height: 15px;
     overflow: hidden;
     display: flex;
+
+    justify-content: space-between;
   }
 
   .tipos {
@@ -160,19 +163,17 @@ const Wrapper = styled.div`
     font-weight: 700;
   }
   .izquierda {
-    width: 70%;
     padding: 0.5rem;
   }
 
   .hotel-name {
-    margin-top: 0.3rem;
     font-size: 1.2rem;
     font-weight: 700;
   }
 
   p {
     margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .address {
     color: var(--clr-grey-5);
@@ -185,33 +186,45 @@ const Wrapper = styled.div`
   }
 
   .derecha {
+    width: 11rem;
+    @media ${device.tablet} {
+      width: 8rem;
+    }
     border-left: 1px solid var(--clr-grey-8);
+
     align-self: center;
     padding: 1rem;
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
   }
   .currency-text {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+    color: var(--clr-grey-8);
   }
   .price {
     text-align: center;
-    color: var(--clr-grey-8);
-    font-size: 1.5rem;
+    color: #4caf50;
+    font-size: 1.2rem;
     font-weight: 700;
+    flex-basis: 100%;
   }
   .reservar {
     background-color: #feba31;
     color: #fff;
     display: inline-block;
-    margin-top: 10px;
-    width: 100%;
+    padding: 0.5rem;
+
     white-space: nowrap;
-    padding: 0 10px;
-    height: 46px;
+
     border-radius: 3px;
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 46px;
+
     :hover {
       box-shadow: 0 4px 12px rgba(254, 186, 49, 0.5);
     }

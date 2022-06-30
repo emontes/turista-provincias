@@ -87,7 +87,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
        (pjemplo hoteles-palenque-5)                */
 
     // Primero hace un query para saber cuántas páginas (pagina 1, 2 ...) por cada destino
-    const hotelPerPage = 14 //tomamos 14 por que es lo que usa google hotels, pero vamos a ver si luego funciona mejor con 20
+    const hotelPerPage = 32 //tomamos 14 por que es lo que usa google hotels, pero vamos a ver si luego funciona mejor con 20
     const resultHotelesHome = await graphql(`
       {
         hoteles: allStrapiHotelHotellook(
