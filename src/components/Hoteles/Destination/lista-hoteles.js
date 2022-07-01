@@ -1,12 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
 import HotelType from '../../atoms/hotelType'
+import SearchBox from '../../atoms/search-box'
 
 const Lista = ({ hoteles }) => {
+  const [searchField, setSearchField] = useState('')
+  const [displayHoteles, setDisplayHoteles] = useState([])
+  const [filteredHoteles, setFilteredHoteles] = useState(displayHoteles)
+
+  useEffect(() => {
+    setDisplayHoteles(hoteles)
+  }, [])
+
+  useEffect(() => {
+    const newFilteredHoteles = displayHoteles.filter((hotel) => {
+      return hotel.name.en.toLocaleLowerCase().includes(searchField)
+    })
+
+    setFilteredHoteles(newFilteredHoteles)
+    console.log('Evento de setFilteredHotels is fired')
+  }, [displayHoteles, searchField])
+
+  const onSearchChange = (event) => {
+    const searchFieldString = event.target.value.toLocaleLowerCase()
+    setSearchField(searchFieldString)
+  }
+
   return (
     <Wrapper>
+      <SearchBox onChangeHandler={onSearchChange} placeholder="buscar hotel" />
       <table>
         <tbody>
           <tr>
@@ -15,7 +39,7 @@ const Lista = ({ hoteles }) => {
             <th>Cuartos</th>
             <th>*Precio</th>
           </tr>
-          {hoteles.map((hotel) => {
+          {filteredHoteles.map((hotel) => {
             return (
               <tr key={hotel.strapi_id}>
                 <td>
