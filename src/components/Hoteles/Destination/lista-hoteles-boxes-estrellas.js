@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import HotelBox from './hotel-box'
 import ButtonMoreHotels from '../../atoms/ButtonMoreHotels'
@@ -7,14 +7,13 @@ const Lista = ({ hoteles, perPage }) => {
   let hotelStars = ''
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [dataHoteles, setDataHoteles] = useState([])
-
-  useEffect(() => {
-    setDataHoteles(hoteles.slice(0, perPage * currentPage))
-  }, [currentPage])
+  const [dataHoteles, setDataHoteles] = useState(
+    hoteles.slice(0, perPage * currentPage),
+  )
 
   const onMoreHotels = () => {
     const newPage = currentPage + 1
+    setDataHoteles(hoteles.slice(0, perPage * newPage))
     setCurrentPage(newPage)
   }
 
