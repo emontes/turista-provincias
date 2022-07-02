@@ -8,14 +8,14 @@ import footerList2 from '../../../constants/especialistas-links'
 import Banner from '../../../components/Hoteles/Destination/Banner'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
-import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes-estrellas'
+import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
 
 const Estrellas = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
-  const pageInfo = data.hoteles.pageInfo
-  const numhoteles = pageInfo.totalCount
+
+  const numhoteles = data.hoteles.nodes.length
   const estrellas = pageContext.estrellas
 
   // Para el sideBanner que liste las ciudades del estado
@@ -83,7 +83,10 @@ const Estrellas = ({ data, pageContext }) => {
             estrellas={pageContext.diferentesEstrellas}
           />
           <div className="back-white">
-            <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+            <ListaHotelesBoxes
+              hoteles={data.hoteles.nodes}
+              perPage={pageContext.perPage}
+            />
             <Leyenda location={location.name} />
           </div>
         </div>
@@ -114,15 +117,6 @@ export const pageQuery = graphql`
     ) {
       nodes {
         ...ListaHoteles
-      }
-      pageInfo {
-        pageCount
-        itemCount
-        perPage
-        totalCount
-        hasPreviousPage
-        hasNextPage
-        currentPage
       }
     }
 

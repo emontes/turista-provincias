@@ -12,19 +12,13 @@ import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import BlockTopHotels from '../../../components/Hoteles/Destination/block-tophotels'
-import Pagination from '../../../components/Hoteles/Destination/Pagination'
 import BlockStars from '../../../components/Hoteles/Destination/block-stars'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
 
-  const pageInfo = data.hoteles.pageInfo
-  const numhoteles = pageInfo.totalCount
+  const numhoteles = data.hoteles.nodes.length
   let tree = []
-
-  if (pageInfo.currentPage > 1) {
-    tree.push({ slug: `${data.location.slug}.html`, title: location.name })
-  }
 
   // Para el sideBanner que liste las ciudades del estado
   const listItems1 = {
@@ -36,10 +30,6 @@ const Locations = ({ data, pageContext }) => {
 
   let titleSeo = `Guía de Hoteles en ${location.name}`
   let descriptionSeo = `Encuentre su Hotel en ${location.name}, ${location.estado.Name} y resérvelo en línea  con las diferentes opiones de esta guía de Hoteles en ${location.name}`
-  if (pageInfo.currentPage > 1) {
-    titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
-    descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
-  }
 
   let cuantosTienenPrecio = 0
   let sumaPrecios = 0
@@ -54,9 +44,7 @@ const Locations = ({ data, pageContext }) => {
   return (
     <Layout
       linkExterno="/hoteles"
-      seoTitle={`Hoteles en ${location.name} ${
-        pageInfo.currentPage > 1 ? `Página ${pageInfo.currentPage}` : ''
-      }`}
+      seoTitle={`Hoteles en ${location.name} `}
       footerList1={footerList1}
       footerList2={footerList2}
     >
@@ -79,17 +67,13 @@ const Locations = ({ data, pageContext }) => {
             homeLink="/hoteles"
             homeTitle="Hoteles"
             tree={tree}
-            endTitle={
-              pageInfo.currentPage > 1
-                ? `Página ${pageInfo.currentPage}`
-                : location.name
-            }
+            endTitle={location.name}
             singleUrl
           />
           <div className="padding-1">
             <h2>Hoteles en {location.name}</h2>
             <p>
-              Precio promedio por noche{' '}
+              Una noche de hospedaje en {location.name} cuesta en promedio{' '}
               <span className="green-text">
                 {new Intl.NumberFormat('es-MX', {
                   style: 'currency',
@@ -102,13 +86,16 @@ const Locations = ({ data, pageContext }) => {
 
           <NavTabs url={data.location.slug} />
           <div className="back-white">
-            <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+            <ListaHotelesBoxes
+              hoteles={data.hoteles.nodes}
+              perPage={pageContext.perPage}
+            />
           </div>
-          <Pagination url={data.location.slug} pageInfo={pageInfo} />
+
           <Leyenda location={location.name} />
         </div>
         <div>
-          {pageInfo.totalCount > pageInfo.perPage && (
+          {numhoteles > pageContext.perPage && (
             <>
               <BlockTopHotels data={data} location={location} />
               <BlockStars
@@ -134,7 +121,7 @@ const Locations = ({ data, pageContext }) => {
 export default Locations
 
 export const pageQuery = graphql`
-  query($id: String, $skip: Int, $limit: Int) {
+  query($id: String) {
     topecono: allStrapiHotelHotellook(
       filter: {
         cityId: { eq: $id }
@@ -194,22 +181,13 @@ export const pageQuery = graphql`
     }
 
     hoteles: allStrapiHotelHotellook(
-      limit: $limit
-      skip: $skip
+      # limit: $limit
+      # skip: $skip
       filter: { cityId: { eq: $id }, stars: { gt: 0 }, photoCount: { gt: 0 } }
       sort: { fields: stars, order: DESC }
     ) {
       nodes {
         ...ListaHoteles
-      }
-      pageInfo {
-        pageCount
-        itemCount
-        perPage
-        totalCount
-        hasPreviousPage
-        hasNextPage
-        currentPage
       }
     }
 

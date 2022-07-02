@@ -186,6 +186,7 @@ const Wrapper = styled.div`
   }
 
   .derecha {
+    margin: 0.8rem 0;
     width: 11rem;
     @media ${device.tablet} {
       width: 8rem;
@@ -193,7 +194,7 @@ const Wrapper = styled.div`
     border-left: 1px solid var(--clr-grey-8);
 
     align-self: center;
-    padding: 1rem;
+    padding: 0 1rem;
     display: flex;
 
     flex-wrap: wrap;

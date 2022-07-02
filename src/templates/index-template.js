@@ -4,11 +4,11 @@ import Layout from '../components/Layout'
 import Noticias from '../components/Noticias/noticias-list'
 
 import Seo from '../components/Seo'
-import Mapa from '../components/Home/mapa'
 import BlockGrey from '../components/atoms/BlockGrey'
 import BannerAdsense from '../utilities/BannerAdsense'
 import ContainerGrecas from '../components/molecules/ContainerGrecas'
 import ListaDestinos from '../components/Home/location-list'
+import Banner from '../components/Banner'
 
 const index = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -19,10 +19,13 @@ const index = ({ data }) => {
       sub={data.site.siteMetadata.estado.slogan}
     >
       <Seo />
-      <Mapa metadata={data.site.siteMetadata} />
+      {/* <Mapa metadata={data.site.siteMetadata} /> */}
 
       <ContainerGrecas title={metadata.title} sideNavSec>
-        <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
+        <div className="section-center">
+          <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
+          <Banner showHotelsBox={true} sinAbout={true} />
+        </div>
       </ContainerGrecas>
 
       {/* Noticias */}

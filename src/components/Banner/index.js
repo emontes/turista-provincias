@@ -5,11 +5,21 @@ import HotelsBox from './HotelsBox'
 import ListItems from './ListItems'
 import BlockGrey from '../atoms/BlockGrey'
 
-const index = ({ title, description, image, showHotelsBox, listItems1 }) => {
+const index = ({
+  title,
+  description,
+  image,
+  showHotelsBox,
+  listItems1,
+  sinAbout,
+}) => {
   return (
     <BlockGrey>
       <Wrapper>
-        <About title={title} description={description} image={image} />
+        {!sinAbout && (
+          <About title={title} description={description} image={image} />
+        )}
+
         {listItems1 && (
           <ListItems
             title={listItems1.title}

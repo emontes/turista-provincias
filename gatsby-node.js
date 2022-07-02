@@ -4,6 +4,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   const postPerPage = 16
+  const hotelsPerPage = 12
   const estadoSlug = process.env.ESTADO_SLUG
 
   console.log('Creando estrucutra para: ', estadoSlug)
@@ -83,32 +84,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   destinos.map(async (item) => {
-    /* Crea la página principal del destion 
-       (pjemplo hoteles-palenque-5)                */
-
-    // Primero hace un query para saber cuántas páginas (pagina 1, 2 ...) por cada destino
-    const hotelPerPage = 32 //tomamos 14 por que es lo que usa google hotels, pero vamos a ver si luego funciona mejor con 20
-    const resultHotelesHome = await graphql(`
-      {
-        hoteles: allStrapiHotelHotellook(
-          limit: ${hotelPerPage}
-          filter: {
-            cityId: { eq: "${item.id}" }
-            stars: { gt: 0 }
-            photoCount: { gt: 0 }
-          }
-          sort: { fields: stars, order: DESC }
-        ) {
-          distinct(field: stars)
-          pageInfo {
-            pageCount
-          }
-        }
-      }
-    `)
-
-    const hotelHomePages = resultHotelesHome.data.hoteles.pageInfo.pageCount
-
     // Query para sabar cuantos tipos y cuales de estrellas hay en cada destino
     const resultEstrellas = await graphql(`
       {
@@ -126,23 +101,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     console.log('Hoteles zona', item.slug)
 
-    // ** Pagina home del destino con paginación
-    for (var i = 0; i < hotelHomePages; i++) {
-      createPage({
-        path: i === 0 ? `/${item.slug}.html` : `/${item.slug}-p${i + 1}.html`,
-        component: path.resolve(
-          './src/templates/hoteles/locations/home-template.js',
-        ),
-        context: {
-          id: item.id,
-          limit: hotelPerPage,
-          skip: i * hotelPerPage,
-          slug: item.slug,
-          destinos: destinosBlock,
-          estrellas: diferentesEstrellas,
-        },
-      })
-    }
+    /* Crea la página principal del destion 
+       (pjemplo hoteles-palenque-5)                */
+    createPage({
+      path: `/${item.slug}.html`,
+      component: path.resolve(
+        './src/templates/hoteles/locations/home-template.js',
+      ),
+      context: {
+        id: item.id,
+        slug: item.slug,
+        destinos: destinosBlock,
+        estrellas: diferentesEstrellas,
+        perPage: hotelsPerPage,
+      },
+    })
 
     // ** Paginas de estrellitas
 
@@ -159,6 +132,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           estrellas: parseInt(estrellas),
           diferentesEstrellas: diferentesEstrellas,
           estadoSlug: estadoSlug,
+          perPage: hotelsPerPage,
         },
       })
     })
@@ -174,6 +148,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id: item.id,
           slug: item.slug,
           destinos: destinosBlock,
+          perPage: hotelsPerPage,
         },
       })
     })

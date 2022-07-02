@@ -20,7 +20,7 @@ const Categories = ({ items }) => {
                 </Link>
               </li>
             )
-          }
+          } else return ''
         })}
       </ul>
     </div>

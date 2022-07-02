@@ -13,7 +13,7 @@ const SideNavSec = () => {
           return (
             <li key={item.id}>
               <Link to={item.url} activeClassName="active">
-                {item.text}
+                {item.icon} <span className="title">{item.text}</span>
               </Link>
             </li>
           )
@@ -33,6 +33,7 @@ const Wrapper = styled.div`
     gap: 1px;
     font-size: 1.2rem;
     flex-wrap: wrap;
+    justify-content: center;
     @media ${device.tablet} {
       flex-direction: column;
       font-size: 1.4rem;
@@ -45,7 +46,9 @@ const Wrapper = styled.div`
       text-transform: uppercase;
 
       display: block;
-
+      .title {
+        margin-left: 10px;
+      }
       a {
         display: block;
         color: var(--clr-white);

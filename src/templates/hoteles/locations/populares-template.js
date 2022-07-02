@@ -83,7 +83,6 @@ export const pageQuery = graphql`
     hoteles: allStrapiHotelHotellook(
       filter: { cityId: { eq: $id }, cntRooms: { gt: 0 } }
       sort: { fields: popularity, order: DESC }
-      limit: 36
     ) {
       nodes {
         ...ListaHoteles

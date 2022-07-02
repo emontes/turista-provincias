@@ -94,7 +94,6 @@ export const pageQuery = graphql`
         photoCount: { gt: 0 }
       }
       sort: { fields: pricefrom, order: ASC }
-      limit: 36
     ) {
       nodes {
         ...ListaHoteles

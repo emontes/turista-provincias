@@ -9,7 +9,7 @@ const Noticias = ({ noticias, isHome, pageInfo, url }) => {
       {noticias.map((noticia, i) => {
         return (
           <>
-            {i % 3 === 0 && (
+            {i % 3 === 0 && i > 0 && (
               <BannerAdSense
                 slot="9869048679"
                 format="fluid"
