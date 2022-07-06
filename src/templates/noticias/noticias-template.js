@@ -6,14 +6,9 @@ import Noticias from '../../components/Noticias'
 import { getSrc } from 'gatsby-plugin-image'
 
 const noticias = ({ data, pageContext }) => {
-  const pageInfo = data.allStrapiNoticia.pageInfo
   const metadata = data.site.siteMetadata
   let titleSeo = `Noticias de ${metadata.estado.name}`
   let descriptionSeo = `Artículos Informativos y de Noticias en Turista ${metadata.estado.name}. Nos enfocamos principalmente en noticias de turismo en ${metadata.estado.name}.`
-  if (pageInfo.currentPage > 1) {
-    titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
-    descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
-  }
 
   return (
     <Layout
@@ -33,10 +28,9 @@ const noticias = ({ data, pageContext }) => {
         noticias={data.allStrapiNoticia.nodes}
         title={titleSeo}
         description={descriptionSeo}
-        pageInfo={pageInfo}
-        url="/noticias/ultimas"
         topics={pageContext.topics}
         categories={pageContext.categories}
+        perPage={8}
       />
     </Layout>
   )
@@ -45,24 +39,14 @@ const noticias = ({ data, pageContext }) => {
 export default noticias
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!, $estadoSlug: String!) {
+  query($estadoSlug: String!) {
     allStrapiNoticia(
-      limit: $limit
-      skip: $skip
       filter: { estado: { slug: { eq: $estadoSlug } } }
       sort: { fields: date, order: DESC }
+      limit: 500
     ) {
       nodes {
         ...NoticiaCard
-      }
-      pageInfo {
-        pageCount
-        itemCount
-        perPage
-        totalCount
-        hasPreviousPage
-        hasNextPage
-        currentPage
       }
     }
     site {

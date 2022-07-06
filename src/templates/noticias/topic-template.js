@@ -6,14 +6,9 @@ import { getSrc } from 'gatsby-plugin-image'
 import Noticias from '../../components/Noticias'
 
 const Topic = ({ data, pageContext }) => {
-  const pageInfo = data.allStrapiNoticia.pageInfo
-
   let titleSeo = `Noticias del Tema: ${data.topic.Title}`
   let descriptionSeo = `Artículos publicados con el tema ${data.topic.Title} en el Turista.`
-  if (pageInfo.currentPage > 1) {
-    titleSeo = titleSeo + ' Página. ' + pageInfo.currentPage
-    descriptionSeo = 'Página ' + pageInfo.currentPage + ' de ' + descriptionSeo
-  }
+
   let displayImage = data.image.childImageSharp
   if (data.topic.image)
     displayImage = data.topic.image.localFile.childImageSharp
@@ -21,7 +16,6 @@ const Topic = ({ data, pageContext }) => {
     <Layout
       heroImg={displayImage}
       main={data.topic.Title}
-      sub={pageInfo.currentPage > 1 ? `Página ${pageInfo.currentPage}` : ''}
       seoTitle={titleSeo}
       linkExterno="/noticias"
     >
@@ -35,9 +29,8 @@ const Topic = ({ data, pageContext }) => {
         noticias={data.allStrapiNoticia.nodes}
         title={titleSeo}
         description={descriptionSeo}
-        pageInfo={pageInfo}
-        url={`/noticias/tema/${pageContext.slug}`}
         topics={pageContext.topics}
+        perPage={5}
       />
     </Layout>
   )
@@ -46,27 +39,17 @@ const Topic = ({ data, pageContext }) => {
 export default Topic
 
 export const query = graphql`
-  query($slug: String!, $skip: Int!, $limit: Int!, $estadoSlug: String!) {
+  query($slug: String!, $estadoSlug: String!) {
     allStrapiNoticia(
-      limit: $limit
-      skip: $skip
       filter: {
         estado: { slug: { eq: $estadoSlug } }
         topics: { elemMatch: { slug: { eq: $slug } } }
       }
+      limit: 100
       sort: { fields: date, order: DESC }
     ) {
       nodes {
         ...NoticiaCard
-      }
-      pageInfo {
-        pageCount
-        itemCount
-        perPage
-        totalCount
-        hasPreviousPage
-        hasNextPage
-        currentPage
       }
     }
 

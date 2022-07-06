@@ -27,25 +27,24 @@ export default SideNavSec
 
 const Wrapper = styled.div`
   min-width: 15rem;
-
+  font-size: 1.4rem;
   ul {
     display: flex;
-    gap: 1px;
-    font-size: 1.2rem;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 1px;
     @media ${device.tablet} {
       flex-direction: column;
-      font-size: 1.4rem;
     }
     li {
       background: url(${menuBg}) repeat-x left top;
       background-color: ${(props) => props.theme.colors.primary1};
       height: 50px;
-
+      width: 49%;
       text-transform: uppercase;
-
       display: block;
+      @media ${device.tablet} {
+        width: 100%;
+      }
       .title {
         margin-left: 10px;
       }

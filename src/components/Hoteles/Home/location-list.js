@@ -12,9 +12,9 @@ const Lista = ({ metadata, locations }) => {
         subtitle={`Hoteles en ${metadata.estado.name}`}
       />
       <div className="destinos">
-        {locations.map((item) => {
+        {locations.map((item, index) => {
           return (
-            <Link to={`/${item.hotel_location.slug}.html`}>
+            <Link key={index} to={`/${item.hotel_location.slug}.html`}>
               <div className="hero">
                 <GatsbyImage
                   image={getImage(

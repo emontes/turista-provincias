@@ -2,8 +2,7 @@ const path = require('path')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
-  const postPerPage = 16
+  const postPerPage = 100
   const hotelsPerPage = 12
   const estadoSlug = process.env.ESTADO_SLUG
 
@@ -349,8 +348,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   })
 
-  // *** Create Categories Pages ***
-  console.log('Creando páginas de Categorías de noticias')
+  // *** Consigue las distintas Categorías ***
   const resultCategories = await graphql(`
     {
       allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
@@ -361,65 +359,46 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const categories = resultCategories.data.allStrapiNoticia.distinct
 
-  // Obtiene datos de Categorías
+  // Obtiene datos de Categorías (Que en realidad corresponden a locations)
   let categoriesFull = []
-  categories.map(async (item) => {
+  categories.forEach(async (item) => {
     console.log('Obteniendo datos de Categoria: ', item)
-    const result = await graphql(`
+    const resultCat = await graphql(`
       {
-        strapiLocation(
-          estado: { slug: { eq: "${estadoSlug}" } }
-          slug: { eq: "${item}" }
+        allStrapiNoticia(
+        filter: {
+estado: {slug: {eq: "${estadoSlug}"}}, 
+location: {slug: {eq: "${item}"}}
+        } 
+        limit: 1
+        
         ) {
-          name
-          slug
+          totalCount
+          nodes {
+            location {
+              name
+              slug
+            }
+          }
         }
       }
     `)
-    categoriesFull.push(result.data.strapiLocation)
+    if (resultCat.errors) {
+      reporter.panicOnBuild(
+        `Hubo un error en lo de obtener los datos de la categoría`,
+        resultCat.errors,
+      )
+      return
+    }
+    catego = {
+      count: resultCat.data.allStrapiNoticia.totalCount,
+      name: resultCat.data.allStrapiNoticia.nodes[0].location.name,
+      slug: resultCat.data.allStrapiNoticia.nodes[0].location.slug,
+    }
+    categoriesFull.push(catego)
   })
 
-  categories.map(async (item) => {
-    const result = await graphql(`
-     {
-      allStrapiNoticia(
-        limit: ${postPerPage}
-        filter: {
-          estado: { slug: { eq: "${estadoSlug}" } }
-          location: { slug: {eq: "${item}" } }
-        }
-    ) {
-    pageInfo {
-          pageCount
-        }
-    }
-    }`)
-    const topicPages = result.data.allStrapiNoticia.pageInfo.pageCount
-    console.log('Category (item) ===> ', item)
-    console.log('Cuantos paginos:', topicPages)
-
-    for (var i = 0; i < topicPages; i++) {
-      createPage({
-        path: i === 0 ? `/noticias/${item}` : `/noticias/${item}/${i + 1}`,
-
-        component: path.resolve(
-          './src/templates/noticias/category-template.js',
-        ),
-        context: {
-          limit: postPerPage,
-          skip: i * postPerPage,
-          slug: item,
-          topics: topicsFull,
-          categories: categoriesFull,
-          estadoSlug: estadoSlug,
-        },
-      })
-    }
-  })
-
-  // *** Crea las páginas de los Temas ***
-
-  console.log('Creando páginas de Temas de Noticias')
+  // *** Consigue los distintos temas ***
   const resultTopics = await graphql(`
     {
       allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
@@ -431,9 +410,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const topics = resultTopics.data.allStrapiNoticia.distinct
 
   // Obtiene los datos de los topics (Nombre, url, imagen)
-
   let topicsFull = []
-  topics.map(async (item) => {
+  topics.forEach(async (item) => {
+    console.log('Obteniendo datos de Tema: ', item)
     const result = await graphql(`{
       strapiTopic(slug: {eq: "${item}"}) {
         Title
@@ -448,45 +427,81 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
     `)
-    topicsFull.push(result.data.strapiTopic)
+
+    if (result.errors) {
+      reporter.panicOnBuild(
+        `Hubo un error en lo de obtener los datos del topic`,
+        result.errors,
+      )
+      return
+    }
+    const result2 = await graphql(`
+    {
+        allStrapiNoticia(
+          filter: {
+            topics: { elemMatch: { slug: { eq: "${item}" } } },
+            estado: { slug: { eq: "${estadoSlug}" } }
+          }
+          limit: ${postPerPage}
+        ) {
+          totalCount
+          pageInfo {
+            pageCount
+          }      
+        }
+      }
+    `)
+
+    const topic = {
+      count: result2.data.allStrapiNoticia.totalCount,
+      pageCount: result2.data.allStrapiNoticia.pageInfo.pageCount,
+      slug: result.data.strapiTopic.slug,
+      Title: result.data.strapiTopic.Title,
+      image: result.data.strapiTopic.image,
+    }
+
+    topicsFull.push(topic)
+    //topicsFull.push(result.data.strapiTopic)
   })
 
-  topics.map(async (item) => {
-    const resultTopic = await graphql(`
-     {
-      allStrapiNoticia(
-        limit: ${postPerPage}
-        filter: {
-          estado: { slug: { eq: "${estadoSlug}" } }
-          topics: { elemMatch: { slug: { eq: "${item}" } } }
-        }
-    ) {
-    pageInfo {
-          pageCount
-        }
-    }
-    }`)
-    const topicPages = resultTopic.data.allStrapiNoticia.pageInfo.pageCount
-    console.log('Topic (item) ===> ', item)
-    console.log('Cuantos paginos:', topicPages)
-    for (var i = 0; i < topicPages; i++) {
-      createPage({
-        path:
-          i === 0
-            ? `/noticias/tema/${item}`
-            : `/noticias/tema/${item}/${i + 1}`,
+  // ** crea las páginas de las categorías.
+  categories.map(async (item) => {
+    console.log('Category (item) ===> ', item)
+    createPage({
+      path: `/noticias/${item}`,
+      component: path.resolve('./src/templates/noticias/category-template.js'),
+      context: {
+        slug: item,
+        topics: topicsFull,
+        categories: categoriesFull,
+        estadoSlug: estadoSlug,
+      },
+    })
+  })
 
-        component: path.resolve('./src/templates/noticias/topic-template.js'),
-        context: {
-          limit: postPerPage,
-          skip: i * postPerPage,
-          slug: item,
-          topics: topicsFull,
-          categories: categoriesFull,
-          estadoSlug: estadoSlug,
-        },
-      })
-    }
+  // ** crea las páginas de los topics
+
+  topics.forEach((item) => {
+    console.log('Topic (item) ===> ', item)
+
+    // for (var i = 0; i < item.pageCount; i++) {
+    createPage({
+      // path:
+      //   i === 0
+      //     ? `/noticias/tema/${item.slug}`
+      //     : `/noticias/tema/${item.slug}/${i + 1}`,
+      path: `/noticias/tema/${item}`,
+      component: path.resolve('./src/templates/noticias/topic-template.js'),
+      context: {
+        // limit: postPerPage,
+        // skip: i * postPerPage,
+        slug: item.slug,
+        topics: topicsFull,
+        categories: categoriesFull,
+        estadoSlug: estadoSlug,
+      },
+    })
+    // }
   })
 
   // ** Crea páginas de cada noticia **
@@ -533,7 +548,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       if (article.slugOld) {
         path = article.slugOld
       }
-      console.log('Creando', path)
+      // console.log('Creando', path)
       createPage({
         path: path,
         component: articlePost,
@@ -547,13 +562,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
 
-    //Create noticas pages
-
+    // Create noticas Pages and Pagination
     const numPages = Math.ceil(articles.length / postPerPage)
     Array.from({ length: numPages }).forEach((_, i) => {
-      // console.log('Creando Pagina de Noticias:', i)
+      console.log('Creando Pagina de Noticias:', i)
       createPage({
         path: i === 0 ? `/noticias` : `/noticias/ultimas/${i + 1}`,
+
         component: path.resolve(
           './src/templates/noticias/noticias-template.js',
         ),

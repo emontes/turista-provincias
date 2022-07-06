@@ -33,6 +33,7 @@ const index = ({ data }) => {
         <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
           <Noticias
             noticias={data.allStrapiNoticia.nodes}
+            perPage={5}
             title="Últimas Noticias"
             isHome="si"
           />
