@@ -1,21 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 import device from './device'
+import './fonts.css'
 
 const GlobalStyle = createGlobalStyle`
-/*
-=============== 
-Fonts
-===============
-*/
-
-/* Esto causa un error en producción */
-
- ${
-   '' /* @import url("http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic");  */
- }
-
-
-
 /*
 =============== 
 Variables
@@ -34,12 +21,13 @@ Variables
   --clr-green-dark: hsl(125, 67%, 35%);
   --clr-red-dark: hsl(356, 80%, 46%);
   --clr-red-light: hsl(360, 71%, 66%);
-  --clr-black: #222;
+  --clr-black: #333;
   --clr-white: #fff;
   --clr-white-transparency-8: rgba(255, 255, 255, 0.8);
-  --ff-primary:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ff-primary: Roboto, Arial, "Helvetica Neue", sans-serif;
+  --ff-secondary: Arial, "Helvetica Neue", Helvetica, sans-serif;
   
-  --ff-secondary: "Open Sans", sans-serif;
+  
   --transition: all 0.3s linear;
   --spacing: 0.2rem;
   --radius: 0.25rem;
@@ -84,9 +72,14 @@ html {
   
 }
 body {
-  font-family: var(--ff-primary);
-  
-  color: var(--clr-grey-1);
+  font-family: var(--ff-primary);  
+font-style: normal;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-weight: 400;
+  color: var(--clr-black);
   line-height: 1.5;
   font-size: 1.2rem;
   margin-top: 5.8rem;
@@ -111,11 +104,10 @@ h1,
 h2,
 h3,
 h4 {
-  letter-spacing: var(--spacing);
-
+  letter-spacing: .1rem;
   line-height: 1.25;
   margin-bottom: 0.75rem; /* .75 x 16 = 12 */
-  font-family: var(--ff-primary);
+  
 }
 h1 {
   font-size: 3rem; /* 3x16 = 48 */
@@ -150,6 +142,7 @@ h4 {
   h2,
   h3,
   h4 {
+    
     line-height: 1;
   }
 }

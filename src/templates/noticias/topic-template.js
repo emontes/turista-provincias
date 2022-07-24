@@ -45,7 +45,7 @@ export const query = graphql`
         estado: { slug: { eq: $estadoSlug } }
         topics: { elemMatch: { slug: { eq: $slug } } }
       }
-      limit: 100
+      limit: 30
       sort: { fields: date, order: DESC }
     ) {
       nodes {

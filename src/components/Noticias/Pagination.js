@@ -2,6 +2,8 @@ import React from 'react'
 import ButtonPages from '../atoms/ButtonPages'
 import styled from 'styled-components'
 const Pagination = ({ pageInfo, url }) => {
+  if (!pageInfo) return ''
+
   let nextPage
   if (pageInfo.hasNextPage) {
     nextPage = `${url}/${pageInfo.currentPage + 1}`

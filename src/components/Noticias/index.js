@@ -11,6 +11,8 @@ const Noticias = ({
   title = 'Noticias',
   description = 'Noticias de Turismo',
   perPage = 16,
+  pageInfo,
+  url,
   topics,
   categories,
 }) => {
@@ -21,7 +23,13 @@ const Noticias = ({
         style={{ background: 'var(--clr-white' }}
       >
         <div className="section-center">
-          <NoticiasList noticias={noticias} perPage={perPage} />
+          <NoticiasList
+            noticias={noticias}
+            perPage={perPage}
+            isHome={isHome}
+            pageInfo={pageInfo}
+            url={url}
+          />
           <div>
             <Banner
               title={title}

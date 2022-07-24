@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import NoticiaCard from './noticia-card'
+import Pagination from './Pagination'
 import BannerAdSense from '../../utilities/BannerAdsense'
 import ButtonMoreHotels from '../atoms/ButtonMoreHotels'
 
-const Noticias = ({ noticias, perPage }) => {
+const Noticias = ({ noticias, isHome, pageInfo, url, perPage }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [dataNoticias, setDataNoticias] = useState(
     noticias.slice(0, perPage * currentPage),
@@ -33,6 +34,7 @@ const Noticias = ({ noticias, perPage }) => {
       {dataNoticias.length < noticias.length && (
         <ButtonMoreHotels onClick={onMoreNoticias} title="Más Noticias..." />
       )}
+      {!isHome && <Pagination pageInfo={pageInfo} url={url} />}
     </div>
   )
 }

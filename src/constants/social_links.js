@@ -5,11 +5,11 @@ const SocialLinks = ({ styleClass, slugEstado }) => {
   let faceLink = 'groups/turistachiapas'
   let flickrLink = 'turistachiapas'
   if (slugEstado === 'edomexico') {
-    faceLink = 'turistamexico'
+    faceLink = 'groups/edomexico'
     flickrLink = 'turistaedomexico'
   }
   if (slugEstado === 'yucatan') {
-    faceLink = 'turistamexico'
+    faceLink = 'groups/yucatan'
     flickrLink = 'turistayucatan'
   }
 
