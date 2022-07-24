@@ -255,6 +255,18 @@ a {color: #039be5; :hover{color: var(--clr-red-light);}}
   }
 
 /*===============
+Ads
+=================*/
+.adh90 {
+  height: 90px;
+  margin: 0 auto 1rem;  
+}
+.adh60 {
+  height: 60px;
+  margin: 0 auto 1rem;  
+}
+
+/*===============
 Banner Component
 ===============
 */

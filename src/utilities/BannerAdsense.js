@@ -9,7 +9,7 @@ class Google extends Component {
   render() {
     return (
       <ins
-        className={`${this.props.className} adsbygoogle`}
+        className={`adsbygoogle ${this.props.className}`}
         style={this.props.style}
         data-ad-layout={this.props.layout}
         data-ad-format={this.props.format}
