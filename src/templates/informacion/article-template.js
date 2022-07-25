@@ -58,13 +58,7 @@ const Article = ({ data, pageContext }) => {
               <div className="underline"></div>
             </div>
 
-            <BannerAdsense
-              slot="2384751841"
-              style={{ display: 'block', textAlign: 'center' }}
-              format="fluid"
-              layout="in-article"
-              responsive="false"
-            />
+            <BannerAdsense className="adh90" format="fluid" />
 
             <ReactMarkdown children={content.data.content} />
 

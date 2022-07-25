@@ -50,9 +50,11 @@ const Section = ({ data, pageContext }) => {
             />
 
             <h3 className="section-title">{sectionTitle}</h3>
+            <BannerAdsense className="adh90" format="fluid" />
             {sections.length > 0 && (
               <>
                 <h4>Secciones</h4>
+
                 <ul>
                   {sections.map((item) => {
                     if (pageContext.sections.includes(item.slug)) {
@@ -83,7 +85,6 @@ const Section = ({ data, pageContext }) => {
                 </ul>
               </>
             )}
-            <BannerAdsense />
           </div>
           <div style={{ padding: '0 1rem 1rem' }}>
             <Banner

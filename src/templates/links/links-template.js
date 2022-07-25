@@ -4,6 +4,7 @@ import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
 import { getSrc } from 'gatsby-plugin-image'
 import Links from '../../components/Links'
+import BannerAdsense from '../../utilities/BannerAdsense'
 
 const LinksPage = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -75,6 +76,7 @@ const LinksPage = ({ data }) => {
         links={links.nodes}
         metadata={metadata}
       />
+      <BannerAdsense className="adh90" format="fluid" />
     </Layout>
   )
 }

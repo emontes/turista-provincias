@@ -5,7 +5,7 @@ import {
   // FaRegLightbulb,
   FaRegMoneyBillAlt,
   FaChartLine,
-  // FaRegPaperPlane,
+  FaRegPaperPlane,
   FaUserPlus,
   FaRegHeart,
 } from 'react-icons/fa'
@@ -52,11 +52,11 @@ const Tabs = [
     title: 'Grandes',
     url: 'grandes',
   },
-  // {
-  //   icon: <FaRegPaperPlane />,
-  //   title: 'Travel',
-  //   url: 'travel',
-  // },
+  {
+    icon: <FaRegPaperPlane />,
+    title: 'Travel',
+    url: 'travel',
+  },
 ]
 
 export default Tabs

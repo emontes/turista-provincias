@@ -27,7 +27,7 @@ const Informacion = ({ data, pageContext }) => {
         sideNavSec
       >
         <h3 className="section-title">Secciones</h3>
-        <BannerAdsense />
+        <BannerAdsense className="adh90" format="fluid" />
         <div
           className="cont-area"
           style={{
