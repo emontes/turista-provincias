@@ -255,16 +255,13 @@ a {color: #039be5; :hover{color: var(--clr-red-light);}}
   }
 
 /*===============
-Ads
+ Margins & Heights
 =================*/
-.adh90 {
-  height: 90px;
-  margin: 0 auto 1rem;  
-}
-.adh60 {
-  height: 60px;
-  margin: 0 auto 1rem;  
-}
+.mt1 {margin-top: 1rem;}
+.mb1 {margin-bottom: 1rem;}
+.h90 {height: 90px;}
+.h60 {height: 60px;}
+
 
 /*===============
 Banner Component

@@ -42,7 +42,9 @@ const Article = ({ data, pageContext }) => {
         }
       />
       <Wrapper className="section">
-        <BannerAdsense className="adh90" format="fluid" />
+        <div align="center">
+          <BannerAdsense className="h90 mb1" format="fluid" />
+        </div>
         <div className="section-center">
           <article className="article">
             <div className="post-info">
@@ -77,7 +79,7 @@ const Article = ({ data, pageContext }) => {
                     dangerouslySetInnerHTML={{ __html: hometext.data.hometext }}
                   />
                 )}
-                <BannerAdsense className="adh60" format="fluid" />
+                <BannerAdsense className="h60 mb1" format="fluid" />
                 {bodytext && (
                   <div
                     dangerouslySetInnerHTML={{
@@ -89,7 +91,7 @@ const Article = ({ data, pageContext }) => {
             ) : (
               <>
                 <ReactMarkdown children={hometext.data.hometext} />
-                <BannerAdsense className="adh60" format="fluid" />
+                <BannerAdsense className="h60 mt1 mb1" format="fluid" />
                 <ReactMarkdown children={bodytext.data.bodytext} />
               </>
             )}
@@ -115,7 +117,6 @@ const Article = ({ data, pageContext }) => {
           </div>
         </div>
       </Wrapper>
-      <BannerAdsense />
     </Layout>
   )
 }

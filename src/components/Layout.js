@@ -14,6 +14,8 @@ import Footer from '../components/atoms/Footer'
 import Hero from '../components/Hero'
 import device from '../assets/themes/device'
 
+import BannerAdsense from '../utilities/BannerAdsense'
+
 const Layout = ({
   children,
   topComponent, //optional component for substitute top banner
@@ -52,11 +54,17 @@ const Layout = ({
       {sinFondo ? (
         <Wrapper>
           <div>{children}</div>
+          <BannerAdsense />
         </Wrapper>
       ) : (
         <Wrapper>
           <div className="outer-top">
-            <div className="outer-bottom">{children}</div>
+            <div className="outer-bottom">
+              {children}
+              <div align="center" className="mt1">
+                <BannerAdsense />
+              </div>
+            </div>
           </div>
         </Wrapper>
       )}

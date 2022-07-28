@@ -58,7 +58,7 @@ const Article = ({ data, pageContext }) => {
               <div className="underline"></div>
             </div>
 
-            <BannerAdsense className="adh90" format="fluid" />
+            <BannerAdsense className="h90" format="fluid" />
 
             <ReactMarkdown children={content.data.content} />
 
@@ -83,7 +83,6 @@ const Article = ({ data, pageContext }) => {
         </div>
         <br />
       </Wrapper>
-      <BannerAdsense />
     </Layout>
   )
 }

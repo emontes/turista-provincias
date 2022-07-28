@@ -28,7 +28,6 @@ const Directorio = ({ data, pageContext }) => {
         metadata={metadata}
         sideNavSec
       />
-      <BannerAdsense />
     </Layout>
   )
 }

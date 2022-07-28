@@ -2,7 +2,6 @@ import React from 'react'
 
 import Banner from '../Banner/indexNoticias'
 
-import BannerAdsense from '../../utilities/BannerAdsense'
 import NoticiasList from './noticias-list'
 
 const Noticias = ({
@@ -41,7 +40,6 @@ const Noticias = ({
           </div>
         </div>
       </section>
-      <BannerAdsense />
     </>
   )
 }

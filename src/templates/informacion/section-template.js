@@ -50,7 +50,7 @@ const Section = ({ data, pageContext }) => {
             />
 
             <h3 className="section-title">{sectionTitle}</h3>
-            <BannerAdsense className="adh90" format="fluid" />
+            <BannerAdsense className="h90 mt1 mb1" format="fluid" />
             {sections.length > 0 && (
               <>
                 <h4>Secciones</h4>
@@ -95,7 +95,6 @@ const Section = ({ data, pageContext }) => {
           </div>
         </div>
       </ContainerGrecas>
-      <BannerAdsense />
     </Layout>
   )
 }

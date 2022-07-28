@@ -76,7 +76,6 @@ const LinksPage = ({ data }) => {
         links={links.nodes}
         metadata={metadata}
       />
-      <BannerAdsense className="adh90" format="fluid" />
     </Layout>
   )
 }

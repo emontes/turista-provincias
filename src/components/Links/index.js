@@ -32,7 +32,9 @@ const Links = ({
         ) : (
           <h3 className="section-title">{subtitle}</h3>
         )}
-        <BannerAdsense className="adh90" format="fluid" />
+
+        <BannerAdsense className="h90 mt1 mb1" format="fluid" />
+
         {linksCategories.length > 0 && (
           <>
             <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
