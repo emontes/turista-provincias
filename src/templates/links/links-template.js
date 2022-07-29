@@ -4,7 +4,6 @@ import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
 import { getSrc } from 'gatsby-plugin-image'
 import Links from '../../components/Links'
-import BannerAdsense from '../../utilities/BannerAdsense'
 
 const LinksPage = ({ data }) => {
   const metadata = data.site.siteMetadata

@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   font-size: 1rem;
 
   a {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     letter-spacing: 0.5px;
     color: #1a0dab !important;
     :hover {

@@ -1,19 +1,20 @@
 import React from 'react'
 import {
   FaHotel,
-  // FaHome,
+  FaHome,
   FaRegNewspaper,
   FaInfoCircle,
   FaLink,
+  FaSearch,
 } from 'react-icons/fa'
 
 const data = [
-  // {
-  //   id: 1,
-  //   icon: <FaHome />,
-  //   text: 'inicio',
-  //   url: '/',
-  // },
+  {
+    id: 1,
+    icon: <FaHome />,
+    text: 'inicio',
+    url: '/',
+  },
   {
     id: 2,
     icon: <FaHotel />,
@@ -38,6 +39,12 @@ const data = [
     icon: <FaLink />,
     text: 'directorio',
     url: '/links.html',
+  },
+  {
+    id: 6,
+    icon: <FaSearch />,
+    text: 'buscar',
+    url: '/buscar',
   },
 ]
 
