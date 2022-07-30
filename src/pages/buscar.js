@@ -6,8 +6,10 @@ import algoliasearch from 'algoliasearch/lite'
 import {
   InstantSearch,
   SearchBox,
-  //Hits,
+  Hits,
+  Highlight,
   connectHits,
+  Pagination,
 } from 'react-instantsearch-dom'
 import styled from 'styled-components'
 import LinkCard from '../components/Links/link-card'
@@ -29,6 +31,15 @@ const NewHits = connectHits(({ hits }) => {
   })
 })
 
+function Hit(props) {
+  const link = {
+    title: <Highlight attribute="title" hit={props.hit} />,
+    url: props.hit.url.substring(0, 40),
+    description: <Highlight attribute="text" hit={props.hit} />,
+  }
+  return <LinkCard link={link} style={{ border: '1px solid green' }} />
+}
+
 const Buscar = () => {
   return (
     <Layout>
@@ -48,9 +59,9 @@ const Buscar = () => {
               searchAsYouType={false}
             />
 
-            <Container>
-              <NewHits />
-            </Container>
+            <Hits hitComponent={Hit} />
+
+            <Pagination />
           </InstantSearch>
         </Wrapper>
       </ContainerGrecas>
@@ -60,6 +71,38 @@ const Buscar = () => {
 
 const Wrapper = styled.section`
   padding: 5rem 0;
+
+  .ais-Pagination {
+    margin: 1rem auto 1rem;
+  }
+
+  .ais-Pagination-list {
+    display: flex;
+    font-size: 1.5rem;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ais-Pagination-link {
+    padding: 0.3rem 0.6rem;
+    display: block;
+    border: 1px solid #c4c8d8;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-out;
+  }
+
+  .ais-Pagination-item--disabled .ais-Pagination-link {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: #a5abc4;
+  }
+
+  .ais-Pagination-item--selected .ais-Pagination-link {
+    color: #fff;
+    background-color: ${(props) => props.theme.colors.primary5};
+    border-color: ${(props) => props.theme.colors.primary5};
+  }
 
   .ais-SearchBox {
     width: 90vw;
@@ -91,25 +134,34 @@ const Wrapper = styled.section`
       }
     }
   }
-`
 
-const Container = styled.div`
-  display: grid;
-  gap: 2rem;
-  /* safari workaround */
-  grid-gap: 2rem;
+  .ais-Hits-list {
+    display: grid;
+    gap: 2rem;
+    /* safari workaround */
+    grid-gap: 2rem;
 
-  @media (min-width: 576px) {
-    grid-template-columns: repeat(2, 1fr);
-    .img {
-      height: 8.5rem;
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+      .img {
+        height: 8.5rem;
+      }
+    }
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(3, 1fr);
+
+  p {
+    height: 11.5rem;
+    overflow: hidden;
   }
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
+
+  .ais-Highlight-highlighted {
+    background: ${(props) => props.theme.colors.primary10};
   }
 `
 
