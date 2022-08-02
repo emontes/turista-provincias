@@ -7,8 +7,8 @@ const Lista = ({ metadata, locations }) => {
   return (
     <Wrapper>
       <Title
-        title="Destinos con"
-        subtitle={`Hoteles en ${metadata.estado.name}`}
+        title="Principales Destinos "
+        subtitle={`en ${metadata.estado.name}`}
       />
       <div className="destinos">
         {locations.map((item) => {

@@ -2,6 +2,7 @@ import React from 'react'
 import Banner from '../Banner'
 import InsertaScript from '../../utilities/InsertaScript'
 import styled from 'styled-components'
+import device from '../../assets/themes/device'
 
 const textos = {
   chiapas:
@@ -21,20 +22,18 @@ const ligas = {
 
 const Mapa = ({ metadata }) => {
   return (
-    <Wrapper className="section">
-      <div className="section-center">
-        <div className="mapa-container">
-          <h2 className="section-title">¿Conoces {metadata.estado.name}?</h2>
-          <div className="mapa">
-            <InsertaScript liga={ligas[metadata.estado.slug]} />
-          </div>
-          <div>
-            <p>{textos[metadata.estado.slug]}</p>
-            <p>{metadata.description}</p>
-          </div>
+    <Wrapper>
+      <div className="mapa-container">
+        <h2 className="section-title">¿Conoces {metadata.estado.name}?</h2>
+        <div className="mapa">
+          <InsertaScript liga={ligas[metadata.estado.slug]} />
         </div>
-        <Banner showHotelsBox={true} />
+        <div>
+          <p>{textos[metadata.estado.slug]}</p>
+          <p>{metadata.description}</p>
+        </div>
       </div>
+      <Banner showHotelsBox={true} />
     </Wrapper>
   )
 }
@@ -42,6 +41,11 @@ const Mapa = ({ metadata }) => {
 const Wrapper = styled.section`
   background: var(--clr-white);
   padding: 1rem;
+  @media ${device.desktop} {
+    display: grid;
+    grid-template-columns: 1fr 30rem;
+    column-gap: 1rem;
+  }
   h2 {
     margin: 1.5rem;
     font-size: 1.9rem;
@@ -49,7 +53,7 @@ const Wrapper = styled.section`
   }
   .mapa-container {
     display: none;
-    @media screen and (min-width: 1170px) {
+    @media ${device.laptopL} {
       display: block;
     }
   }

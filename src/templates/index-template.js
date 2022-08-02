@@ -8,7 +8,7 @@ import BlockGrey from '../components/atoms/BlockGrey'
 import BannerAdsense from '../utilities/BannerAdsense'
 import ContainerGrecas from '../components/molecules/ContainerGrecas'
 import ListaDestinos from '../components/Home/location-list'
-import Banner from '../components/Banner'
+import Mapa from '../components/Home/Mapa'
 
 const index = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -19,18 +19,16 @@ const index = ({ data }) => {
       sub={data.site.siteMetadata.estado.slogan}
     >
       <Seo />
-      {/* <Mapa metadata={data.site.siteMetadata} /> */}
 
       <ContainerGrecas title={metadata.title} sideNavSec>
-        <div className="section-center">
-          <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
-          <Banner showHotelsBox={true} sinAbout={true} />
-        </div>
+        <Mapa metadata={data.site.siteMetadata} />
+        <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
       </ContainerGrecas>
 
       {/* Noticias */}
       <div className="section-center">
         <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
+          <h3>Últimas Noticias de turismo en {metadata.estado.name}</h3>
           <Noticias
             noticias={data.allStrapiNoticia.nodes}
             perPage={5}

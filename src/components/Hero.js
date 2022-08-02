@@ -2,6 +2,7 @@ import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
+import device from '../assets/themes/device'
 
 const Hero = ({
   bgColor,
@@ -51,6 +52,10 @@ const Hero = ({
 export default Hero
 
 const Wrapper = styled.header`
+display: none;
+@media ${device.tablet} {
+  display: block;
+}
   .hero-img {
     width: 100%;
     height: 100%;
