@@ -47,7 +47,7 @@ const Buscar = () => {
       <ContainerGrecas title={'Buscar'} sideNavSec>
         <Wrapper>
           <InstantSearch
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME}
+            indexName={process.env.ESTADO_SLUG}
             searchClient={searchClient}
           >
             <SearchBox

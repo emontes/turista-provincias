@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
-import { ThemeProvider } from 'styled-components'
+
 import { useStaticQuery, graphql } from 'gatsby'
-import GlobalStyles from '../assets/themes/globalStyles'
-import Chiapas from '../assets/themes/chiapas'
-import EdoMexico from '../assets/themes/edomexico'
-import Yucatan from '../assets/themes/yucatan'
 
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
@@ -37,13 +33,8 @@ const Layout = ({
   const { site } = useStaticQuery(query)
   const estado = site.siteMetadata.estado
 
-  let themeSel = Chiapas
-  if (estado.slug === 'edomexico') themeSel = EdoMexico
-  if (estado.slug === 'yucatan') themeSel = Yucatan
-
   return (
-    <ThemeProvider theme={themeSel}>
-      <GlobalStyles />
+    <>
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       {heroImg && (
@@ -76,7 +67,7 @@ const Layout = ({
         footerList1={footerList1}
         footerList2={footerList2}
       />
-    </ThemeProvider>
+    </>
   )
 }
 
