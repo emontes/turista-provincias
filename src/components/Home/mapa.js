@@ -9,6 +9,8 @@ const textos = {
     'Chiapas es auténtico por naturaleza.  Chiapas es, y ha sido, siempre la última frontera, un estado que no puedes dejar de visitar',
   edomexico:
     'El estado de México tiene mucho para ver, desde los más impresionantes sitios arqueológicos, museos y maravillas naturales; hasta los más modernos desarrollos urbanos.',
+  yucatan:
+    'Yucatán es la tierra del faisán y del venado, es poesía... es música...  no dejes de visitar la tierra de los elegidos',
 }
 
 const ligas = {

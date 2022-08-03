@@ -8,7 +8,6 @@ import {
   SearchBox,
   Hits,
   Highlight,
-  connectHits,
   Pagination,
 } from 'react-instantsearch-dom'
 import styled from 'styled-components'
@@ -18,18 +17,6 @@ const searchClient = algoliasearch(
   process.env.GATSBY_ALGOLIA_APP_ID,
   process.env.GATSBY_ALGOLIA_SEARCH_KEY,
 )
-
-const NewHits = connectHits(({ hits }) => {
-  return hits.map((item) => {
-    console.log({ item })
-    const link = {
-      title: item.title.substring(0, 55),
-      url: item.url.substring(0, 40),
-      description: item.text ? item.text.substring(0, 150) : '',
-    }
-    return <LinkCard link={link} />
-  })
-})
 
 function Hit(props) {
   const link = {
