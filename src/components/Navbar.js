@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import styled from 'styled-components'
 import { FaAlignRight } from 'react-icons/fa'
-import pageLinks from '../constants/links'
+import linksTop from '../constants/links-top'
 import { Link } from 'gatsby'
 import { debounce } from '../utilities/helpers'
 import device from '../assets/themes/device'
@@ -33,23 +33,25 @@ const Navbar = ({ toggleSidebar }) => {
   return (
     <Wrapper>
       <div className={visible ? 'navbar' : 'navbar-fixed'}>
-        <div className="nav-center">
-          <div className="nav-header">
+        <div className="w-full px-4 mx-auto flex justify-between">
+          <div className="flex justify-between w-full">
             <Link to="/">{themeContext.images.logoNav}</Link>
             <button type="button" className="toggle-btn">
               <FaAlignRight onClick={toggleSidebar} />
             </button>
           </div>
 
-          <div className="nav-links">
-            {pageLinks.map((link) => {
+          <div className="nav-links font-helvetica text-gray-500">
+            {linksTop.map((link) => {
               return (
                 <Link
                   key={link.id}
                   to={link.url}
                   activeStyle={{ color: 'var(--clr-red-dark)' }}
+                  title={link.text}
+                  className="flex gap-1 items-center"
                 >
-                  {link.text}
+                  {link.icon} {link.text}
                 </Link>
               )
             })}
@@ -87,7 +89,6 @@ const Wrapper = styled.div`
     background: var(--clr-white);
     transition: var(--transition);
     border-bottom: 0.116rem solid ${(props) => props.theme.colors.primary5};
-
     box-shadow: var(--dark-shadow);
   }
 
@@ -95,19 +96,6 @@ const Wrapper = styled.div`
     width: 12rem;
   }
 
-  .nav-center {
-    width: 90vw;
-    max-width: 117rem;
-    margin: 0 auto;
-  }
-  .nav-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nav-header img {
-    margin-bottom: 0.475rem;
-  }
   .toggle-btn {
     font-size: 2.32rem;
     background: transparent;
@@ -134,7 +122,6 @@ const Wrapper = styled.div`
 
     .nav-links a {
       text-transform: capitalize;
-      color: var(--clr-grey-1);
 
       font-size: 1rem;
       letter-spacing: var(--spacing);

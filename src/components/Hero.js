@@ -119,7 +119,22 @@ display: none;
       font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 0.4rem;
-      animation: moveInRight 1s ease-out;
+      animation: moveInRight 2s ease-out;
     }
+  }
+  @keyframes moveInLeft {
+    0%{
+      transform: translateX(-100%);
+      opacity: .1;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes moveInRight {
+    0%{transform: translateX(100%);}
+    80% { transform: translateX(-10%);}
+    100% {transform: translateX(0);}
   }
 `

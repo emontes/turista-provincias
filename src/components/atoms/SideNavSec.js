@@ -2,18 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import links from '../../constants/links'
-import device from '../../assets/themes/device'
 import menuBg from '../../assets/images/menu_bg.png'
 
 const SideNavSec = () => {
   return (
     <Wrapper>
-      <ul>
+      <ul className="flex gap-px flex-wrap md:flex-col">
         {links.map((item) => {
           return (
-            <li key={item.id}>
-              <Link to={item.url} activeClassName="active">
-                {item.icon} <span className="title">{item.text}</span>
+            <li
+              key={item.id}
+              className="w-fit text-xs sm:text-sm md:w-auto md:text-lg"
+            >
+              <Link
+                to={item.url}
+                activeClassName="active"
+                className="flex gap-3 items-center"
+              >
+                {item.icon} {item.text}
               </Link>
             </li>
           )
@@ -26,45 +32,26 @@ const SideNavSec = () => {
 export default SideNavSec
 
 const Wrapper = styled.div`
-  min-width: 15rem;
-  font-size: 1.4rem;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    @media ${device.tablet} {
-      flex-direction: column;
-    }
-    li {
-      background: url(${menuBg}) repeat-x left top;
-      background-color: ${(props) => props.theme.colors.primary1};
-      height: 50px;
-      width: 49%;
-      text-transform: uppercase;
-      display: block;
-      @media ${device.tablet} {
-        width: 100%;
-      }
-      .title {
-        margin-left: 10px;
-      }
-      a {
-        display: block;
-        color: var(--clr-white);
-        padding: 1rem;
+  li {
+    background: url(${menuBg}) repeat-x left top;
+    background-color: ${(props) => props.theme.colors.primary1};
+    max-height: 51px;
+    text-transform: uppercase;
+    display: block;
 
-        :hover {
-          background-color: var(--clr-white);
-          height: 51px;
-          color: ${(props) => props.theme.colors.primary1};
-        }
+    a {
+      color: var(--clr-white);
+      padding: 1rem;
+      :hover {
+        background-color: var(--clr-white);
+        color: ${(props) => props.theme.colors.primary1};
       }
     }
   }
 
   .active {
     background-color: var(--clr-white);
-    height: 51px;
+
     color: ${(props) => props.theme.colors.primary1};
   }
 `

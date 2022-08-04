@@ -112,12 +112,17 @@ const Wrapper = styled.section`
       }
       button {
         background: ${(props) => props.theme.colors.primary5};
+
         svg {
           fill: var(--clr-white);
         }
       }
       button.ais-SearchBox-reset {
         background: var(--clr-red-light);
+      }
+      .ais-SearchBox-submitIcon,
+      .ais-SearchBox-resetIcon {
+        margin: auto;
       }
     }
   }

@@ -5,7 +5,7 @@ import device from '../../assets/themes/device'
 
 const ContainerGrecas = ({ title, children, sideNavSec }) => {
   return (
-    <Wrapper className="nav_main">
+    <Wrapper>
       <h2 className="nav_main--h2">{title}</h2>
       <div className="economy_bg">
         {sideNavSec && <SideNavSec />}

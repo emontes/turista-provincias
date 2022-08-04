@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import GlobalStyle from '../assets/themes/globalStyles'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Navbar from '../components/Navbar'
@@ -35,6 +35,7 @@ const Layout = ({
 
   return (
     <>
+      <GlobalStyle />
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       {heroImg && (

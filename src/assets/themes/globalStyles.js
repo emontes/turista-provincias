@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
 import device from './device'
-import './fonts.css'
 
 const GlobalStyle = createGlobalStyle`
 /*
@@ -24,9 +23,6 @@ Variables
   --clr-black: #333;
   --clr-white: #fff;
   --clr-white-transparency-8: rgba(255, 255, 255, 0.8);
-  --ff-primary: Roboto, Arial, "Helvetica Neue", sans-serif;
-  --ff-secondary: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  
   
   --transition: all 0.3s linear;
   --spacing: 0.2rem;
@@ -72,7 +68,7 @@ html {
   
 }
 body {
-  font-family: var(--ff-primary);  
+  font-family: roboto;  
 font-style: normal;
 font-variant-caps: normal;
 font-variant-east-asian: normal;
