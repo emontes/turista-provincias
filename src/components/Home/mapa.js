@@ -1,8 +1,11 @@
 import React from 'react'
-import Banner from '../Banner'
 import InsertaScript from '../../utilities/InsertaScript'
+import Banner from '../Banner'
 import styled from 'styled-components'
 import device from '../../assets/themes/device'
+
+const estadoSlug = process.env.ESTADO_SLUG
+const travelData = require(`../../constants/configs/${estadoSlug}/travelPayouts`)
 
 const textos = {
   chiapas:
@@ -13,23 +16,15 @@ const textos = {
     'Yucatán es la tierra del faisán y del venado, es poesía... es música...  no dejes de visitar la tierra de los elegidos',
 }
 
-const ligas = {
-  chiapas:
-    '//tp.media/content?0=0&1=10&currency=mxn&promo_id=4285&shmarker=182367&campaign_id=101&trs=29063&search_host=jet.turista.com.mx%2Fhotels&locale=es&draggable=true&disable_zoom=false&show_logo=true&scrollwheel=false&color=%2307AF61&contrast_color=%23ffffff&width=800&height=500&zoom=7&radius=60&stars=0%2C1%2C2%2C3%2C4%2C5&price_from=&price_to=&lat=16.75&lng=-92.633333',
-  edomexico:
-    '//tp.media/content?0=0&1=10&currency=mxn&promo_id=4285&shmarker=182367&campaign_id=101&trs=29063&search_host=jet.turista.com.mx%2Fhotels&locale=es&draggable=true&disable_zoom=false&show_logo=true&scrollwheel=false&color=%2307AF61&contrast_color=%23ffffff&width=800&height=500&zoom=7&radius=60&stars=0%2C1%2C2%2C3%2C4%2C5&price_from=&price_to=&lat=19.288333&lng=-99.667222',
-  yucatan:
-    '//tp.media/content?0=0&1=10&currency=mxn&promo_id=4285&shmarker=182367&campaign_id=101&trs=29063&search_host=jet.turista.com.mx%2Fhotels&locale=es&draggable=true&disable_zoom=false&show_logo=true&scrollwheel=false&color=%2307AF61&contrast_color=%23ffffff&width=800&height=500&zoom=7&radius=60&stars=0%2C1%2C2%2C3%2C4%2C5&price_from=&price_to=&lat=20.978431&lng=-89.619942',
-}
-
 const Mapa = ({ metadata }) => {
   return (
     <Wrapper>
       <div className="mapa-container">
         <h2 className="section-title">¿Conoces {metadata.estado.name}?</h2>
-        <div className="mapa">
-          <InsertaScript liga={ligas[metadata.estado.slug]} />
+        <div className="mx-auto mb-5 w-fit">
+          <InsertaScript src={travelData.mapa} />
         </div>
+
         <div>
           <p>{textos[metadata.estado.slug]}</p>
           <p>{metadata.description}</p>
@@ -58,10 +53,6 @@ const Wrapper = styled.section`
     @media ${device.laptopL} {
       display: block;
     }
-  }
-  .mapa {
-    width: 800px;
-    margin: 0 auto 1.5rem;
   }
 `
 

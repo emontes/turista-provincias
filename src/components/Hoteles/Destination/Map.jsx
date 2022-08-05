@@ -10,7 +10,7 @@ const Map = ({ location }) => {
   return (
     <Wrapper>
       <div className="map">
-        <InsertaScript liga={liga} noAsync={true} />
+        <InsertaScript id="map" src={liga} noAsync={true} />
       </div>
     </Wrapper>
   )

@@ -6,10 +6,9 @@ const HotelsBox = ({ title }) => {
   const liga =
     '//www.travelpayouts.com/widgets/aaff9e1c12195d0a95de1c140e9b46ce.js?v=2190'
   return (
-    <div style={{ padding: '.2rem' }}>
+    <div id="hotels-box" style={{ padding: '.2rem' }}>
       {title && <Title title="Hoteles y Vuelos" />}
-
-      <InsertaScript liga={liga} />
+      <InsertaScript id="hotels-box" src={liga} />
     </div>
   )
 }

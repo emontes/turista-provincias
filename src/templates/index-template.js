@@ -40,7 +40,7 @@ const index = ({ data }) => {
           <BlockGrey title="Compartir">
             <div class="s9-widget-wrapper"></div>
           </BlockGrey>
-          <BannerAdsense />
+          <BannerAdsense className="h-80" />
           <BlockGrey title={`Acerca de Turista ${metadata.estado.name}`}>
             {metadata.description}
           </BlockGrey>

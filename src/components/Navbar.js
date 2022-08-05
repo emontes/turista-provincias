@@ -41,7 +41,7 @@ const Navbar = ({ toggleSidebar }) => {
             </button>
           </div>
 
-          <div className="nav-links font-helvetica text-gray-500">
+          <div className="nav-links font-helvetica text-black">
             {linksTop.map((link) => {
               return (
                 <Link
@@ -49,9 +49,11 @@ const Navbar = ({ toggleSidebar }) => {
                   to={link.url}
                   activeStyle={{ color: 'var(--clr-red-dark)' }}
                   title={link.text}
-                  className="flex gap-1 items-center"
+                  className="flex items-center"
                 >
-                  {link.icon} {link.text}
+                  <span className="bg-slate-200 p-3 rounded-full">
+                    {link.icon}
+                  </span>
                 </Link>
               )
             })}

@@ -20,7 +20,11 @@ const Map = ({ metadata }) => {
         <b>hoteles en {metadata.estado.name}</b>
       </p>
       <div className="map">
-        <InsertaScript liga={ligas[metadata.estado.slug]} noAsync={true} />
+        <InsertaScript
+          id="map-jsx"
+          src={ligas[metadata.estado.slug]}
+          noAsync={true}
+        />
       </div>
     </Wrapper>
   )
