@@ -26,7 +26,7 @@ const Informacion = ({ data, pageContext }) => {
         title={`Información de ${metadata.estado.name}`}
         sideNavSec
       >
-        <h3 className="section-title">Secciones</h3>
+        <h3 className="uppercase text-red-500">Secciones</h3>
         <BannerAdsense className="h90 mt1 mb1" format="fluid" />
         <div
           className="cont-area"

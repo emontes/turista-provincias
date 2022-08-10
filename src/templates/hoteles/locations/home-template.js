@@ -13,6 +13,7 @@ import footerList2 from '../../../constants/especialistas-links'
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import BlockTopHotels from '../../../components/Hoteles/Destination/block-tophotels'
 import BlockStars from '../../../components/Hoteles/Destination/block-stars'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -48,6 +49,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={titleSeo}
         description={descriptionSeo}

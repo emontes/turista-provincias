@@ -1,54 +1,32 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import styled from 'styled-components'
 import Title from '../atoms/Title'
+import ItemChevron from '../../components/atoms/ItemChevronRight'
 
 const Lista = ({ metadata, locations }) => {
   return (
-    <Wrapper>
+    <section>
       <Title
         title="Principales Destinos "
         subtitle={`en ${metadata.estado.name}`}
+        className="mt-12"
       />
-      <div className="destinos">
-        {locations.map((item) => {
+      <ul className="columns-2 sm:columns-3 xl:columns-4">
+        {locations.map((item, i) => {
           return (
-            <Link
-              to={`/${item.hotel_location.slug}.html`}
-              title={`Hoteles en ${item.name}`}
-            >
-              <div className="name">{item.name}</div>
-            </Link>
+            <li key={i}>
+              <Link
+                to={`/${item.hotel_location.slug}.html`}
+                title={`Hoteles en ${item.name}`}
+              >
+                <ItemChevron text={item.name} />
+              </Link>
+            </li>
           )
         })}
-      </div>
-    </Wrapper>
+      </ul>
+    </section>
   )
 }
 
 export default Lista
-
-const Wrapper = styled.section`
-  padding: 2rem;
-  text-align: center;
-
-  .destinos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: space-evenly;
-  }
-  .name {
-    padding: 0 1rem;
-    box-shadow: var(--light-shadow);
-    color: ${(props) => props.theme.colors.primary8};
-    border-bottom-left-radius: 8px;
-    border-bottom: 1px solid ${(props) => props.theme.colors.primary8};
-    border-left: 1px solid ${(props) => props.theme.colors.primary8};
-    font-size: 2rem;
-    transition: var(--transition);
-    :hover {
-      color: ${(props) => props.theme.colors.primary10};
-    }
-  }
-`

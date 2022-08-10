@@ -7,7 +7,7 @@ import device from '../../../assets/themes/device'
 const NavTabs = ({ url, estrellas }) => {
   return (
     <Wrapper>
-      <ul>
+      <ul className="flex justify-around">
         {estrellas
           ? estrellas.map((item) => {
               let estrellitas = ''
@@ -29,7 +29,11 @@ const NavTabs = ({ url, estrellas }) => {
           : tabs.map((tab) => {
               return (
                 <li key={tab.url}>
-                  <Link to={`/${url}-${tab.url}.html`} activeClassName="active">
+                  <Link
+                    to={`/${url}-${tab.url}.html`}
+                    activeClassName="active"
+                    className="flex items-center"
+                  >
                     {tab.icon}
                     <span className="tab-title">{tab.title}</span>
                   </Link>
@@ -37,7 +41,10 @@ const NavTabs = ({ url, estrellas }) => {
               )
             })}
       </ul>
-      <div className="line"></div>
+      <div
+        className="border border-b-stone-500"
+        style={{ marginTop: '-2px' }}
+      ></div>
     </Wrapper>
   )
 }
@@ -45,10 +52,6 @@ const NavTabs = ({ url, estrellas }) => {
 export default NavTabs
 const Wrapper = styled.div`
   padding: 0.5rem 0 1rem;
-  ul {
-    display: flex;
-    justify-content: space-around;
-  }
 
   .stars {
     background: var(--clr-white-transparency-8);
@@ -67,7 +70,7 @@ const Wrapper = styled.div`
   }
   .tab-title {
     display: none;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       margin-left: 5px;
       display: inline-block;
     }
@@ -75,11 +78,6 @@ const Wrapper = styled.div`
   .active {
     color: var(--clr-red-light);
     border: 1px solid var(--clr-grey-5);
-    border-bottom: 1px solid var(--clr-white);
-  }
-  .line {
-    width: 100%;
-    margin-top: 0.8rem;
-    border-bottom: 1px solid var(--clr-grey-5);
+    border-bottom: 3px solid var(--clr-white);
   }
 `

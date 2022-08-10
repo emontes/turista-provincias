@@ -7,6 +7,7 @@ import LeyendaPrecios from '../../../components/Hoteles/Destination/leyenda-prec
 import ContainerGrecas from '../../../components/molecules/ContainerGrecas'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Global = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -18,6 +19,7 @@ const Global = ({ data }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo title={seoTitle} description={seoDescription} />
       <ContainerGrecas
         title={`Los Hoteles más Económicos de ${metadata.estado.name}`}

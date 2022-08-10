@@ -113,7 +113,7 @@ const Wrapper = styled.div`
     display: none;
   }
 
-  @media screen and ${device.tablet} {
+  @media screen and ${device.lg} {
     .toggle-btn {
       display: none;
     }
@@ -145,7 +145,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and ${device.tablet} {
+  @media screen and ${device.lg} {
     background: transparent;
   }
 `

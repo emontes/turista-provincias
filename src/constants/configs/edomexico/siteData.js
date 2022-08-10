@@ -15,14 +15,19 @@ const siteData = {
     },
   },
   googleAnalytics: {
-    resolve: 'gatsby-plugin-google-analytics',
+    resolve: 'gatsby-plugin-google-gtag',
     options: {
-      trackingId: 'UA-693957-8',
+      trackingIds: ['G-E8QVT78VM2'],
     },
   },
   manifest: {
     resolve: 'gatsby-plugin-manifest',
     options: {
+      name: `Turista Estado de México`,
+      short_name: `TEdomex`,
+      start_url: `/`,
+      background_color: `#fbeded`,
+      theme_color: `#812324`,
       icon: 'src/assets/images/edomexico/icon.png',
     },
   },

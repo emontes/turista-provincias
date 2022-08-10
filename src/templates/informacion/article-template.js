@@ -9,6 +9,8 @@ import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
+import BlockGrey from '../../components/atoms/BlockGrey'
+import Compartir from '../../components/atoms/Compartir'
 
 const Article = ({ data, pageContext }) => {
   const { title, content, sections } = data.article
@@ -39,7 +41,7 @@ const Article = ({ data, pageContext }) => {
     <Layout linkExterno="/informacion">
       <Seo title={title} description={content.data.content.substring(0, 250)} />
       <Wrapper title="Información">
-        <div className="section-center">
+        <div className=" xl:flex">
           <article>
             <Breadcrumbs
               homeLink="/informacion"
@@ -51,11 +53,7 @@ const Article = ({ data, pageContext }) => {
             <div className="post-info">
               <h1>{title}</h1>
 
-              <div className="date-box">
-                <div class="s9-widget-wrapper"></div>
-              </div>
-
-              <div className="underline"></div>
+              <div className="border-b w-2/3 m-auto"></div>
             </div>
 
             <BannerAdsense className="h90" format="fluid" />
@@ -72,13 +70,16 @@ const Article = ({ data, pageContext }) => {
               </Link>
             ))}
           </article>
-          <div style={{ padding: '0 1rem' }}>
+          <div>
             <Banner
               title="Informacion"
               description="&nbsp;"
               listItems1={listItems1}
             />
-            <BannerAdsense />
+
+            <BlockGrey title="compartir">
+              <Compartir url={`/info/${pageContext.slug}`} title={title} />
+            </BlockGrey>
           </div>
         </div>
         <br />

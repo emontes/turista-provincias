@@ -4,12 +4,13 @@ import { graphql } from 'gatsby'
 import Seo from '../../../components/Seo'
 import { getSrc } from 'gatsby-plugin-image'
 import Banner from '../../../components/Hoteles/Destination/Banner'
-import Map from '../../../components/Hoteles/Destination/Map'
+import Map from '../../../components/Hoteles/partial/Map'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import SideBanner from '../../../components/Banner'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -27,6 +28,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Mapa de Hoteles en ${location.name}`}
         description={seoDescription}
@@ -51,7 +53,7 @@ const Locations = ({ data, pageContext }) => {
             </p>
           </div>
           <NavTabs url={data.location.slug} />
-          <Map location={data.location} />
+          <Map location={data.location.location} />
         </div>
         <div>
           <SideBanner

@@ -95,7 +95,7 @@ const Wrapper = styled.section`
     align-items: center;
 
     backgorund: ${(props) => props.theme.colors.primary10};
-    @media ${device.tablet} {
+    @media ${device.lg} {
       width: 49%;
     }
     @media ${device.laptop} {

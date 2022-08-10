@@ -11,6 +11,7 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -28,6 +29,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Los hoteles más Populares de ${location.name}`}
         description={`Listado de hoteles que cuentan con mayor índice de popularidad en ${location.name}. Son los hoteles que más visita la gente en ${location.name}`}

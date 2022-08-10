@@ -1,59 +1,38 @@
 import React from 'react'
-import InsertaScript from '../../utilities/InsertaScript'
 import Banner from '../Banner'
-import styled from 'styled-components'
-import device from '../../assets/themes/device'
+import Map from '../../components/Hoteles/partial/Map'
 
 const estadoSlug = process.env.ESTADO_SLUG
 const travelData = require(`../../constants/configs/${estadoSlug}/travelPayouts`)
 
 const textos = {
   chiapas:
-    'Chiapas es auténtico por naturaleza.  Chiapas es, y ha sido, siempre la última frontera, un estado que no puedes dejar de visitar',
+    'Chiapas es auténtico por naturaleza.  Chiapas es, y ha sido, siempre la última frontera de México, el lugar que aparece en tus seños cuando la selva tapa el cielo con el verde de su follaje, cascadas maravillosas, lagos de colores, un estado que no puedes dejar de visitar.',
   edomexico:
     'El estado de México tiene mucho para ver, desde los más impresionantes sitios arqueológicos, museos y maravillas naturales; hasta los más modernos desarrollos urbanos.',
   yucatan:
-    'Yucatán es la tierra del faisán y del venado, es poesía... es música...  no dejes de visitar la tierra de los elegidos',
+    'Yucatán es la tierra del faisán y del venado, es poesía... es música... el lugar de las Maravilas, imponente arqueología, la cuna de la trova. No dejes de visitar la tierra de los elegidos',
 }
 
 const Mapa = ({ metadata }) => {
   return (
-    <Wrapper>
-      <div className="mapa-container">
-        <h2 className="section-title">¿Conoces {metadata.estado.name}?</h2>
-        <div className="mx-auto mb-5 w-fit">
-          <InsertaScript src={travelData.mapa} />
-        </div>
+    <section className="2xl:flex">
+      <div className="2xl:w-1/3 2xl:order-last">
+        <Banner showHotelsBox={true} />
+      </div>
 
-        <div>
+      <div className=" 2xl:w-2/3">
+        <h3 className="text-red-600 text-center uppercase">
+          ¿Conoces {metadata.estado.name}?
+        </h3>
+        <Map location={travelData.location} zoom={7} />
+        <div className="mt-16">
           <p>{textos[metadata.estado.slug]}</p>
           <p>{metadata.description}</p>
         </div>
       </div>
-      <Banner showHotelsBox={true} />
-    </Wrapper>
+    </section>
   )
 }
-
-const Wrapper = styled.section`
-  background: var(--clr-white);
-  padding: 1rem;
-  @media ${device.desktop} {
-    display: grid;
-    grid-template-columns: 1fr 30rem;
-    column-gap: 1rem;
-  }
-  h2 {
-    margin: 1.5rem;
-    font-size: 1.9rem;
-    text-align: center;
-  }
-  .mapa-container {
-    display: none;
-    @media ${device.laptopL} {
-      display: block;
-    }
-  }
-`
 
 export default Mapa

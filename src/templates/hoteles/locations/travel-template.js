@@ -9,6 +9,7 @@ import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 import SideBanner from '../../../components/Banner'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data, pageContext }) => {
   const hotelsUrl = `https://jet.turista.com.mx/hotels?cityId=${data.location.hotellookId}&currency=mxn`
@@ -26,6 +27,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Viaja a ${location.name}`}
         description={`Hospedaje en ${location.name}, ${location.estado.Name}. Reservaciones en línea e información de tarifas y disponibilidad para encontrar su hospedaje en ${location.name}`}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Script, ScriptStrategy } from 'gatsby'
 
 class Google extends Component {
   componentDidMount() {
@@ -8,15 +9,24 @@ class Google extends Component {
 
   render() {
     return (
-      <ins
-        className={`adsbygoogle ${this.props.className}`}
-        style={this.props.style}
-        data-ad-layout={this.props.layout}
-        data-ad-format={this.props.format}
-        data-full-width-responsive={this.props.responsive}
-        data-ad-client={this.props.client}
-        data-ad-slot={this.props.slot}
-      ></ins>
+      <>
+        {/* <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5136877882943908"
+          crossOrigin="anonymous"
+          strategy={ScriptStrategy.idle}
+          id="adsense"
+        /> */}
+        <ins
+          className={`adsbygoogle ${this.props.className}`}
+          style={this.props.style}
+          data-ad-layout={this.props.layout}
+          data-ad-format={this.props.format}
+          data-full-width-responsive={this.props.responsive}
+          data-ad-client={this.props.client}
+          data-ad-slot={this.props.slot}
+        ></ins>
+      </>
     )
   }
 }

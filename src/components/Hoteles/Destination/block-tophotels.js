@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  @media${device.tablet} {
+  @media${device.lg} {
     flex-direction: row;
   }
   @media${device.laptopL} {

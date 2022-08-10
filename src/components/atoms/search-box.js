@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   color: rgb(68, 71, 106);
   position: relative;
 
-  @media${device.tablet} {
+  @media${device.lg} {
     width: 40%;
     margin-right: 1rem;
   }

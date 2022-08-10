@@ -14,10 +14,10 @@ const ListaHoteles = ({ hoteles, title }) => {
                 href={`//jet.turista.com.mx${hotel.link}`}
                 target="_blank"
                 rel="noreferrer"
+                title={hotel.name.en}
               >
-                <span>
-                  <BiChevronRight style={{ paddingTop: '2px' }} />{' '}
-                  {hotel.name.en}
+                <span className="flex items-center">
+                  <BiChevronRight /> {hotel.name.en.substring(0, 40)}
                 </span>
                 <div className="items">
                   {hotel.rating > 0 && (

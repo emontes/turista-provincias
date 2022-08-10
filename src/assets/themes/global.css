@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cont-area {
+    @apply bg-slate-50 border rounded-lg shadow relative p-3;
+}

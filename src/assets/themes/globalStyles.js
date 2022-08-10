@@ -46,40 +46,32 @@ Global Styles
   box-sizing: border-box;
 }
 html {
-    /* This defines what 1rem is */
+/* This defines what 1rem is */
   font-size: 62.5%; /* 1 rem = 10px; 10px/16px = 62.5% */
-
-  @media ${device.mobileL} {
-      font-size: 75%; /* 1 rem = 12px 12/16 = .75 */
+  @media ${device.sm} {
+    font-size: 75%; /* 1 rem = 12px 12/16 = .75 */
   }
-  @media ${device.tablet} {
+  @media ${device.md} {
     font-size: 81.25%; /* 1 rem = 13px 13/16 = .8125 */
   }
-  @media ${device.laptop} {
-      font-size: 87.5%; /* 1 rem = 14px 14/16 = .875% */
+  @media ${device.lg} {
+    font-size: 87.5%; /* 1 rem = 14px 14/16 = .875% */
   }
-  @media ${device.desktop} {
-      font-size: 93.75%; /* 1 rem = 15px 15/16 = .9375% */
+  @media ${device.xl} {
+    font-size: 93.75%; /* 1 rem = 15px 15/16 = .9375% */
   }
-  @media ${device.desktopL} {
-      font-size: 100%; /* 1 rem = 16px 16/16 = 1% */
+  @media ${device.xl2} {
+    font-size: 100%; /* 1 rem = 16px 16/16 = 1% */
   }
-
-  
 }
+
 body {
   font-family: roboto;  
-font-style: normal;
-font-variant-caps: normal;
-font-variant-east-asian: normal;
-font-variant-ligatures: normal;
-font-variant-numeric: normal;
-font-weight: 400;
   color: var(--clr-black);
   line-height: 1.5;
-  font-size: 1.2rem;
   margin-top: 5.8rem;
 }
+
 ul {
   list-style-type: none;
   
@@ -87,14 +79,15 @@ ul {
 a {
   text-decoration: none;
   color: ${(props) => props.theme.colors.primary5};
+  transition: var(--transition);
   :hover {
     color: ${(props) => props.theme.colors.primary9};
   }
 }
 p {
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem !important;
   color: ${(props) => props.theme.colors.primary8};
-  font-size: 1.3rem;
+  
 }
 h1,
 h2,
@@ -154,7 +147,7 @@ h4 {
 }
 
 .section-center {
-  @media ${device.laptopL} {
+  @media ${device.xl} {
     display: grid;
     grid-template-columns: 1fr 30rem;
     column-gap: 1rem;
@@ -173,23 +166,6 @@ h4 {
 .back-primary-9 { background-color: ${(props) => props.theme.colors.primary9} }
 .back-primary-10 { background-color: ${(props) =>
   props.theme.colors.primary10} }
-
-.section-title {
-  
-    text-transform: uppercase;
-    color: var(--clr-red-dark);
-    
-    margin: 0;
-}
-
-.cont-area {
-    background: var(--clr-grey-10);
-    border: 1px solid #d3d3d3;
-    border-radius: 8px;
-    box-shadow: 0px 0px 1px #d3d3d3;
-    position: relative;
-    padding: 1rem;
-}
 
 table {
     width: 100%;

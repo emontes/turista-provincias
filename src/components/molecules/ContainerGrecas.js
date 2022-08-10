@@ -45,7 +45,7 @@ const Wrapper = styled.div`
     padding: 5px;
     display: flex;
     flex-direction: column;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       flex-direction: row;
     }
   }

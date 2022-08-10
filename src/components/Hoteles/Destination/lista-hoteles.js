@@ -78,7 +78,7 @@ export default Lista
 const Wrapper = styled.div`
   .direccion {
     display: none;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       display: block;
     }
   }

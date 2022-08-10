@@ -9,6 +9,7 @@ import BannerAdsense from '../../utilities/BannerAdsense'
 import BlockGrey from '../../components/atoms/BlockGrey'
 import footerList1 from '../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../constants/especialistas-links'
+import Chat from '../../components/atoms/chat-hubspot'
 
 const hoteles = ({ data }) => {
   const src = getSrc(data.image.childImageSharp)
@@ -23,6 +24,7 @@ const hoteles = ({ data }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Destinos con Hoteles en ${metadata.estado.name}`}
         description={`Encuentre el Hotel que busca con el buscador de hoteles de ${metadata.estado.name}, o con el listado de ciudades que tienen Hoteles en ${metadata.estado.name}`}

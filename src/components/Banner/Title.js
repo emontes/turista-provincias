@@ -4,7 +4,7 @@ const Title = ({ title }) => {
   return (
     <Wrapper>
       <h4>{title}</h4>
-      <div className="line"></div>
+      <div className=" mt-2 border-b"></div>
     </Wrapper>
   )
 }

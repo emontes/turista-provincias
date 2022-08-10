@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
 
-  @media ${device.tablet} {
+  @media ${device.lg} {
     margin: -5px auto 0.5rem;
   }
   .hero-img {
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
     font-weight: bold;
     margin-left: 1.7rem;
     width: 13rem;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       width: 30rem;
       font-size: 1.8rem;
     }
@@ -59,7 +59,7 @@ const Wrapper = styled.div`
     margin-left: 2.8rem;
     margin-top: -0.4rem;
     display: none;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       display: block;
     }
   }

@@ -9,6 +9,7 @@ import BannerAdsense from '../utilities/BannerAdsense'
 import ContainerGrecas from '../components/molecules/ContainerGrecas'
 import ListaDestinos from '../components/Home/location-list'
 import Mapa from '../components/Home/Mapa'
+import Compartir from '../components/atoms/Compartir'
 
 const index = ({ data }) => {
   const metadata = data.site.siteMetadata
@@ -26,21 +27,28 @@ const index = ({ data }) => {
       </ContainerGrecas>
 
       {/* Noticias */}
-      <div className="section-center">
+      <div className="md:flex gap-4">
         <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
-          <h3>Últimas Noticias de turismo en {metadata.estado.name}</h3>
+          <h3 className="text-red-600">
+            Últimas Noticias de turismo en {metadata.estado.name}
+          </h3>
           <Noticias
             noticias={data.allStrapiNoticia.nodes}
-            perPage={5}
+            perPage={3}
             title="Últimas Noticias"
             isHome="si"
           />
         </div>
         <div>
           <BlockGrey title="Compartir">
-            <div class="s9-widget-wrapper"></div>
+            <Compartir title="¿Ya conoces el Turista?" />
           </BlockGrey>
-          <BannerAdsense className="h-80" />
+
+          {/* <BannerAdsense
+            style={{ display: 'inline-block', width: '300px', height: '600px' }}
+            className="mx-auto hidden md:inline-block"
+          /> */}
+
           <BlockGrey title={`Acerca de Turista ${metadata.estado.name}`}>
             {metadata.description}
           </BlockGrey>
@@ -72,7 +80,7 @@ export const query = graphql`
     }
 
     allStrapiNoticia(
-      limit: 5
+      limit: 3
       filter: { estado: { slug: { eq: $estadoSlug } } }
       sort: { fields: date, order: DESC }
     ) {

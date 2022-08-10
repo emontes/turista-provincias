@@ -188,7 +188,7 @@ const Wrapper = styled.div`
   .derecha {
     margin: 0.8rem 0;
     width: 11rem;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       width: 8rem;
     }
     border-left: 1px solid var(--clr-grey-8);

@@ -2,7 +2,6 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import SocialLinks from '../../constants/social_links'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
-import Title from './Title'
 import styled from 'styled-components'
 
 const About = (props) => {
@@ -14,11 +13,6 @@ const About = (props) => {
 
   return (
     <Wrapper>
-      <Title
-        title={
-          props.title || `El Turista ${data.site.siteMetadata.estado.name}`
-        }
-      />
       <GatsbyImage
         image={getImage(displayImage.localFile)}
         className="img"

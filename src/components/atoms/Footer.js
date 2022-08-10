@@ -42,7 +42,7 @@ const Footer = ({
                   {footerList1.elements.map((link) => {
                     return (
                       <li key={link.id}>
-                        <Link to={link.url}>
+                        <Link to={link.url} className="flex items-center gap-1">
                           <BiChevronRightCircle /> {link.title}
                         </Link>
                       </li>
@@ -59,7 +59,7 @@ const Footer = ({
                   {footerList2.elements.map((link) => {
                     return (
                       <li key={link.id}>
-                        <Link to={link.url}>
+                        <Link to={link.url} className="flex items-center gap-1">
                           <BiChevronRightCircle /> {link.title}
                         </Link>
                       </li>

@@ -9,6 +9,7 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
 const Locations = ({ data }) => {
   const { location, banner, image, numhoteles } = data.location
   return (
@@ -18,6 +19,7 @@ const Locations = ({ data }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Guía de Hoteles en ${location.name}`}
         description={`Hoteles en ${location.name}, ${location.estado.Name}. Reservaciones en línea e información de tarrifas, servicios y disponibilidad para encontrar su hotel en ${location.name}`}

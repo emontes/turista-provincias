@@ -11,6 +11,8 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
+
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
   const numhoteles = data.hoteles.nodes.length
@@ -27,6 +29,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Los hoteles mejor valorados de ${location.name}`}
         description={`Listado de hoteles que han tenido mejores calificaciones en ${location.name}.`}

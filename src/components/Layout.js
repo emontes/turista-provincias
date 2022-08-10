@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import GlobalStyle from '../assets/themes/globalStyles'
 import { useStaticQuery, graphql } from 'gatsby'
 
@@ -90,7 +90,7 @@ const Wrapper = styled.main`
       right bottom;
     width: 100%;
     padding: 0rem;
-    @media ${device.tablet} {
+    @media ${device.lg} {
       padding: 1rem;
 
       @media ${device.laptop} {

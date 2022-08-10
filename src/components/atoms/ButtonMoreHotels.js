@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   background: var(--clr-white);
   transition: var(--transition);
 
-  @media ${device.tablet} {
+  @media ${device.lg} {
     width: 25%;
   }
   :hover {

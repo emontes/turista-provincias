@@ -11,6 +11,7 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Estrellas = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -56,6 +57,7 @@ const Estrellas = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={titleSeo}
         description={descriptionSeo}

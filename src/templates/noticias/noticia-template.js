@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import Banner from '../../components/Banner/indexNoticias'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
+import Compartir from '../../components/atoms/Compartir'
 
 const Article = ({ data, pageContext }) => {
   const {
@@ -52,13 +53,15 @@ const Article = ({ data, pageContext }) => {
 
               <h1>{title}</h1>
 
-              <div className="date-box">
+              <div className="date-box text-slate-400">
                 <span className="date">
                   <FaRegClock className="icon"></FaRegClock>
                   {date}
                 </span>
-
-                <div class="s9-widget-wrapper"></div>
+                <div className="flex gap-2 items-center">
+                  Compartir en:{' '}
+                  <Compartir url={pageContext.slug} title={title} />
+                </div>
               </div>
 
               <div className="underline"></div>
@@ -153,7 +156,6 @@ const Wrapper = styled.section`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: ${(props) => props.theme.colors.primary5};
 
       & .date {
         display: flex;

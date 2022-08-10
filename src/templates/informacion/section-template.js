@@ -7,6 +7,8 @@ import Banner from '../../components/Banner'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
+import ItemChevron from '../../components/atoms/ItemChevronRight'
+import Compartir from '../../components/atoms/Compartir'
 
 const Section = ({ data, pageContext }) => {
   const sectionTitle = data.strapiSection.title
@@ -49,10 +51,10 @@ const Section = ({ data, pageContext }) => {
               endTitle={sectionTitle}
             />
 
-            <h3 className="section-title">{sectionTitle}</h3>
+            <h3 className="text-red-500 uppercase">{sectionTitle}</h3>
             <BannerAdsense className="h90 mt1 mb1" format="fluid" />
             {sections.length > 0 && (
-              <>
+              <div className=" mb-3">
                 <h4>Secciones</h4>
 
                 <ul>
@@ -61,30 +63,38 @@ const Section = ({ data, pageContext }) => {
                       return (
                         <li key={item.slug}>
                           <Link to={`/informacion/${item.slug}`}>
-                            {item.title}
+                            <ItemChevron text={item.title} />
                           </Link>
                         </li>
                       )
                     } else return ''
                   })}
                 </ul>
-                <br />
-              </>
+              </div>
             )}
             {articles.length > 0 && (
-              <>
+              <div className="mb-6">
                 <h4>Artículos</h4>
-                <ul>
+                <ul className="sm:columns-2 xl:columns-3">
                   {articles.map((item) => {
                     return (
                       <li key={item.slug}>
-                        <Link to={`/info/${item.slug}`}>{item.title}</Link>
+                        <Link to={`/info/${item.slug}`} className="border-b">
+                          <ItemChevron text={item.title} />
+                        </Link>
                       </li>
                     )
                   })}
                 </ul>
-              </>
+              </div>
             )}
+            <div className=" text-slate-400 w-1/4">
+              Compartir:
+              <Compartir
+                url={`/info/${pageContext.slug}`}
+                title={sectionTitle}
+              />
+            </div>
           </div>
           <div style={{ padding: '0 1rem 1rem' }}>
             <Banner

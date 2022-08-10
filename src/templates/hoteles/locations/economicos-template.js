@@ -11,6 +11,7 @@ import footerList2 from '../../../constants/especialistas-links'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import SideBanner from '../../../components/Banner'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data, pageContext }) => {
   const { location, banner, image } = data.location
@@ -38,6 +39,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Hoteles económicos en ${location.name}`}
         description={descriptionSeo}

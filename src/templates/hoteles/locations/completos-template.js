@@ -11,6 +11,7 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Chat from '../../../components/atoms/chat-hubspot'
 
 const Locations = ({ data }) => {
   const { location, banner, image } = data.location
@@ -22,6 +23,7 @@ const Locations = ({ data }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
+      <Chat />
       <Seo
         title={`Los más completos hoteles en ${location.name}`}
         description={`Lista ordenada a partir del mayor número de Facilidades para Hoteles en ${location.name}. Encuentre el hotel más completo de ${location.name}`}

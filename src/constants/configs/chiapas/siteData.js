@@ -15,9 +15,9 @@ const siteData = {
     },
   },
   googleAnalytics: {
-    resolve: 'gatsby-plugin-google-analytics',
+    resolve: 'gatsby-plugin-google-gtag',
     options: {
-      trackingId: 'UA-693957-11',
+      trackingIds: ['G-9QKZZP9RRY'],
     },
   },
   manifest: {

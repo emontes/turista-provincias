@@ -53,7 +53,7 @@ export default Hero
 
 const Wrapper = styled.header`
 display: none;
-@media ${device.tablet} {
+@media ${device.lg} {
   display: block;
 }
   .hero-img {

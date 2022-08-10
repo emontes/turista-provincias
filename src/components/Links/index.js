@@ -30,7 +30,7 @@ const Links = ({
             singleUrl
           />
         ) : (
-          <h3 className="section-title">{subtitle}</h3>
+          <h3 className="uppercase text-red-500">{subtitle}</h3>
         )}
 
         <BannerAdsense className="h90 mt1 mb1" format="fluid" />
