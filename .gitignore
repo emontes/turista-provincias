@@ -70,3 +70,6 @@ yarn-error.log
 
 # Los zip que luego se olvidan
 *.zip
+
+# Partytown
+static/~partytown
