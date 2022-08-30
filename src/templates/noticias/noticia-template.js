@@ -6,6 +6,7 @@ import { GatsbyImage, getImage, getSrc } from 'gatsby-plugin-image'
 import { FaRegClock } from 'react-icons/fa'
 import { Link } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
+
 import Banner from '../../components/Banner/indexNoticias'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
@@ -19,9 +20,11 @@ const Article = ({ data, pageContext }) => {
     location,
     topics,
     hometext,
+
     bodytext,
     image,
   } = data.strapiNoticia
+
   const fecha = new Date(datePlano)
   const anyo = fecha.getFullYear()
   let displayImage
@@ -75,29 +78,11 @@ const Article = ({ data, pageContext }) => {
                 title={title}
               />
             )}
-            {anyo < 2018 ? (
-              <>
-                {hometext && (
-                  <div
-                    dangerouslySetInnerHTML={{ __html: hometext.data.hometext }}
-                  />
-                )}
-                <BannerAdsense className="h60 mb1" format="fluid" />
-                {bodytext && (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: bodytext.data.bodytext,
-                    }}
-                  />
-                )}
-              </>
-            ) : (
-              <>
-                <ReactMarkdown children={hometext.data.hometext} />
-                <BannerAdsense className="h60 mt1 mb1" format="fluid" />
-                <ReactMarkdown children={bodytext.data.bodytext} />
-              </>
-            )}
+
+            <ReactMarkdown children={hometext.data.hometext} />
+            <BannerAdsense className="h60 mt1 mb1" format="fluid" />
+            <ReactMarkdown children={bodytext.data.bodytext} />
+
             {topics.map((topic) => (
               <Link
                 key={topic.slug}

@@ -9,7 +9,7 @@ export const onRouteUpdate = ({ location }) => {
     : undefined
   setTimeout(() => {
     if (typeof gtag === 'function') {
-      gtag('event', 'page_view', { page_path: pagePath })
+      // gtag('event', 'page_view', { page_path: pagePath })
     }
   }, 100)
 }

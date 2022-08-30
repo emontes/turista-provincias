@@ -3,7 +3,8 @@ import { graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
-import ReactMarkdown from 'react-markdown'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+// import ReactMarkdown from 'react-markdown'
 import Banner from '../../components/Banner'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
@@ -40,7 +41,7 @@ const Article = ({ data, pageContext }) => {
   return (
     <Layout linkExterno="/informacion">
       <Seo title={title} description={content.data.content.substring(0, 250)} />
-      <Wrapper title="Información">
+      <Wrapper title="Informaciónes">
         <div className=" xl:flex">
           <article>
             <Breadcrumbs
@@ -50,15 +51,14 @@ const Article = ({ data, pageContext }) => {
               endTitle={title}
             />
 
-            <div className="post-info">
-              <h1>{title}</h1>
-
-              <div className="border-b w-2/3 m-auto"></div>
-            </div>
+            <h2 className="text-center">{title}</h2>
+            <div className="border-b w-2/3 m-auto"></div>
 
             <BannerAdsense className="h90" format="fluid" />
-
-            <ReactMarkdown children={content.data.content} />
+            <div className="section-article">
+              <MDXRenderer>{content.data.childMdx.body}</MDXRenderer>
+              {/* <ReactMarkdown children={content.data.content} /> */}
+            </div>
 
             {sections.map((section) => (
               <Link
@@ -89,61 +89,8 @@ const Article = ({ data, pageContext }) => {
 }
 
 const Wrapper = styled(ContainerGrecas)`
-  .category {
-    color: var(--clr-white);
-    background: ${(props) => props.theme.colors.primary9};
-    border-radius: var(--radius);
-    padding: 0.25rem 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: var(--spacing);
-  }
-  .topic {
-    background: ${(props) => props.theme.colors.primary9};
-    margin-right: 1rem;
-  }
-  .post-info {
-    margin: 2rem 0 4rem 0;
-    text-align: center;
-
-    h1 {
-      margin: 1.25rem 0;
-      font-size: 1.9rem;
-      font-weight: 400;
-    }
-
-    .date-box {
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--clr-grey-5);
-
-      & .date {
-        display: flex;
-        align-items: center;
-        & .icon {
-          color: ${(props) => props.theme.colors.primary5};
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-
-  .image {
-    width: 100%;
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-  }
-
-  p {
-    color: ${(props) => props.theme.colors.primary8};
-  }
-  .underline {
-    width: 5rem;
-    height: 1px;
-    background: var(--clr-grey-9);
-    margin: 1rem auto;
-    margin-bottom: 1rem;
+  .mdarti {
+    border: 1px solid red;
   }
 `
 
@@ -155,6 +102,9 @@ export const pageQuery = graphql`
       content {
         data {
           content
+          childMdx {
+            body
+          }
         }
       }
       sections {

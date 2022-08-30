@@ -35,6 +35,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    `gatsby-plugin-mdx`,
     siteData.sourceFileSystem,
     {
       resolve: `gatsby-source-strapi`,

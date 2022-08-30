@@ -41,13 +41,8 @@ const NoticiaCard = ({ noticia }) => {
 
           <div>
             <h3 className="text-2xl hidden md:block">{noticia.title}</h3>
-            {anyo < 2018 ? (
-              <div dangerouslySetInnerHTML={{ __html: hometext }} />
-            ) : (
-              <>
-                <ReactMarkdown children={hometext} />
-              </>
-            )}
+
+            <ReactMarkdown children={hometext} />
           </div>
         </div>
         <footer className="mt-8 pt-4 border-t flex items-center justify-between text-slate-400">

@@ -1,389 +1,263 @@
-<style type='text/css'>
-    /*
-===============
-Navbar
-===============
-*/
-
-    a {
-        text-decoration: none;
-    }
-
-
-    .navbar {
-        --max-width: 1170px;
-        --clr-black: #0a0c10;
-        --clr-red: #e2001a --spacing: 0.1rem;
-        --ff-secondary: "Open Sans", sans-serif;
-        --transition: all 0.3s linear;
-        --radius: 0.25rem;
-        --clr-primary-5: #036544;
-        /* lighter shades of primary color */
-        --clr-primary-6: hsl(245, 57%, 50%);
-        --clr-primary-7: hsl(245, 65%, 59%);
-        --clr-primary-8: hsl(245, 80%, 74%);
-        --clr-primary-9: hsl(245, 94%, 87%);
-        --clr-primary-10: #7fab82;
-
-        height: 5rem;
-        display: flex;
-        align-items: center;
-        background: var(--clr-primary-10);
-    }
-
-    .nav-center {
-        width: 90vw;
-        max-width: var(--max-width);
-        margin: 0 auto;
-    }
-
-    .nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-logo {
-        display: block;
-        height: 40px;
-    }
-
-    .nav-logo img {
-        height: 100%;
-    }
-
-    .nav-links {
-        display: none;
-        list-style-type: none;
-    }
-
-    @media screen and (min-width: 800px) {
-        .toggle-btn {
-            display: none;
-        }
-
-        .nav-center {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            column-gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
-        .page-link {
-            margin-right: 1rem;
-        }
-
-        .page-link {
-            color: var(--clr-red);
-            font-weight: bold;
-            letter-spacing: var(--spacing);
-            font-size: 1rem;
-            transition: var(--transition);
-            font-family: var(--ff-secondary);
-            cursor: pointer;
-            padding: 0.25rem 0.5rem;
-            border-radius: var(--radius);
-        }
-
-        .page-link:hover {
-            background: var(--clr-primary-5);
-            color: var(--clr-primary-10);
-        }
-    }
-
-    /*
-============================
-Termina Navbar de www.turista.com.mx
-============================
-*/
-
-    .TPWL-widget .TPWL-front-content {
-        max-width: 948px;
-        margin: auto;
-        padding: 0;
-
-        p {
-            line-height: 25px;
-            font-size: 14px;
-            margin: 10px 0;
-        }
-
-        h1 {
-            font-size: 24px;
-            line-height: 1.29;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        a {
-            color: #4285f4;
-        }
-
-        h2 {
-            font-size: 20px;
-            line-height: 1.29;
-            font-weight: 400;
-            margin: 30px 0 15px;
-        }
-
-        table {
-            border: 1px solid #808080;
-            border-collapse: collapse;
-            border-spacing: 0;
-            font-size: 14px;
-
-            th {
-                background-color: #f5f5f5;
-                text-align: left;
-                border: 1px solid #eee;
-                padding: 4px 12px;
-                vertical-align: top;
-                font-weight: bold;
-            }
-
-            td {
-                border: 1px solid #eee;
-                padding: 4px 12px;
-                vertical-align: top;
-            }
-
-            tr {
-                background-color: #fafafa;
-            }
-
-            tr:nth-of-type(even) {
-                background-color: #fff;
-            }
-        }
-    }
-
-    .TPWL-widget .TPWL-front-content .TPWL-front-content_attention {
-        padding: 10px 10px;
-        background-color: #f6f9ff;
-        border: 1px solid #f8f6e6;
-        color: #444;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        font-size: 16px;
-        line-height: 25px;
-        font-weight: 500;
-    }
-
-    .TPWL-widget .TPWL-front-content .TPWL-front-content_text-list {
-        background-image: none;
-        margin: 10px 10px 10px 30px;
-        list-style-type: disc;
-        color: #757575;
-        font-size: 16px;
-        line-height: 24px;
-    }
-
-    .TPWL-widget .TPWL-front-content-weedle-title,
-    .TPWL-widget .TPWL-front-content-subscription-title,
-    .TPWL-widget .TPWL-front-content-special_offers-title {
-        text-align: center;
-        font-size: 32px;
-        margin-bottom: 36px;
-        margin-top: 60px;
-        font-weight: 300;
-    }
-
-    .TPWL-widget .TPWL-front-content-weedle {
-        text-align: center;
-        margin-right: -21px;
-    }
-
-    .TPWL-widget .TPWL-front-content-weedle-container {
-        display: inline-block;
-        width: 300px;
-        margin: 10px 21px 10px 0;
-    }
-
-    .TPWL-widget .weedle-header__city {
-        text-align: center;
-    }
-
-    .TPWL-footer-content {
-        margin: 15px auto 40px;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    .TPWL-footer-content__descrition {
-        margin-top: 5px;
-        opacity: .6;
-    }
-
-    .TPWL-header-content-wrapper {
-        width: 100%;
-        margin: 0 auto;
-        max-width: 1024px;
-    }
-
-    .TPWL-header-content {
-        padding-top: 45px;
-        padding-bottom: 10px;
-    }
-
-    .TPWL-header-content .TPWL-header-content__descrition {
-        padding-right: 15px;
-        float: right;
-        line-height: 23px;
-        font-weight: 300;
-        font-size: 14px;
-    }
-
-    .TPWL-header-content .TPWL-header-content__label {
-        display: none;
-        font-size: 36px;
-        margin: 0 auto;
-        max-width: 1024px;
-        padding: 95px 0px 0px 15px;
-    }
-
-    .TPWL-widget--front_page .TPWL-header-content .TPWL-header-content__label {
-        display: block;
-    }
-
-    .TPWL-header-content .TPWL-header-content__logo {
-        padding-left: 15px;
-        display: inline;
-        line-height: 24px;
-    }
-
-    .TPWL-header-content .TPWL-header-content-logo-link {
-        text-decoration: none;
-    }
-
-    .TPWL-header-content .TPWL-header-content-logo__text {
-        padding-left: 40px;
-        color: #FFFFFF;
-        font-size: 24px;
-        font-weight: 900;
-        text-transform: uppercase;
-    }
-
-    .TPWL-header-content .TPWL-header-content-logo__img {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        background: no-repeat url("data:image/svg+xml, %3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2227%22%20viewBox%3D%220%200%2028%2027%22%3E%3Cpath%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%20d%3D%22M15.903%2014.94l6.308%2011.614c.197.36.686.432.977.14l.494-.493c.12-.12.022-.322-.146-.3l-2.56-10.58s.762-.347%201.447-.837c.468-.335.53-1.016.114-1.413l-.03-.03c-.357-.327-.905-.325-1.26.005-.223.21-.473.47-.656.736l-.716-2.956c-.083-.343.014-.706.26-.96l5.91-6.15s.64-.9.834-1.476c.192-.578.29-1.7.065-1.924-.224-.224-1.346-.128-1.923.065-.577.19-1.475.833-1.475.833l-6.15%205.91c-.256.245-.618.343-.962.26l-2.957-.717c.267-.182.528-.433.736-.656.33-.354.33-.903.004-1.26l-.03-.03c-.396-.415-1.078-.354-1.412.114-.49.684-.837%201.448-.837%201.448L1.355%203.72c.02-.167-.182-.266-.3-.147l-.496.495c-.292.29-.22.78.14.976l11.614%206.308c.23.125.277.434.096.622L9.527%2014.97c-1.32%201.375-2.6%203.185-3.008%203.78-.084.12-.23.18-.374.156l-4.73-.822c.02-.144-.155-.23-.258-.13l-.377.38c-.356.356-.272.956.17%201.2l3.43%201.907c.17.095.24.302.162.48-.1.234-.18.445-.24.622-.086.254.156.496.41.41.178-.06.39-.138.623-.24.178-.076.385-.008.48.162l1.905%203.432c.245.44.845.525%201.202.168l.377-.378c.102-.103.015-.277-.13-.256l-.822-4.73c-.025-.146.037-.29.157-.374.595-.41%202.404-1.687%203.78-3.01%201.19-1.146%202.402-2.31%202.995-2.88.19-.183.498-.135.623.095%22%2F%3E%3C%2Fsvg%3E");
-    }
-
-    .TPWL-widget--front_page .TPWL-template-header {
-        padding-bottom: 145px;
-    }
-
-    .TPWL-widget--front_page .TPWL-template-header.TPWL-template-header--sticky {
-        padding: 0;
-    }
-
-    @media (max-width: 1024px) {
-        .TPWL-widget--front_page .TPWL-template-header.TPWL-template-header--sticky {
-            display: none;
-        }
-    }
-
-    @media (max-width: 1001px) {
-        .TPWL-widget .TPWL-front-content {
-            padding: 0 30px;
-        }
-
-        .TPWL-widget .TPWL-template-header-content {
-            max-width: 1024px;
-        }
-
-        .TPWL-header-content .TPWL-header-content__descrition {
-            padding-right: 10px;
-        }
-
-        .TPWL-header-content .TPWL-header-content__label {
-            padding: 75px 0 0 15px;
-        }
-
-        .TPWL-header-content .TPWL-header-content__logo {
-            padding-left: 10px;
-        }
-
-        .TPWL-widget--front_page .TPWL-template-header {
-            padding-bottom: 90px;
-        }
-    }
-
-    @media (max-width: 790px) {
-        .TPWL-widget .TPWL-front-content {
-            padding: 0 20px;
-        }
-
-        .TPWL-widget--front_page .TPWL-template-header {
-            padding-bottom: 25px;
-        }
-
-        .TPWL-header-content .TPWL-header-content__label {
-            font-size: 24px;
-            padding-bottom: 0px;
-            padding-top: 91px;
-        }
-
-        .TPWL-widget .TPWL-front-content-weedle {
-            margin: 0px;
-        }
-    }
-
-    @media (max-width: 460px) {
-        .TPWL-widget .TPWL-front-content {
-            padding: 0 10px;
-        }
-
-        .TPWL-header-content {
-            text-align: center;
-            padding-bottom: 0px;
-            padding-top: 20px;
-        }
-
-        .TPWL-header-content .TPWL-header-content__descrition {
-            padding-right: 0px;
-            float: none;
-            display: block;
-        }
-
-        .TPWL-header-content .TPWL-header-content__label {
-            padding: 0;
-            display: none;
-        }
-
-        .TPWL-header-content .TPWL-header-content__logo {
-            padding-left: 0px;
-            display: block;
-        }
-
-        .TPWL-widget--front_page .TPWL-template-header {
-            padding-bottom: 0px;
-        }
-
-        .TPWL-widget .TPWL-front-content-weedle {
-            margin: 0px;
-        }
-
-        .TPWL-widget .TPWL-front-content-weedle-container {
-            display: inline-block;
-            width: 250px;
-            margin: 10px 0 10px 0;
-        }
-    }
-
-    @media (max-width: 340px) {
-        .TPWL-widget .ducklett-widget .ducklett-widget-wrapper--brickwork .ducklett-widget-wrapper-item {
-            margin: 0 0 20px 0 !important;
-        }
-
-        .TPWL-widget .ducklett-widget .ducklett-slider-wrapper {
-            overflow: visible !important;
-        }
-    }
-</style>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Su programa propone conciertos con Robi Draco Rosa, Ana Moura, Bajofondo, Ximena Sariñana, Luis María Pescetti y
+    Óscar Chávez, así como del encuentro de pirotecnia y del desfile de calaveras.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Por su parte, San Miguel Allende, Guanajuato, honrará la memoria de Chavela Vargas con La Calaca Festival, en donde
+    el arte y cultura se unirán a la celebración de la vida y la muerte para explorar las tradiciones del Día de Muertos
+    a partir de este día y hasta el 3 de noviembre.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Aunado a esta celebración, continuó el Conaculta, en la capital del país se llevará a cabo el XVI Festival
+    Universitario de Día de Muertos. Mega Ofrenda 2013, que cada año organiza la Universidad Nacional Autónoma de
+    México, en esta ocasión bajo el lema &quot;50 años sin Remedios Varo&quot;.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Como ya es tradición, la comunidad de la máxima casa de estudios del país crea altares y ofrendas para rendir culto
+    a los que han partido.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Además, las 16 delegaciones de la capital albergarán diversas actividades los días 1 y 1 de noviembre, que incluyen
+    conciertos, entre los que destaca el de Óscar Chávez en la Plaza de la Constitución de la ciudad de México.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Por su parte, en la colonia Roma se llevará a cabo el primer Festival de Día de Muertos, que contará con
+    exposiciones de libros, talleres y conciertos a partir de este jueves y hasta el 3 de noviembre en el camellón de la
+    Avenida Álvaro Obregón. También sobresale la visita a los diferentes panteones que existen en la Ciudad de México.
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Mientras que el Centro Nacional de las Artes, los días 1 y 2 de este mes celebrará en sus distintos foros y espacios
+    abiertos la XIII Feria de Calacas, en la que ofrecerá exposiciones, narraciones orales, talleres, actividades
+    multimedia, proyecciones, conciertos, teatro, pasajes sonoros y una ofrenda tradicional maya.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Recordó que dicha actividad se lleva a cabo por parte del programa Alas y Raíces del Conaculta.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Destacó que del tema, en la ciudad de México, en el pueblo de San Andrés Mixquic, delegación Tláhuac, se lleva a
+    cabo una de las celebraciones más impactantes, ya que en ella participa todo la población para recibir a las almas
+    de los difuntos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Entre ofrendas, oraciones y el repique de las campanas, los lugareños aguardan el 1 de noviembre la llegada de las
+    ánimas de los niños, mientras que al día siguiente esperan la llegada de las ánimas de los adultos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Así, el 2 de noviembre marca lo más significativo de la celebración con &quot;La alumbrada o noche de las
+    velas&quot;, ya que a partir de las 18:00 horas los habitantes de Mixquic se encaminan hacia el panteón con velas,
+    incienso y flores.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    En el cementerio, las tumbas son iluminadas con velas y se hace arder el incienso por los habitantes del pueblo de
+    Mixquic, quienes permanecen al lado de las tumbas de sus deudos, en un ambiente místico, de comunión entre vivos y
+    muertos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Es de esta forma que transcurre la noche, y las ánimas son guiadas en su camino de regreso por la luz de las velas,
+    refirió el Consejo.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Otro emblemático lugar que representa a esta tradición es la zona del Lago de Pátzcuaro, Michoacán, celebración
+    inmersa en la leyenda de la princesa Mitzita, hija del último Caltzonci, y de Itzihuapa, hijo del señor de Janitzio,
+    quienes profundamente enamorados no pudieron desposarse por la inesperada llegada de los conquistadores.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Según la leyenda, la princesa ofreció, a cambio de la libertad de su padre, quien era torturado por el conquistador
+    de Michoacán, Nuño de Guzmán, el tesoro que se encontraba en las profundidades del lago de Pátzcuaro, entre Janitzio
+    y Pacanda.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    De acuerdo a las creencias, en la noche del 1 de noviembre surgen las sombras de Mitzita e Itzihuapa en la isla de
+    Janitzio, quienes, al sonar las campañas, suben la cuesta de la isla, se encaminan al panteón y reciben ofrendas de
+    los vivos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Sobre lo mencionado, las mujeres y los niños, antes de la medianoche del 1 de noviembre, se dirigen en silencio al
+    cementerio para llevar las ofrendas a sus muertos, y sobre las tumbas colocan arreglos florales y los alimentos que
+    tanto gustaron en vida al difunto.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    El ritual continúa cuando encienden las velas para transformar al oscuro cementerio en un jardín de luces
+    misteriosas y con el tañido de las campanas, en toda la isla se escucha el eco de los cantos en purépecha, que
+    imploran el descanso eterno para las almas de los ausentes y la felicidad para quienes aún están vivos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Por su parte, en la Huasteca Potosina, en San Luis Potosí, se realiza el Xantolo, que se caracteriza por cinco días
+    de regocijo y bienvenida para los Fieles Difuntos y que, a pesar de la solemnidad del ambiente, se convierte en un
+    evento festivo, que arranca el 31 de octubre, pues según las creencias es cuando las almas de los niños llegan a
+    visitar a sus familiares.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Música, danzas, cantos y comida marcan el ritmo de la vida de los habitantes de la Huasteca Potosina, que se combina
+    con velaciones, rezos y alabanzas que se realizan el 1 de noviembre, anotó el Conaculta.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Mientras que el día 2 de noviembre llevan ofrendas a los panteones y adornan las tumbas con flores, las cuales son
+    renovadas hasta el último día del mes para despedir a las almas que acudieron a la visita.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    En el marco de este festejo, se llevará a cabo el Sexto Festival Cultural de Día de Muertos de San Luis Potosí, que
+    tendrá lugar este fin de semana en el Cementerio Jardines Perpetuos de la capital del estado con conciertos de
+    huapango, danza folclórica, cuenta cuentos, leyendas potosinas y concurso de dibujos de &quot;La Catrina&quot;.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Asimismo, en Huaquechula, Puebla, la celebración se centra en los &quot;altares de ´cabo de año´&quot;, dedicados a
+    aquellos individuos de la comunidad que fallecieron durante los meses previos a la celebración del 1 de noviembre.
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Esta tradición marca que los altares deben ser estructuras piramidales de tres o cuatro niveles, erigidas
+    generalmente en el recibidor de las casas, a donde han de llegar las ánimas para disponer del banquete que se les
+    ofrece.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    La tradición continúa a las dos de la tarde del mismo día, cuando suenan las campanas del templo para anunciar el
+    arribo de los muertos, los cuales son guiados por veredas hechas con flor de cempasúchil dispuestos desde la base
+    del altar hasta la mitad de la calle.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    De esta forma, se hacen procesiones para visitar los diferentes altares que, al caer la noche sólo son iluminados
+    con velas; así, el 2 de noviembre se acude al cementerio a limpiar y adornar las tumbas y acompañar a los
+    fallecidos.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Mientras que en el poblado de Ocotepec, Morelos, también se lleva a cabo una peculiar celebración, pues se colocan
+    en las casas &quot;ofrendas nuevas&quot;, caracterizadas con caminos de flores desde el altar hasta la calle.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Estas ofrendas son dedicadas a los que fallecieron durante el último año.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    De igual forma, el 31 de octubre y el 1 de noviembre comienzan las procesiones, en las que todo el pueblo se
+    encamina al panteón, para llevar ofrendas a sus difuntos y más tarde se sientan todos a comer a un lado de las
+    tumbas.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Además de estas celebraciones destaca también el Festival de Día de Muertos en San Juan del Río, Querétaro, que
+    comienza el 31 de octubre y finaliza el 3 de noviembre, en el que se puede disfrutar de concursos nacionales de
+    plañideras, catrinas y grabafantasmas, así como concursos de altares y calaveritas.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Además de la procesión al Museo de la Muerte; recorrido con leyendas por la Casona de Camino Real y el paseo de La
+    Llorona por el Río de San Juan.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Igualmente, con la finalidad de dar continuidad a la preservación, promoción y difusión de las festividades de Día
+    de Muertos, en diferentes municipios de Oaxaca se llevarán a cabo este año más de 60 actividades dentro del programa
+    del Festival Cultural de Muertos 2013, que inicia este jueves y finaliza el 2 de noviembre.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Este festival tendrá conciertos, exhibiciones de danza, comparsas, zanqueros, actividades teatrales, exposiciones de
+    máscaras y los tradicionales altares.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Finalmente, en el Parque Ecológico Xochitla, en Tepotzotlán, Estado de México, tendrá lugar el Festival de Noche de
+    Muertos el 2 de noviembre, en el cual se recreará el Mictlán azteca.</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+</p>
+<p
+    style="padding: 5px 0px; margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 16px; color: rgb(0, 0, 0); font-size: 12px;">
+    Además, habrá una feria con juegos populares, concurso de disfraces y la presentación de la obra &quot;Truppus
+    Calacus&quot;, de la compañía La Trouppe.</p>
