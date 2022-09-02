@@ -5,7 +5,7 @@ import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
 import { getSrc } from 'gatsby-plugin-image'
 
-const SEO = ({ title, description, image, article }) => {
+const SEO = ({ title, description, image, externalImage, article }) => {
   const { pathname } = useLocation()
   const { site, imageSeo } = useStaticQuery(query)
   const imgSrc = getSrc(imageSeo.childImageSharp)
@@ -19,10 +19,16 @@ const SEO = ({ title, description, image, article }) => {
     twitterUsername,
   } = site.siteMetadata
 
+  let finalImage = `${siteUrl}${image || imgSrc}`
+
+  if (externalImage) {
+    finalImage = externalImage
+  }
+
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || imgSrc}`,
+    image: finalImage,
     url: `${siteUrl}${pathname}`,
   }
 

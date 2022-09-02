@@ -6,7 +6,7 @@ import { GatsbyImage, getImage, getSrc } from 'gatsby-plugin-image'
 import { FaRegClock } from 'react-icons/fa'
 import { Link } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Banner from '../../components/Banner/indexNoticias'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
@@ -81,7 +81,9 @@ const Article = ({ data, pageContext }) => {
 
             <ReactMarkdown children={hometext.data.hometext} />
             <BannerAdsense className="h60 mt1 mb1" format="fluid" />
-            <ReactMarkdown children={bodytext.data.bodytext} />
+            {bodytext && (
+              <MDXRenderer>{bodytext.data.childMdx.body}</MDXRenderer>
+            )}
 
             {topics.map((topic) => (
               <Link
@@ -186,6 +188,9 @@ export const pageQuery = graphql`
       bodytext {
         data {
           bodytext
+          childMdx {
+            body
+          }
         }
       }
       image {

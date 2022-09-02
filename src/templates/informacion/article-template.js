@@ -1,20 +1,17 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../../components/Layout'
-import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-// import ReactMarkdown from 'react-markdown'
 import Banner from '../../components/Banner'
 import Seo from '../../components/Seo'
-import BannerAdsense from '../../utilities/BannerAdsense'
 import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
 import BlockGrey from '../../components/atoms/BlockGrey'
 import Compartir from '../../components/atoms/Compartir'
 
 const Article = ({ data, pageContext }) => {
-  const { title, content, sections } = data.article
+  const { title, content, sections, seo_image, seo_description } = data.article
 
   let sectionParent = ''
   if (data.article.sections[0].strapi_parent)
@@ -39,9 +36,17 @@ const Article = ({ data, pageContext }) => {
   })
 
   return (
-    <Layout linkExterno="/informacion">
-      <Seo title={title} description={content.data.content.substring(0, 250)} />
-      <Wrapper title="Informaciónes">
+    <Layout linkExterno="/informacion" seoTitle={title}>
+      <Seo
+        title={title}
+        externalImage={seo_image ? seo_image : ''}
+        description={
+          seo_description
+            ? seo_description
+            : content.data.content.substring(0, 250)
+        }
+      />
+      <ContainerGrecas title={title}>
         <div className=" xl:flex">
           <article>
             <Breadcrumbs
@@ -51,13 +56,8 @@ const Article = ({ data, pageContext }) => {
               endTitle={title}
             />
 
-            <h2 className="text-center">{title}</h2>
-            <div className="border-b w-2/3 m-auto"></div>
-
-            <BannerAdsense className="h90" format="fluid" />
             <div className="section-article">
               <MDXRenderer>{content.data.childMdx.body}</MDXRenderer>
-              {/* <ReactMarkdown children={content.data.content} /> */}
             </div>
 
             {sections.map((section) => (
@@ -83,22 +83,18 @@ const Article = ({ data, pageContext }) => {
           </div>
         </div>
         <br />
-      </Wrapper>
+      </ContainerGrecas>
     </Layout>
   )
 }
-
-const Wrapper = styled(ContainerGrecas)`
-  .mdarti {
-    border: 1px solid red;
-  }
-`
 
 export const pageQuery = graphql`
   query($id: String) {
     article: strapiSectionArticle(id: { eq: $id }) {
       slug
       title
+      seo_image
+      seo_description
       content {
         data {
           content
