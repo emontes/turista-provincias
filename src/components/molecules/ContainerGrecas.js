@@ -53,5 +53,6 @@ const Wrapper = styled.div`
     background: var(--clr-white);
     padding: 1rem;
     width: 100%;
+    overflow: hidden;
   }
 `

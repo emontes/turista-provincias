@@ -57,8 +57,6 @@ const Buscar = () => {
 }
 
 const Wrapper = styled.section`
-  padding: 5rem 0;
-
   .ais-Pagination {
     margin: 1rem auto 1rem;
   }
@@ -132,18 +130,18 @@ const Wrapper = styled.section`
     gap: 2rem;
     /* safari workaround */
     grid-gap: 2rem;
-
+    grid-template-columns: repeat(1, 100%);
     @media (min-width: 576px) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 50%);
       .img {
         height: 8.5rem;
       }
     }
     @media (min-width: 992px) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 33%);
     }
     @media (min-width: 1200px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, 24%);
     }
   }
 

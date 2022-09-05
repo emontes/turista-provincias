@@ -10,13 +10,13 @@ class Google extends Component {
   render() {
     return (
       <>
-        {/* <Script
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5136877882943908"
           crossOrigin="anonymous"
           strategy={ScriptStrategy.idle}
           id="adsense"
-        /> */}
+        />
         <ins
           className={`adsbygoogle ${this.props.className}`}
           style={this.props.style}

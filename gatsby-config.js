@@ -30,7 +30,7 @@ module.exports = {
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-
+    siteData.googleAnalytics,
     siteData.manifest,
     `gatsby-plugin-offline`,
     'gatsby-plugin-sharp',

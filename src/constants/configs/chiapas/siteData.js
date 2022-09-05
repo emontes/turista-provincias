@@ -14,6 +14,12 @@ const siteData = {
       slogan: 'El Espíritu del Mundo Maya',
     },
   },
+  googleAnalytics: {
+    resolve: 'gatsby-plugin-google-gtag',
+    options: {
+      trackingIds: ['G-9QKZZP9RRY'],
+    },
+  },
   manifest: {
     resolve: 'gatsby-plugin-manifest',
     options: {

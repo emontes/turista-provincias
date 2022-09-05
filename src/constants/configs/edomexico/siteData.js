@@ -14,7 +14,12 @@ const siteData = {
       slogan: 'Con el mejor Estado de Ánimo',
     },
   },
-
+  googleAnalytics: {
+    resolve: 'gatsby-plugin-google-gtag',
+    options: {
+      trackingIds: ['G-E8QVT78VM2'],
+    },
+  },
   manifest: {
     resolve: 'gatsby-plugin-manifest',
     options: {
