@@ -3,6 +3,7 @@ require('dotenv').config({
 })
 const estadoSlug = process.env.ESTADO_SLUG
 const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
+const { languages, defaultLanguage } = require('./languages.js')
 
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
@@ -50,6 +51,31 @@ module.exports = {
         indexName: process.env.ESTADO_SLUG,
         queries: require('./src/constants/algolia'),
         chunkSize: 10000,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/locales`,
+        name: `locale`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-react-i18next',
+      options: {
+        localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
+        languages,
+        defaultLanguage,
+        siteUrl: `https://turista.com.mx`,
+        i18nextOptions: {
+          // debug: true,
+          fallbackLng: defaultLanguage,
+          supportedLngs: languages,
+          defaultNS: 'common',
+          interpolation: {
+            escapeValue: false, // not needed for react as it escapes by default
+          },
+        },
       },
     },
   ],

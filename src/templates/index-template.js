@@ -10,14 +10,16 @@ import ContainerGrecas from '../components/molecules/ContainerGrecas'
 import ListaDestinos from '../components/Home/location-list'
 import Mapa from '../components/Home/Mapa'
 import Compartir from '../components/atoms/Compartir'
+import { Link, Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
-const index = ({ data }) => {
+const Index = ({ data }) => {
   const metadata = data.site.siteMetadata
+  const { t } = useTranslation()
   return (
     <Layout
       heroImg={data.image.childImageSharp}
-      main={data.site.siteMetadata.estado.name}
-      sub={data.site.siteMetadata.estado.slogan}
+      main={t(data.site.siteMetadata.estado.name)}
+      sub={t(data.site.siteMetadata.estado.slogan)}
     >
       <Seo />
 
@@ -30,7 +32,7 @@ const index = ({ data }) => {
       <div className="md:flex gap-4">
         <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
           <h3 className="text-red-600">
-            Últimas Noticias de turismo en {metadata.estado.name}
+            <Trans>Últimas Noticias de turismo en</Trans> {metadata.estado.name}
           </h3>
           <Noticias
             noticias={data.allStrapiNoticia.nodes}
@@ -40,8 +42,8 @@ const index = ({ data }) => {
           />
         </div>
         <div>
-          <BlockGrey title="Compartir">
-            <Compartir title="¿Ya conoces el Turista?" />
+          <BlockGrey title={t('Compartir')}>
+            <Compartir title={t('¿Ya conoces el Turista?')} />
           </BlockGrey>
 
           {/* <BannerAdsense
@@ -49,7 +51,9 @@ const index = ({ data }) => {
             className="mx-auto hidden md:inline-block"
           /> */}
 
-          <BlockGrey title={`Acerca de Turista ${metadata.estado.name}`}>
+          <BlockGrey
+            title={`${t('Acerca de')} Turista ${metadata.estado.name}`}
+          >
             {metadata.description}
           </BlockGrey>
         </div>
@@ -58,10 +62,19 @@ const index = ({ data }) => {
   )
 }
 
-export default index
+export default Index
 
 export const query = graphql`
-  query($estadoSlug: String!) {
+  query($estadoSlug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     locations: allStrapiLocation(
       filter: {
         estado: { slug: { eq: $estadoSlug } }

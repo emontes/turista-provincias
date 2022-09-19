@@ -8,6 +8,8 @@ import { Link } from 'gatsby'
 import SocialLinks from '../../constants/social_links'
 import { BiChevronRightCircle } from 'react-icons/bi'
 
+import Language from './Language'
+
 const Footer = ({
   title = 'El Turista',
   estado,
@@ -33,7 +35,8 @@ const Footer = ({
           </div>
         </div>
         <div>
-          <h1>{title}</h1>
+          <h1 className="capitalize text-3xl border">{title}</h1>
+
           <div className="enlaces">
             {footerList1 && (
               <div className="foot">
@@ -69,6 +72,7 @@ const Footer = ({
               </div>
             )}
           </div>
+          <Language />
         </div>
 
         <div className="foot">{themeContext.images.logoSmal}</div>
@@ -98,11 +102,6 @@ const Wrapper = styled.footer`
   color: ${(props) => props.theme.colors.primary1};
   background-color: ${(props) => props.theme.colors.primary9};
 
-  h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    text-transform: capitalize;
-  }
   h4 {
     color: ${(props) => props.theme.colors.primary2};
     text-transform: capitalize;
