@@ -2,7 +2,6 @@ import React from 'react'
 import imgOpenSea from '../../assets/images/opensea.svg'
 
 const Nft = ({ items }) => {
-  console.log('Los Items -=>', items)
   return (
     <div className="flex justify-center gap-4 mb-4">
       {items.map((item, index) => {

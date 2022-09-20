@@ -3,9 +3,10 @@ import { ThemeContext } from 'styled-components'
 import styled from 'styled-components'
 import { FaAlignRight } from 'react-icons/fa'
 import linksTop from '../constants/links-top'
-import { Link } from 'gatsby'
+
 import { debounce } from '../utilities/helpers'
 import device from '../assets/themes/device'
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Navbar = ({ toggleSidebar }) => {
   const themeContext = useContext(ThemeContext)
@@ -29,7 +30,7 @@ const Navbar = ({ toggleSidebar }) => {
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [prevScrollPos, visible, handleScroll])
-
+  const { t } = useTranslation()
   return (
     <Wrapper>
       <div className={visible ? 'navbar' : 'navbar-fixed'}>
@@ -48,7 +49,7 @@ const Navbar = ({ toggleSidebar }) => {
                   key={link.id}
                   to={link.url}
                   activeStyle={{ color: 'var(--clr-red-dark)' }}
-                  title={link.text}
+                  title={t(link.text)}
                   className="flex items-center"
                 >
                   <span className="bg-slate-200 p-3 rounded-full">

@@ -10,11 +10,12 @@ import ContainerGrecas from '../components/molecules/ContainerGrecas'
 import ListaDestinos from '../components/Home/location-list'
 import Mapa from '../components/Home/Mapa'
 import Compartir from '../components/atoms/Compartir'
-import { Link, Trans, useTranslation } from 'gatsby-plugin-react-i18next'
+import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
-const Index = ({ data }) => {
+const Index = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
   const { t } = useTranslation()
+
   return (
     <Layout
       heroImg={data.image.childImageSharp}
@@ -23,8 +24,8 @@ const Index = ({ data }) => {
     >
       <Seo />
 
-      <ContainerGrecas title={metadata.title} sideNavSec>
-        <Mapa metadata={data.site.siteMetadata} />
+      <ContainerGrecas title={t(metadata.title)} sideNavSec>
+        <Mapa metadata={data.site.siteMetadata} pageContext={pageContext} />
         <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
       </ContainerGrecas>
 
@@ -54,7 +55,7 @@ const Index = ({ data }) => {
           <BlockGrey
             title={`${t('Acerca de')} Turista ${metadata.estado.name}`}
           >
-            {metadata.description}
+            {t(metadata.description)}
           </BlockGrey>
         </div>
       </div>
@@ -94,7 +95,10 @@ export const query = graphql`
 
     allStrapiNoticia(
       limit: 3
-      filter: { estado: { slug: { eq: $estadoSlug } } }
+      filter: {
+        estado: { slug: { eq: $estadoSlug } }
+        locale: { eq: $language }
+      }
       sort: { fields: date, order: DESC }
     ) {
       nodes {

@@ -3,9 +3,12 @@ import { graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
+import TopNavSec from '../../components/atoms/TopNavSec'
 
 import ButtonPages from '../../components/atoms/ButtonPages'
 const Tema = ({ data }) => {
+  const { t } = useTranslation()
   const topics = data.allStrapiNoticia.distinct
   const metadata = data.site.siteMetadata
   return (
@@ -19,6 +22,7 @@ const Tema = ({ data }) => {
         title={`Temas de Noticias en Turista ${metadata.estado.name}`}
         description={`Muestra los diferentes temas de noticias que se encuentran registrados en Turista ${metadata.estado.name}.`}
       />
+      <TopNavSec />
       <div
         className="cont-area"
         style={{
@@ -32,7 +36,7 @@ const Tema = ({ data }) => {
       >
         {topics.map((item) => (
           <p key={item}>
-            <ButtonPages url={item} description={item} />
+            <ButtonPages url={item} description={t(item)} />
           </p>
         ))}
       </div>
@@ -44,7 +48,16 @@ const Tema = ({ data }) => {
 export default Tema
 
 export const query = graphql`
-  query($estadoSlug: String!) {
+  query($estadoSlug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     allStrapiNoticia(filter: { estado: { slug: { eq: $estadoSlug } } }) {
       distinct(field: topics___slug)
     }

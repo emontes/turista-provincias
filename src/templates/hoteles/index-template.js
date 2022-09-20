@@ -52,7 +52,16 @@ const hoteles = ({ data }) => {
 export default hoteles
 
 export const query = graphql`
-  query($estadoSlug: String!) {
+  query($estadoSlug: String!, $language: String) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     locations: allStrapiLocation(
       filter: {
         estado: { slug: { eq: $estadoSlug } }

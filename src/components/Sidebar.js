@@ -1,10 +1,11 @@
 import React from 'react'
 import links from '../constants/links'
 import SocialLinks from '../constants/social_links'
-import { Link } from 'gatsby'
 import { FaTimes } from 'react-icons/fa'
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const { t } = useTranslation()
   return (
     <aside className={isOpen ? 'sidebar show-sidebar' : 'sidebar'}>
       <button className="close-btn" type="button" onClick={toggleSidebar}>
@@ -16,7 +17,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             return (
               <li key={link.id}>
                 <Link to={link.url} onClick={toggleSidebar}>
-                  {link.text}
+                  {t(link.text)}
                 </Link>
               </li>
             )

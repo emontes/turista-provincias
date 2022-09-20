@@ -3,12 +3,12 @@ import { ThemeContext } from 'styled-components'
 
 import styled from 'styled-components'
 import TuristaExternos from '../../constants/turista_externos'
-import { Link } from 'gatsby'
 
 import SocialLinks from '../../constants/social_links'
 import { BiChevronRightCircle } from 'react-icons/bi'
 
 import Language from './Language'
+import { Link, Trans, useI18next } from 'gatsby-plugin-react-i18next'
 
 const Footer = ({
   title = 'El Turista',
@@ -19,7 +19,7 @@ const Footer = ({
 }) => {
   const themeContext = useContext(ThemeContext)
   const slugEstado = estado.slug
-
+  const { t } = useI18next()
   return (
     <Wrapper>
       <div className="footer-1">
@@ -29,24 +29,26 @@ const Footer = ({
 
           <div className="privacy">
             &copy; {new Date().getFullYear()} {' | '}
-            <Link to="/privacidad"> Aviso de Privacidad</Link>
+            <Link to="/privacidad">
+              <Trans>Aviso de Privacidad</Trans>
+            </Link>
             <br />
-            Derechos Reservados
+            <Trans>Derechos Reservados</Trans>
           </div>
         </div>
         <div>
-          <h1 className="capitalize text-3xl border">{title}</h1>
+          <h1 className="capitalize text-3xl">{title}</h1>
 
           <div className="enlaces">
             {footerList1 && (
               <div className="foot">
-                <h4>{footerList1.title}</h4>
+                <h4>{t(footerList1.title)}</h4>
                 <ul className="ftr-list">
                   {footerList1.elements.map((link) => {
                     return (
                       <li key={link.id}>
                         <Link to={link.url} className="flex items-center gap-1">
-                          <BiChevronRightCircle /> {link.title}
+                          <BiChevronRightCircle /> {t(link.title)}
                         </Link>
                       </li>
                     )
@@ -57,13 +59,13 @@ const Footer = ({
 
             {footerList2 && (
               <div className="foot">
-                <h4>{footerList2.title}</h4>
+                <h4>{t(footerList2.title)}</h4>
                 <ul className="ftr-list">
                   {footerList2.elements.map((link) => {
                     return (
                       <li key={link.id}>
                         <Link to={link.url} className="flex items-center gap-1">
-                          <BiChevronRightCircle /> {link.title}
+                          <BiChevronRightCircle /> {t(link.title)}
                         </Link>
                       </li>
                     )
@@ -79,7 +81,14 @@ const Footer = ({
       </div>
 
       <div className="footer-2">
-        <Link to="/">Home</Link> | <Link to="/hoteles">Hoteles</Link> |&nbsp;
+        <Link to="/">
+          <Trans>Inicio</Trans>
+        </Link>{' '}
+        |{' '}
+        <Link to="/hoteles">
+          <Trans>Hoteles</Trans>
+        </Link>{' '}
+        |&nbsp;
         {TuristaExternos[slugEstado].map((link, i) => {
           const rowLen = TuristaExternos[slugEstado].length
           return (

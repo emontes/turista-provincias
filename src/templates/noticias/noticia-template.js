@@ -11,6 +11,8 @@ import Banner from '../../components/Banner/indexNoticias'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import Compartir from '../../components/atoms/Compartir'
+import TopNavSec from '../../components/atoms/TopNavSec'
+import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Article = ({ data, pageContext }) => {
   const {
@@ -26,7 +28,7 @@ const Article = ({ data, pageContext }) => {
   } = data.strapiNoticia
 
   const fecha = new Date(datePlano)
-  const anyo = fecha.getFullYear()
+
   let displayImage
   if (image) {
     displayImage = image
@@ -34,6 +36,7 @@ const Article = ({ data, pageContext }) => {
     if (topics[0]) displayImage = topics[0].image
   }
 
+  const { t } = useTranslation()
   return (
     <Layout linkExterno="/noticias">
       <Seo
@@ -49,6 +52,7 @@ const Article = ({ data, pageContext }) => {
         <div align="center">
           <BannerAdsense className="h90 mb1" format="fluid" />
         </div>
+        <TopNavSec />
         <div className="section-center">
           <article className="article">
             <div className="post-info">
@@ -62,7 +66,7 @@ const Article = ({ data, pageContext }) => {
                   {date}
                 </span>
                 <div className="flex gap-2 items-center">
-                  Compartir en:{' '}
+                  <Trans>Compartir</Trans>:{' '}
                   <Compartir url={pageContext.slug} title={title} />
                 </div>
               </div>
@@ -91,7 +95,7 @@ const Article = ({ data, pageContext }) => {
                 className="category topic"
                 to={`/noticias/tema/${topic.slug}`}
               >
-                {topic.Title}
+                {t(topic.Title)}
               </Link>
             ))}
           </article>
@@ -171,7 +175,16 @@ const Wrapper = styled.section`
 `
 
 export const pageQuery = graphql`
-  query($id: String) {
+  query($id: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     strapiNoticia(id: { eq: $id }) {
       id
       slug

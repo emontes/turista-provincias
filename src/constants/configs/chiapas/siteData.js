@@ -1,8 +1,7 @@
 const siteData = {
   siteMetadata: {
-    title: 'El Turista Chiapas',
-    description:
-      'El Turista Chiapas cuenta con las herramientas necesarias para que los turistas puedan planear su viaje por Chiapas.',
+    title: 'siteTitleChiapas',
+    description: 'siteDescriptionChiapas',
     titleTemplate: `%s | Turista Chiapas`,
     url: `https://chiapas.turista.com.mx`,
     siteUrl: `https://chiapas.turista.com.mx`,

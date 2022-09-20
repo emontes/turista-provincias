@@ -5,21 +5,18 @@ import links from '../../constants/links'
 import menuBg from '../../assets/images/menu_bg.png'
 import { Link, useTranslation } from 'gatsby-plugin-react-i18next'
 
-const SideNavSec = () => {
+const TopNavSec = () => {
   const { t } = useTranslation()
   return (
-    <Wrapper>
-      <ul className="flex gap-px flex-wrap md:flex-col">
+    <Wrapper className="rounded mb-4">
+      <ul className="flex gap-5 flex-wrap justify-between">
         {links.map((item) => {
           return (
-            <li
-              key={item.id}
-              className="w-fit text-xs sm:text-sm md:w-auto md:text-lg"
-            >
+            <li key={item.id} className="w-fit md:w-auto md:text-lg">
               <Link
                 to={item.url}
                 activeClassName="active"
-                className="flex gap-3 items-center"
+                className="flex gap-1 items-center"
               >
                 {item.icon} {t(item.text)}
               </Link>
@@ -31,9 +28,13 @@ const SideNavSec = () => {
   )
 }
 
-export default SideNavSec
+export default TopNavSec
 
 const Wrapper = styled.div`
+  background: url(${menuBg}) repeat-x left top;
+  background-color: ${(props) => props.theme.colors.primary1};
+  overflow: hidden;
+
   li {
     background: url(${menuBg}) repeat-x left top;
     background-color: ${(props) => props.theme.colors.primary1};
@@ -53,7 +54,6 @@ const Wrapper = styled.div`
 
   .active {
     background-color: var(--clr-white);
-
     color: ${(props) => props.theme.colors.primary1};
   }
 `

@@ -13,7 +13,15 @@ const strapiConfig = {
     'hotel-location',
     'estado',
     'location',
-    'noticia',
+    // 'noticia',
+    {
+      singularName: 'noticia',
+      pluginOptions: {
+        i18n: {
+          locale: 'all',
+        },
+      },
+    },
     'topic',
     'section',
     'section-article',

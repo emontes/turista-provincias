@@ -3,8 +3,10 @@ import NoticiaCard from './noticia-card'
 import Pagination from './Pagination'
 import BannerAdSense from '../../utilities/BannerAdsense'
 import ButtonMoreHotels from '../atoms/ButtonMoreHotels'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Noticias = ({ noticias, isHome, pageInfo, url, perPage }) => {
+  const { t } = useTranslation()
   const [currentPage, setCurrentPage] = useState(1)
   const [dataNoticias, setDataNoticias] = useState(
     noticias.slice(0, perPage * currentPage),
@@ -32,7 +34,10 @@ const Noticias = ({ noticias, isHome, pageInfo, url, perPage }) => {
         )
       })}
       {dataNoticias.length < noticias.length && (
-        <ButtonMoreHotels onClick={onMoreNoticias} title="Más Noticias..." />
+        <ButtonMoreHotels
+          onClick={onMoreNoticias}
+          title={`${t('Más Noticias')} ...`}
+        />
       )}
       {!isHome && <Pagination pageInfo={pageInfo} url={url} />}
     </div>

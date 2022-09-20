@@ -1,6 +1,6 @@
 const siteData = {
   siteMetadata: {
-    title: 'El Turista Estado de México',
+    title: 'siteTitleEdoMexico',
     description:
       'El Turista Estado de México cuenta con las herramientas necesarias para que los turistas puedan planear su viaje por el Estado de México.',
     titleTemplate: `%s | Turista Estado de México`,

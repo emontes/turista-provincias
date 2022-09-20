@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import Title from '../Banner/Title'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Topics = ({ topics }) => {
+  const { t } = useTranslation()
   return (
     <div>
-      <Title title="Temas" />
+      <Title title={t('Temas')} />
       <ul>
         {topics.map((item, index) => {
           return (
@@ -15,7 +17,7 @@ const Topics = ({ topics }) => {
                 className="category-menu"
                 activeStyle={{ color: 'var(--clr-red-dark)' }}
               >
-                {item.Title}
+                {t(item.Title)}
               </Link>
             </li>
           )

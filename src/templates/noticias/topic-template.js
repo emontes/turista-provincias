@@ -4,10 +4,19 @@ import Seo from '../../components/Seo'
 import { graphql } from 'gatsby'
 import { getSrc } from 'gatsby-plugin-image'
 import Noticias from '../../components/Noticias'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
+import TopNavSec from '../../components/atoms/TopNavSec'
 
 const Topic = ({ data, pageContext }) => {
-  let titleSeo = `Noticias del Tema: ${data.topic.Title}`
+  const { t } = useTranslation()
+  let titleSeo = `Noticias del Tema: ${t(data.topic.Title)}`
   let descriptionSeo = `Artículos publicados con el tema ${data.topic.Title} en el Turista.`
+  if (pageContext.language === 'en') {
+    titleSeo = `News in the Topic: ${t(data.topic.Title)}`
+    descriptionSeo = `Articles published with the topic ${t(
+      data.topic.Title,
+    )} in the Turista.`
+  }
 
   let displayImage = data.image.childImageSharp
   if (data.topic.image)
@@ -15,7 +24,7 @@ const Topic = ({ data, pageContext }) => {
   return (
     <Layout
       heroImg={displayImage}
-      main={data.topic.Title}
+      main={t(data.topic.Title)}
       seoTitle={titleSeo}
       linkExterno="/noticias"
     >
@@ -24,7 +33,7 @@ const Topic = ({ data, pageContext }) => {
         description={descriptionSeo}
         image={displayImage ? getSrc(displayImage) : ''}
       />
-
+      <TopNavSec />
       <Noticias
         noticias={data.allStrapiNoticia.nodes}
         title={titleSeo}
@@ -39,11 +48,21 @@ const Topic = ({ data, pageContext }) => {
 export default Topic
 
 export const query = graphql`
-  query($slug: String!, $estadoSlug: String!) {
+  query($slug: String!, $estadoSlug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     allStrapiNoticia(
       filter: {
         estado: { slug: { eq: $estadoSlug } }
         topics: { elemMatch: { slug: { eq: $slug } } }
+        locale: { eq: $language }
       }
       limit: 30
       sort: { fields: date, order: DESC }
