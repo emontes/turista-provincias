@@ -14,7 +14,22 @@ import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Index = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
+
   const { t } = useTranslation()
+
+  let seoDescription = `El turista ${t(
+    metadata.estado.name,
+  )} cuenta con las herramientas necesarias para que el turista pueda planear su viaje por ${t(
+    metadata.estado.name,
+  )}; hoteles, noticias, información y mucho más...`
+
+  if (pageContext.language === 'en') {
+    seoDescription = `The turista ${t(
+      metadata.estado.name,
+    )} has all the necesary tools for the tourist can plain his travel to ${t(
+      metadata.estado.name,
+    )}, hotels, news, information and much more...`
+  }
 
   return (
     <Layout
@@ -22,10 +37,14 @@ const Index = ({ data, pageContext }) => {
       main={t(data.site.siteMetadata.estado.name)}
       sub={t(data.site.siteMetadata.estado.slogan)}
     >
-      <Seo />
+      <Seo title={t('inicio')} description={seoDescription} />
 
       <ContainerGrecas title={t(metadata.title)} sideNavSec>
-        <Mapa metadata={data.site.siteMetadata} pageContext={pageContext} />
+        <Mapa
+          metadata={data.site.siteMetadata}
+          pageContext={pageContext}
+          seoDescription={seoDescription}
+        />
         <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
       </ContainerGrecas>
 
@@ -55,7 +74,7 @@ const Index = ({ data, pageContext }) => {
           <BlockGrey
             title={`${t('Acerca de')} Turista ${metadata.estado.name}`}
           >
-            {t(metadata.description)}
+            {seoDescription}
           </BlockGrey>
         </div>
       </div>

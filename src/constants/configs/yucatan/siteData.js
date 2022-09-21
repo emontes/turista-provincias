@@ -1,7 +1,8 @@
 const siteData = {
   siteMetadata: {
-    title: 'siteTitleYucatan',
-    description: 'siteDescriptionYucatan',
+    title: 'El Turista Yucatán',
+    description:
+      'El Turista Yucatán cuenta con las herramientas necesarias para que los turistas puedan planear su viaje por Yucatán',
     titleTemplate: `%s | Turista Yucatán`,
     url: `https://yucatan.turista.com.mx`,
     siteUrl: `https://yucatan.turista.com.mx`,

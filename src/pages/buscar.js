@@ -12,6 +12,8 @@ import {
 } from 'react-instantsearch-dom'
 import styled from 'styled-components'
 import LinkCard from '../components/Links/link-card'
+import { graphql } from 'gatsby'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
 
 const searchClient = algoliasearch(
   process.env.GATSBY_ALGOLIA_APP_ID,
@@ -27,11 +29,23 @@ function Hit(props) {
   return <LinkCard link={link} style={{ border: '1px solid green' }} />
 }
 
-const Buscar = () => {
+const Buscar = ({ data, pageContext }) => {
+  const { t } = useTranslation()
+  let seoTitle = 'Búsqueda'
+  let submitTitle = 'Enviar su Búqueda.'
+  let resetTitle = 'Limpiar su búsqueda'
+  let placeholder = 'Buscar aquí ...'
+  if (pageContext.language === 'en') {
+    seoTitle = 'Search'
+    submitTitle = 'Send search.'
+    resetTitle = 'Clean search'
+    placeholder = 'Search here ...'
+  }
+
   return (
     <Layout>
-      <Seo title="Búsqueda" description="Buscar información en el Turista" />{' '}
-      <ContainerGrecas title={'Buscar'} sideNavSec>
+      <Seo title={seoTitle} description="Buscar información en el Turista" />{' '}
+      <ContainerGrecas title={t('buscar')} sideNavSec>
         <Wrapper>
           <InstantSearch
             indexName={process.env.ESTADO_SLUG}
@@ -39,9 +53,9 @@ const Buscar = () => {
           >
             <SearchBox
               translations={{
-                submitTitle: 'Enviar su Búqueda.',
-                resetTitle: 'Limpiar su búsqueda.',
-                placeholder: 'Buscar aquí...',
+                submitTitle: submitTitle,
+                resetTitle: resetTitle,
+                placeholder: placeholder,
               }}
               searchAsYouType={false}
             />
@@ -156,3 +170,17 @@ const Wrapper = styled.section`
 `
 
 export default Buscar
+
+export const query = graphql`
+  query($language: String) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`

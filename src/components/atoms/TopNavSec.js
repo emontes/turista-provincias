@@ -9,7 +9,7 @@ const TopNavSec = () => {
   const { t } = useTranslation()
   return (
     <Wrapper className="rounded mb-4">
-      <ul className="flex gap-5 flex-wrap justify-between">
+      <ul className="flex flex-wrap justify-around">
         {links.map((item) => {
           return (
             <li key={item.id} className="w-fit md:w-auto md:text-lg">
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 
     a {
       color: var(--clr-white);
-      padding: 1rem;
+      padding: 0.75rem;
       :hover {
         background-color: var(--clr-white);
         color: ${(props) => props.theme.colors.primary1};

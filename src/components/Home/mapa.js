@@ -1,12 +1,12 @@
 import React from 'react'
 import Banner from '../Banner'
 import Map from '../../components/Hoteles/partial/Map'
-import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
+import { Trans } from 'gatsby-plugin-react-i18next'
 
 const estadoSlug = process.env.ESTADO_SLUG
 const travelData = require(`../../constants/configs/${estadoSlug}/travelPayouts`)
 
-const Mapa = ({ metadata, pageContext }) => {
+const Mapa = ({ metadata, pageContext, seoDescription }) => {
   let textos = {
     chiapas:
       'Chiapas es auténtico por naturaleza.  Chiapas es, y ha sido, siempre la última frontera de México, el lugar que aparece en tus seños cuando la selva tapa el cielo con el verde de su follaje, cascadas maravillosas, lagos de colores, un estado que no puedes dejar de visitar.',
@@ -25,9 +25,6 @@ const Mapa = ({ metadata, pageContext }) => {
         'Yucatan is the land of the pheasant and the deer, it is poetry... it is music... the place of wonders, imposing archeology, the cradle of trova. Be sure to visit the land of the chosen ones.',
     }
   }
-  console.log({ textos })
-
-  const { t } = useTranslation()
 
   return (
     <section className="2xl:flex">
@@ -42,7 +39,6 @@ const Mapa = ({ metadata, pageContext }) => {
         <Map location={travelData.location} zoom={7} />
         <div className="mt-16">
           <p>{textos[metadata.estado.slug]}</p>
-          <p>{t(metadata.description)}</p>
         </div>
       </div>
     </section>

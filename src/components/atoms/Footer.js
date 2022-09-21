@@ -82,7 +82,7 @@ const Footer = ({
 
       <div className="footer-2">
         <Link to="/">
-          <Trans>Inicio</Trans>
+          <Trans>inicio</Trans>
         </Link>{' '}
         |{' '}
         <Link to="/hoteles">

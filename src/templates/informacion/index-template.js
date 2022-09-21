@@ -6,27 +6,38 @@ import BannerAdsense from '../../utilities/BannerAdsense'
 import { getSrc } from 'gatsby-plugin-image'
 import ButtonPages from '../../components/atoms/ButtonPages'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
+import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Informacion = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
+  const { t } = useTranslation()
+  let seoTitle = `Información sobre ${t(metadata.estado.name)}`
+  let seoDescription = `Artículos informativos sobre el estado de ${t(
+    metadata.estado.name,
+  )}, México`
+  if (pageContext.language == 'en') {
+    seoTitle = `Information about ${t(metadata.estado.name)}`
+    seoDescription = `Informative articles regarding the state of ${t(
+      metadata.estado.name,
+    )}, Mexico`
+  }
   return (
     <Layout
       heroImg={data.image.localFile.childImageSharp}
-      main="Información"
-      sub={`sobre ${metadata.estado.name}`}
+      main={t('información')}
+      sub={`${t('Acerca de')} ${t(metadata.estado.name)}`}
       seoTitle={`${metadata.estado.name} Información`}
       linkExterno="/informacion"
     >
       <Seo
-        title={`Información de ${metadata.estado.name}`}
-        description={`Artículos Informativos sobre el Estado de ${metadata.estado.name}, México`}
+        title={seoTitle}
+        description={seoDescription}
         image={getSrc(data.image.localFile.childImageSharp)}
       />
-      <ContainerGrecas
-        title={`Información de ${metadata.estado.name}`}
-        sideNavSec
-      >
-        <h3 className="uppercase text-red-500">Secciones</h3>
+      <ContainerGrecas title={seoTitle} sideNavSec>
+        <h3 className="uppercase text-red-500">
+          <Trans>Secciones</Trans>
+        </h3>
         <BannerAdsense className="h90 mt1 mb1" format="fluid" />
         <div
           className="cont-area"
@@ -41,7 +52,10 @@ const Informacion = ({ data, pageContext }) => {
         >
           {pageContext.sections.map((item) => (
             <p key={item.slug}>
-              <ButtonPages url={item.slug} description={item.title} />
+              <ButtonPages
+                url={`/informacion/${item.slug}`}
+                description={t(item.title)}
+              />
             </p>
           ))}
         </div>
@@ -53,7 +67,16 @@ const Informacion = ({ data, pageContext }) => {
 export default Informacion
 
 export const query = graphql`
-  query {
+  query($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     site {
       siteMetadata {
         description

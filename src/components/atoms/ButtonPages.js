@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { Link } from 'gatsby-plugin-react-i18next'
 
 const ButtonPages = ({ url, description }) => {
   return <Wrapper to={url}>{description}</Wrapper>

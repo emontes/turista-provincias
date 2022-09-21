@@ -9,6 +9,7 @@ import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 import ContainerGrecas from '../../components/molecules/ContainerGrecas'
 import BlockGrey from '../../components/atoms/BlockGrey'
 import Compartir from '../../components/atoms/Compartir'
+import TopNavSec from '../../components/atoms/TopNavSec'
 
 const Article = ({ data, pageContext }) => {
   const { title, content, sections, seo_image, seo_description } = data.article
@@ -84,12 +85,22 @@ const Article = ({ data, pageContext }) => {
         </div>
         <br />
       </ContainerGrecas>
+      <TopNavSec />
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query($id: String) {
+  query($id: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     article: strapiSectionArticle(id: { eq: $id }) {
       slug
       title
