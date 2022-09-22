@@ -19,12 +19,14 @@ const Article = ({ data, pageContext }) => {
     title,
     datePlano,
     date,
+    dateSlug,
     location,
     topics,
     hometext,
 
     bodytext,
     image,
+    localizations,
   } = data.strapiNoticia
 
   const fecha = new Date(datePlano)
@@ -37,8 +39,24 @@ const Article = ({ data, pageContext }) => {
   }
 
   const { t } = useTranslation()
+
+  let footLanguages = []
+  console.log({ data })
+  if (localizations.data) {
+    localizations.data.forEach((item) => {
+      let slug = '/'
+      slug += `article${dateSlug}-${item.attributes.slug}.html`
+
+      footLanguages.push({
+        lng: item.attributes.locale,
+        title: item.attributes.title,
+        slug: slug,
+      })
+    })
+  }
+
   return (
-    <Layout linkExterno="/noticias">
+    <Layout linkExterno="/noticias" footLanguages={footLanguages}>
       <Seo
         title={title}
         description={
@@ -190,7 +208,7 @@ export const pageQuery = graphql`
       slug
       title
       date(formatString: "dd D MMM yy", locale: "es")
-      dateslug: date(formatString: "yy/M")
+      dateSlug: date(formatString: "yy-M")
       datePlano: date
       hometext {
         data {
@@ -224,6 +242,15 @@ export const pageQuery = graphql`
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
             }
+          }
+        }
+      }
+      localizations {
+        data {
+          attributes {
+            locale
+            title
+            slug
           }
         }
       }

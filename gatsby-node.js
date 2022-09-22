@@ -99,8 +99,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     `)
     const diferentesEstrellas = resultEstrellas.data.hoteles.distinct.reverse()
 
-    console.log('Hoteles zona', item.slug)
-
     /* Crea la página principal del destion 
        (pjemplo hoteles-palenque-5)                */
     createPage({
@@ -190,7 +188,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     // Esto para los links de provincia (por ejemplo chiapas, se les pone old slug y el slug como link-chis-1)
     // if (item.slugOld) slug = item.slugOld /* Desechamos esta opcion por que no vale la pena el esfuerzo para recupear tan pocas categoráis
 
-    console.log('Creando página de Links: ', slug)
     createPage({
       path: `/${slug}`,
       component: path.resolve('./src/templates/links/links-template.js'),
@@ -220,7 +217,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
      ------------ Información (Sections)  --------------
      ---------------------------------------------------*/
   // *** Create Sections Pages ***
-  console.log('Creando páginas de Secciones de Información')
+
   const resultSections = await graphql(`
     {
       parents: allStrapiSectionArticle(
@@ -245,7 +242,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   let sectionsFull = []
   let sectionsMaster = []
   sections.map(async (item) => {
-    console.log('Obteniendo datos de Section: ', item)
     const result = await graphql(`
       {
         strapiSection(
@@ -314,10 +310,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const sectionArticles =
     resultSectionArticle.data.allStrapiSectionArticle.nodes
-  console.log('Creando páginas individuales de Sections Articles.....')
+
   if (sectionArticles.length > 0) {
     sectionArticles.forEach((article) => {
-      // console.log('Creando', article.slug)
       createPage({
         path: `/info/${article.slug}`,
         component: path.resolve(
@@ -350,7 +345,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   // *** Create Categories Pages ***
-  console.log('Creando páginas de Categorías de noticias')
+
   const resultCategories = await graphql(`
     {
       allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
@@ -364,7 +359,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Obtiene datos de Categorías
   let categoriesFull = []
   categories.map(async (item) => {
-    console.log('Obteniendo datos de Categoria: ', item)
     const result = await graphql(`
       {
         strapiLocation(
@@ -395,8 +389,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
     }`)
     const topicPages = result.data.allStrapiNoticia.pageInfo.pageCount
-    console.log('Category (item) ===> ', item)
-    console.log('Cuantos paginos:', topicPages)
 
     for (var i = 0; i < topicPages; i++) {
       createPage({
@@ -419,7 +411,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // *** Crea las páginas de los Temas ***
 
-  console.log('Creando páginas de Temas de Noticias')
   const resultTopics = await graphql(`
     {
       allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
@@ -467,8 +458,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
     }`)
     const topicPages = resultTopic.data.allStrapiNoticia.pageInfo.pageCount
-    console.log('Topic (item) ===> ', item)
-    console.log('Cuantos paginos:', topicPages)
+
     // for (var i = 0; i < topicPages; i++) {
     createPage({
       // path:
@@ -492,7 +482,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // ** Crea páginas de cada noticia **
 
-  console.log('Creando páginas para cada noticia')
   const result = await graphql(
     `
       {
@@ -504,7 +493,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             id
             slug
             slugOld
-            dateslug: date(formatString: "yy/M")
+            locale
+            dateslug: date(formatString: "yy-M")
           }
         }
       }
@@ -526,15 +516,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   const articles = result.data.allStrapiNoticia.nodes
-  console.log('Creando páginas individuales de artículos.....')
+
   if (articles.length > 0) {
     articles.forEach((article) => {
-      let path = `/${article.dateslug}/${article.slug}`
+      let path = ''
+      if (article.locale === 'en') {
+        path += '/en'
+      }
 
       if (article.slugOld) {
-        path = article.slugOld
+        path += article.slugOld
+      } else {
+        path += `/article${article.dateslug}-${article.slug}.html`
       }
-      console.log('Creando', path)
+
       createPage({
         path: path,
         component: articlePost,
@@ -552,7 +547,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     const numPages = Math.ceil(articles.length / postPerPage)
     Array.from({ length: numPages }).forEach((_, i) => {
-      // console.log('Creando Pagina de Noticias:', i)
       createPage({
         path: i === 0 ? `/noticias` : `/noticias/ultimas/${i + 1}`,
         component: path.resolve(

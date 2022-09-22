@@ -10,6 +10,7 @@ import BlockGrey from '../../components/atoms/BlockGrey'
 import footerList1 from '../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../constants/especialistas-links'
 import Chat from '../../components/atoms/chat-hubspot'
+import TopNavSec from '../../components/atoms/TopNavSec'
 
 const hoteles = ({ data }) => {
   const src = getSrc(data.image.childImageSharp)
@@ -33,6 +34,7 @@ const hoteles = ({ data }) => {
       <section style={{ background: 'var(--clr-grey-10)' }}>
         <Hoteles metadata={metadata} locations={data.locations.nodes} />
       </section>
+      <TopNavSec />
       <section className="section-center" style={{ marginTop: '2rem' }}>
         <BannerAdsense />
         <BlockGrey title={`Hoteles en Turista ${metadata.estado.name}`}>

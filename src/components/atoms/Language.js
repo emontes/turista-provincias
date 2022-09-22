@@ -13,30 +13,46 @@ const languageFlag = {
   en: usFlag,
 }
 
-const Language = () => {
+const Language = ({ extendidos }) => {
   const { language, languages, originalPath } = useI18next()
+  console.log({ extendidos })
   return (
     <Wrapper>
       <ul className="flex justify-between">
-        {languages.map((lng) => {
-          return (
-            <li key={lng}>
-              <Link
-                key={lng}
-                to={originalPath}
-                language={lng}
-                className={`link ${lng === language ? 'selected' : ''}`}
-              >
-                <img
-                  src={languageFlag[lng]}
-                  alt={languageName[lng]}
-                  style={{ height: '1.2rem' }}
-                />
-                {languageName[lng]}
-              </Link>
-            </li>
-          )
-        })}
+        {extendidos
+          ? extendidos.map((item) => {
+              return (
+                <li key={item.lng}>
+                  <Link key={item.lng} to={item.slug} language={item.lng}>
+                    <img
+                      src={languageFlag[item.lng]}
+                      alt={languageName[item.lng]}
+                      style={{ height: '1.2rem' }}
+                    />
+                    {item.title}
+                  </Link>
+                </li>
+              )
+            })
+          : languages.map((lng) => {
+              return (
+                <li key={lng}>
+                  <Link
+                    key={lng}
+                    to={originalPath}
+                    language={lng}
+                    className={`link ${lng === language ? 'selected' : ''}`}
+                  >
+                    <img
+                      src={languageFlag[lng]}
+                      alt={languageName[lng]}
+                      style={{ height: '1.2rem' }}
+                    />
+                    {languageName[lng]}
+                  </Link>
+                </li>
+              )
+            })}
       </ul>
     </Wrapper>
   )
@@ -45,36 +61,11 @@ const Language = () => {
 export default Language
 
 const Wrapper = styled.div`
-  font-size: -5rem;
   postion: relative;
 
-  :hover {
-    cursor: pointer;
-    ul {
-      opacity: 1;
-      top: -5rem;
-    }
-  }
-  .current-language {
-    border: 1px solid var(--clr-grey-9);
-    border-radius: var(--radius);
-    color: var(--clr-grey-5);
-    padding: 0.8rem 2rem;
-
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    z-index: 3;
-  }
-
   ul {
-    /* position: absolute; */
-
-    /* top: -11rem; */
-    /* opacity: 0; */
-    padding: 0.8rem;
+    padding: 0.3rem;
     transition: var(--transition);
-    /* margin-top: 8rem; */
     background-color: var(--clr-white);
     border: 1px solid var(--clr-grey-9);
     border-radius: var(--radius);
@@ -97,6 +88,6 @@ const Wrapper = styled.div`
   }
 
   .selected {
-    color: var(--clr-primary-5);
+    color: var(--clr-grey-10);
   }
 `

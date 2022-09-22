@@ -16,10 +16,12 @@ const Footer = ({
   linkExterno = '',
   footerList1,
   footerList2,
+  footLanguages = '',
 }) => {
   const themeContext = useContext(ThemeContext)
   const slugEstado = estado.slug
   const { t } = useI18next()
+
   return (
     <Wrapper>
       <div className="footer-1">
@@ -74,7 +76,7 @@ const Footer = ({
               </div>
             )}
           </div>
-          <Language />
+          <Language extendidos={footLanguages} />
         </div>
 
         <div className="foot">{themeContext.images.logoSmal}</div>

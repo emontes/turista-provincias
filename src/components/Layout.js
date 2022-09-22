@@ -24,6 +24,7 @@ const Layout = ({
   sinFondo, //define no background and no padding for the children
   footerList1,
   footerList2,
+  footLanguages, //array con lenguajes para cambio de idioma en footer
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => {
@@ -67,6 +68,7 @@ const Layout = ({
         estado={estado}
         footerList1={footerList1}
         footerList2={footerList2}
+        footLanguages={footLanguages}
       />
     </>
   )

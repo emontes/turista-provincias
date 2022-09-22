@@ -22,7 +22,11 @@ const NoticiaCard = ({ noticia }) => {
     imagen = noticia.image.localFile
   }
 
-  let slug = `/${noticia.dateslug}/${noticia.slug}`
+  let slug = ''
+  if (noticia.locale != 'es') {
+    slug += `/${noticia.locale}`
+  }
+  slug += `/article${noticia.dateslug}-${noticia.slug}.html`
   if (noticia.slugOld) slug = `/${noticia.slugOld}`
 
   return (
@@ -75,8 +79,9 @@ export const query = graphql`
     slugOld
     title
     date(formatString: "ddd D MMM yy", locale: "es")
-    dateslug: date(formatString: "yy/M")
+    dateslug: date(formatString: "yy-M")
     datePlano: date
+    locale
     image {
       localFile {
         childImageSharp {
@@ -100,6 +105,14 @@ export const query = graphql`
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
           }
+        }
+      }
+    }
+    localizations {
+      data {
+        attributes {
+          title
+          slug
         }
       }
     }

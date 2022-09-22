@@ -84,6 +84,17 @@ module.exports = {
             escapeValue: false, // not needed for react as it escapes by default
           },
         },
+        pages: [
+          {
+            matchPath: '/:lang?/article:id?',
+            getLanguageFromPath: true,
+            excludeLanguages: ['en'],
+          },
+          {
+            matchPath: '/:lang?/info/:id',
+            excludeLanguages: ['en'],
+          },
+        ],
       },
     },
   ],
