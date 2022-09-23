@@ -3,13 +3,15 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Title from '../../atoms/Title'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Lista = ({ metadata, locations }) => {
+  const { t } = useTranslation()
   return (
     <Wrapper>
       <Title
-        title="Destinos con"
-        subtitle={`Hoteles en ${metadata.estado.name}`}
+        title={t('Destinos con')}
+        subtitle={`${t('Hoteles en')} ${metadata.estado.name}`}
       />
       <div className="destinos">
         {locations.map((item, index) => {
@@ -20,8 +22,8 @@ const Lista = ({ metadata, locations }) => {
                   image={getImage(
                     item.hotel_location.banner.localFile.childImageSharp,
                   )}
-                  alt={`Hoteles en ${item.name}`}
-                  title={`Hoteles en ${item.name}`}
+                  alt={`${t('Hoteles en')} ${item.name}`}
+                  title={`${t('Hoteles en')} ${item.name}`}
                   className="hero-img"
                   placeholder="tracedSVG"
                   layout="constrained"

@@ -521,13 +521,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     articles.forEach((article) => {
       let path = ''
       if (article.locale === 'en') {
-        path += '/en'
+        path += '/en/'
       }
 
       if (article.slugOld) {
         path += article.slugOld
       } else {
-        path += `/article${article.dateslug}-${article.slug}.html`
+        path += `article${article.dateslug}-${article.slug}.html`
       }
 
       createPage({

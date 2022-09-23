@@ -1,17 +1,26 @@
 import React from 'react'
 import Title from '../../atoms/Title'
 import advantages from '../../../constants/Hoteles/advantages'
+import advantagesEn from '../../../constants/Hoteles/advantages-en'
 import styled from 'styled-components'
+import { useTranslation, useI18next } from 'gatsby-plugin-react-i18next'
 
 const Advantages = ({ metadata }) => {
+  const { t } = useTranslation()
+  const { language } = useI18next()
+  let ventajas = advantages
+  if (language === 'en') {
+    ventajas = advantagesEn
+  }
+
   return (
     <Wrapper>
       <Title
-        title="Ventajas de Reservar con"
+        title={t('Ventajas de Reservar con')}
         subtitle={`Turista ${metadata.estado.name}`}
       />
       <div className="center">
-        {advantages.map((item, index) => {
+        {ventajas.map((item, index) => {
           return (
             <article key={index} className="advantage">
               <span>{item.icon}</span>

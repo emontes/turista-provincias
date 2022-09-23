@@ -4,19 +4,21 @@ import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import { getSrc } from 'gatsby-plugin-image'
 import Links from '../../components/Links'
+import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Directorio = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata
+  const { t } = useTranslation()
   return (
     <Layout
       heroImg={data.image.localFile.childImageSharp}
-      main="Directorio"
-      sub={`de sitios Web en ${metadata.estado.name}`}
-      seoTitle="Directorio Web"
+      main={t('directorio')}
+      sub={`${t('de sitios Web en')} ${metadata.estado.name}`}
+      seoTitle={t('Directorio Web')}
       linkExterno="/links.html"
     >
       <Seo
-        title="Directorio Web"
+        title={t('Directorio Web')}
         description={`Directorio de Sitios Web Registrados en el Turista ${metadata.estado.name} y que tienen relación directa con ${metadata.estado.name}`}
         image={getSrc(data.image.localFile.childImageSharp)}
       />
@@ -34,7 +36,16 @@ const Directorio = ({ data, pageContext }) => {
 export default Directorio
 
 export const query = graphql`
-  query {
+  query($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     site {
       siteMetadata {
         description

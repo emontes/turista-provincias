@@ -11,14 +11,35 @@ import footerList1 from '../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../constants/especialistas-links'
 import Chat from '../../components/atoms/chat-hubspot'
 import TopNavSec from '../../components/atoms/TopNavSec'
+import { useTranslation } from 'gatsby-plugin-react-i18next'
 
-const hoteles = ({ data }) => {
+const HotelesIndex = ({ data, pageContext }) => {
   const src = getSrc(data.image.childImageSharp)
   const metadata = data.site.siteMetadata
+  const { t } = useTranslation()
+  let seoDescription = `Encuentre el Hotel que busca con el buscador de hoteles de ${metadata.estado.name}, o con el listado de ciudades que tienen Hoteles en ${metadata.estado.name}`
+  let muestranText = `
+            Se muestran ${data.locations.totalCount} Destinos con 
+            <i>Hoteles en ${metadata.estado.name}</i>
+            <br />
+            Tenemos ${data.locations.sum} hoteles registrados en el 
+            <b>Turista ${metadata.estado.name}</b>
+          `
+  if (pageContext.language === 'en') {
+    seoDescription = `Find the hotel you are looking for with the hotel search engine for ${metadata.estado.name}, or with the list of cities that have hotels in ${metadata.estado.name}`
+    muestranText = `
+            Shown ${data.locations.totalCount} Destinations with  
+            <i>Hotels in ${metadata.estado.name}</i>
+            <br />
+            We have ${data.locations.sum} hotels registered in the  
+            <b>Turista ${metadata.estado.name}</b>
+          `
+  }
 
+  const seoTitle = t('Destinos con Hoteles en')
   return (
     <Layout
-      seoTitle={`Destinos con Hoteles en ${metadata.estado.name}`}
+      seoTitle={`${seoTitle} ${metadata.estado.name}`}
       linkExterno="/hoteles"
       heroImg={data.image}
       heroComponent={<HotelesHero topDestinos={data.topDestinos.nodes} />}
@@ -27,8 +48,8 @@ const hoteles = ({ data }) => {
     >
       <Chat />
       <Seo
-        title={`Destinos con Hoteles en ${metadata.estado.name}`}
-        description={`Encuentre el Hotel que busca con el buscador de hoteles de ${metadata.estado.name}, o con el listado de ciudades que tienen Hoteles en ${metadata.estado.name}`}
+        title={`${seoTitle} ${metadata.estado.name}`}
+        description={seoDescription}
         image={src}
       />
       <section style={{ background: 'var(--clr-grey-10)' }}>
@@ -37,21 +58,15 @@ const hoteles = ({ data }) => {
       <TopNavSec />
       <section className="section-center" style={{ marginTop: '2rem' }}>
         <BannerAdsense />
-        <BlockGrey title={`Hoteles en Turista ${metadata.estado.name}`}>
-          <p>
-            Se muestran {data.locations.totalCount} Destinos con{' '}
-            <i>Hoteles en {metadata.estado.name}</i>
-            <br />
-            Tenemos {data.locations.sum} hoteles registrados en el{' '}
-            <b>Turista {metadata.estado.name}</b>
-          </p>
+        <BlockGrey title={`${t('Hoteles en')} Turista ${metadata.estado.name}`}>
+          <p dangerouslySetInnerHTML={{ __html: muestranText }} />
         </BlockGrey>
       </section>
     </Layout>
   )
 }
 
-export default hoteles
+export default HotelesIndex
 
 export const query = graphql`
   query($estadoSlug: String!, $language: String) {

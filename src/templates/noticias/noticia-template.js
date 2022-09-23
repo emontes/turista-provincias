@@ -56,7 +56,11 @@ const Article = ({ data, pageContext }) => {
   }
 
   return (
-    <Layout linkExterno="/noticias" footLanguages={footLanguages}>
+    <Layout
+      linkExterno="/noticias"
+      footLanguages={footLanguages}
+      seoTitle={title.substring(0, 40)}
+    >
       <Seo
         title={title}
         description={

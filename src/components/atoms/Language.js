@@ -15,7 +15,6 @@ const languageFlag = {
 
 const Language = ({ extendidos }) => {
   const { language, languages, originalPath } = useI18next()
-  console.log({ extendidos })
   return (
     <Wrapper>
       <ul className="flex justify-between">

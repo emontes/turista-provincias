@@ -82,7 +82,16 @@ const LinksPage = ({ data }) => {
 export default LinksPage
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     category: strapiLinkCategory(slug: { eq: $slug }) {
       title
       slug
