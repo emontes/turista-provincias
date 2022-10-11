@@ -23,7 +23,7 @@ const Topic = ({ data, pageContext }) => {
     displayImage = data.topic.image.localFile.childImageSharp
   return (
     <Layout
-      heroImg={displayImage}
+      heroImg={displayImage ? displayImage : ''}
       main={t(data.topic.Title)}
       seoTitle={titleSeo}
       linkExterno="/noticias"

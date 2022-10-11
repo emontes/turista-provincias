@@ -17,7 +17,7 @@ const Nft = ({ items }) => {
                 />
               </div>
               <div className="p-2 overflow-hidden">
-                <p className="font-bold text-black">{item.title}</p>
+                <p className="font-bold mt-5 text-black">{item.title}</p>
                 <span className="flex justify-center gap-2 translate-y-8 opacity-0  duration-100 group-hover:translate-y-0 group-hover:opacity-100">
                   <img className="w-6" src={imgOpenSea} alt="Open Sea" />
                   <span className="group-hover:text-black">

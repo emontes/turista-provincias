@@ -7,7 +7,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const hotelsPerPage = 12
   const estadoSlug = process.env.ESTADO_SLUG
 
-  console.log('Creando estrucutra para: ', estadoSlug)
+  // console.log('Creando estrucutra para: ', estadoSlug)
   // ** crea el index
   createPage({
     path: `/`,

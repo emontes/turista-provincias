@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Noticias from '../components/Noticias/noticias-list'
 
 import Seo from '../components/Seo'
 import BlockGrey from '../components/atoms/BlockGrey'
-import BannerAdsense from '../utilities/BannerAdsense'
+// import BannerAdsense from '../utilities/BannerAdsense'
+const BannerAdsense = React.lazy(() => import('../utilities/BannerAdsense'))
 import ContainerGrecas from '../components/molecules/ContainerGrecas'
-import ListaDestinos from '../components/Home/location-list'
-import Mapa from '../components/Home/Mapa'
+// import ListaDestinos from '../components/Home/location-list'
+const ListaDestinos = React.lazy(() =>
+  import('../components/Home/location-list'),
+)
+// import Mapa from '../components/Home/Mapa'
+const Mapa = React.lazy(() => import('../components/Home/mapa'))
 import Compartir from '../components/atoms/Compartir'
 import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
@@ -40,12 +45,14 @@ const Index = ({ data, pageContext }) => {
       <Seo title={t('inicio')} description={seoDescription} />
 
       <ContainerGrecas title={t(metadata.title)} sideNavSec>
-        <Mapa
-          metadata={data.site.siteMetadata}
-          pageContext={pageContext}
-          seoDescription={seoDescription}
-        />
-        <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Mapa
+            metadata={data.site.siteMetadata}
+            pageContext={pageContext}
+            seoDescription={seoDescription}
+          />
+          <ListaDestinos metadata={metadata} locations={data.locations.nodes} />
+        </Suspense>
       </ContainerGrecas>
 
       {/* Noticias */}
@@ -66,10 +73,16 @@ const Index = ({ data, pageContext }) => {
             <Compartir title={t('¿Ya conoces el Turista?')} />
           </BlockGrey>
 
-          {/* <BannerAdsense
-            style={{ display: 'inline-block', width: '300px', height: '600px' }}
-            className="mx-auto hidden md:inline-block"
-          /> */}
+          <Suspense fallback={<div>Cargando...</div>}>
+            <BannerAdsense
+              style={{
+                display: 'inline-block',
+                width: '300px',
+                height: '600px',
+              }}
+              className="mx-auto hidden md:inline-block"
+            />
+          </Suspense>
 
           <BlockGrey
             title={`${t('Acerca de')} Turista ${metadata.estado.name}`}

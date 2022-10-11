@@ -13,7 +13,7 @@ const Tema = ({ data }) => {
   const metadata = data.site.siteMetadata
   return (
     <Layout
-      heroImg={data.image.localFile.childImageSharp}
+      heroImg={data.image ? data.image.localFile.childImageSharp : ''}
       main="Temas de Noticias"
       sub={`sobre ${metadata.estado.name}`}
       linkExterno="/noticias/tema"
