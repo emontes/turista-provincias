@@ -12,95 +12,111 @@ import footerList2 from '../../../constants/especialistas-links'
 import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
 import Chat from '../../../components/atoms/chat-hubspot'
 
-const Locations = ({ data, pageContext }) => {
-  const { location, banner, image } = data.location
-  const listItems1 = {
-    title: `${location.estado.Name}`,
-    items: pageContext.destinos,
-    linkTo: '',
-    linkToSuffix: '-mapa.html',
-  }
-  const seoDescription = `Mapa de hoteles en ${location.name}, ${location.estado.Name}. Encuentre la ubicación ideal para su hotel en ${location.name}`
+// const Locations = ({ data, pageContext }) => {
+//   const { location, banner, image } = data.location
+//   const listItems1 = {
+//     title: `${location.estado.Name}`,
+//     items: pageContext.destinos,
+//     linkTo: '',
+//     linkToSuffix: '-mapa.html',
+//   }
+//   const seoDescription = `Mapa de hoteles en ${location.name}, ${location.estado.Name}. Encuentre la ubicación ideal para su hotel en ${location.name}`
+//   return (
+//     <Layout
+//       linkExterno="/hoteles"
+//       seoTitle={`Hoteles ${location.name} Mapa`}
+//       footerList1={footerList1}
+//       footerList2={footerList2}
+//     >
+//       <Chat />
+//       <Seo
+//         title={`Mapa de Hoteles en ${location.name}`}
+//         description={seoDescription}
+//         image={image ? getSrc(image.localFile.childImageSharp) : ''}
+//       />
+
+//       <section className="section-center">
+//         <div className="back-white">
+//           <Banner
+//             image={banner}
+//             vistaDesc={location.name}
+//             estado={location.estado.Name}
+//             subTitle="Mapa de Hoteles"
+//             title={`Mapa de Hoteles en ${location.name}`}
+//           />
+//           <HotelBreadCrumbs location={location} endTitle="Mapa" />
+//           <div className="padding-1">
+//             <h2>Mapa de Hoteles en {location.name}</h2>
+//             <p>
+//               En este mapa te presentamos los hoteles disponibles en{' '}
+//               <b>{location.name}</b>
+//             </p>
+//           </div>
+//           <NavTabs url={data.location.slug} />
+//           <Map location={data.location.location} />
+//         </div>
+//         <div>
+//           <SideBanner
+//             title={`${location.name} Mapa Hoteles`}
+//             description={seoDescription}
+//             image={image ? image : ''}
+//             listItems1={listItems1}
+//           />
+//         </div>
+//       </section>
+//     </Layout>
+//   )
+// }
+
+const Locations = () => {
   return (
     <Layout
       linkExterno="/hoteles"
-      seoTitle={`Hoteles ${location.name} Mapa`}
+      seoTitle="Hoteles Mapa"
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      <Chat />
-      <Seo
-        title={`Mapa de Hoteles en ${location.name}`}
-        description={seoDescription}
-        image={image ? getSrc(image.localFile.childImageSharp) : ''}
-      />
 
-      <section className="section-center">
-        <div className="back-white">
-          <Banner
-            image={banner}
-            vistaDesc={location.name}
-            estado={location.estado.Name}
-            subTitle="Mapa de Hoteles"
-            title={`Mapa de Hoteles en ${location.name}`}
-          />
-          <HotelBreadCrumbs location={location} endTitle="Mapa" />
-          <div className="padding-1">
-            <h2>Mapa de Hoteles en {location.name}</h2>
-            <p>
-              En este mapa te presentamos los hoteles disponibles en{' '}
-              <b>{location.name}</b>
-            </p>
-          </div>
-          <NavTabs url={data.location.slug} />
-          <Map location={data.location.location} />
-        </div>
-        <div>
-          <SideBanner
-            title={`${location.name} Mapa Hoteles`}
-            description={seoDescription}
-            image={image ? image : ''}
-            listItems1={listItems1}
-          />
-        </div>
-      </section>
+        <h2>Hoteles Mapa</h2>
+
     </Layout>
   )
 }
+       
 
 export default Locations
 
-export const pageQuery = graphql`
-  query($id: String) {
-    location: strapiHotelLocation(hotellookId: { eq: $id }) {
-      banner {
-        localFile {
-          childImageSharp {
-            gatsbyImageData
-          }
-        }
-      }
-      image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData
-          }
-        }
-      }
-      hotellookId
-      numhoteles
-      slug
-      location {
-        name
-        latitude
-        longitude
-        hotel_location {
-          slug
-        }
-        estado {
-          Name
-        }
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query($id: String) {
+//     location: strapiHotelLocation(hotellookId: { eq: $id }) {
+//       banner {
+//         localFile {
+//           childImageSharp {
+//             gatsbyImageData
+//           }
+//         }
+//       }
+//       image {
+//         localFile {
+//           childImageSharp {
+//             gatsbyImageData
+//           }
+//         }
+//       }
+//       hotellookId
+//       numhoteles
+//       slug
+//       location {
+//         name
+//         latitude
+//         longitude
+//         hotel_location {
+//           slug
+//         }
+//         estado {
+//           Name
+//         }
+//       }
+//     }
+//   }
+// `

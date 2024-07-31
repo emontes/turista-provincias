@@ -1,34 +1,27 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import SocialLinks from '../../constants/social_links'
-import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
 
-const About = (props) => {
-  const data = useStaticQuery(query)
-  let displayImage = data.image
-  if (props.image) {
-    displayImage = props.image
-  }
-
+const About = ({ theme }) => {
   return (
     <Wrapper>
-      <GatsbyImage
-        image={getImage(displayImage.localFile)}
+      <StaticImage
+        // src="../../assets/images/edomexico/topic-turista.jpeg"
+        src="../images/edomexico/topic-turista.jpeg"
         className="img"
-        alt={props.title}
-        title={props.title}
+        alt={theme.siteMetadata.estado.slogan}
+        title={theme.siteMetadata.estado.slogan}
+        width={100}
+        height={100}
       />
       <p>
-        {props.description || (
-          <span
-            dangerouslySetInnerHTML={{
-              __html: `La <b>Guía de Turismo</b> en <i>${data.site.siteMetadata.estado.name}</i>`,
-            }}
-          />
-        )}
+        <span
+          dangerouslySetInnerHTML={{
+            __html: `La <b>Guía de Turismo</b> en <i>${theme.siteMetadata.estado.name}</i>`,
+          }}
+        />
       </p>
-
       <SocialLinks styleClass="banner-icons" />
     </Wrapper>
   )
@@ -45,27 +38,5 @@ const Wrapper = styled.div`
     border-radius: 50%;
   }
 `
+
 export default About
-
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        estado {
-          name
-          slug
-          slogan
-        }
-      }
-    }
-
-    image: strapiMedia(name: { eq: "topic-turista.jpg" }) {
-      name
-      localFile {
-        childImageSharp {
-          gatsbyImageData
-        }
-      }
-    }
-  }
-`

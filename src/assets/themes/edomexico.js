@@ -30,6 +30,14 @@ const LogoSmal = (
   />
 )
 
+const TopicTurista = (
+  <StaticImage
+    src="../images/edomexico/topic_turista.jpeg"
+    alt="Turista Estado de México"
+    title="Turista Estado de México"
+  />
+)
+
 const theme = {
   fonts: {},
   colors: {
@@ -55,7 +63,15 @@ const theme = {
     logoNav: LogoNav,
     logoSmal2: LogoSmal2,
     logoSmal: LogoSmal,
+    topicTurista: TopicTurista,
   },
+  siteMetadata: {
+    estado: {
+      name: "Estado de México",
+      slug: "edomexico",
+      slogan: "Turista Estado de México"
+    }
+  }
 }
 
 export default theme
