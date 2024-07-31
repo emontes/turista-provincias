@@ -1,27 +1,36 @@
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import SocialLinks from '../../constants/social_links'
-import { StaticImage } from 'gatsby-plugin-image'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import styled from 'styled-components'
 
-const About = ({ theme }) => {
+const About = (props) => {
+  const data = useStaticQuery(query)
+  let displayImage = data.image
+  if (props.image) {
+    displayImage = props.image
+  }
+  console.log('La Image: ', displayImage)
+
   return (
     <Wrapper>
-      <StaticImage
-        // src="../../assets/images/edomexico/topic-turista.jpeg"
-        src="../images/edomexico/topic-turista.jpeg"
+      <GatsbyImage
+        //image={getImage(displayImage.localFile)}
+        image={getImage(displayImage.childImageSharp)}
         className="img"
-        alt={theme.siteMetadata.estado.slogan}
-        title={theme.siteMetadata.estado.slogan}
-        width={100}
-        height={100}
+        alt={props.title}
+        title={props.title}
       />
       <p>
-        <span
-          dangerouslySetInnerHTML={{
-            __html: `La <b>Guía de Turismo</b> en <i>${theme.siteMetadata.estado.name}</i>`,
-          }}
-        />
+        {props.description || (
+          <span
+            dangerouslySetInnerHTML={{
+              __html: `La <b>Guía de Turismo</b> en <i>${data.site.siteMetadata.estado.name}</i>`,
+            }}
+          />
+        )}
       </p>
+
       <SocialLinks styleClass="banner-icons" />
     </Wrapper>
   )
@@ -38,5 +47,25 @@ const Wrapper = styled.div`
     border-radius: 50%;
   }
 `
-
 export default About
+
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+
+    image: file(relativePath: { eq: "topic-turista.jpg" }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+    }
+
+  }
+`
