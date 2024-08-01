@@ -6,17 +6,16 @@ import ReactMarkdown from 'react-markdown'
 import { FaRegClock } from 'react-icons/fa'
 
 const NoticiaCard = ({ noticia }) => {
-  const topic = noticia.topics[0]
-  const fecha = new Date(noticia.datePlano)
-  const anyo = fecha.getFullYear()
-  const hometext = noticia.hometext.data.hometext
+  console.log('La Noticia: ', noticia)
+  // const topic = noticia.topics[0]
+  const hometext = noticia.hometext
 
   let imagen
-  if (topic) {
-    if (topic.image) {
-      imagen = topic.image.localFile
-    }
-  }
+  // if (topic) {
+  //   if (topic.image) {
+  //     imagen = topic.image.localFile
+  //   }
+  // }
 
   if (noticia.image) {
     imagen = noticia.image.localFile
@@ -34,19 +33,19 @@ const NoticiaCard = ({ noticia }) => {
       <Link to={slug}>
         <h3 className="text-2xl md:hidden">{noticia.title}</h3>
         <div className="flex gap-4 items-center">
-          {imagen && (
+          {/* {imagen && (
             <GatsbyImage
               image={getImage(imagen)}
               className="rounded topic-image"
               alt={topic ? topic.Title : 'Sin Tema Definido'}
               title={topic ? topic.Title : 'Sit Tema Definido'}
             />
-          )}
+          )} */}
 
           <div>
             <h3 className="text-2xl hidden md:block">{noticia.title}</h3>
 
-            <ReactMarkdown children={hometext} />
+            <div dangerouslySetInnerHTML={{ __html: hometext }} />
           </div>
         </div>
         <footer className="mt-8 pt-4 border-t flex items-center justify-between text-slate-400">
@@ -73,49 +72,13 @@ const Wraper = styled.article`
 `
 
 export const query = graphql`
-  fragment NoticiaCard on STRAPI_NOTICIA {
-    id
-    slug
-    slugOld
+  fragment NoticiaCard on Noticia {
+    sid
     title
-    date(formatString: "ddd D MMM yy", locale: "es")
-    dateslug: date(formatString: "yy-M")
-    datePlano: date
-    locale
-    image {
-      localFile {
-        childImageSharp {
-          gatsbyImageData
-        }
-      }
-    }
-    hometext {
-      data {
-        hometext
-      }
-    }
-    location {
-      name
-    }
-    topics {
-      Title
-      slug
-      image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
-          }
-        }
-      }
-    }
-    localizations {
-      data {
-        attributes {
-          title
-          slug
-        }
-      }
-    }
+    date: time(formatString: "ddd D MMM yy", locale: "es")
+    dateslug: time(formatString: "yy-M")
+    datePlano: time
+    hometext
   }
 `
 

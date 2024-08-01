@@ -1,6 +1,31 @@
 const path = require('path')
 const fetch = require('node-fetch')
 
+async function fetchAllNoticias(baseUrl) {
+  let page = 1
+  let allNoticias = []
+  let hasNextPage = true
+
+  while (hasNextPage) {
+    const response = await fetch(`${baseUrl}?page=${page}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+
+    allNoticias = allNoticias.concat(data._embedded.noticia)
+
+    hasNextPage = data._links.next !== undefined
+    page++
+
+    // Optional: add a small delay to avoid overwhelming the API
+    await new Promise(resolve => setTimeout(resolve, 1000))
+  }
+
+  return allNoticias
+}
 exports.sourceNodes = async ({
   actions,
   createNodeId,
@@ -33,6 +58,43 @@ exports.sourceNodes = async ({
     }
     const node = Object.assign({}, location, nodeMeta)
     createNode(node)
+  })
+
+  // Fetch all news data
+  const baseUrl = `http://api.${estadoSlug}.turista.com.mx/noticia`
+  const allNoticias = await fetchAllNoticias(baseUrl)
+
+  // Create nodes for each news item
+  allNoticias.forEach((noticia) => {
+    const nodeContent = JSON.stringify(noticia)
+    const nodeMeta = {
+      id: createNodeId(`noticia-${noticia.sid}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: `Noticia`,
+        content: nodeContent,
+        contentDigest: createContentDigest(noticia),
+      },
+    }
+    const node = Object.assign({}, noticia, nodeMeta)
+    createNode(node)
+  })
+
+  // Create a node for total news count
+  const totalNewsInfo = {
+    total_items: allNoticias.length
+  }
+  createNode({
+    ...totalNewsInfo,
+    id: createNodeId(`noticia-total`),
+    parent: null,
+    children: [],
+    internal: {
+      type: `NoticiaTotal`,
+      content: JSON.stringify(totalNewsInfo),
+      contentDigest: createContentDigest(totalNewsInfo),
+    },
   })
 }
 

@@ -55,6 +55,48 @@ const Index = ({ data, pageContext }) => {
 					<ListaDestinos metadata={metadata} locations={data.locations.nodes} />
 				</Suspense>
 			</ContainerGrecas>
+
+      {/* Noticias */}
+      <div className="md:flex gap-4">
+        <div className="cont-area" style={{ background: 'var(--clr-white)' }}>
+          <h3 className="text-red-600">
+            <Trans>Últimas Noticias de turismo en</Trans> {metadata.estado.name}
+          </h3>
+          <Noticias
+            noticias={data.allNoticia.nodes}
+            perPage={3}
+            title="Últimas Noticias"
+            isHome="si"
+          />
+        </div>
+
+        <div>
+          <BlockGrey title={t('Compartir')}>
+            <Compartir title={t('¿Ya conoces el Turista?')} />
+          </BlockGrey>
+
+          <Suspense fallback={<div>Cargando...</div>}>
+            <BannerAdsense
+              style={{
+                display: 'inline-block',
+                width: '300px',
+                height: '600px',
+              }}
+              className="mx-auto hidden md:inline-block"
+            />
+          </Suspense>
+
+          <BlockGrey
+            title={`${t('Acerca de')} Turista ${metadata.estado.name}`}
+          >
+            {seoDescription}
+          </BlockGrey>
+        </div>
+
+      </div>
+
+
+
 		</Layout>
 	);
 };
@@ -63,6 +105,7 @@ export default Index;
 
 export const query = graphql`
   query($language: String!) {
+
     locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
@@ -72,7 +115,6 @@ export const query = graphql`
         }
       }
     }
-
 
     site {
       siteMetadata {
@@ -93,13 +135,23 @@ export const query = graphql`
     }
 
     locations:allLocation(sort: {fields: hvi_desc_spanish, order: ASC}) {
-    nodes {
-      hviid
-      hvi_desc_spanish
-      hvi_desc_english
-      numhoteles
+      nodes {
+        hviid
+        hvi_desc_spanish
+        hvi_desc_english
+        numhoteles
+      }
     }
-  }
+
+    allNoticia(
+      limit: 3
+      
+      sort: { fields: time, order: DESC }
+    ) {
+      nodes {
+        ...NoticiaCard
+      }
+    }
 
   }
 `;
