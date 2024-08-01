@@ -21,12 +21,7 @@ const NoticiaCard = ({ noticia }) => {
     imagen = noticia.image.localFile
   }
 
-  let slug = ''
-  if (noticia.locale != 'es') {
-    slug += `/${noticia.locale}`
-  }
-  slug += `/article${noticia.dateslug}-${noticia.slug}.html`
-  if (noticia.slugOld) slug = `/${noticia.slugOld}`
+  const slug = `/article${noticia.sid}.html`
 
   return (
     <Wraper className=" transition rounded-lg bg-white hover:bg-slate-50 shadow-md hover:shadow-lg relative mb-5 p-4">
