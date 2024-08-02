@@ -144,7 +144,7 @@ export const query = graphql`
     }
 
     allNoticia(
-      limit: 3
+      limit: 20
       
       sort: { fields: time, order: DESC }
     ) {

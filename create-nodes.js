@@ -1,11 +1,12 @@
 const fetch = require("node-fetch");
 
-async function fetchAllData(baseUrl, fields = null) {
+async function fetchAllData(baseUrl, fields = null, maxPages = Infinity) {
     let page = 1
     let allData = []
     let hasNextPage = true
   
-    while (hasNextPage) {
+    while (hasNextPage && page <= maxPages) {
+      console.log('Generando Página ', page)
       let url = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}page=${page}`
       if (fields) {
         url += `&fields=${fields.join(',')}`
@@ -54,6 +55,10 @@ async function createNodes({ actions, createNodeId, createContentDigest }) {
 	const { createNode, createNodeField } = actions;
 	const estadoSlug = process.env.ESTADO_SLUG;
 
+    // Leer la variable de entorno para el número máximo de páginas
+    const maxPages = parseInt(process.env.MAX_PAGES_FETCH) || Infinity;
+    console.log("Número máximo de páginas:", maxPages);
+
 	try {
 		console.log("Obteniendo datos de locations");
 		const locations = await fetchAllData(
@@ -63,9 +68,10 @@ async function createNodes({ actions, createNodeId, createContentDigest }) {
 
 		console.log("Obteniendo datos de noticias (sin bodytext)");
 		const noticias = await fetchAllData(
-			`http://api.${estadoSlug}.turista.com.mx/noticia`,
-			["sid", "title", "time", "catid", "topic", "hometext"],
-		);
+            `http://api.${estadoSlug}.turista.com.mx/noticia`,
+            ["sid", "title", "time", "catid", "topic", "hometext"],
+            maxPages
+          );
 		console.log(`${noticias.length} noticias obtenidas`);
 
 		console.log("Obteniendo datos de topics");
