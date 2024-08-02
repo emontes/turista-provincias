@@ -30,8 +30,22 @@ exports.createPages = async ({ graphql, actions }) => {
       estadoSlug: estadoSlug,
     },
   })
-
   console.log('Página de índice creada')
+
+  /* ---------------------------------------
+     ------------ Noticias  --------------
+     --------------------------------------*/
+
+   // ** Crea el ïndice de topics (ddonde lista los topics que hay)
+   createPage({
+    path: `/noticias/tema`,
+    component: path.resolve(`./src/templates/noticias/topic-index-template.js`),
+    context: {
+      estadoSlug: estadoSlug,
+    },
+  })
+
+
   console.log('Finalizando createPages')
 }
 
