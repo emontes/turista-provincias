@@ -20,16 +20,16 @@ module.exports = {
     'gatsby-transformer-sharp',
     `gatsby-plugin-mdx`,
     siteData.sourceFileSystem,   
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-        indexName: process.env.ESTADO_SLUG,
-        queries: require('./src/constants/algolia'),
-        chunkSize: 10000,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-algolia`,
+    //   options: {
+    //     appId: process.env.GATSBY_ALGOLIA_APP_ID,
+    //     apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
+    //     indexName: process.env.ESTADO_SLUG,
+    //     queries: require('./src/constants/algolia'),
+    //     chunkSize: 10000,
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
