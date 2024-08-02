@@ -14,8 +14,8 @@ const BoardWrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
   padding: 2rem;
-  background-color: #e6f2ff;
-  border: 10px solid #8b4513;
+  background-color: ${(props) => props.theme.colors.primary9};
+  border: 10px solid ${(props) => props.theme.colors.primary1};
   border-radius: 20px;
 `
 
@@ -41,8 +41,9 @@ const Tema = ({ data }) => {
           <TopicCard 
             key={item.fieldValue}
             topic={item.fieldValue}
-            image={data.defaultTopicImage}
+            topicImage={item.nodes[0].topicimage}
             newsCount={item.totalCount}
+            allTopicImages={data.allFile}
           />
         ))}
       </BoardWrapper>
@@ -59,6 +60,9 @@ export const query = graphql`
       group(field: topictext) {
         fieldValue
         totalCount
+        nodes {
+          topicimage
+        }
       }
     }
     site {
@@ -76,9 +80,12 @@ export const query = graphql`
         gatsbyImageData
       }
     }
-    defaultTopicImage: file(relativePath: { eq: "default-topic.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 200, height: 150, layout: CONSTRAINED)
+    allFile(filter: { sourceInstanceName: { eq: "topicImages" } }) {
+      nodes {
+        relativePath
+        childImageSharp {
+          gatsbyImageData(width: 200, height: 150, layout: CONSTRAINED)
+        }
       }
     }
   }

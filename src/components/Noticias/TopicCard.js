@@ -9,7 +9,7 @@ const CardWrapper = styled(Link)`
   flex-direction: column;
   width: 200px;
   height: 300px;
-  border: 2px solid #000;
+  border: 2px solid ${(props) => props.theme.colors.primary1};
   border-radius: 10px;
   overflow: hidden;
   background-color: #f0f0f0;
@@ -43,13 +43,22 @@ const NewsCount = styled.span`
   color: #666;
 `
 
-const TopicCard = ({ topic, image, newsCount }) => {
+const TopicCard = ({ topic, topicImage, newsCount, allTopicImages }) => {
   const formattedUrl = `/noticias/tema/${topic.replace(/\s+/g, '_').normalize("NFD").replace(/[\u0300-\u036f]/g, "")}.html`
   
+  const image = allTopicImages.nodes.find(node => node.relativePath === topicImage)
+  const gatsbyImage = image ? getImage(image) : null
+
   return (
     <CardWrapper to={formattedUrl}>
       <ImageWrapper>
-        <GatsbyImage image={getImage(image)} alt={topic} style={{height: '100%'}} />
+        {gatsbyImage ? (
+          <GatsbyImage image={gatsbyImage} alt={topic} style={{height: '100%'}} />
+        ) : (
+          <div style={{height: '100%', backgroundColor: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            No image
+          </div>
+        )}
       </ImageWrapper>
       <Content>
         <Title>{topic}</Title>
