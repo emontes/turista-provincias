@@ -10,7 +10,6 @@ const About = (props) => {
   if (props.image) {
     displayImage = props.image
   }
-  console.log('La Image: ', displayImage)
 
   return (
     <Wrapper>

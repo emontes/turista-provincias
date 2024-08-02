@@ -5,32 +5,6 @@ const estadoSlug = process.env.ESTADO_SLUG
 const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
 const { languages, defaultLanguage } = require('./languages.js')
 
-const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL,
-  accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: [
-    'hotel-hotellook',
-    'hotel-location',
-    'estado',
-    'location',
-    // 'noticia',
-    {
-      singularName: 'noticia',
-      pluginOptions: {
-        i18n: {
-          locale: 'all',
-        },
-      },
-    },
-    'topic',
-    'section',
-    'section-article',
-    'link',
-    'link-category',
-  ],
-  singleTypes: [],
-}
-
 module.exports = {
   siteMetadata: siteData.siteMetadata,
   plugins: [
@@ -45,12 +19,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     `gatsby-plugin-mdx`,
-    siteData.sourceFileSystem,
-    {
-      resolve: `gatsby-source-strapi`,
-      options: strapiConfig,
-    },
-
+    siteData.sourceFileSystem,   
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
@@ -66,6 +35,13 @@ module.exports = {
       options: {
         path: `${__dirname}/locales`,
         name: `locale`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `topicImages`,
+        path: `${__dirname}/src/assets/images/topics`,
       },
     },
     {

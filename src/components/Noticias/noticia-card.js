@@ -1,70 +1,70 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import styled from 'styled-components'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import ReactMarkdown from 'react-markdown'
-import { FaRegClock } from 'react-icons/fa'
+import { FaRegClock, FaFolder } from 'react-icons/fa'
 
 const NoticiaCard = ({ noticia }) => {
-  console.log('La Noticia: ', noticia)
-  // const topic = noticia.topics[0]
-  const hometext = noticia.hometext
+  const { allFile } = useStaticQuery(graphql`
+    query {
+      allFile(filter: { sourceInstanceName: { eq: "topicImages" } }) {
+        nodes {
+          relativePath
+          childImageSharp {
+            gatsbyImageData(width: 200, height: 133, layout: CONSTRAINED)
+          }
+        }
+      }
+    }
+  `)
 
-  let imagen
-  // if (topic) {
-  //   if (topic.image) {
-  //     imagen = topic.image.localFile
-  //   }
-  // }
-
-  if (noticia.image) {
-    imagen = noticia.image.localFile
+  const getTopicImage = (filename) => {
+    const image = allFile.nodes.find(node => node.relativePath === filename)
+    return image ? getImage(image.childImageSharp.gatsbyImageData) : null
   }
 
+  const hometext = noticia.hometext
   const slug = `/article${noticia.sid}.html`
+  const topicImage = noticia.topicimage ? getTopicImage(noticia.topicimage) : null
+  const topicUrl = noticia.topictext ? `/noticias/tema/${encodeURIComponent(noticia.topictext.toLowerCase().replace(/ /g, '-'))}.html` : ''
 
   return (
-    <Wraper className=" transition rounded-lg bg-white hover:bg-slate-50 shadow-md hover:shadow-lg relative mb-5 p-4">
-      <Link to={slug}>
-        <h3 className="text-2xl md:hidden">{noticia.title}</h3>
-        <div className="flex gap-4 items-center">
-          {/* {imagen && (
-            <GatsbyImage
-              image={getImage(imagen)}
-              className="rounded topic-image"
-              alt={topic ? topic.Title : 'Sin Tema Definido'}
-              title={topic ? topic.Title : 'Sit Tema Definido'}
-            />
-          )} */}
-
-          <div>
-            <h3 className="text-2xl hidden md:block">{noticia.title}</h3>
-
-            <div dangerouslySetInnerHTML={{ __html: hometext }} />
+    <article className="transition rounded-lg bg-white hover:bg-gray-50 shadow-md hover:shadow-xl relative mb-5 p-4 overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-4 items-start">
+        {topicImage && (
+          <div className="w-full md:w-1/4 mb-4 md:mb-0">
+            <Link to={topicUrl}>
+              <GatsbyImage
+                image={topicImage}
+                className="rounded-lg w-full h-32 object-cover"
+                alt={noticia.topictext || ''}
+                title={noticia.topictext || ''}
+              />
+            </Link>
           </div>
+        )}
+        <div className="w-full md:w-3/4">
+          <Link to={slug} className="block">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">{noticia.title}</h3>
+            <div className="text-gray-600 mb-4" dangerouslySetInnerHTML={{ __html: hometext }} />
+          </Link>
         </div>
-        <footer className="mt-8 pt-4 border-t flex items-center justify-between text-slate-400">
-          <span className="flex items-center gap-2">
-            <FaRegClock className="icon"></FaRegClock>
-            {noticia.date}
-          </span>
-          {noticia.location && (
-            <span className="bg-slate-200 shadow rounded text-slate-500 tracking-widest px-2 py-1 uppercase font-bold">
-              {noticia.location.name}
+      </div>
+      <footer className="mt-4 pt-4 border-t flex items-center justify-between text-gray-500">
+        <span className="flex items-center gap-2">
+          <FaRegClock className="text-gray-500" />
+          {noticia.date}
+        </span>
+        {noticia.cattitle && (
+          <Link to={`/noticias/${encodeURIComponent(noticia.cattitle.toLowerCase().replace(/ /g, '-'))}.html`}>
+            <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-sm font-semibold flex items-center">
+              <FaFolder className="mr-1" /> {noticia.cattitle}
             </span>
-          )}
-        </footer>
-      </Link>
-    </Wraper>
+          </Link>
+        )}
+      </footer>
+    </article>
   )
 }
-
-const Wraper = styled.article`
-  .topic-image {
-    max-width: 12rem;
-    height: 12rem;
-  }
-`
 
 export const query = graphql`
   fragment NoticiaCard on Noticia {
@@ -73,6 +73,11 @@ export const query = graphql`
     date: time(formatString: "ddd D MMM yy", locale: "es")
     dateslug: time(formatString: "yy-M")
     datePlano: time
+    topic
+    topictext
+    topicimage
+    catid
+    cattitle
     hometext
   }
 `
