@@ -121,6 +121,30 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 	});
 
+  // Create noticias pages para todas las noticias
+const resultNoticias = await graphql(`
+  {
+    allNoticia {
+      totalCount
+    }
+  }
+`)
+
+const numPages = Math.ceil(resultNoticias.data.allNoticia.totalCount / postPerPage)
+
+Array.from({ length: numPages }).forEach((_, i) => {
+  createPage({
+    path: i === 0 ? `/noticias.html` : `/noticias/ultimas/${i + 1}.html`,
+    component: path.resolve('./src/templates/noticias/noticias-template.js'),
+    context: {
+      limit: postPerPage,
+      skip: i * postPerPage,
+      currentPage: i + 1,
+      totalPages: numPages,
+    },
+  })
+})
+
 	console.log("Finalizando createPages");
 };
 
