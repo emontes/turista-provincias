@@ -167,4 +167,4 @@ async function createNodes({ actions, createNodeId, createContentDigest }) {
 	}
 }
 
-module.exports = createNodes;
+module.exports = { fetchAllData, createNodes};
