@@ -57,7 +57,7 @@ const NoticiaCard = ({ noticia }) => {
           {noticia.date}
         </span>
         {noticia.cattitle && (
-          <Link to={`/noticias/${encodeURIComponent(noticia.cattitle.toLowerCase().replace(/ /g, '-'))}.html`}>
+          <Link to={`/noticias/${encodeURIComponent(noticia.cattitle.replace(/ /g, '_'))}.html`}>
             <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-sm font-semibold flex items-center">
               <FaFolder className="mr-1" /> {noticia.cattitle}
             </span>
