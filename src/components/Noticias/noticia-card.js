@@ -27,7 +27,7 @@ const NoticiaCard = ({ noticia }) => {
   const hometext = noticia.hometext
   const slug = `/article${noticia.sid}.html`
   const topicImage = noticia.topicimage ? getTopicImage(noticia.topicimage) : null
-  const topicUrl = noticia.topictext ? `/noticias/tema/${encodeURIComponent(noticia.topictext.toLowerCase().replace(/ /g, '-'))}.html` : ''
+  const topicUrl = noticia.topictext ? `/noticias/tema/${encodeURIComponent(noticia.topictext.replace(/ /g, '-'))}.html` : ''
 
   return (
     <article className="transition rounded-lg bg-white hover:bg-gray-50 shadow-md hover:shadow-xl relative mb-5 p-4 overflow-hidden">

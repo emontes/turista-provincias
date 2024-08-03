@@ -36,14 +36,46 @@ exports.createPages = async ({ graphql, actions }) => {
      ------------ Noticias  --------------
      --------------------------------------*/
 
-   // ** Crea el ïndice de topics (ddonde lista los topics que hay)
-   createPage({
-    path: `/noticias/tema`,
-    component: path.resolve(`./src/templates/noticias/topic-index-template.js`),
-    context: {
-      estadoSlug: estadoSlug,
-    },
+   // *** Crea las páginas de los Temas ***
+   const resultTopics = await graphql(`
+    {
+      allNoticia {
+        group(field: topictext) {
+          fieldValue
+          totalCount
+          nodes {
+            topicimage
+          }
+        }
+      }
+    }
+  `)
+
+  const topics = resultTopics.data.allNoticia.group
+
+  // Crea una página para cada tema
+  topics.forEach(topic => {
+    const slug = topic.fieldValue.replace(/\s+/g, '_').normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    createPage({
+      path: `/noticias/tema/${slug}.html`,
+      component: path.resolve('./src/templates/noticias/topic-template.js'),
+      context: {
+        topic: topic.fieldValue,
+        topicImage: topic.nodes[0].topicimage,
+        totalCount: topic.totalCount,
+        alanguage: 'spanish', 
+      },
+    })
   })
+
+  // Crea la página de índice de temas
+  createPage({
+    path: `/noticias/tema`,
+    component: path.resolve('./src/templates/noticias/topic-index-template.js'),
+    context: {
+      topics: topics,
+    },
+  }) 
 
 
   console.log('Finalizando createPages')
