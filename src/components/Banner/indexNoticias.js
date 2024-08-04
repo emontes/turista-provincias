@@ -1,3 +1,5 @@
+// src/components/Banner/indexNoticias.js
+
 import React from 'react'
 import styled from 'styled-components'
 import About from './About'

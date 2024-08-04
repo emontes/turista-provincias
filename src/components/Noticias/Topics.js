@@ -1,7 +1,10 @@
+// src/components/Noticias/Topics.js
+
 import React from 'react'
 import { Link } from 'gatsby'
 import Title from '../Banner/Title'
 import { useTranslation } from 'gatsby-plugin-react-i18next'
+
 
 const Topics = ({ topics }) => {
   const { t } = useTranslation()
@@ -9,19 +12,17 @@ const Topics = ({ topics }) => {
     <div>
       <Title title={t('Temas')} />
       <ul>
-        {topics.map((item, index) => {
-          return (
-            <li key={index}>
-              <Link
-                to={`/noticias/tema/${item.slug}`}
-                className="category-menu"
-                activeStyle={{ color: 'var(--clr-red-dark)' }}
-              >
-                {t(item.Title)}
-              </Link>
-            </li>
-          )
-        })}
+        {topics.map((item, index) => (
+          <li key={index}>
+            <Link
+              to={`/noticias/tema/${item.fieldValue.replace(/\s+/g, '_').normalize("NFD").replace(/[\u0300-\u036f]/g, "")}.html`}
+              className="category-menu"
+              activeStyle={{ color: 'var(--clr-red-dark)' }}
+            >
+              {t(item.fieldValue)} ({item.totalCount})
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   )

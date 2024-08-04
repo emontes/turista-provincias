@@ -68,6 +68,8 @@ exports.createPages = async ({ graphql, actions }) => {
 				topicImage: topic.nodes[0].topicimage,
 				totalCount: topic.totalCount,
 				alanguage: "spanish",
+				topics: topics,
+				
 			},
 		});
 	});
@@ -117,6 +119,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					category: category.fieldValue,
 					totalPages,
 					currentPage: i + 1,
+					categories: categories,
 				},
 			});
 		});
@@ -142,6 +145,8 @@ Array.from({ length: numPages }).forEach((_, i) => {
       skip: i * postPerPage,
       currentPage: i + 1,
       totalPages: numPages,
+	  topics: topics,
+	  categories: categories,
     },
   })
 })
@@ -149,12 +154,13 @@ Array.from({ length: numPages }).forEach((_, i) => {
 /**
  * NOTICIAS Crea una página para cada noticia
  */
-
+// Leer la variable de entorno para el número máximo de páginas
+const maxPages = parseInt(process.env.MAX_PAGES_FETCH) || Infinity;
 // Usa fetchAllData para obtener todos los SIDs de las noticias
 const allNoticias = await fetchAllData(
   `http://api.${estadoSlug}.turista.com.mx/noticia`,
   ["sid"],
-  5 // o el número máximo de páginas que quieras obtener
+  maxPages // o el número máximo de páginas que quieras obtener
 );
 
 if (!allNoticias || allNoticias.length === 0) {
@@ -187,6 +193,8 @@ for (const noticia of allNoticias) {
       context: {
         sid: noticia.sid,
         noticiaCompleta: noticiaCompleta,
+		topics: topics,
+		categories: categories
       },
     });
   } catch (error) {

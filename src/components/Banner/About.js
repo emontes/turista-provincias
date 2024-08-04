@@ -1,3 +1,5 @@
+// src/components/Banner/About.js
+
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import SocialLinks from '../../constants/social_links'

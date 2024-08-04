@@ -40,6 +40,8 @@ const NoticiasIndex = ({ data, pageContext }) => {
         noticias={data.allNoticia.nodes}
         title={titleSeo}
         description={descriptionSeo}
+        topics={pageContext.topics}
+        categories={pageContext.categories}
         pageInfo={{
           currentPage,
           pageCount: totalPages,

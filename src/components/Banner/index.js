@@ -1,3 +1,4 @@
+// src/components/Banner/index.js
 import React from 'react'
 import About from './About'
 import HotelsBox from './HotelsBox'

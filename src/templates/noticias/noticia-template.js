@@ -13,11 +13,12 @@ import { Link } from "gatsby-plugin-react-i18next";
 
 const Article = ({ pageContext }) => {
 	const { noticiaCompleta } = pageContext;
-	const { title, time, hometext, bodytext, cattitle, topictext } =
+	const { title, time, hometext, bodytext, cattitle, topictext, topicimage } =
 		noticiaCompleta;
-	console.log("Noticia completa", noticiaCompleta);
-	console.log("Title: ", title);
 
+  console.log ('Categories: ', pageContext.categories)
+  console.log  ('Topics: ', pageContext.topics)
+  
 	const fecha = new Date(time).toLocaleDateString();
 
 	// let displayImage
@@ -89,10 +90,7 @@ const Article = ({ pageContext }) => {
 									{topictext || "Sin tema"}
 								</Topic>
                   
-                )}
-
-
-								
+                )}	
 							</Metadata>
 						</article>
 
@@ -100,8 +98,9 @@ const Article = ({ pageContext }) => {
 					</div>
           <Banner
 							title="Noticia"
-							// categories={pageContext.categories}
-							// image={topics[0] ? topics[0].image : ''}
+							categories={pageContext.categories}
+              topics={pageContext.topics}
+              image={topicimage}
 						/>
 				</div>
 			</Wrapper>

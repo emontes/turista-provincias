@@ -28,6 +28,7 @@ const Category = ({ data, pageContext }) => {
         noticias={data.allNoticia.nodes}
         title={titleSeo}
         description={descriptionSeo}
+        categories={pageContext.categories}
         pageInfo={{
           currentPage,
           pageCount: totalPages,
@@ -38,6 +39,7 @@ const Category = ({ data, pageContext }) => {
         }}
         url={`/noticias/${category.replace(/\s+/g, '_').normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
         perPage={5}
+        
       />
     </Layout>
   )
