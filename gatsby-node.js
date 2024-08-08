@@ -1,3 +1,5 @@
+// gatsby-node.js
+
 const path = require("path");
 const { fetchAllData, createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
@@ -55,7 +57,8 @@ exports.createPages = async ({ graphql, actions }) => {
 	const topics = resultTopics.data.allNoticia.group;
 
 	// Crea una página para cada tema
-	topics.forEach((topic) => {
+
+	for (const topic of topics) {
 		const slug = topic.fieldValue
 			.replace(/\s+/g, "_")
 			.normalize("NFD")
@@ -72,7 +75,7 @@ exports.createPages = async ({ graphql, actions }) => {
 				
 			},
 		});
-	});
+	};
 
 	// Crea la página de índice de temas
 	createPage({
@@ -97,7 +100,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	const categories = resultCategories.data.allNoticia.group;
 
-	categories.forEach((category) => {
+
+	for (const category of categories) {		
 		const slug = category.fieldValue
 			.replace(/\s+/g, "_")
 			.normalize("NFD")
@@ -123,7 +127,7 @@ exports.createPages = async ({ graphql, actions }) => {
 				},
 			});
 		});
-	});
+	};
 
   // Create noticias pages para todas las noticias
   const resultNoticias = await graphql(`
@@ -201,10 +205,6 @@ for (const noticia of allNoticias) {
     console.error(`Error al obtener datos para la noticia ${noticia.sid}:`, error);
   }
 }
-
-
-
-
 
 
 
