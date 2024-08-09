@@ -168,7 +168,7 @@ const allNoticias = await fetchAllData(
 );
 
 if (!allNoticias || allNoticias.length === 0) {
-  reporter.panicOnBuild(`No se pudieron obtener las noticias`);
+  console.log(`❌ No se pudieron obtener las noticias`);
   return;
 }
 
@@ -190,6 +190,7 @@ for (const noticia of allNoticias) {
   try {
     // Obtener los datos completos de la noticia
     const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
+	console.log ('Creando pagina de Noticia:', noticia.sid );
 
     createPage({
       path: path,

@@ -6,7 +6,7 @@ async function fetchAllData(baseUrl, fields = null, maxPages = Infinity) {
 	let hasNextPage = true;
 
 	while (hasNextPage && page <= maxPages) {
-		console.log("Generando Página ", page);
+		console.log(`Generando Nodos ${baseUrl} Página `, page);
 		let url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}page=${page}`;
 		if (fields) {
 			url += `&fields=${fields.join(",")}`;

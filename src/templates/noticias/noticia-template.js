@@ -16,8 +16,8 @@ const Article = ({ pageContext }) => {
 	const { title, time, hometext, bodytext, cattitle, topictext, topicimage } =
 		noticiaCompleta;
 
-  console.log ('Categories: ', pageContext.categories)
-  console.log  ('Topics: ', pageContext.topics)
+  // console.log ('Categories: ', pageContext.categories)
+  // console.log  ('Topics: ', pageContext.topics)
   
 	const fecha = new Date(time).toLocaleDateString();
 
