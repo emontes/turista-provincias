@@ -134,7 +134,7 @@ export const query = graphql`
       }
     }
 
-    locations:allLocation(sort: {fields: hvi_desc_spanish, order: ASC}) {
+    locations:allLocation(sort: {hvi_desc_spanish: ASC}) {
       nodes {
         hviid
         hvi_desc_spanish
@@ -146,7 +146,7 @@ export const query = graphql`
     allNoticia(
       limit: 20
       
-      sort: { fields: time, order: DESC }
+      sort: {time: DESC}
     ) {
       nodes {
         ...NoticiaCard

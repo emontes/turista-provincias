@@ -65,7 +65,7 @@ export const query = graphql`
       }
       limit: $limit
       skip: $skip
-      sort: { fields: time, order: DESC }
+      sort: {time: DESC}
     ) {
       nodes {
         ...NoticiaCard

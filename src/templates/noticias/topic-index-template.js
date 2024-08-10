@@ -57,7 +57,7 @@ export default Tema
 export const query = graphql`
   query {
     allNoticia {
-      group(field: topictext) {
+      group(field: {topictext: SELECT}) {
         fieldValue
         totalCount
         nodes {

@@ -43,16 +43,16 @@ exports.createPages = async ({ graphql, actions }) => {
 	// *** Crea las páginas de los Temas ***
 	const resultTopics = await graphql(`
     {
-      allNoticia {
-        group(field: topictext) {
-          fieldValue
-          totalCount
-          nodes {
-            topicimage
-          }
-        }
-      }
-    }
+		allNoticia {
+			group(field: {topictext: SELECT}) {
+			fieldValue
+			totalCount
+			nodes {
+				topicimage
+			}
+			}
+		}
+	}
   `);
 
 	const topics = resultTopics.data.allNoticia.group;
@@ -73,10 +73,9 @@ exports.createPages = async ({ graphql, actions }) => {
 				totalCount: topic.totalCount,
 				alanguage: "spanish",
 				topics: topics,
-				
 			},
 		});
-	};
+	}
 
 	// Crea la página de índice de temas
 	createPage({
@@ -90,19 +89,18 @@ exports.createPages = async ({ graphql, actions }) => {
 	// *** Create Categories Pages ***
 	const resultCategories = await graphql(`
   {
-    allNoticia {
-      group(field: cattitle) {
-        fieldValue
-        totalCount
-      }
-    }
-  }
+	allNoticia {
+		group(field: {cattitle: SELECT}) {
+		fieldValue
+		totalCount
+		}
+		}
+	}
 `);
 
 	const categories = resultCategories.data.allNoticia.group;
 
-
-	for (const category of categories) {		
+	for (const category of categories) {
 		const slug = category.fieldValue
 			.replace(/\s+/g, "_")
 			.normalize("NFD")
@@ -128,10 +126,10 @@ exports.createPages = async ({ graphql, actions }) => {
 				},
 			});
 		});
-	};
+	}
 
-  // Create noticias pages para todas las noticias
-  const resultNoticias = await graphql(`
+	// Create noticias pages para todas las noticias
+	const resultNoticias = await graphql(`
     {
       allNoticia {
 		nodes {
@@ -141,66 +139,73 @@ exports.createPages = async ({ graphql, actions }) => {
         totalCount
       }
     }
-  `)
+  `);
 
-const numPages = Math.ceil(resultNoticias.data.allNoticia.totalCount / postPerPage)
+	const numPages = Math.ceil(
+		resultNoticias.data.allNoticia.totalCount / postPerPage,
+	);
 
-Array.from({ length: numPages }).forEach((_, i) => {
-  createPage({
-    path: i === 0 ? `/noticias.html` : `/noticias/ultimas/${i + 1}.html`,
-    component: path.resolve('./src/templates/noticias/noticias-template.js'),
-    context: {
-      limit: postPerPage,
-      skip: i * postPerPage,
-      currentPage: i + 1,
-      totalPages: numPages,
-	  topics: topics,
-	  categories: categories,
-    },
-  })
-})
+	Array.from({ length: numPages }).forEach((_, i) => {
+		createPage({
+			path: i === 0 ? `/noticias.html` : `/noticias/ultimas/${i + 1}.html`,
+			component: path.resolve("./src/templates/noticias/noticias-template.js"),
+			context: {
+				limit: postPerPage,
+				skip: i * postPerPage,
+				currentPage: i + 1,
+				totalPages: numPages,
+				topics: topics,
+				categories: categories,
+			},
+		});
+	});
 
-/**
- * NOTICIAS Crea una página para cada noticia
- */
+	/**
+	 * NOTICIAS Crea una página para cada noticia
+	 */
 
-// Función para obtener los datos completos de una noticia
-const getNoticiaCompleta = async (sid) => {
-  const response = await fetch(`http://api.${estadoSlug}.turista.com.mx/noticia/${sid}`);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return await response.json();
-};
+	// Función para obtener los datos completos de una noticia
+	const getNoticiaCompleta = async (sid) => {
+		const response = await fetch(
+			`http://api.${estadoSlug}.turista.com.mx/noticia/${sid}`,
+		);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return await response.json();
+	};
 
-const articlePost = path.resolve('./src/templates/noticias/noticia-template.js');
-const allNoticiasNodes = resultNoticias.data.allNoticia.nodes;
+	const articlePost = path.resolve(
+		"./src/templates/noticias/noticia-template.js",
+	);
+	const allNoticiasNodes = resultNoticias.data.allNoticia.nodes;
 
-// Crear una página para cada noticia
-for (const noticia of allNoticiasNodes) {
-  const path = `article${noticia.sid}.html`;
-  
-  try {
-    // Obtener los datos completos de la noticia
-    const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
-	console.log ('Creando pagina de Noticia:', noticia.sid );
+	// Crear una página para cada noticia
+	for (const noticia of allNoticiasNodes) {
+		const path = `article${noticia.sid}.html`;
 
-    createPage({
-      path: path,
-      component: articlePost,
-      context: {
-        sid: noticia.sid,
-        noticiaCompleta: noticiaCompleta,
-		topics: topics,
-		categories: categories
-      },
-    });
-  } catch (error) {
-    console.error(`❌ Error al obtener datos para la noticia ${noticia.sid}:`, error);
-  }
-}
+		try {
+			// Obtener los datos completos de la noticia
+			const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
+			console.log("Creando pagina de Noticia:", noticia.sid);
 
-
+			createPage({
+				path: path,
+				component: articlePost,
+				context: {
+					sid: noticia.sid,
+					noticiaCompleta: noticiaCompleta,
+					topics: topics,
+					categories: categories,
+				},
+			});
+		} catch (error) {
+			console.error(
+				`❌ Error al obtener datos para la noticia ${noticia.sid}:`,
+				error,
+			);
+		}
+	}
 
 	console.log("Finalizando createPages");
 };

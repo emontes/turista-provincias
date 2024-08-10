@@ -73,7 +73,7 @@ export const query = graphql`
       limit: $limit
       skip: $skip
       #filter: { language: { eq: $language } }
-      sort: { fields: time, order: DESC }
+      sort: {time: DESC}
     ) {
       nodes {
         ...NoticiaCard
