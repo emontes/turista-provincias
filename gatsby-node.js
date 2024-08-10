@@ -1,6 +1,7 @@
 // gatsby-node.js
 
 const path = require("path");
+const fs = require("fs");
 const { fetchAllData, createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
 
@@ -13,7 +14,7 @@ exports.sourceNodes = async (params) => {
 	} catch (error) {
 		console.error("Error al crear nodos:", error);
 	}
-	console.log("Finalizando sourceNodes");
+	console.log("✅ Finalizando sourceNodes");
 };
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -133,6 +134,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const resultNoticias = await graphql(`
     {
       allNoticia {
+		nodes {
+			sid
+			time
+		}
         totalCount
       }
     }
@@ -158,21 +163,6 @@ Array.from({ length: numPages }).forEach((_, i) => {
 /**
  * NOTICIAS Crea una página para cada noticia
  */
-// Leer la variable de entorno para el número máximo de páginas
-const maxPages = parseInt(process.env.MAX_PAGES_FETCH) || Infinity;
-// Usa fetchAllData para obtener todos los SIDs de las noticias
-const allNoticias = await fetchAllData(
-  `http://api.${estadoSlug}.turista.com.mx/noticia`,
-  ["sid"],
-  maxPages // o el número máximo de páginas que quieras obtener
-);
-
-if (!allNoticias || allNoticias.length === 0) {
-  console.log(`❌ No se pudieron obtener las noticias`);
-  return;
-}
-
-const articlePost = path.resolve('./src/templates/noticias/noticia-template.js');
 
 // Función para obtener los datos completos de una noticia
 const getNoticiaCompleta = async (sid) => {
@@ -183,8 +173,11 @@ const getNoticiaCompleta = async (sid) => {
   return await response.json();
 };
 
+const articlePost = path.resolve('./src/templates/noticias/noticia-template.js');
+const allNoticiasNodes = resultNoticias.data.allNoticia.nodes;
+
 // Crear una página para cada noticia
-for (const noticia of allNoticias) {
+for (const noticia of allNoticiasNodes) {
   const path = `article${noticia.sid}.html`;
   
   try {
@@ -203,7 +196,7 @@ for (const noticia of allNoticias) {
       },
     });
   } catch (error) {
-    console.error(`Error al obtener datos para la noticia ${noticia.sid}:`, error);
+    console.error(`❌ Error al obtener datos para la noticia ${noticia.sid}:`, error);
   }
 }
 

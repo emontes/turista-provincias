@@ -46,7 +46,7 @@ async function fetchAllData(baseUrl, fields = null, maxPages = Infinity) {
 
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 		} catch (error) {
-			console.error(`Error fetching data from ${url}:`, error);
+			console.error(`❌ Error fetching data from ${url}:`, error);
 			hasNextPage = false;
 		}
 	}
