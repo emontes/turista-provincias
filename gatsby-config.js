@@ -13,12 +13,12 @@ module.exports = {
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    siteData.googleAnalytics,
+    // siteData.googleAnalytics,
     siteData.manifest,
-    `gatsby-plugin-offline`,
+    "gatsby-plugin-offline",
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    `gatsby-plugin-mdx`,
+    "gatsby-plugin-mdx",
     siteData.sourceFileSystem,   
     // {
     //   resolve: `gatsby-plugin-algolia`,
@@ -31,26 +31,26 @@ module.exports = {
     //   },
     // },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/locales`,
-        name: `locale`,
+        name: "locale",
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `topicImages`,
+        name: "topicImages",
         path: `${__dirname}/src/assets/images/topics`,
       },
     },
     {
       resolve: 'gatsby-plugin-react-i18next',
       options: {
-        localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
+        localeJsonSourceName: "locale", // name given to `gatsby-source-filesystem` plugin.
         languages,
         defaultLanguage,
-        siteUrl: `https://turista.com.mx`,
+        siteUrl: "https://turista.com.mx",
         i18nextOptions: {
           // debug: true,
           fallbackLng: defaultLanguage,

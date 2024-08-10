@@ -6208,14 +6208,6 @@ gatsby-plugin-algolia@^0.26.0:
     deep-equal "^2.0.5"
     lodash.chunk "^4.2.0"
 
-gatsby-plugin-google-gtag@^4.23.0:
-  version "4.25.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-gtag/-/gatsby-plugin-google-gtag-4.25.0.tgz#cfea9ab34cb9c053440757e76f2863f2aad310bf"
-  integrity sha512-mzhjor5JYct1qQWLKayAHuyOHGHW3TT8Ns5fgdmSlqsmAR0X6dAh7zqSfqbvetGU309PZrRXeOrL92vjmeSIdQ==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    minimatch "^3.1.2"
-
 gatsby-plugin-htaccess@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-htaccess/-/gatsby-plugin-htaccess-1.4.0.tgz#e7629cfca0e6cf12e714c6ad29162a12b0c60e89"

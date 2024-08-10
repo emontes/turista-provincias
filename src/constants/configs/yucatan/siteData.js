@@ -14,12 +14,12 @@ const siteData = {
       slogan: 'La tierra de los Elegidos',
     },
   },
-  googleAnalytics: {
-    resolve: 'gatsby-plugin-google-gtag',
-    options: {
-      trackingIds: ['G-WGT7JK0T5T'],
-    },
-  },
+  // googleAnalytics: {
+  //   resolve: 'gatsby-plugin-google-gtag',
+  //   options: {
+  //     trackingIds: ['G-WGT7JK0T5T'],
+  //   },
+  // },
   manifest: {
     resolve: 'gatsby-plugin-manifest',
     options: {
