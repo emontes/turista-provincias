@@ -5,12 +5,22 @@ const fs = require("fs");
 const { fetchAllData, createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
 
-exports.sourceNodes = async (params) => {
+exports.sourceNodes = async (params, { parentSpan }) => {
+	const { actions, createNodeId, createContentDigest, getCache } = params;
+	const { createNode, touchNode } = actions;
+
 	console.log("Iniciando sourceNodes");
 	try {
+		const cache = getCache("custom-source-nodes");
+		const lastFetchTime = (await cache.get("lastFetchTime")) || null;
+		console.log("Última fecha de fetching:", lastFetchTime);
+
 		console.log("Volviendo a crear nodos");
-		await createNodes(params);
+		const newFetchTime = await createNodes(params, lastFetchTime);
 		console.log("Nodos creados exitosamente");
+
+		await cache.set("lastFetchTime", newFetchTime);
+		console.log("Nueva fecha de fetching guardada:", newFetchTime);
 	} catch (error) {
 		console.error("Error al crear nodos:", error);
 	}
@@ -79,7 +89,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	// Crea la página de índice de temas
 	createPage({
-		path: `/noticias/tema`,
+		path: "/noticias/tema",
 		component: path.resolve("./src/templates/noticias/topic-index-template.js"),
 		context: {
 			topics: topics,
@@ -181,13 +191,17 @@ exports.createPages = async ({ graphql, actions }) => {
 	const allNoticiasNodes = resultNoticias.data.allNoticia.nodes;
 
 	// Crear una página para cada noticia
+	let contador = 0;
 	for (const noticia of allNoticiasNodes) {
 		const path = `article${noticia.sid}.html`;
 
 		try {
 			// Obtener los datos completos de la noticia
 			const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
-			console.log("Creando pagina de Noticia:", noticia.sid);
+			contador++;
+			if (contador % 20 === 0 || contador === 1) {
+				console.log("Creando página de Noticia:", noticia.sid);
+			}
 
 			createPage({
 				path: path,
@@ -196,6 +210,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					sid: noticia.sid,
 					noticiaCompleta: noticiaCompleta,
 					topics: topics,
+					topicimage: noticiaCompleta.topicimage,
 					categories: categories,
 				},
 			});
@@ -206,6 +221,25 @@ exports.createPages = async ({ graphql, actions }) => {
 			);
 		}
 	}
+	console.log(`✅ Total de noticias creadas: ${contador}`);
+
+	/* --------------------------------------------------
+     ------------ Información (Sections)  ---------------
+     --------------------------------------------------*/
+	const resultSections = await graphql(`	
+	{
+	  allSection {
+		nodes {
+		  secid
+			secname
+			color
+			parentid
+			language
+		}
+		totalCount
+	  }
+	}
+  `);
 
 	console.log("Finalizando createPages");
 };

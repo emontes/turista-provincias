@@ -6,6 +6,10 @@ const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
 const { languages, defaultLanguage } = require('./languages.js')
 
 module.exports = {
+  flags: {
+    PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    PRESERVE_WEBPACK_CACHE: true,
+  },
   siteMetadata: siteData.siteMetadata,
   plugins: [
     'gatsby-plugin-htaccess', // Para que haga las redirecciones en Apache2
@@ -15,11 +19,16 @@ module.exports = {
     'gatsby-plugin-sitemap',
     siteData.manifest,
     "gatsby-plugin-offline",
-    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        failOnError: false,
+      },
+    },
     'gatsby-transformer-sharp',
     siteData.sourceFileSystem,   
     {
-      resolve: `gatsby-plugin-algolia`,
+      resolve: 'gatsby-plugin-algolia',
       options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,

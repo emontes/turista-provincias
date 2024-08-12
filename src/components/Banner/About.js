@@ -16,7 +16,6 @@ const About = (props) => {
   return (
     <Wrapper>
       <GatsbyImage
-        //image={getImage(displayImage.localFile)}
         image={getImage(displayImage.childImageSharp)}
         className="img"
         alt={props.title}

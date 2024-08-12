@@ -10,10 +10,12 @@ import BannerAdsense from "../../utilities/BannerAdsense";
 import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby-plugin-react-i18next";
+import { graphql } from "gatsby";
 
-const Article = ({ pageContext }) => {
+
+const Article = ({ data, pageContext }) => {
 	const { noticiaCompleta } = pageContext;
-	const { title, time, hometext, bodytext, cattitle, topictext, topicimage } =
+	const { title, time, hometext, bodytext, cattitle, topictext } =
 		noticiaCompleta;
 
   // console.log ('Categories: ', pageContext.categories)
@@ -93,14 +95,13 @@ const Article = ({ pageContext }) => {
                 )}	
 							</Metadata>
 						</article>
-
-						
 					</div>
           <Banner
-							title="Noticia"
+							title={`Noticia en ${topictext || cattitle}`}
+              description={topictext ? `Noticia en el tema ${topictext}` : `Noticia en la categoría ${cattitle}`}
 							categories={pageContext.categories}
               topics={pageContext.topics}
-              image={topicimage}
+              image={data.image}
 						/>
 				</div>
 			</Wrapper>
@@ -201,6 +202,16 @@ const Topic = styled(Link)`
 
   &:hover {
     background-color: #1e88e5;
+  }
+`;
+
+export const query = graphql`
+  query($topicimage: String!) {
+    image: file(relativePath: { eq: $topicimage }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+    }
   }
 `;
 export default Article;
