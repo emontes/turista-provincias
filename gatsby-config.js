@@ -5,6 +5,21 @@ const estadoSlug = process.env.ESTADO_SLUG
 const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
 const { languages, defaultLanguage } = require('./languages.js')
 
+/**
+ * This function is called by Gatsby during the build process.
+ * It's used to configure the webpack configuration for the build process.
+ *
+ * La vamos a usar para desactivar la minificación en producción (Es temporalmente)
+ */
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  // Only run this during the build-javascript stage
+  if (stage === "build-javascript") {
+    actions.setWebpackConfig({
+      devtool: "source-map",
+    });
+  }
+};
+
 module.exports = {
   flags: {
     PRESERVE_FILE_DOWNLOAD_CACHE: true,
