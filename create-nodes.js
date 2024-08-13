@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-async function fetchAllData(baseUrl, fields = null, maxPages = Infinity, lastFetchTime = null) {
+async function fetchAllData(baseUrl, maxPages = Infinity, lastFetchTime = null) {
   let page = 1;
   let allData = [];
   let hasNextPage = true;
@@ -9,12 +9,10 @@ async function fetchAllData(baseUrl, fields = null, maxPages = Infinity, lastFet
   while (hasNextPage && page <= maxPages) {
     console.log(`Generando Nodos ${baseUrl} Página `, page);
     let url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}page=${page}`;
-    if (fields) {
-      url += `&fields=${fields.join(",")}`;
-    }
+
     if (lastFetchTime) {
       url += `&last_updated=${encodeURIComponent(lastFetchTime)}`;
-	  console.log ('🔥 El url con last_updated es: ', url);
+      console.log('🔗 El url con last_updated es: ', url);
     }
 
     try {
@@ -60,199 +58,103 @@ async function fetchAllData(baseUrl, fields = null, maxPages = Infinity, lastFet
 }
 
 async function createNodes({ actions, createNodeId, createContentDigest, getNodesByType }, lastFetchTime = null) {
-	console.log("Iniciando creación de nodos");
-	const { createNode, touchNode } = actions;
-	const estadoSlug = process.env.ESTADO_SLUG;
+  console.log("Iniciando creación de nodos");
+  const { createNode, touchNode } = actions;
+  const estadoSlug = process.env.ESTADO_SLUG;
+
+//    // Usar el caché para almacenar la última vez que se crearon los nodos
+//    const lastNodeBuildTime = await cache.get('lastNodeBuildTime');
   
-	const maxPages = Number.parseInt(process.env.MAX_PAGES_FETCH) || Number.POSITIVE_INFINITY;
-	console.log("Número máximo de páginas:", maxPages);
-  
-	const newFetchTime = new Date().toISOString();
+//    // Si la última construcción de nodos fue hace menos de 5 minutos, no hacer nada
+//    if (lastNodeBuildTime && (Date.now() - new Date(lastNodeBuildTime).getTime() < 5 * 60 * 1000)) {
+// 	 console.log("Saltando la creación de nodos, la última construcción fue hace menos de 5 minutos");
+// 	 return null;
+//    }
+
+  const maxPages = Number.parseInt(process.env.MAX_PAGES_FETCH) || Number.POSITIVE_INFINITY;
+  console.log("Número máximo de páginas:", maxPages);
+
+  const newFetchTime = new Date().toISOString();
 
   try {
-    console.log("Obteniendo datos de locations");
-    const locations = await fetchAllData(
-      `http://api.${estadoSlug}.turista.com.mx/estado-vistas/1`,
-      null,
-      maxPages,
-      lastFetchTime
-    );
-    console.log(`${locations.length} locations obtenidas`);
-
-    console.log("Obteniendo datos de informacion (SECTIONS)");
-    const sections = await fetchAllData(
-      `http://api.${estadoSlug}.turista.com.mx/sections`,
-      [],
-      maxPages,
-      lastFetchTime
-    );
-
-    console.log("Obteniendo datos de noticias (sin bodytext)");
-    const noticias = await fetchAllData(
-      `http://api.${estadoSlug}.turista.com.mx/noticia`,
-      ["sid", "title", "time", "catid", "topic", "hometext"],
-      maxPages,
-      lastFetchTime
-    );
-    console.log(`${noticias.length} noticias obtenidas`);
-
-    console.log("Obteniendo datos de topics");
-    const topics = await fetchAllData(
-      `http://api.${estadoSlug}.turista.com.mx/topics`,
-      null,
-      maxPages,
-      lastFetchTime
-    );
-    console.log(`${topics.length} topics obtenidos`);
-
-    console.log("Obteniendo datos de categories");
-    const categories = await fetchAllData(
-      `http://api.${estadoSlug}.turista.com.mx/categories`,
-      null,
-      maxPages,
-      lastFetchTime
-    );
-    console.log(`${categories.length} categories obtenidas`);
-
-    // Obtén los nodos existentes
-    const existingLocations = getNodesByType('Location');
-    const existingSections = getNodesByType('Section');
-    const existingTopics = getNodesByType('Topic');
-    const existingCategories = getNodesByType('Category');
-    const existingNoticias = getNodesByType('Noticia');
-
-    // Create or update nodes for locations
-    for (const location of locations) {
-      const nodeId = createNodeId(`location-${location.hviid}`);
-      const existingNode = existingLocations.find(node => node.id === nodeId);
-
-      if (existingNode) {
-        touchNode(existingNode);
-      } else {
-        const node = {
-          ...location,
+    // Función helper para actualizar o crear nodos
+    const updateOrCreateNodes = async (fetchFunction, nodeType, idField) => {
+      const existingNodes = getNodesByType(nodeType);
+      const updatedData = await fetchFunction();
+      
+      console.log(`${nodeType}: Existentes: ${existingNodes.length}, Actualizados: ${updatedData.length}`);
+      
+      const existingNodesMap = new Map(existingNodes.map(n => [n[idField], n]));
+      
+      for (const item of updatedData) {
+        const nodeId = createNodeId(`${nodeType.toLowerCase()}-${item[idField]}`);
+        if (existingNodesMap.has(item[idField])) {
+          const existingNode = existingNodesMap.get(item[idField]);
+          touchNode(existingNode);
+        }
+        createNode({
+          ...item,
           id: nodeId,
           parent: null,
           children: [],
           internal: {
-            type: "Location",
-            content: JSON.stringify(location),
-            contentDigest: createContentDigest(location),
+            type: nodeType,
+            content: JSON.stringify(item),
+            contentDigest: createContentDigest(item),
           },
-        };
-        createNode(node);
-      }
-    }
-
-    // Create or update nodes for Sections
-    for (const section of sections) {
-      const nodeId = createNodeId(`section-${section.secid}`);
-      const existingNode = existingSections.find(node => node.id === nodeId);
-
-      if (existingNode) {
-        touchNode(existingNode);
-      } else {
-        const node = {
-          ...section,
-          id: nodeId,
-          parent: null,
-          children: [],
-          internal: {
-            type: "Section",
-            content: JSON.stringify(section),
-            contentDigest: createContentDigest(section),
-          },
-        };
-        createNode(node);
-      }
-    }
-
-    // Create or update nodes for topics
-    for (const topic of topics) {
-      const nodeId = createNodeId(`topic-${topic.topicid}`);
-      const existingNode = existingTopics.find(node => node.id === nodeId);
-
-      if (existingNode) {
-        touchNode(existingNode);
-      } else {
-        const node = {
-          ...topic,
-          id: nodeId,
-          parent: null,
-          children: [],
-          internal: {
-            type: "Topic",
-            content: JSON.stringify(topic),
-            contentDigest: createContentDigest(topic),
-          },
-        };
-        createNode(node);
-      }
-    }
-
-    // Create or update nodes for categories
-    for (const category of categories) {
-      const nodeId = createNodeId(`category-${category.catid}`);
-      const existingNode = existingCategories.find(node => node.id === nodeId);
-
-      if (existingNode) {
-        touchNode(existingNode);
-      } else {
-        const node = {
-          ...category,
-          id: nodeId,
-          parent: null,
-          children: [],
-          internal: {
-            type: "Category",
-            content: JSON.stringify(category),
-            contentDigest: createContentDigest(category),
-          },
-        };
-        createNode(node);
-      }
-    }
-
-    // Create or update nodes for noticias
-    for (const noticia of noticias) {
-      const nodeId = createNodeId(`noticia-${noticia.sid}`);
-      const existingNode = existingNoticias.find(node => node.id === nodeId);
-
-      if (existingNode) {
-        touchNode(existingNode);
-      } else {
-        const node = {
-          ...noticia,
-          id: nodeId,
-          parent: null,
-          children: [],
-          internal: {
-            type: "Noticia",
-            content: JSON.stringify(noticia),
-            contentDigest: createContentDigest(noticia),
-          },
-        };
-        createNode(node);
-
-        actions.createNodeField({
-          node,
-          name: "topic___NODE",
-          value: createNodeId(`topic-${noticia.topic}`),
         });
-
-        actions.createNodeField({
-          node,
-          name: "category___NODE",
-          value: createNodeId(`category-${noticia.catid}`),
-        });
+        existingNodesMap.delete(item[idField]);
       }
-    }
+      
+      for (const [, node] of existingNodesMap) {
+        touchNode(node);
+      }
+      
+      console.log(`${nodeType}: Nodos no actualizados: ${existingNodesMap.size}`);
+    };
+
+    // Locations
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/estado-vistas/1`, maxPages, lastFetchTime),
+      'Location',
+      'hviid'
+    );
+
+    // Sections
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/sections`, maxPages, lastFetchTime),
+      'Section',
+      'secid'
+    );
+
+    // Noticias
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/noticia`,  maxPages, lastFetchTime),
+      'Noticia',
+      'sid'
+    );
+
+    // Topics
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/topics`, maxPages, lastFetchTime),
+      'Topic',
+      'topicid'
+    );
+
+    // Categories
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/categories`, maxPages, lastFetchTime),
+      'Category',
+      'catid'
+    );
 
     console.log("Finalizando creación de nodos");
+	 // Actualizar el tiempo de la última construcción de nodos
+	//  await cache.set('lastNodeBuildTime', new Date().toISOString());
     return newFetchTime;
   } catch (error) {
     console.error("Error en la creación de nodos:", error);
-	return null;
+    return null;
   }
 }
 

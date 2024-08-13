@@ -53,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	// *** Crea las páginas de los Temas ***
 	const resultTopics = await graphql(`
     {
-		allNoticia {
+		allNoticia(sort: {time: DESC}) {
 			group(field: {topictext: SELECT}) {
 			fieldValue
 			totalCount
@@ -145,6 +145,14 @@ exports.createPages = async ({ graphql, actions }) => {
 		nodes {
 			sid
 			time
+			title
+			hometext
+			bodytext
+			catid
+			cattitle
+			topic
+			topicimage
+			topictext
 		}
         totalCount
       }
@@ -174,17 +182,6 @@ exports.createPages = async ({ graphql, actions }) => {
 	 * NOTICIAS Crea una página para cada noticia
 	 */
 
-	// Función para obtener los datos completos de una noticia
-	const getNoticiaCompleta = async (sid) => {
-		const response = await fetch(
-			`http://api.${estadoSlug}.turista.com.mx/noticia/${sid}`,
-		);
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		return await response.json();
-	};
-
 	const articlePost = path.resolve(
 		"./src/templates/noticias/noticia-template.js",
 	);
@@ -197,10 +194,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
 		try {
 			// Obtener los datos completos de la noticia
-			const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
+			// const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
 			contador++;
-			if (contador % 20 === 0 || contador === 1) {
-				console.log("Creando página de Noticia:", noticia.sid);
+			if (contador % 40 === 0 || contador === 1) {
+				console.log(`Creando Noticia: ${noticia.sid} => ${contador} de ${allNoticiasNodes.length}`);
 			}
 
 			createPage({
@@ -208,9 +205,10 @@ exports.createPages = async ({ graphql, actions }) => {
 				component: articlePost,
 				context: {
 					sid: noticia.sid,
-					noticiaCompleta: noticiaCompleta,
+					// noticiaCompleta: noticiaCompleta,
+					noticia,
 					topics: topics,
-					topicimage: noticiaCompleta.topicimage,
+					topicimage: noticia.topicimage,
 					categories: categories,
 				},
 			});

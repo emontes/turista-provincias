@@ -14,12 +14,8 @@ import { graphql } from "gatsby";
 
 
 const Article = ({ data, pageContext }) => {
-	const { noticiaCompleta } = pageContext;
 	const { title, time, hometext, bodytext, cattitle, topictext } =
-		noticiaCompleta;
-
-  // console.log ('Categories: ', pageContext.categories)
-  // console.log  ('Topics: ', pageContext.topics)
+		pageContext.noticia;
   
 	const fecha = new Date(time).toLocaleDateString();
 
@@ -68,12 +64,12 @@ const Article = ({ data, pageContext }) => {
 							</div>
 
 							<div
-								dangerouslySetInnerHTML={{ __html: noticiaCompleta.hometext }}
+								dangerouslySetInnerHTML={{ __html: hometext }}
 							/>
 							<BannerAdsense className="h60 mt1 mb1" format="fluid" />
 							{bodytext && (
 								<div
-									dangerouslySetInnerHTML={{ __html: noticiaCompleta.bodytext }}
+									dangerouslySetInnerHTML={{ __html: bodytext }}
 								/>
 							)}
 							<Metadata>
@@ -87,7 +83,7 @@ const Article = ({ data, pageContext }) => {
 
                 {topictext && (
                   <Topic
-									to={`/noticias/tema/${topictext?.replace(/\s+/g, "-")}.html`}
+									to={`/noticias/tema/${topictext?.replace(/\s+/g, "_")}.html`}
 								>
 									{topictext || "Sin tema"}
 								</Topic>
@@ -101,7 +97,7 @@ const Article = ({ data, pageContext }) => {
               description={topictext ? `Noticia en el tema ${topictext}` : `Noticia en la categoría ${cattitle}`}
 							categories={pageContext.categories}
               topics={pageContext.topics}
-              image={data.image}
+              image={data.image || ''}
 						/>
 				</div>
 			</Wrapper>
@@ -206,7 +202,7 @@ const Topic = styled(Link)`
 `;
 
 export const query = graphql`
-  query($topicimage: String!) {
+  query($topicimage: String) {
     image: file(relativePath: { eq: $topicimage }) {
       childImageSharp {
         gatsbyImageData
