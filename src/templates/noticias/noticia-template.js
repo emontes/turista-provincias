@@ -1,5 +1,3 @@
-// src/templates/noticias/noticia-template.js
-
 import React from "react";
 import Layout from "../../components/Layout";
 import styled from "styled-components";
@@ -19,39 +17,26 @@ const Article = ({ data, pageContext }) => {
   
 	const fecha = new Date(time).toLocaleDateString();
 
-	// let displayImage
-	// if (image) {
-	//   displayImage = image
-	// } else {
-	//   if (topics[0]) displayImage = topics[0].image
-	// }
-
 	return (
 		<Layout linkExterno="/noticias" seoTitle={title.substring(0, 40)}>
 			<Seo
 				title={title}
 				description={hometext ? hometext.substring(0, 250) : ""}
-				// image={
-				//   displayImage ? getSrc(displayImage.localFile.childImageSharp) : ''
-				// }
 			/>
-			<Wrapper className="section">
-				<div align="center">
-					<BannerAdsense className="h90 mb1" format="fluid" />
-				</div>
+			<div className="section">
+				{/* <div align="center">
+					<BannerAdsense className="h90 mb-1" format="fluid" />
+				</div> */}
 				<TopNavSec />
 				<div className="flex flex-col xl:flex-row gap-4">
-					<div
-						className="cont-area"
-						style={{ background: "var(--clr-grey-10)" }}
-					>
-						<article className="article">
-							<div className="post-info">
-								<h1>{title}</h1>
+					<div className="bg-gray-100 p-4 rounded-lg shadow-md">
+						<article>
+							<div className="text-center mb-8">
+								<h1 className="text-2xl font-bold mb-4">{title}</h1>
 
-								<div className="date-box text-slate-400">
-									<span className="date">
-										<FaRegClock className="icon" />
+								<div className="flex justify-between items-center text-gray-400 mb-4">
+									<span className="flex items-center">
+										<FaRegClock className="text-primary5 mr-2" />
 										{fecha}
 									</span>
 									<div className="flex gap-2 items-center">
@@ -60,144 +45,51 @@ const Article = ({ data, pageContext }) => {
 									</div>
 								</div>
 
-								<div className="underline" />
+								<div className="h-1 w-20 bg-gray-900 mx-auto my-4" />
 							</div>
 
-							<div
-								dangerouslySetInnerHTML={{ __html: hometext }}
-							/>
-							<BannerAdsense className="h60 mt1 mb1" format="fluid" />
+							<div dangerouslySetInnerHTML={{ __html: hometext }} />
+							{/* <BannerAdsense className="h60 mt-1 mb-1" format="fluid" /> */}
 							{bodytext && (
-								<div
-									dangerouslySetInnerHTML={{ __html: bodytext }}
-								/>
+								<div dangerouslySetInnerHTML={{ __html: bodytext }} />
 							)}
-							<Metadata>
+							<div className="flex justify-between text-sm text-gray-600">
 								{cattitle && (
-									<Category
+									<Link
 										to={`/noticias/${cattitle?.replace(/\s+/g, "-")}.html`}
+										className="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition duration-300"
 									>
 										{cattitle || "Sin categoría"}
-									</Category>
+									</Link>
 								)}
 
-                {topictext && (
-                  <Topic
-									to={`/noticias/tema/${topictext?.replace(/\s+/g, "_")}.html`}
-								>
-									{topictext || "Sin tema"}
-								</Topic>
-                  
-                )}	
-							</Metadata>
+								{topictext && (
+									<Link
+										to={`/noticias/tema/${topictext?.replace(/\s+/g, "_")}.html`}
+										className="bg-blue-600 text-white px-4 py-2 rounded-full font-bold ml-4 hover:bg-blue-700 transition duration-300"
+									>
+										{topictext || "Sin tema"}
+									</Link>
+								)}	
+							</div>
 						</article>
 					</div>
-          <Banner
-							title={`Noticia en ${topictext || cattitle}`}
-              description={topictext ? `Noticia en el tema ${topictext}` : `Noticia en la categoría ${cattitle}`}
-							categories={pageContext.categories}
-              topics={pageContext.topics}
-              image={data.image || ''}
-						/>
+					<Banner
+						title={`Noticia en ${topictext || cattitle}`}
+						description={topictext ? `Noticia en el tema ${topictext}` : `Noticia en la categoría ${cattitle}`}
+						categories={pageContext.categories}
+						topics={pageContext.topics}
+						image={data.image || ''}
+					/>
 				</div>
-			</Wrapper>
+			</div>
 		</Layout>
 	);
 };
 
 const Wrapper = styled.section`
-  .article {
-    padding: 0 1rem;
-    margin: 0 0 2rem;
-  }
-  .category {
-    color: var(--clr-white);
-    background: var(--clr-grey-4);
-    border-radius: var(--radius);
-    padding: 0.25rem 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: var(--spacing);
-  }
-  .topic {
-    background: var(--clr-grey-8);
-    margin-right: 1rem;
-  }
-  .post-info {
-    margin: 2rem 0 4rem 0;
-    text-align: center;
-
-    h1 {
-      margin: 1.25rem 0;
-      font-size: 1.9rem;
-      font-weight: 400;
-    }
-
-    .date-box {
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      & .date {
-        display: flex;
-        align-items: center;
-        & .icon {
-          color: ${(props) => props.theme.colors.primary5};
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-
-  .image {
-    width: 100%;
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-  }
-
-  .underline {
-    width: 5rem;
-    height: 1px;
-    background: var(--clr-grey-9);
-    margin: 1rem auto;
-    margin-bottom: 1rem;
-  }
-`;
-
-const Metadata = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: #666;
-`;
-
-const Category = styled(Link)`
-  background-color: #4caf50;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-const Topic = styled(Link)`
-  background-color: #2196f3;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 1rem;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #1e88e5;
+  .icon {
+    color: ${(props) => props.theme.colors.primary5};
   }
 `;
 
@@ -210,4 +102,5 @@ export const query = graphql`
     }
   }
 `;
+
 export default Article;

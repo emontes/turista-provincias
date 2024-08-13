@@ -23,6 +23,7 @@ exports.sourceNodes = async (params, { parentSpan }) => {
 		console.log("Nueva fecha de fetching guardada:", newFetchTime);
 	} catch (error) {
 		console.error("Error al crear nodos:", error);
+		throw error;
 	}
 	console.log("✅ Finalizando sourceNodes");
 };
