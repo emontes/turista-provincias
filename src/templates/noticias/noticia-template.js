@@ -10,8 +10,29 @@ import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby-plugin-react-i18next";
 import { graphql } from "gatsby";
 
-
 const Article = ({ data, pageContext }) => {
+	const { title, time, hometext, bodytext, cattitle, topictext } =
+		pageContext.noticia;
+  
+	const fecha = new Date(time).toLocaleDateString();
+
+	return (
+		<Layout linkExterno="/noticias" seoTitle={title.substring(0, 40)}>
+			<Seo
+				title={title}
+				description={hometext ? hometext.substring(0, 250) : ""}
+			/>
+			<div className="section">
+				{/* <div align="center">
+					<BannerAdsense className="h90 mb-1" format="fluid" />
+				</div> */}
+				<TopNavSec />
+				
+			</div>
+		</Layout>
+	);
+};
+const ArticleTest = ({ data, pageContext }) => {
 	const { title, time, hometext, bodytext, cattitle, topictext } =
 		pageContext.noticia;
   
