@@ -2,7 +2,7 @@
 
 const path = require("path");
 const fs = require("fs");
-const { fetchAllData, createNodes } = require("./create-nodes");
+const { createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
 
 exports.sourceNodes = async (params, { parentSpan }) => {
@@ -39,8 +39,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	// ** crea el index
 	createPage({
-		path: `/`,
-		component: path.resolve(`./src/templates/index-template.js`),
+		path: '/',
+		component: path.resolve('./src/templates/index-template.js'),
 		context: {
 			estadoSlug: estadoSlug,
 		},
@@ -144,16 +144,9 @@ exports.createPages = async ({ graphql, actions }) => {
     {
       allNoticia {
 		nodes {
-			sid
-			time
-			title
-			hometext
-			bodytext
-			catid
-			cattitle
-			topic
+			id
+			sid			
 			topicimage
-			topictext
 		}
         totalCount
       }
@@ -205,9 +198,7 @@ exports.createPages = async ({ graphql, actions }) => {
 				path: path,
 				component: articlePost,
 				context: {
-					sid: noticia.sid,
-					// noticiaCompleta: noticiaCompleta,
-					noticia,
+					id: noticia.id,
 					topics: topics,
 					topicimage: noticia.topicimage,
 					categories: categories,

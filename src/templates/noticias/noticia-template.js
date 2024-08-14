@@ -10,31 +10,10 @@ import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby-plugin-react-i18next";
 import { graphql } from "gatsby";
 
+
 const Article = ({ data, pageContext }) => {
 	const { title, time, hometext, bodytext, cattitle, topictext } =
-		pageContext.noticia;
-  
-	const fecha = new Date(time).toLocaleDateString();
-
-	return (
-		<Layout linkExterno="/noticias" seoTitle={title.substring(0, 40)}>
-			<Seo
-				title={title}
-				description={hometext ? hometext.substring(0, 250) : ""}
-			/>
-			<div className="section">
-				{/* <div align="center">
-					<BannerAdsense className="h90 mb-1" format="fluid" />
-				</div> */}
-				<TopNavSec />
-				
-			</div>
-		</Layout>
-	);
-};
-const ArticleTest = ({ data, pageContext }) => {
-	const { title, time, hometext, bodytext, cattitle, topictext } =
-		pageContext.noticia;
+		data.noticia;
   
 	const fecha = new Date(time).toLocaleDateString();
 
@@ -115,7 +94,20 @@ const Wrapper = styled.section`
 `;
 
 export const query = graphql`
-  query($topicimage: String) {
+  query($id: String!, $topicimage: String) {
+    noticia: noticia(id: { eq: $id }) {
+      sid
+      time
+      title
+      hometext
+      bodytext
+      catid
+      cattitle
+      topic
+      topicimage
+      topictext
+    }
+
     image: file(relativePath: { eq: $topicimage }) {
       childImageSharp {
         gatsbyImageData

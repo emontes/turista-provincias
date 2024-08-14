@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-async function fetchAllData(baseUrl, maxPages = Infinity, lastFetchTime = null) {
+async function fetchAllData(baseUrl, maxPages = Number.POSITIVE_INFINITY, lastFetchTime = null) {
   let page = 1;
   let allData = [];
   let hasNextPage = true;
@@ -61,15 +61,6 @@ async function createNodes({ actions, createNodeId, createContentDigest, getNode
   console.log("Iniciando creación de nodos");
   const { createNode, touchNode } = actions;
   const estadoSlug = process.env.ESTADO_SLUG;
-
-//    // Usar el caché para almacenar la última vez que se crearon los nodos
-//    const lastNodeBuildTime = await cache.get('lastNodeBuildTime');
-  
-//    // Si la última construcción de nodos fue hace menos de 5 minutos, no hacer nada
-//    if (lastNodeBuildTime && (Date.now() - new Date(lastNodeBuildTime).getTime() < 5 * 60 * 1000)) {
-// 	 console.log("Saltando la creación de nodos, la última construcción fue hace menos de 5 minutos");
-// 	 return null;
-//    }
 
   const maxPages = Number.parseInt(process.env.MAX_PAGES_FETCH) || Number.POSITIVE_INFINITY;
   console.log("Número máximo de páginas:", maxPages);
@@ -149,8 +140,6 @@ async function createNodes({ actions, createNodeId, createContentDigest, getNode
     );
 
     console.log("Finalizando creación de nodos");
-	 // Actualizar el tiempo de la última construcción de nodos
-	//  await cache.set('lastNodeBuildTime', new Date().toISOString());
     return newFetchTime;
   } catch (error) {
     console.error("Error en la creación de nodos:", error);
