@@ -33,7 +33,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     siteData.manifest,
-    "gatsby-plugin-offline",
     {
       resolve: 'gatsby-plugin-sharp',
       options: {
