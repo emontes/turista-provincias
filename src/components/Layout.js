@@ -12,7 +12,10 @@ import device from '../assets/themes/device'
 
 import BannerAdsense from '../utilities/BannerAdsense'
 
-const Layout = ({
+const Layout = ({ children }) => {
+  return <>{children}</>  
+}
+const LayoutOld = ({
   children,
   topComponent, //optional component for substitute top banner
   heroImg,

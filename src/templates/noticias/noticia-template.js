@@ -10,13 +10,7 @@ import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby-plugin-react-i18next";
 import { graphql } from "gatsby";
 
-const Article = () => {
-		return (
-			<h1>Article</h1>
-		)
-}
-
-const ArticleTest = ({ data, pageContext }) => {
+const Article = ({ data, pageContext }) => {
 	const { title, time, hometext, bodytext, cattitle, topictext } =
 		data.noticia;
   
