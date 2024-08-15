@@ -15,13 +15,13 @@ const Informacion = ({ data, pageContext }) => {
 	let seoDescription = `Artículos informativos sobre el estado de ${t(
 		metadata.estado.name,
 	)}, México`;
-	if (pageContext.language == "en") {
+	if (pageContext.language === "en") {
 		seoTitle = `Information about ${t(metadata.estado.name)}`;
 		seoDescription = `Informative articles regarding the state of ${t(
 			metadata.estado.name,
 		)}, Mexico`;
 	}
-	console.log("Sections:", pageContext.sections);
+
 	return (
 		<Layout
       heroImg={data.image ? data.image.childImageSharp : ''}
@@ -55,7 +55,7 @@ const Informacion = ({ data, pageContext }) => {
 						<div
 							key={item.secid}
 							className="m-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-							style={{ width: "200px", height: "150px" }}
+							style={{ width: "200px", height: "170px" }}
 						>
 							<div
 								className="p-3 text-center font-bold text-white"
@@ -66,7 +66,9 @@ const Informacion = ({ data, pageContext }) => {
 							<div className="bg-white h-full p-4 flex flex-col justify-between">
 								<p className="text-sm text-gray-700">{item.metadescrip}</p>
 								<Link
-									to={`/informacion/${item.secname}`}
+									to={`/informacion/${item.secname.replace(/\s+/g, "_")
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")}`}
 									className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300 text-center"
 								>
 									Visitar
@@ -79,6 +81,7 @@ const Informacion = ({ data, pageContext }) => {
 		</Layout>
 	);
 };
+
 
 export default Informacion;
 

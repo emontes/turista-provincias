@@ -8,7 +8,7 @@ import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 
 import Seo from "../components/Seo";
 import BlockGrey from "../components/atoms/BlockGrey";
-// import BannerAdsense from '../utilities/BannerAdsense' 
+import BannerAdsense from '../utilities/BannerAdsense' 
 // const BannerAdsense = React.lazy(() => import("../utilities/BannerAdsense"));
 
 // import ListaDestinos from '../components/Home/location-list'
@@ -71,11 +71,11 @@ const Index = ({ data, pageContext }) => {
         </div>
 
         <div>
-          {/* <BlockGrey title={t('Compartir')}>
+          <BlockGrey title={t('Compartir')}>
             <Compartir title={t('¿Ya conoces el Turista?')} />
-          </BlockGrey> */}
+          </BlockGrey>
 
-          {/* <Suspense fallback={<div>Cargando...</div>}>
+          <Suspense fallback={<div>Cargando...</div>}>
             <BannerAdsense
               style={{
                 display: 'inline-block',
@@ -84,7 +84,7 @@ const Index = ({ data, pageContext }) => {
               }}
               className="mx-auto hidden md:inline-block"
             />
-          </Suspense> */}
+          </Suspense>
 
           <BlockGrey
             title={`${t('Acerca de')} Turista ${metadata.estado.name}`}

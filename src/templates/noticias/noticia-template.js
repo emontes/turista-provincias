@@ -7,13 +7,11 @@ import Banner from "../../components/Banner/indexNoticias";
 import BannerAdsense from "../../utilities/BannerAdsense";
 import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
-import { Link } from "gatsby-plugin-react-i18next";
-
+import { Link } from "gatsby";
 
 const Article = ({ data, pageContext }) => {
-	const { title, time, hometext, bodytext, cattitle, topictext } =
-		data.noticia;
-  
+	const { title, time, hometext, bodytext, cattitle, topictext } = data.noticia;
+
 	const fecha = new Date(time).toLocaleDateString();
 
 	return (
@@ -23,10 +21,11 @@ const Article = ({ data, pageContext }) => {
 				description={hometext ? hometext.substring(0, 250) : ""}
 			/>
 			<div className="section">
-				{/* <div align="center">
+				<div align="center">
 					<BannerAdsense className="h90 mb-1" format="fluid" />
-				</div> */}
+				</div>
 				<TopNavSec />
+
 				<div className="flex flex-col xl:flex-row gap-4">
 					<div className="bg-gray-100 p-4 rounded-lg shadow-md">
 						<article>
@@ -48,7 +47,7 @@ const Article = ({ data, pageContext }) => {
 							</div>
 
 							<div dangerouslySetInnerHTML={{ __html: hometext }} />
-							{/* <BannerAdsense className="h60 mt-1 mb-1" format="fluid" /> */}
+							<BannerAdsense className="h60 mt-1 mb-1" format="fluid" />
 							{bodytext && (
 								<div dangerouslySetInnerHTML={{ __html: bodytext }} />
 							)}
@@ -69,16 +68,20 @@ const Article = ({ data, pageContext }) => {
 									>
 										{topictext || "Sin tema"}
 									</Link>
-								)}	
+								)}
 							</div>
 						</article>
 					</div>
 					<Banner
 						title={`Noticia en ${topictext || cattitle}`}
-						description={topictext ? `Noticia en el tema ${topictext}` : `Noticia en la categoría ${cattitle}`}
+						description={
+							topictext
+								? `Noticia en el tema ${topictext}`
+								: `Noticia en la categoría ${cattitle}`
+						}
 						categories={pageContext.categories}
 						topics={pageContext.topics}
-						image={data.image || ''}
+						image={data.image || ""}
 					/>
 				</div>
 			</div>

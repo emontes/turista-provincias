@@ -218,14 +218,15 @@ exports.createPages = async ({ graphql, actions }) => {
 	/* --------------------------------------------------
      ------------ Información (Sections)  ---------------
      --------------------------------------------------*/
+
 	const resultSectionParents = await graphql(`	
 	{
 		allSection(filter: {parentid: {eq: "0"}}) {
 			nodes {
-			secid
-			secname
-			color
-			metadescrip
+				secid
+				secname
+				color
+				metadescrip
 			}
 		}
 	}
@@ -241,6 +242,40 @@ exports.createPages = async ({ graphql, actions }) => {
 			sections: parentSections,
 		},
 	});
+
+	// Crea páginas para cada sección
+	const resultSection = await graphql(`	
+		{
+			allSection {
+				nodes {
+					secid
+					secname
+					parentid
+				}
+			}
+		}
+	  `);
+
+	const sections = resultSection.data.allSection.nodes;
+
+	for (const section of sections) {
+		const slug = section.secname.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		createPage({
+			path: `/informacion/${slug}`,
+			component: path.resolve(
+				"./src/templates/informacion/section-template.js",
+			),
+			context: {
+				slug: slug,
+				secid: section.secid,
+				parentid: section.parentid,
+				title: section.secname,
+				sectionsMaster: parentSections,
+			},
+		});
+	}
+
+
 
 	console.log("Finalizando createPages");
 };
