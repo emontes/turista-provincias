@@ -17,7 +17,7 @@ const querySection = `
   }
 `
 
-const query = `
+const queryStrapiNoticia = `
 {
     allStrapiNoticia(
       filter: {estado: {slug: {eq: "${estadoSlug}"}}}
@@ -31,6 +31,8 @@ const query = `
         dateslug: date(formatString: "yy/M")
         hometext {
           data {
+            sid
+            title
             hometext
           }
         }
@@ -38,6 +40,21 @@ const query = `
     }
   }
 `
+const query = ` {
+  allNoticia(
+      #filter: { language: { eq: $language } }
+      sort: {time: DESC}
+    ) {
+      nodes {
+         sid
+          title
+          hometext
+          time(formatString: "ddd D MMM yy", locale: "es-mx")
+      }
+      totalCount
+    }
+}`
+
 const queryLinks = `{
     allStrapiLink(
       filter: {link_categories: {elemMatch: {estado: {slug: {eq: "${estadoSlug}"}}}}}
@@ -68,15 +85,12 @@ function sectionToAlgoliaRecord({
   }
 }
 
-function pageToAlgoliaRecord({ id, title, slug, slugOld, dateslug, hometext }) {
-  const hometext1 = hometext.data.hometext
+function pageToAlgoliaRecord({ sid, title, hometext, time }) {
+  const hometext1 = hometext
   const text = hometext1.replace(/<\/?[^>]+(>|$)/g, '') // para que quite tags html
-  let url = `/${dateslug}/${slug}`
-  if (slugOld) {
-    url = `/${slugOld}`
-  }
+  const url = `/article${sid}.html`
   return {
-    objectID: id,
+    objectID: sid,
     title,
     url,
     text,
@@ -95,21 +109,21 @@ function linkToAlgoliaRecord({ id, title, url, description }) {
 }
 
 const queries = [
-  {
-    query: querySection,
-    transformer: ({ data }) =>
-      data.allStrapiSectionArticle.nodes.map(sectionToAlgoliaRecord),
-  },
+  // {
+  //   query: querySection,
+  //   transformer: ({ data }) =>
+  //     data.allStrapiSectionArticle.nodes.map(sectionToAlgoliaRecord),
+  // },
   {
     query: query,
     transformer: ({ data }) =>
-      data.allStrapiNoticia.nodes.map(pageToAlgoliaRecord),
+      data.allNoticia.nodes.map(pageToAlgoliaRecord),
   },
-  {
-    query: queryLinks,
-    transformer: ({ data }) =>
-      data.allStrapiLink.nodes.map(linkToAlgoliaRecord),
-  },
+  // {
+  //   query: queryLinks,
+  //   transformer: ({ data }) =>
+  //     data.allStrapiLink.nodes.map(linkToAlgoliaRecord),
+  // },
 ]
 
 module.exports = queries

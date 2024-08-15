@@ -1,265 +1,115 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Layout from '../../components/Layout'
-import styled from 'styled-components'
-import { GatsbyImage, getImage, getSrc } from 'gatsby-plugin-image'
-import { FaRegClock } from 'react-icons/fa'
-import { Link } from 'gatsby'
-import ReactMarkdown from 'react-markdown'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-import Banner from '../../components/Banner/indexNoticias'
-import Seo from '../../components/Seo'
-import BannerAdsense from '../../utilities/BannerAdsense'
-import Compartir from '../../components/atoms/Compartir'
-import TopNavSec from '../../components/atoms/TopNavSec'
-import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
+import React from "react";
+import Layout from "../../components/Layout";
+import { FaRegClock } from "react-icons/fa";
+import Seo from "../../components/Seo";
+import { graphql } from "gatsby";
+import Banner from "../../components/Banner/indexNoticias";
+import BannerAdsense from "../../utilities/BannerAdsense";
+import Compartir from "../../components/atoms/Compartir";
+import TopNavSec from "../../components/atoms/TopNavSec";
+import { Link } from "gatsby";
 
 const Article = ({ data, pageContext }) => {
-  const {
-    title,
-    datePlano,
-    date,
-    dateSlug,
-    location,
-    topics,
-    hometext,
+	const { title, time, hometext, bodytext, cattitle, topictext } = data.noticia;
 
-    bodytext,
-    image,
-    localizations,
-  } = data.strapiNoticia
+	const fecha = new Date(time).toLocaleDateString();
 
-  const fecha = new Date(datePlano)
+	return (
+		<Layout linkExterno="/noticias" seoTitle={title.substring(0, 40)}>
+			<Seo
+				title={title}
+				description={hometext ? hometext.substring(0, 250) : ""}
+			/>
+			<div className="section">
+				<div align="center">
+					<BannerAdsense className="h90 mb-1" format="fluid" />
+				</div>
+				<TopNavSec />
 
-  let displayImage
-  if (image) {
-    displayImage = image
-  } else {
-    if (topics[0]) displayImage = topics[0].image
-  }
+				<div className="flex flex-col xl:flex-row gap-4">
+					<div className="bg-gray-100 p-4 rounded-lg shadow-md">
+						<article>
+							<div className="text-center mb-8">
+								<h1 className="text-2xl font-bold mb-4">{title}</h1>
 
-  const { t } = useTranslation()
+								<div className="flex justify-between items-center text-gray-400 mb-4">
+									<span className="flex items-center">
+										<FaRegClock className="text-primary5 mr-2" />
+										{fecha}
+									</span>
+									<div className="flex gap-2 items-center">
+										Compartir:{" "}
+										<Compartir url={pageContext.slug} title={title} />
+									</div>
+								</div>
 
-  let footLanguages = []
-  console.log({ data })
-  if (localizations.data) {
-    localizations.data.forEach((item) => {
-      let slug = '/'
-      slug += `article${dateSlug}-${item.attributes.slug}.html`
+								<div className="h-1 w-20 bg-gray-900 mx-auto my-4" />
+							</div>
 
-      footLanguages.push({
-        lng: item.attributes.locale,
-        title: item.attributes.title,
-        slug: slug,
-      })
-    })
-  }
+							<div dangerouslySetInnerHTML={{ __html: hometext }} />
+							<BannerAdsense className="h60 mt-1 mb-1" format="fluid" />
+							{bodytext && (
+								<div dangerouslySetInnerHTML={{ __html: bodytext }} />
+							)}
+							<div className="flex justify-between text-sm text-gray-600">
+								{cattitle && (
+									<Link
+										to={`/noticias/${cattitle?.replace(/\s+/g, "-")}.html`}
+										className="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition duration-300"
+									>
+										{cattitle || "Sin categoría"}
+									</Link>
+								)}
 
-  return (
-    <Layout
-      linkExterno="/noticias"
-      footLanguages={footLanguages}
-      seoTitle={title.substring(0, 40)}
-    >
-      <Seo
-        title={title}
-        description={
-          hometext.data.hometext ? hometext.data.hometext.substring(0, 250) : ''
-        }
-        image={
-          displayImage ? getSrc(displayImage.localFile.childImageSharp) : ''
-        }
-      />
-      <Wrapper className="section">
-        <div align="center">
-          <BannerAdsense className="h90 mb1" format="fluid" />
-        </div>
-        <TopNavSec />
-        <div className="section-center">
-          <article className="article">
-            <div className="post-info">
-              {location && <span className="category">{location.name}</span>}
+								{topictext && (
+									<Link
+										to={`/noticias/tema/${topictext?.replace(/\s+/g, "_")}.html`}
+										className="bg-blue-600 text-white px-4 py-2 rounded-full font-bold ml-4 hover:bg-blue-700 transition duration-300"
+									>
+										{topictext || "Sin tema"}
+									</Link>
+								)}
+							</div>
+						</article>
+					</div>
+					<Banner
+						title={`Noticia en ${topictext || cattitle}`}
+						description={
+							topictext
+								? `Noticia en el tema ${topictext}`
+								: `Noticia en la categoría ${cattitle}`
+						}
+						categories={pageContext.categories}
+						topics={pageContext.topics}
+						image={data.image || ""}
+					/>
+				</div>
+			</div>
+		</Layout>
+	);
+};
 
-              <h1>{title}</h1>
-
-              <div className="date-box text-slate-400">
-                <span className="date">
-                  <FaRegClock className="icon"></FaRegClock>
-                  {date}
-                </span>
-                <div className="flex gap-2 items-center">
-                  <Trans>Compartir</Trans>:{' '}
-                  <Compartir url={pageContext.slug} title={title} />
-                </div>
-              </div>
-
-              <div className="underline"></div>
-            </div>
-
-            {image && (
-              <GatsbyImage
-                image={getImage(image.localFile)}
-                className="image"
-                alt={title}
-                title={title}
-              />
-            )}
-
-            <ReactMarkdown children={hometext.data.hometext} />
-            <BannerAdsense className="h60 mt1 mb1" format="fluid" />
-            {bodytext && (
-              <MDXRenderer>{bodytext.data.childMdx.body}</MDXRenderer>
-            )}
-
-            {topics.map((topic) => (
-              <Link
-                key={topic.slug}
-                className="category topic"
-                to={`/noticias/tema/${topic.slug}`}
-              >
-                {t(topic.Title)}
-              </Link>
-            ))}
-          </article>
-          <div
-            className="cont-area"
-            style={{ background: 'var(--clr-grey-10)' }}
-          >
-            <Banner
-              title="Noticia"
-              categories={pageContext.categories}
-              image={topics[0] ? topics[0].image : ''}
-            />
-          </div>
-        </div>
-      </Wrapper>
-    </Layout>
-  )
-}
-
-const Wrapper = styled.section`
-  .article {
-    padding: 0 1rem;
-    margin: 0 0 2rem;
-  }
-  .category {
-    color: var(--clr-white);
-    background: var(--clr-grey-4);
-    border-radius: var(--radius);
-    padding: 0.25rem 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: var(--spacing);
-  }
-  .topic {
-    background: var(--clr-grey-8);
-    margin-right: 1rem;
-  }
-  .post-info {
-    margin: 2rem 0 4rem 0;
-    text-align: center;
-
-    h1 {
-      margin: 1.25rem 0;
-      font-size: 1.9rem;
-      font-weight: 400;
-    }
-
-    .date-box {
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      & .date {
-        display: flex;
-        align-items: center;
-        & .icon {
-          color: ${(props) => props.theme.colors.primary5};
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-
-  .image {
-    width: 100%;
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-  }
-
-  .underline {
-    width: 5rem;
-    height: 1px;
-    background: var(--clr-grey-9);
-    margin: 1rem auto;
-    margin-bottom: 1rem;
-  }
-`
-
-export const pageQuery = graphql`
-  query($id: String!, $language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
-    strapiNoticia(id: { eq: $id }) {
-      id
-      slug
+export const query = graphql`
+  query($id: String!, $topicimage: String) {
+    noticia: noticia(id: { eq: $id }) {
+      sid
+      time
       title
-      date(formatString: "dd D MMM yy", locale: "es")
-      dateSlug: date(formatString: "yy-M")
-      datePlano: date
-      hometext {
-        data {
-          hometext
-        }
-      }
+      hometext
+      bodytext
+      catid
+      cattitle
+      topic
+      topicimage
+      topictext
+    }
 
-      bodytext {
-        data {
-          bodytext
-          childMdx {
-            body
-          }
-        }
-      }
-      image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData
-          }
-        }
-      }
-      location {
-        name
-      }
-      topics {
-        Title
-        slug
-        image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
-            }
-          }
-        }
-      }
-      localizations {
-        data {
-          attributes {
-            locale
-            title
-            slug
-          }
-        }
+    image: file(relativePath: { eq: $topicimage }) {
+      childImageSharp {
+        gatsbyImageData
       }
     }
   }
-`
+`;
 
-export default Article
+export default Article;

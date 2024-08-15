@@ -1,16 +1,15 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import styled from 'styled-components'
 import { ImHome } from 'react-icons/im'
 import breadLine from '../../assets/images/breadcrumb.png'
 
 const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
   return (
-    <Wrapper vocab="http://schema.org/" typeof="BreadcrumbList">
+    <div className="flex flex-wrap list-none p-4" vocab="http://schema.org/" typeof="BreadcrumbList">
       <Link to="/" title="Home" className="home">
         <ImHome />
       </Link>
-      <span property="itemListElement" typeof="ListItem" className="breadcrumb">
+      <span property="itemListElement" typeof="ListItem" className="breadcrumb ml-2">
         <Link property="item" typeof="WebPage" to={homeLink}>
           <span property="name">{homeTitle}</span>
         </Link>
@@ -20,12 +19,8 @@ const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
         let linkTo = `${homeLink}/${item.slug}`
         if (singleUrl) linkTo = `/${item.slug}`
         return (
-          <div
-            key={index}
-            className="breadcrumb"
-            property="itemListElement"
-            typeof="ListItem"
-          >
+          <div key={index} className="breadcrumb ml-2" property="itemListElement" typeof="ListItem">
+            <span className="mx-2 text-gray-500">/</span>
             <Link property="item" typeof="WebPage" to={linkTo}>
               <span property="name">{item.title}</span>
             </Link>
@@ -33,47 +28,13 @@ const Breadcrumbs = ({ homeLink, homeTitle, tree, endTitle, singleUrl }) => {
           </div>
         )
       })}
-      <span className="breadcrumb">{endTitle}</span>
-      <div className="brlines"></div>
-    </Wrapper>
+      <span className="breadcrumb ml-2">
+        <span className="mx-2 text-gray-500">/</span>
+        {endTitle}
+      </span>
+      <div className="w-full h-2 mt-2" style={{ backgroundImage: `url(${breadLine})` }}></div>
+    </div>
   )
 }
 
 export default Breadcrumbs
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 1rem;
-
-  .breadcrumb {
-    ::before {
-      display: inline-block;
-      padding-right: 0.5rem;
-      padding-left: 0.5rem;
-      color: #6c757d;
-      content: '/';
-    }
-  }
-
-  .home {
-    width: 21px;
-    height: 21px;
-    background-color: #fff;
-    border-radius: 100px;
-    padding: 2px 3px 0;
-    transition: 0.3s;
-    :hover {
-      background-color: #222;
-      color: #fff;
-    }
-  }
-
-  .brlines {
-    height: 8px;
-    width: 100%;
-    margin: 10px 0 0;
-    background: url(${breadLine});
-  }
-`

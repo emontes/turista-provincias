@@ -1,565 +1,323 @@
-const path = require('path')
-const { exit } = require('process')
+// gatsby-node.js
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
-  const postPerPage = 16
-  const hotelsPerPage = 12
-  const estadoSlug = process.env.ESTADO_SLUG
+const path = require("path");
+const fs = require("fs");
+const { createNodes } = require("./create-nodes");
+const fetch = require("node-fetch");
 
-  // console.log('Creando estrucutra para: ', estadoSlug)
-  // ** crea el index
-  createPage({
-    path: `/`,
-    component: path.resolve(`./src/templates/index-template.js`),
-    context: {
-      estadoSlug: estadoSlug,
-    },
-  })
+exports.sourceNodes = async (params, { parentSpan }) => {
+	const { actions, createNodeId, createContentDigest, getCache } = params;
+	const { createNode, touchNode } = actions;
 
-  /* ---------------------------------
-     ------------ Hoteles --------------
-     --------------------------------*/
+	console.log("Iniciando sourceNodes");
+	try {
+		const cache = getCache("custom-source-nodes");
+		const lastFetchTime = (await cache.get("lastFetchTime")) || null;
+		console.log("Última fecha de fetching:", lastFetchTime);
 
-  // ** Crea pagina principal de Hoteles
-  createPage({
-    path: `/hoteles`,
-    component: path.resolve(`./src/templates/hoteles/index-template.js`),
-    context: {
-      estadoSlug: estadoSlug,
-    },
-  })
+		console.log("Volviendo a crear nodos");
+		const newFetchTime = await createNodes(params, lastFetchTime);
+		console.log("Nodos creados exitosamente");
 
-  const globalPages1 = ['mapa', 'ofertas', 'economicos', 'completos', 'grandes']
-  const globalPages = ['economicos', 'grandes']
+		await cache.set("lastFetchTime", newFetchTime);
+		console.log("Nueva fecha de fetching guardada:", newFetchTime);
+	} catch (error) {
+		console.error("Error al crear nodos:", error);
+		throw error;
+	}
+	console.log("✅ Finalizando sourceNodes");
+};
 
-  globalPages.map(async (item) => {
-    createPage({
-      path: `/hoteles/${item}/global`,
-      component: path.resolve(
-        `./src/templates/hoteles/global/${item}-template.js`,
-      ),
-      context: {
-        item: item,
-        estadoSlug: estadoSlug,
-      },
-    })
-  })
+exports.createPages = async ({ graphql, actions }) => {
+	console.log("Iniciando createPages");
+	const { createPage } = actions;
+	const postPerPage = 16;
+	const hotelsPerPage = 12;
+	const estadoSlug = process.env.ESTADO_SLUG;
 
-  const resultDestinos = await graphql(`
-    {
-      locations: allStrapiHotelLocation(
-        filter: { location: { estado: { slug: { eq: "${estadoSlug}" } } } }
-        sort: { fields: numhoteles, order: DESC }
-      ) {
-        nodes {
-          id: hotellookId
-          slug
-          location {
-            name
-          }
-        }
-      }
-    }
-  `)
+	console.log("Estado Slug:", estadoSlug);
 
-  const destinos = resultDestinos.data.locations.nodes
+	// ** crea el index
+	createPage({
+		path: "/",
+		component: path.resolve("./src/templates/index-template.js"),
+		context: {
+			estadoSlug: estadoSlug,
+		},
+	});
+	console.log("Página de índice creada");
 
-  const locationPages = [
-    'lista',
-    'mapa',
-    'ofertas',
-    'economicos',
-    'populares',
-    'valorados',
-    'completos',
-    'grandes',
-    'travel',
-  ]
-
-  let destinosBlock = []
-  destinos.map((item) => {
-    let destino = { title: item.location.name, slug: item.slug, id: item.id }
-    destinosBlock.push(destino)
-  })
-
-  destinos.map(async (item) => {
-    // Query para sabar cuantos tipos y cuales de estrellas hay en cada destino
-    const resultEstrellas = await graphql(`
-      {
-        hoteles: allStrapiHotelHotellook(          
-          filter: {
-            cityId: { eq: "${item.id}" }
-            stars: { gt: 0 }            
-          }          
-        ) {
-          distinct(field: stars)          
-        }
-      }
-    `)
-    const diferentesEstrellas = resultEstrellas.data.hoteles.distinct.reverse()
-
-    /* Crea la página principal del destion 
-       (pjemplo hoteles-palenque-5)                */
-    createPage({
-      path: `/${item.slug}.html`,
-      component: path.resolve(
-        './src/templates/hoteles/locations/home-template.js',
-      ),
-      context: {
-        id: item.id,
-        slug: item.slug,
-        destinos: destinosBlock,
-        estrellas: diferentesEstrellas,
-        perPage: hotelsPerPage,
-      },
-    })
-
-    // ** Paginas de estrellitas
-
-    diferentesEstrellas.forEach(async (estrellas) => {
-      createPage({
-        path: `${item.slug}-estrellas-${estrellas}.html`,
-        component: path.resolve(
-          './src/templates/hoteles/locations/estrellas-template.js',
-        ),
-        context: {
-          id: item.id,
-          slug: item.slug,
-          destinos: destinosBlock,
-          estrellas: parseInt(estrellas),
-          diferentesEstrellas: diferentesEstrellas,
-          estadoSlug: estadoSlug,
-          perPage: hotelsPerPage,
-        },
-      })
-    })
-
-    // Crea las páginas específicas (listado, mapa, económicos, etc)
-    locationPages.map(async (page) => {
-      createPage({
-        path: `/${item.slug}-${page}.html`,
-        component: path.resolve(
-          `./src/templates/hoteles/locations/${page}-template.js`,
-        ),
-        context: {
-          id: item.id,
-          slug: item.slug,
-          destinos: destinosBlock,
-          perPage: hotelsPerPage,
-        },
-      })
-    })
-  })
-
-  /* ---------------------------------
-     ------------ Links --------------
-     --------------------------------*/
-  const resultLinks = await graphql(`
-    {
-      categories: allStrapiLinkCategory(
-        filter: {estado: {slug: {eq: "${estadoSlug}"}}}
-      ) {
-        nodes {
-          id
-          title
-          slug
-          slugOld
-          link_categories {
-            strapi_id
-            slug
-          }
-        }
-      }
-    }
-  `)
-
-  const links = resultLinks.data.categories.nodes
-  const estadoRoots = {
-    chiapas: 'link-40.html',
-    edomexico: 'link-41.html',
-    yucatan: 'link-18.html',
-  }
-
-  let linksRoot = []
-  //Crea las páginas de las Links
-  links.map(async (item) => {
-    let slug = item.slug
-    // Esto para los links de provincia (por ejemplo chiapas, se les pone old slug y el slug como link-chis-1)
-    // if (item.slugOld) slug = item.slugOld /* Desechamos esta opcion por que no vale la pena el esfuerzo para recupear tan pocas categoráis
-
-    createPage({
-      path: `/${slug}`,
-      component: path.resolve('./src/templates/links/links-template.js'),
-      context: {
-        id: item.id,
-        slug: item.slug,
-      },
-    })
-
-    //Este if es para cuando se trata de México Global
-    //if (item.link_categories.length === 0) linksRoot.push(item)
-
-    if (item.link_categories[0].slug === estadoRoots[estadoSlug])
-      linksRoot.push(item)
-  })
-
-  //Crea página del Index de Directorio (links)
-  createPage({
-    path: `/links.html`,
-    component: path.resolve('./src/templates/links/index-template.js'),
-    context: {
-      linksRoot: linksRoot,
-    },
-  })
-
-  /* ---------------------------------------------------
-     ------------ Información (Sections)  --------------
-     ---------------------------------------------------*/
-  // *** Create Sections Pages ***
-
-  const resultSections = await graphql(`
-    {
-      parents: allStrapiSectionArticle(
-        filter: { estado: { slug: { eq: "${estadoSlug}" } } }
-      ) {
-        distinct(field: sections___strapi_parent___slug)
-      }
-      allStrapiSectionArticle(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
-        distinct(field: sections___slug)
-      }
-    }
-  `)
-
-  const sections = resultSections.data.parents.distinct
-  const sections2 = resultSections.data.allStrapiSectionArticle.distinct
-
-  sections2.map((item) => {
-    if (!sections.includes(item)) sections.push(item)
-  })
-
-  // Obtiene datos de las Secciones
-  let sectionsFull = []
-  let sectionsMaster = []
-  sections.map(async (item) => {
-    const result = await graphql(`
-      {
-        strapiSection(
-          
-          slug: { eq: "${item}" }
-        ) {
-          title
-          slug
-          strapi_parent {
-            slug
-          }
-        }
-      }
-    `)
-    sectionsFull.push(result.data.strapiSection)
-    if (!result.data.strapiSection.strapi_parent)
-      sectionsMaster.push(result.data.strapiSection)
-  })
-
-  // ** Crea el index de información
-  createPage({
-    path: `/informacion`,
-    component: path.resolve(`./src/templates/informacion/index-template.js`),
-    context: {
-      sections: sectionsFull,
-      sectionsMaster: sectionsMaster,
-    },
-  })
-
-  //Crea las páginas de Secciones
-  sections.map(async (item) => {
-    createPage({
-      path: `/informacion/${item}`,
-      component: path.resolve(
-        './src/templates/informacion/section-template.js',
-      ),
-      context: {
-        slug: item,
-        sections: sections,
-        sectionsMaster: sectionsMaster,
-        estadoSlug: estadoSlug,
-      },
-    })
-  })
-
-  // ** Crea las páginas de Todos los Artículos en Secciones
-
-  const resultSectionArticle = await graphql(
-    `
-      {
-        strapiSection {
-          title
-          slug
-        }
-        allStrapiSectionArticle(
-          filter: { estado: { slug: { eq: "${estadoSlug}" } } }
-        ) {
-          nodes {
-            id
-            slug
-          }
-        }
-      }
-    `,
-  )
-
-  const sectionArticles =
-    resultSectionArticle.data.allStrapiSectionArticle.nodes
-
-  if (sectionArticles.length > 0) {
-    sectionArticles.forEach((article) => {
-      createPage({
-        path: `/info/${article.slug}`,
-        component: path.resolve(
-          './src/templates/informacion/article-template.js',
-        ),
-        context: {
-          id: article.id,
-          slug: article.slug,
-          sections: sectionsFull,
-          sectionsMaster: sectionsMaster,
-        },
-      })
-    })
-  }
-
-  /* ---------------------------------------
+	/* ---------------------------------------
      ------------ Noticias  --------------
      --------------------------------------*/
 
-  const filtroMexico = 'filter: { estado: {Name: {nin: [ "Chiapas"] }}}' // excluye chiapas
-  const filtroChiapas = 'filter: { estado: { Name: { eq: "Chiapas" } } }'
-
-  // ** Crea el ïndice de topics (ddonde lista los topics que hay)
-  createPage({
-    path: `/noticias/tema`,
-    component: path.resolve(`./src/templates/noticias/topic-index-template.js`),
-    context: {
-      estadoSlug: estadoSlug,
-    },
-  })
-
-  // *** Create Categories Pages ***
-
-  const resultCategories = await graphql(`
+	// *** Crea las páginas de los Temas ***
+	const resultTopics = await graphql(`
     {
-      allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
-        distinct(field: location___slug)
-      }
-    }
-  `)
+		allNoticia(sort: {time: DESC}) {
+			group(field: {topictext: SELECT}) {
+			fieldValue
+			totalCount
+			nodes {
+				topicimage
+			}
+			}
+		}
+	}
+  `);
 
-  const categories = resultCategories.data.allStrapiNoticia.distinct
+	const topics = resultTopics.data.allNoticia.group;
 
-  // Obtiene datos de Categorías
-  let categoriesFull = []
-  categories.map(async (item) => {
-    const result = await graphql(`
-      {
-        strapiLocation(
-          estado: { slug: { eq: "${estadoSlug}" } }
-          slug: { eq: "${item}" }
-        ) {
-          name
-          slug
-        }
-      }
-    `)
-    categoriesFull.push(result.data.strapiLocation)
-  })
+	// Crea una página para cada tema
 
-  categories.map(async (item) => {
-    const result = await graphql(`
-     {
-      allStrapiNoticia(
-        limit: ${postPerPage}
-        filter: {
-          estado: { slug: { eq: "${estadoSlug}" } }
-          location: { slug: {eq: "${item}" } }
-        }
-    ) {
-    pageInfo {
-          pageCount
-        }
-    }
-    }`)
-    const topicPages = result.data.allStrapiNoticia.pageInfo.pageCount
+	for (const topic of topics) {
+		const slug = topic.fieldValue
+			.replace(/\s+/g, "_")
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "");
+		createPage({
+			path: `/noticias/tema/${slug}.html`,
+			component: path.resolve("./src/templates/noticias/topic-template.js"),
+			context: {
+				topic: topic.fieldValue,
+				topicImage: topic.nodes[0].topicimage,
+				totalCount: topic.totalCount,
+				alanguage: "spanish",
+				topics: topics,
+			},
+		});
+	}
 
-    for (var i = 0; i < topicPages; i++) {
-      createPage({
-        path: i === 0 ? `/noticias/${item}` : `/noticias/${item}/${i + 1}`,
+	// Crea la página de índice de temas
+	createPage({
+		path: "/noticias/tema",
+		component: path.resolve("./src/templates/noticias/topic-index-template.js"),
+		context: {
+			topics: topics,
+		},
+	});
 
-        component: path.resolve(
-          './src/templates/noticias/category-template.js',
-        ),
-        context: {
-          limit: postPerPage,
-          skip: i * postPerPage,
-          slug: item,
-          topics: topicsFull,
-          categories: categoriesFull,
-          estadoSlug: estadoSlug,
-        },
-      })
-    }
-  })
+	// *** Create Categories Pages ***
+	const resultCategories = await graphql(`
+  {
+	allNoticia {
+		group(field: {cattitle: SELECT}) {
+		fieldValue
+		totalCount
+		}
+		}
+	}
+`);
 
-  // *** Crea las páginas de los Temas ***
+	const categories = resultCategories.data.allNoticia.group;
 
-  const resultTopics = await graphql(`
+	for (const category of categories) {
+		const slug = category.fieldValue
+			.replace(/\s+/g, "_")
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "");
+		const totalPages = Math.ceil(category.totalCount / postPerPage);
+
+		Array.from({ length: totalPages }).forEach((_, i) => {
+			createPage({
+				path:
+					i === 0
+						? `/noticias/${slug}.html`
+						: `/noticias/${slug}/${i + 1}.html`,
+				component: path.resolve(
+					"./src/templates/noticias/category-template.js",
+				),
+				context: {
+					limit: postPerPage,
+					skip: i * postPerPage,
+					category: category.fieldValue,
+					totalPages,
+					currentPage: i + 1,
+					categories: categories,
+				},
+			});
+		});
+	}
+
+	// Create noticias pages para todas las noticias
+	const resultNoticias = await graphql(`
     {
-      allStrapiNoticia(filter: { estado: { slug: { eq: "${estadoSlug}" } } }) {
-        distinct(field: topics___slug)
+      allNoticia {
+		nodes {
+			id
+			sid			
+			topicimage
+		}
+        totalCount
       }
     }
-  `)
+  `);
 
-  const topics = resultTopics.data.allStrapiNoticia.distinct
+	const numPages = Math.ceil(
+		resultNoticias.data.allNoticia.totalCount / postPerPage,
+	);
 
-  // Obtiene los datos de los topics (Nombre, url, imagen)
+	Array.from({ length: numPages }).forEach((_, i) => {
+		createPage({
+			path: i === 0 ? `/noticias.html` : `/noticias/ultimas/${i + 1}.html`,
+			component: path.resolve("./src/templates/noticias/noticias-template.js"),
+			context: {
+				limit: postPerPage,
+				skip: i * postPerPage,
+				currentPage: i + 1,
+				totalPages: numPages,
+				topics: topics,
+				categories: categories,
+			},
+		});
+	});
 
-  let topicsFull = []
-  topics.map(async (item) => {
-    const result = await graphql(`{
-      strapiTopic(slug: {eq: "${item}"}) {
-        Title
-        slug
-        image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-        }
-      }
-    }
-    `)
-    topicsFull.push(result.data.strapiTopic)
-  })
+	/**
+	 * NOTICIAS Crea una página para cada noticia
+	 */
 
-  topics.map(async (item) => {
-    const resultTopic = await graphql(`
-     {
-      allStrapiNoticia(
-        limit: ${postPerPage}
-        filter: {
-          estado: { slug: { eq: "${estadoSlug}" } }
-          topics: { elemMatch: { slug: { eq: "${item}" } } }
-        }
-    ) {
-    pageInfo {
-          pageCount
-        }
-    }
-    }`)
-    const topicPages = resultTopic.data.allStrapiNoticia.pageInfo.pageCount
+	const articlePost = path.resolve(
+		"./src/templates/noticias/noticia-template.js",
+	);
+	const allNoticiasNodes = resultNoticias.data.allNoticia.nodes;
 
-    // for (var i = 0; i < topicPages; i++) {
-    createPage({
-      // path:
-      //   i === 0
-      //     ? `/noticias/tema/${item}`
-      //     : `/noticias/tema/${item}/${i + 1}`,
-      path: `/noticias/tema/${item}`,
+	// Crear una página para cada noticia
+	let contador = 0;
+	for (const noticia of allNoticiasNodes) {
+		const path = `article${noticia.sid}.html`;
 
-      component: path.resolve('./src/templates/noticias/topic-template.js'),
-      context: {
-        // limit: postPerPage,
-        // skip: i * postPerPage,
-        slug: item,
-        topics: topicsFull,
-        categories: categoriesFull,
-        estadoSlug: estadoSlug,
-      },
-    })
-    // }
-  })
+		try {
+			// Obtener los datos completos de la noticia
+			// const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
+			contador++;
+			if (contador % 40 === 0 || contador === 1) {
+				console.log(
+					`Creando Noticia: ${noticia.sid} => ${contador} de ${allNoticiasNodes.length}`,
+				);
+			}
 
-  // ** Crea páginas de cada noticia **
+			createPage({
+				path: path,
+				component: articlePost,
+				context: {
+					id: noticia.id,
+					topics: topics,
+					topicimage: noticia.topicimage,
+					categories: categories,
+				},
+			});
+		} catch (error) {
+			console.error(
+				`❌ Error al obtener datos para la noticia ${noticia.sid}:`,
+				error,
+			);
+		}
+	}
+	console.log(`✅ Total de noticias creadas: ${contador}`);
 
-  const result = await graphql(
-    `
-      {
-        allStrapiNoticia(
-          filter: { estado: { slug: { eq: "${estadoSlug}" } } }
-          sort: { fields: date, order: ASC }
-        ) {
-          nodes {
-            id
-            slug
-            slugOld
-            locale
-            dateslug: date(formatString: "yy-M")
-          }
-        }
-      }
-    `,
-  )
+	/* --------------------------------------------------
+     ------------ Información (Sections)  ---------------
+     --------------------------------------------------*/
 
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your Strapi Noticias`,
-      result.errors,
-    )
+	const resultSectionParents = await graphql(`	
+	{
+		allSection(filter: {parentid: {eq: "0"}}) {
+			nodes {
+				secid
+				secname
+				color
+				metadescrip
+			}
+		}
+	}
+  `);
 
-    return
-  }
+	const parentSections = resultSectionParents.data.allSection.nodes;
 
-  // Define a template for noticia post
-  const articlePost = path.resolve(
-    './src/templates/noticias/noticia-template.js',
-  )
+	// ** Crea el index de información
+	createPage({
+		path: "/informacion",
+		component: path.resolve("./src/templates/informacion/index-template.js"),
+		context: {
+			sections: parentSections,
+		},
+	});
 
-  const articles = result.data.allStrapiNoticia.nodes
+	// Crea páginas para cada sección
+	// const resultSection = await graphql(`	
+	// 	{
+	// 		allSection {
+	// 			nodes {
+	// 				secid
+	// 				secname
+	// 				parentid
+	// 			}
+	// 		}
+	// 	}
+	//   `);
 
-  if (articles.length > 0) {
-    articles.forEach((article) => {
-      let path = ''
-      if (article.locale === 'en') {
-        path += '/en/'
-      }
+	// const sections = resultSection.data.allSection.nodes;
 
-      if (article.slugOld) {
-        path += article.slugOld
-      } else {
-        path += `article${article.dateslug}-${article.slug}.html`
-      }
+	// for (const section of sections) {
+	// 	const slug = section.secname.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+	// 	createPage({
+	// 		path: `/informacion/${slug}`,
+	// 		component: path.resolve(
+	// 			"./src/templates/informacion/section-template.js",
+	// 		),
+	// 		context: {
+	// 			slug: slug,
+	// 			secid: section.secid,
+	// 			parentid: section.parentid,
+	// 			title: section.secname,
+	// 			sectionsMaster: parentSections,
+	// 		},
+	// 	});
+	// }
 
-      createPage({
-        path: path,
-        component: articlePost,
-        context: {
-          id: article.id,
-          slug: path,
-          topics: topicsFull,
-          categories: categoriesFull,
-          estadoSlug: estadoSlug,
-        },
-      })
-    })
+	const resultSection = await graphql(`	
+		{
+			allSection {
+				nodes {
+					secid
+					secname
+					parentid
+				}
+			}
+		}
+	  `);
 
-    //Create noticas pages
+	const sections = resultSection.data.allSection.nodes;
 
-    const numPages = Math.ceil(articles.length / postPerPage)
-    Array.from({ length: numPages }).forEach((_, i) => {
-      createPage({
-        path: i === 0 ? `/noticias` : `/noticias/ultimas/${i + 1}`,
-        component: path.resolve(
-          './src/templates/noticias/noticias-template.js',
-        ),
-        context: {
-          limit: postPerPage,
-          skip: i * postPerPage,
-          topics: topicsFull,
-          categories: categoriesFull,
-          estadoSlug,
-        },
-      })
-    })
-  }
-}
+	for (const section of sections) {
+		const slug = section.secname.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		createPage({
+			path: `/informacion/${slug}`,
+			component: path.resolve(
+				"./src/templates/informacion/section-template.js",
+			),
+			context: {
+				// slug: slug,
+				// secid: section.secid,
+				// parentid: section.parentid,
+				title: section.secname,
+				// sectionsMaster: parentSections,
+			},
+		});
+	}
+
+
+
+
+	console.log("Finalizando createPages");
+};
+
+// Añade este hook para ver cuándo se inicia el proceso de construcción
+exports.onPreBootstrap = () => {
+	console.log("Gatsby está iniciando el proceso de construcción");
+};
+
+// Añade este hook para ver cuándo finaliza el proceso de construcción
+exports.onPostBuild = () => {
+	console.log("Gatsby ha finalizado el proceso de construcción");
+};

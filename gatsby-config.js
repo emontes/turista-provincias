@@ -5,97 +5,95 @@ const estadoSlug = process.env.ESTADO_SLUG
 const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
 const { languages, defaultLanguage } = require('./languages.js')
 
-const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL,
-  accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: [
-    'hotel-hotellook',
-    'hotel-location',
-    'estado',
-    'location',
-    // 'noticia',
-    {
-      singularName: 'noticia',
-      pluginOptions: {
-        i18n: {
-          locale: 'all',
-        },
-      },
-    },
-    'topic',
-    'section',
-    'section-article',
-    'link',
-    'link-category',
-  ],
-  singleTypes: [],
-}
+/**
+ * This function is called by Gatsby during the build process.
+ * It's used to configure the webpack configuration for the build process.
+ *
+ * La vamos a usar para desactivar la minificación en producción (Es temporalmente)
+ */
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  // Only run this during the build-javascript stage
+  if (stage === "build-javascript") {
+    actions.setWebpackConfig({
+      devtool: "source-map",
+    });
+  }
+};
 
 module.exports = {
+  flags: {
+    PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    PRESERVE_WEBPACK_CACHE: true,
+  },
   siteMetadata: siteData.siteMetadata,
   plugins: [
-    'gatsby-plugin-htaccess', // Para que haga las redirecciones en Apache2
+    // 'gatsby-plugin-htaccess', // Para que haga las redirecciones en Apache2
     'gatsby-plugin-styled-components',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    siteData.googleAnalytics,
     siteData.manifest,
-    `gatsby-plugin-offline`,
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    `gatsby-plugin-mdx`,
-    siteData.sourceFileSystem,
     {
-      resolve: `gatsby-source-strapi`,
-      options: strapiConfig,
-    },
-
-    {
-      resolve: `gatsby-plugin-algolia`,
+      resolve: 'gatsby-plugin-sharp',
       options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-        indexName: process.env.ESTADO_SLUG,
-        queries: require('./src/constants/algolia'),
-        chunkSize: 10000,
+        failOnError: false,
       },
     },
+    'gatsby-transformer-sharp',
+    siteData.sourceFileSystem,   
+    // {
+    //   resolve: 'gatsby-plugin-algolia',
+    //   options: {
+    //     appId: process.env.GATSBY_ALGOLIA_APP_ID,
+    //     apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
+    //     indexName: process.env.ESTADO_SLUG,
+    //     queries: require('./src/constants/algolia'),
+    //     chunkSize: 10000,
+    //   },
+    // },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/locales`,
-        name: `locale`,
+        name: "locale",
       },
     },
     {
-      resolve: 'gatsby-plugin-react-i18next',
+      resolve: "gatsby-source-filesystem",
       options: {
-        localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
-        languages,
-        defaultLanguage,
-        siteUrl: `https://turista.com.mx`,
-        i18nextOptions: {
-          // debug: true,
-          fallbackLng: defaultLanguage,
-          supportedLngs: languages,
-          defaultNS: 'common',
-          interpolation: {
-            escapeValue: false, // not needed for react as it escapes by default
-          },
-        },
-        pages: [
-          {
-            matchPath: '/:lang?/article:id?',
-            getLanguageFromPath: true,
-            excludeLanguages: ['en'],
-          },
-          {
-            matchPath: '/:lang?/info/:id',
-            excludeLanguages: ['en'],
-          },
-        ],
+        name: "topicImages",
+        path: `${__dirname}/src/assets/images/topics`,
       },
     },
+    // {
+    //   resolve: 'gatsby-plugin-react-i18next',
+    //   options: {
+    //     redirect: false,
+    //     localeJsonSourceName: "locale", // name given to `gatsby-source-filesystem` plugin.
+    //     languages,
+    //     defaultLanguage,
+    //     siteUrl: "https://turista.com.mx",
+    //     i18nextOptions: {
+    //       // debug: true,
+    //       fallbackLng: defaultLanguage,
+    //       supportedLngs: languages,
+    //       defaultNS: 'common',
+    //       interpolation: {
+    //         escapeValue: false, // not needed for react as it escapes by default
+    //       },
+    //     },
+    //     pages: [
+    //       {
+    //         matchPath: '/:lang?/article:id?',
+    //         getLanguageFromPath: true,
+    //         excludeLanguages: ['en'],
+    //       },
+    //       {
+    //         matchPath: '/:lang?/info/:id',
+    //         excludeLanguages: ['en'],
+    //       },
+    //     ],
+    //   },
+    // },
   ],
 }

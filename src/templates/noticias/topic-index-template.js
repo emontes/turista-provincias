@@ -1,19 +1,32 @@
+// src/templates/noticias/topic-index-template.js
 import React from 'react'
 import { graphql } from 'gatsby'
+import styled from 'styled-components'
 import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import BannerAdsense from '../../utilities/BannerAdsense'
 import { useTranslation } from 'gatsby-plugin-react-i18next'
 import TopNavSec from '../../components/atoms/TopNavSec'
+import TopicCard from '../../components/Noticias/TopicCard'
 
-import ButtonPages from '../../components/atoms/ButtonPages'
+const BoardWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: ${(props) => props.theme.colors.primary9};
+  border: 10px solid ${(props) => props.theme.colors.primary1};
+  border-radius: 20px;
+`
+
 const Tema = ({ data }) => {
   const { t } = useTranslation()
-  const topics = data.allStrapiNoticia.distinct
+  const topics = data.allNoticia.group
   const metadata = data.site.siteMetadata
+
   return (
     <Layout
-      heroImg={data.image ? data.image.localFile.childImageSharp : ''}
+      heroImg={data.image}
       main="Temas de Noticias"
       sub={`sobre ${metadata.estado.name}`}
       linkExterno="/noticias/tema"
@@ -23,23 +36,17 @@ const Tema = ({ data }) => {
         description={`Muestra los diferentes temas de noticias que se encuentran registrados en Turista ${metadata.estado.name}.`}
       />
       <TopNavSec />
-      <div
-        className="cont-area"
-        style={{
-          padding: '2rem',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '2rem',
-        }}
-      >
+      <BoardWrapper>
         {topics.map((item) => (
-          <p key={item}>
-            <ButtonPages url={item} description={t(item)} />
-          </p>
+          <TopicCard 
+            key={item.fieldValue}
+            topic={item.fieldValue}
+            topicImage={item.nodes[0].topicimage}
+            newsCount={item.totalCount}
+            allTopicImages={data.allFile}
+          />
         ))}
-      </div>
+      </BoardWrapper>
       <BannerAdsense />
     </Layout>
   )
@@ -48,20 +55,16 @@ const Tema = ({ data }) => {
 export default Tema
 
 export const query = graphql`
-  query($estadoSlug: String!, $language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
+  query {
+    allNoticia {
+      group(field: {topictext: SELECT}) {
+        fieldValue
+        totalCount
+        nodes {
+          topicimage
         }
       }
     }
-    allStrapiNoticia(filter: { estado: { slug: { eq: $estadoSlug } } }) {
-      distinct(field: topics___slug)
-    }
-
     site {
       siteMetadata {
         description
@@ -72,12 +75,16 @@ export const query = graphql`
         }
       }
     }
-
-    image: strapiMedia(name: { eq: "noticias.jpg" }) {
-      name
-      localFile {
+    image: file(relativePath: { eq: "topic-turista.jpg" }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+    }
+    allFile(filter: { sourceInstanceName: { eq: "topicImages" } }) {
+      nodes {
+        relativePath
         childImageSharp {
-          gatsbyImageData
+          gatsbyImageData(width: 200, height: 150, layout: CONSTRAINED)
         }
       }
     }

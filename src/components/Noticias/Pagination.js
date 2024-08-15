@@ -6,12 +6,12 @@ const Pagination = ({ pageInfo, url }) => {
 
   let nextPage
   if (pageInfo.hasNextPage) {
-    nextPage = `${url}/${pageInfo.currentPage + 1}`
+    nextPage = `${url}/${pageInfo.currentPage + 1}.html`
   }
   let previousPage
 
   if (pageInfo.hasPreviousPage) {
-    previousPage = `${url}/${pageInfo.currentPage - 1}`
+    previousPage = `${url}/${pageInfo.currentPage - 1}.html`
     if (pageInfo.currentPage === 2) {
       previousPage = `${url}`
       if (url === '/noticias/ultimas') previousPage = '/noticias'

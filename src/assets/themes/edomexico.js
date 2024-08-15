@@ -56,6 +56,13 @@ const theme = {
     logoSmal2: LogoSmal2,
     logoSmal: LogoSmal,
   },
+  siteMetadata: {
+    estado: {
+      name: "Estado de México",
+      slug: "edomexico",
+      slogan: "Turista Estado de México"
+    }
+  }
 }
 
 export default theme

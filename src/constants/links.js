@@ -16,24 +16,26 @@ const data = [
     url: '/',
   },
   {
+    id: 4,
+    icon: <FaInfoCircle />,
+    text: 'información',
+    url: '/informacion',
+  },
+  {
+    id: 3,
+    icon: <FaRegNewspaper />,
+    text: 'noticias',
+    url: '/noticias.html',
+  },
+  {
     id: 2,
     icon: <FaHotel />,
     text: 'hoteles',
     url: '/hoteles',
   },
 
-  {
-    id: 3,
-    icon: <FaRegNewspaper />,
-    text: 'noticias',
-    url: '/noticias',
-  },
-  {
-    id: 4,
-    icon: <FaInfoCircle />,
-    text: 'información',
-    url: '/informacion',
-  },
+ 
+  
   {
     id: 5,
     icon: <FaLink />,

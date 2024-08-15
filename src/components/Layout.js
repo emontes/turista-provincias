@@ -11,7 +11,6 @@ import Hero from '../components/Hero'
 import device from '../assets/themes/device'
 
 import BannerAdsense from '../utilities/BannerAdsense'
-
 const Layout = ({
   children,
   topComponent, //optional component for substitute top banner

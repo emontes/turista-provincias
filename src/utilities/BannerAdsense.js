@@ -1,3 +1,5 @@
+// src/utilities/BannerAdsense.js
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Script, ScriptStrategy } from 'gatsby'
@@ -12,7 +14,7 @@ class Google extends Component {
       <>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5136877882943908"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3640924718734312"
           crossOrigin="anonymous"
           strategy={ScriptStrategy.idle}
           id="adsense"
@@ -45,11 +47,11 @@ Google.propTypes = {
 }
 
 Google.defaultProps = {
-  slot: '8837254790',
+  slot: '3903986308',
   className: '',
   style: { display: 'block' },
 
-  client: 'ca-pub-5136877882943908',
+  client: 'ca-pub-3640924718734312',
   format: 'auto',
   layout: '',
   layoutKey: '',

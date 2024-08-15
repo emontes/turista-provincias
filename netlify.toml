@@ -1,0 +1,25 @@
+[[plugins]]
+package = "netlify-plugin-gatsby-cache"
+
+[build]
+command = "gatsby build"
+publish = "public/"
+
+[build.environment]
+GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES = "true"
+GATSBY_CONCURRENT_DOWNLOAD = "25"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

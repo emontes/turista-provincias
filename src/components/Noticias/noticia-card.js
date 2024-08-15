@@ -1,121 +1,86 @@
+// src/components/Noticias/noticia-card.js
+
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import styled from 'styled-components'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import ReactMarkdown from 'react-markdown'
-import { FaRegClock } from 'react-icons/fa'
+import { FaRegClock, FaFolder } from 'react-icons/fa'
 
 const NoticiaCard = ({ noticia }) => {
-  const topic = noticia.topics[0]
-  const fecha = new Date(noticia.datePlano)
-  const anyo = fecha.getFullYear()
-  const hometext = noticia.hometext.data.hometext
-
-  let imagen
-  if (topic) {
-    if (topic.image) {
-      imagen = topic.image.localFile
-    }
-  }
-
-  if (noticia.image) {
-    imagen = noticia.image.localFile
-  }
-
-  let slug = ''
-  if (noticia.locale != 'es') {
-    slug += `/${noticia.locale}`
-  }
-  slug += `/article${noticia.dateslug}-${noticia.slug}.html`
-  if (noticia.slugOld) slug = `/${noticia.slugOld}`
-
-  return (
-    <Wraper className=" transition rounded-lg bg-white hover:bg-slate-50 shadow-md hover:shadow-lg relative mb-5 p-4">
-      <Link to={slug}>
-        <h3 className="text-2xl md:hidden">{noticia.title}</h3>
-        <div className="flex gap-4 items-center">
-          {imagen && (
-            <GatsbyImage
-              image={getImage(imagen)}
-              className="rounded topic-image"
-              alt={topic ? topic.Title : 'Sin Tema Definido'}
-              title={topic ? topic.Title : 'Sit Tema Definido'}
-            />
-          )}
-
-          <div>
-            <h3 className="text-2xl hidden md:block">{noticia.title}</h3>
-
-            <ReactMarkdown children={hometext} />
-          </div>
-        </div>
-        <footer className="mt-8 pt-4 border-t flex items-center justify-between text-slate-400">
-          <span className="flex items-center gap-2">
-            <FaRegClock className="icon"></FaRegClock>
-            {noticia.date}
-          </span>
-          {noticia.location && (
-            <span className="bg-slate-200 shadow rounded text-slate-500 tracking-widest px-2 py-1 uppercase font-bold">
-              {noticia.location.name}
-            </span>
-          )}
-        </footer>
-      </Link>
-    </Wraper>
-  )
-}
-
-const Wraper = styled.article`
-  .topic-image {
-    max-width: 12rem;
-    height: 12rem;
-  }
-`
-
-export const query = graphql`
-  fragment NoticiaCard on STRAPI_NOTICIA {
-    id
-    slug
-    slugOld
-    title
-    date(formatString: "ddd D MMM yy", locale: "es")
-    dateslug: date(formatString: "yy-M")
-    datePlano: date
-    locale
-    image {
-      localFile {
-        childImageSharp {
-          gatsbyImageData
-        }
-      }
-    }
-    hometext {
-      data {
-        hometext
-      }
-    }
-    location {
-      name
-    }
-    topics {
-      Title
-      slug
-      image {
-        localFile {
+  const { allFile } = useStaticQuery(graphql`
+    query {
+      allFile(filter: { sourceInstanceName: { eq: "topicImages" } }) {
+        nodes {
+          relativePath
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+            gatsbyImageData(width: 200, height: 133, layout: CONSTRAINED)
           }
         }
       }
     }
-    localizations {
-      data {
-        attributes {
-          title
-          slug
-        }
-      }
-    }
+  `)
+
+  const getTopicImage = (filename) => {
+    const image = allFile.nodes.find(node => node.relativePath === filename)
+    return image ? getImage(image.childImageSharp.gatsbyImageData) : null
+  }
+
+  const hometext = noticia.hometext
+  const slug = `/article${noticia.sid}.html`
+  const topicImage = noticia.topicimage ? getTopicImage(noticia.topicimage) : null
+  const topicUrl = noticia.topictext ? `/noticias/tema/${encodeURIComponent(noticia.topictext.replace(/ /g, '-'))}.html` : ''
+
+  return (
+    <article className="transition rounded-lg bg-white hover:bg-gray-50 shadow-md hover:shadow-xl relative mb-5 p-4 overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-4 items-start">
+        {topicImage && (
+          <div className="w-full md:w-1/4 mb-4 md:mb-0">
+            <Link to={topicUrl}>
+              <GatsbyImage
+                image={topicImage}
+                className="rounded-lg w-full h-32 object-cover"
+                alt={noticia.topictext || ''}
+                title={noticia.topictext || ''}
+              />
+            </Link>
+          </div>
+        )}
+        <div className="w-full md:w-3/4">
+          <Link to={slug} className="block">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">{noticia.title}</h3>
+            <div className="text-gray-600 mb-4" dangerouslySetInnerHTML={{ __html: hometext }} />
+          </Link>
+        </div>
+      </div>
+      <footer className="mt-4 pt-4 border-t flex items-center justify-between text-gray-500">
+        <span className="flex items-center gap-2">
+          <FaRegClock className="text-gray-500" />
+          {noticia.date}
+        </span>
+        {noticia.cattitle && (
+          <Link to={`/noticias/${encodeURIComponent(noticia.cattitle.replace(/ /g, '_'))}.html`}>
+            <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-sm font-semibold flex items-center">
+              <FaFolder className="mr-1" /> {noticia.cattitle}
+            </span>
+          </Link>
+        )}
+      </footer>
+    </article>
+  )
+}
+
+export const query = graphql`
+  fragment NoticiaCard on Noticia {
+    sid
+    title
+    date: time(formatString: "ddd D MMM yy", locale: "es")
+    dateslug: time(formatString: "yy-M")
+    datePlano: time
+    topic
+    topictext
+    topicimage
+    catid
+    cattitle
+    hometext
   }
 `
 
