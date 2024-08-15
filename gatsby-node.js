@@ -37,6 +37,15 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	console.log("Estado Slug:", estadoSlug);
 
+	// Crear explícitamente la página 404 en inglés
+	createPage({
+		path: "/en/404/",
+		component: path.resolve('src/pages/404.js'),
+		context: {
+		  language: "en",
+		},
+	  });
+
 	// ** crea el index
 	createPage({
 		path: '/',
