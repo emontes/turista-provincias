@@ -147,45 +147,45 @@ const SectionTest = ({ data, pageContext }) => {
 
 export default Section
 
-export const query = graphql`
-  query($secid: String!, $parentid: String) {
-    section: section(secid: { eq: $secid }) {
-      secname
-      parentid
-    }
-    parent: section(secid: {eq: $parentid}) {
-      parentid
-      secname
-    }
-    sections: allSection(
-      filter: { parentid:  { eq: $secid }  }
-    ) {
-      nodes {
-        secid
-        secname
-      }
-    }
+// export const query = graphql`
+//   query($secid: String!, $parentid: String) {
+//     section: section(secid: { eq: $secid }) {
+//       secname
+//       parentid
+//     }
+//     parent: section(secid: {eq: $parentid}) {
+//       parentid
+//       secname
+//     }
+//     sections: allSection(
+//       filter: { parentid:  { eq: $secid }  }
+//     ) {
+//       nodes {
+//         secid
+//         secname
+//       }
+//     }
     
-    # articles: allStrapiSectionArticle(
-    #   filter: {
-    #     estado: { slug: { eq: $estadoSlug } }
-    #     sections: { elemMatch: { slug: { eq: $slug } } }
-    #   }
-    # ) {
-    #   nodes {
-    #     title
-    #     slug
-    #   }
-    # }
-    site {
-      siteMetadata {
-        description
-        estado {
-          name
-          slug
-          slogan
-        }
-      }
-    }
-  }
-`
+//     # articles: allStrapiSectionArticle(
+//     #   filter: {
+//     #     estado: { slug: { eq: $estadoSlug } }
+//     #     sections: { elemMatch: { slug: { eq: $slug } } }
+//     #   }
+//     # ) {
+//     #   nodes {
+//     #     title
+//     #     slug
+//     #   }
+//     # }
+//     site {
+//       siteMetadata {
+//         description
+//         estado {
+//           name
+//           slug
+//           slogan
+//         }
+//       }
+//     }
+//   }
+// `
