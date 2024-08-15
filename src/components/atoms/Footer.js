@@ -7,7 +7,7 @@ import TuristaExternos from '../../constants/turista_externos'
 import SocialLinks from '../../constants/social_links'
 import { BiChevronRightCircle } from 'react-icons/bi'
 
-import Language from './Language'
+// import Language from './Language'
 import { Link, Trans, useI18next } from 'gatsby-plugin-react-i18next'
 
 const Footer = ({

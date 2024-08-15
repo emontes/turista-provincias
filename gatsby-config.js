@@ -27,7 +27,7 @@ module.exports = {
   },
   siteMetadata: siteData.siteMetadata,
   plugins: [
-    'gatsby-plugin-htaccess', // Para que haga las redirecciones en Apache2
+    // 'gatsby-plugin-htaccess', // Para que haga las redirecciones en Apache2
     'gatsby-plugin-styled-components',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
