@@ -1,14 +1,14 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import styled from "styled-components";
 import { FaRegClock } from "react-icons/fa";
 import Seo from "../../components/Seo";
+import { graphql } from "gatsby";
 import Banner from "../../components/Banner/indexNoticias";
 import BannerAdsense from "../../utilities/BannerAdsense";
 import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby-plugin-react-i18next";
-import { graphql } from "gatsby";
+
 
 const Article = ({ data, pageContext }) => {
 	const { title, time, hometext, bodytext, cattitle, topictext } =
@@ -85,12 +85,6 @@ const Article = ({ data, pageContext }) => {
 		</Layout>
 	);
 };
-
-const Wrapper = styled.section`
-  .icon {
-    color: ${(props) => props.theme.colors.primary5};
-  }
-`;
 
 export const query = graphql`
   query($id: String!, $topicimage: String) {
