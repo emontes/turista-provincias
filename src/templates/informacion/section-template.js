@@ -16,7 +16,7 @@ const Section = ({ data, pageContext }) => {
   console.log ('La data es: ', data)
   console.log ('La pageContext es: ', pageContext)
   return (
-    <div>Section {data.section.secname}</div>
+    <div>Section {pageContext.title}</div>
   )
 }
 const SectionTest = ({ data, pageContext }) => {
