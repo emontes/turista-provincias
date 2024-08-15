@@ -76,7 +76,7 @@ const Footer = ({
               </div>
             )}
           </div>
-          <Language extendidos={footLanguages} />
+          {/* <Language extendidos={footLanguages} /> */}
         </div>
 
         <div className="foot">{themeContext.images.logoSmal}</div>
