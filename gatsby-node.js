@@ -244,37 +244,6 @@ exports.createPages = async ({ graphql, actions }) => {
 	});
 
 	// Crea páginas para cada sección
-	// const resultSection = await graphql(`	
-	// 	{
-	// 		allSection {
-	// 			nodes {
-	// 				secid
-	// 				secname
-	// 				parentid
-	// 			}
-	// 		}
-	// 	}
-	//   `);
-
-	// const sections = resultSection.data.allSection.nodes;
-
-	// for (const section of sections) {
-	// 	const slug = section.secname.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-	// 	createPage({
-	// 		path: `/informacion/${slug}`,
-	// 		component: path.resolve(
-	// 			"./src/templates/informacion/section-template.js",
-	// 		),
-	// 		context: {
-	// 			slug: slug,
-	// 			secid: section.secid,
-	// 			parentid: section.parentid,
-	// 			title: section.secname,
-	// 			sectionsMaster: parentSections,
-	// 		},
-	// 	});
-	// }
-
 	const resultSection = await graphql(`	
 		{
 			allSection {
@@ -297,17 +266,14 @@ exports.createPages = async ({ graphql, actions }) => {
 				"./src/templates/informacion/section-template.js",
 			),
 			context: {
-				// slug: slug,
-				// secid: section.secid,
-				// parentid: section.parentid,
+				slug: slug,
+				secid: section.secid,
+				parentid: section.parentid,
 				title: section.secname,
-				// sectionsMaster: parentSections,
+				sectionsMaster: parentSections,
 			},
 		});
 	}
-
-
-
 
 	console.log("Finalizando createPages");
 };
