@@ -5,6 +5,7 @@ const fs = require("fs");
 const { createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
 
+// ** Forzamos entrada a Cache del plugin react-i18next para Idiomas **
 exports.onPreBootstrap = ({ actions }) => {
 	const { touchNode } = actions;
 	const filePath = path.resolve('./node_modules/gatsby-plugin-react-i18next/dist/plugin/onCreateNode.js');
