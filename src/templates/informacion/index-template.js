@@ -4,7 +4,6 @@ import { graphql } from "gatsby";
 import Seo from "../../components/Seo";
 import BannerAdsense from "../../utilities/BannerAdsense";
 import { getSrc } from "gatsby-plugin-image";
-import ButtonPages from "../../components/atoms/ButtonPages";
 import ContainerGrecas from "../../components/molecules/ContainerGrecas";
 import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 import { Link } from "gatsby";

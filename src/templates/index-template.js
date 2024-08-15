@@ -71,9 +71,9 @@ const Index = ({ data, pageContext }) => {
         </div>
 
         <div>
-          <BlockGrey title={t('Compartir')}>
+          {/* <BlockGrey title={t('Compartir')}>
             <Compartir title={t('¿Ya conoces el Turista?')} />
-          </BlockGrey>
+          </BlockGrey> */}
 
           {/* <Suspense fallback={<div>Cargando...</div>}>
             <BannerAdsense
