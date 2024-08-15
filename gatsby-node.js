@@ -39,8 +39,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	// ** crea el index
 	createPage({
-		path: '/',
-		component: path.resolve('./src/templates/index-template.js'),
+		path: "/",
+		component: path.resolve("./src/templates/index-template.js"),
 		context: {
 			estadoSlug: estadoSlug,
 		},
@@ -191,7 +191,9 @@ exports.createPages = async ({ graphql, actions }) => {
 			// const noticiaCompleta = await getNoticiaCompleta(noticia.sid);
 			contador++;
 			if (contador % 40 === 0 || contador === 1) {
-				console.log(`Creando Noticia: ${noticia.sid} => ${contador} de ${allNoticiasNodes.length}`);
+				console.log(
+					`Creando Noticia: ${noticia.sid} => ${contador} de ${allNoticiasNodes.length}`,
+				);
 			}
 
 			createPage({
@@ -216,20 +218,29 @@ exports.createPages = async ({ graphql, actions }) => {
 	/* --------------------------------------------------
      ------------ Información (Sections)  ---------------
      --------------------------------------------------*/
-	const resultSections = await graphql(`	
+	const resultSectionParents = await graphql(`	
 	{
-	  allSection {
-		nodes {
-		  secid
+		allSection(filter: {parentid: {eq: "0"}}) {
+			nodes {
+			secid
 			secname
 			color
-			parentid
-			language
+			metadescrip
+			}
 		}
-		totalCount
-	  }
 	}
   `);
+
+	const parentSections = resultSectionParents.data.allSection.nodes;
+
+	// ** Crea el index de información
+	createPage({
+		path: "/informacion",
+		component: path.resolve("./src/templates/informacion/index-template.js"),
+		context: {
+			sections: parentSections,
+		},
+	});
 
 	console.log("Finalizando createPages");
 };

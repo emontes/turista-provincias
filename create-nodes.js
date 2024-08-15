@@ -117,6 +117,7 @@ async function createNodes({ actions, createNodeId, createContentDigest, getNode
       'Section',
       'secid'
     );
+ 
 
     // Noticias
     await updateOrCreateNodes(
