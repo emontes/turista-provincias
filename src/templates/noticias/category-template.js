@@ -48,16 +48,16 @@ const Category = ({ data, pageContext }) => {
 export default Category
 
 export const query = graphql`
-  query($category: String!, $skip: Int!, $limit: Int!, $language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
+  query($category: String!, $skip: Int!, $limit: Int!) {
+    # locales: allLocale(filter: { language: { eq: $language } }) {
+  #     edges {
+  #       node {
+  #         ns
+  #         data
+  #         language
+  #       }
+  #     }
+  #   }
     allNoticia(
       filter: {
         cattitle: { eq: $category }

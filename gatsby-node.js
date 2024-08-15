@@ -5,25 +5,6 @@ const fs = require("fs");
 const { createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
 
-// ** Forzamos entrada a Cache del plugin react-i18next para Idiomas **
-exports.onPreBootstrap = ({ actions }) => {
-	const { touchNode } = actions;
-	const filePath = path.resolve('./node_modules/gatsby-plugin-react-i18next/dist/plugin/onCreateNode.js');
-	
-	if (fs.existsSync(filePath)) {
-	  const stat = fs.statSync(filePath);
-	  touchNode({
-		id: filePath,
-		internal: {
-		  contentDigest: stat.mtimeMs.toString(),
-		  type: 'File',
-		},
-	  });
-	  console.log('Touched onCreateNode.js file for caching');
-	} else {
-	  console.warn('onCreateNode.js file not found');
-	}
-  };
 exports.sourceNodes = async (params, { parentSpan }) => {
 	const { actions, createNodeId, createContentDigest, getCache } = params;
 	const { createNode, touchNode } = actions;

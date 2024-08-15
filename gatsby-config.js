@@ -65,35 +65,35 @@ module.exports = {
         path: `${__dirname}/src/assets/images/topics`,
       },
     },
-    {
-      resolve: 'gatsby-plugin-react-i18next',
-      options: {
-        redirect: false,
-        localeJsonSourceName: "locale", // name given to `gatsby-source-filesystem` plugin.
-        languages,
-        defaultLanguage,
-        siteUrl: "https://turista.com.mx",
-        i18nextOptions: {
-          // debug: true,
-          fallbackLng: defaultLanguage,
-          supportedLngs: languages,
-          defaultNS: 'common',
-          interpolation: {
-            escapeValue: false, // not needed for react as it escapes by default
-          },
-        },
-        pages: [
-          {
-            matchPath: '/:lang?/article:id?',
-            getLanguageFromPath: true,
-            excludeLanguages: ['en'],
-          },
-          {
-            matchPath: '/:lang?/info/:id',
-            excludeLanguages: ['en'],
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-react-i18next',
+    //   options: {
+    //     redirect: false,
+    //     localeJsonSourceName: "locale", // name given to `gatsby-source-filesystem` plugin.
+    //     languages,
+    //     defaultLanguage,
+    //     siteUrl: "https://turista.com.mx",
+    //     i18nextOptions: {
+    //       // debug: true,
+    //       fallbackLng: defaultLanguage,
+    //       supportedLngs: languages,
+    //       defaultNS: 'common',
+    //       interpolation: {
+    //         escapeValue: false, // not needed for react as it escapes by default
+    //       },
+    //     },
+    //     pages: [
+    //       {
+    //         matchPath: '/:lang?/article:id?',
+    //         getLanguageFromPath: true,
+    //         excludeLanguages: ['en'],
+    //       },
+    //       {
+    //         matchPath: '/:lang?/info/:id',
+    //         excludeLanguages: ['en'],
+    //       },
+    //     ],
+    //   },
+    // },
   ],
 }
