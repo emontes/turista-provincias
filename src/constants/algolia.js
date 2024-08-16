@@ -1,6 +1,6 @@
 const { BiInfoCircle } = require('react-icons/bi')
 
-const estadoSlug = process.env.ESTADO_SLUG
+const estadoSlug = process.env.GATSBY_ESTADO_SLUG
 
 const querySection = `
 {

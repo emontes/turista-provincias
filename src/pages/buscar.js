@@ -48,7 +48,7 @@ const Buscar = ({ data, pageContext }) => {
       <ContainerGrecas title={t('buscar')} sideNavSec>
         <Wrapper>
           <InstantSearch
-            indexName={process.env.ESTADO_SLUG}
+            indexName={process.env.GATSBY_ESTADO_SLUG}
             searchClient={searchClient}
           >
             <SearchBox

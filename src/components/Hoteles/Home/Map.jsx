@@ -4,7 +4,7 @@ import Title from '../../atoms/Title'
 import Mapa from '../partial/Map'
 import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
-const estadoSlug = process.env.ESTADO_SLUG
+const estadoSlug = process.env.GATSBY_ESTADO_SLUG
 const travelData = require(`../../../constants/configs/${estadoSlug}/travelPayouts`)
 
 const Map = ({ metadata }) => {

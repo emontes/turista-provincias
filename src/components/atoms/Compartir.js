@@ -17,7 +17,7 @@ import {
 
 // La documentación de React-share está en https://github.com/nygardk/react-share
 
-const estadoSlug = process.env.ESTADO_SLUG
+const estadoSlug = process.env.GATSBY_ESTADO_SLUG
 const siteData = require(`../../constants/configs/${estadoSlug}/siteData`)
 
 const Compartir = ({ url = '', title = 'El Turista' }) => {

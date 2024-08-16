@@ -60,7 +60,7 @@ async function fetchAllData(baseUrl, maxPages = Number.POSITIVE_INFINITY, lastFe
 async function createNodes({ actions, createNodeId, createContentDigest, getNodesByType }, lastFetchTime = null) {
   console.log("Iniciando creación de nodos");
   const { createNode, touchNode } = actions;
-  const estadoSlug = process.env.ESTADO_SLUG;
+  const estadoSlug = process.env.GATSBY_ESTADO_SLUG;
 
   const maxPages = Number.parseInt(process.env.MAX_PAGES_FETCH) || Number.POSITIVE_INFINITY;
   console.log("Número máximo de páginas:", maxPages);

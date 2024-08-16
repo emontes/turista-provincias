@@ -33,7 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	const { createPage } = actions;
 	const postPerPage = 16;
 	const hotelsPerPage = 12;
-	const estadoSlug = process.env.ESTADO_SLUG;
+	const estadoSlug = process.env.GATSBY_ESTADO_SLUG;
 
 	console.log("Estado Slug:", estadoSlug);
 

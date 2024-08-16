@@ -3,7 +3,7 @@ import Banner from '../Banner'
 import Map from '../../components/Hoteles/partial/Map'
 import { Trans } from 'gatsby-plugin-react-i18next'
 
-const estadoSlug = process.env.ESTADO_SLUG
+const estadoSlug = process.env.GATSBY_ESTADO_SLUG
 const travelData = require(`../../constants/configs/${estadoSlug}/travelPayouts`)
 
 const Mapa = ({ metadata, pageContext, seoDescription }) => {

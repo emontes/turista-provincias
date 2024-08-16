@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const estadoSlug = process.env.ESTADO_SLUG
+const estadoSlug = process.env.GATSBY_ESTADO_SLUG
 const siteData = require(`./src/constants/configs/${estadoSlug}/siteData`)
 const { languages, defaultLanguage } = require('./languages.js')
 
@@ -46,7 +46,7 @@ module.exports = {
     //   options: {
     //     appId: process.env.GATSBY_ALGOLIA_APP_ID,
     //     apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-    //     indexName: process.env.ESTADO_SLUG,
+    //     indexName: process.env.GATSBY_ESTADO_SLUG,
     //     queries: require('./src/constants/algolia'),
     //     chunkSize: 10000,
     //   },
