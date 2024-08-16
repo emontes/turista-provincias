@@ -1,17 +1,22 @@
-import React from 'react'
-import './src/assets/themes/global.css' // para el Tailwind
-// import GlobalStyle from './src/assets/themes/globalStyles'
-import { ThemeProvider } from 'styled-components'
+import React, { lazy, Suspense } from 'react';
+import './src/assets/themes/global.css'; // para Tailwind
+import { ThemeProvider } from 'styled-components';
 
-import Chiapas from './src/assets/themes/chiapas'
-import EdoMexico from './src/assets/themes/edomexico'
-import Yucatan from './src/assets/themes/yucatan'
+const Chiapas = lazy(() => import('./src/assets/themes/chiapas'));
+const EdoMexico = lazy(() => import('./src/assets/themes/edomexico'));
+const Yucatan = lazy(() => import('./src/assets/themes/yucatan'));
 const estadoSlug = process.env.ESTADO_SLUG
 
 export const wrapRootElement = ({ element }) => {
-  let themeSel = Chiapas
-  if (estadoSlug === 'edomexico') themeSel = EdoMexico
-  if (estadoSlug === 'yucatan') themeSel = Yucatan
+  let ThemeComponent = Chiapas;
+  if (estadoSlug === 'edomexico') ThemeComponent = EdoMexico;
+  if (estadoSlug === 'yucatan') ThemeComponent = Yucatan;
 
-  return <ThemeProvider theme={themeSel}>{element}</ThemeProvider>
-}
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ThemeProvider theme={ThemeComponent}>
+        {element}
+      </ThemeProvider>
+    </Suspense>
+  );
+};
