@@ -20,8 +20,6 @@ const SectionTest = ({ data, pageContext }) => {
   )
 }
 const Section = ({ data, pageContext }) => {
-  console.log ('La data es: ', data)
-  console.log ('La pageContext es: ', pageContext)
   const sectionTitle = data.section.secname
   const metadata = data.site.siteMetadata
 
