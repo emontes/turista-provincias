@@ -59,16 +59,16 @@ const NoticiasIndex = ({ data, pageContext }) => {
 export default NoticiasIndex
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
-    # locales: allLocale(filter: { language: { eq: $language } }) {
-  #     edges {
-  #       node {
-  #         ns
-  #         data
-  #         language
-  #       }
-  #     }
-  #   }
+  query($skip: Int!, $limit: Int!, $language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     allNoticia(
       limit: $limit
       skip: $skip

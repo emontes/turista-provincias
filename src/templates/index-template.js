@@ -104,18 +104,17 @@ const Index = ({ data, pageContext }) => {
 export default Index;
 
 export const query = graphql`
-  query {
-  #query($language: String!) {
+  query($language: String!) {
 
-    # locales: allLocale(filter: { language: { eq: $language } }) {
-    #   edges {
-    #     node {
-    #       ns
-    #       data
-    #       language
-    #     }
-    #   }
-    # }
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
 
     site {
       siteMetadata {
