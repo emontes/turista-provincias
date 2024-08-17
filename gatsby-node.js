@@ -275,6 +275,37 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 	}
 
+	// Crea páginas para cada Section Article
+	const resultSectionArticles = await graphql(`	
+		{
+			allSectionArticle {
+				nodes {
+					artid
+					title
+					secid
+				}
+			}
+		}
+	  `);
+
+	const sectionArticles = resultSectionArticles.data.allSectionArticle.nodes;
+
+	for (const article of sectionArticles) {
+				const slug = article.title.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		createPage({
+			path: `/info/${slug}`,
+			component: path.resolve(
+				"./src/templates/informacion/article-template.js",
+			),
+			context: {
+				artid: article.artid,
+				secid: article.secid,
+				title: article.title,
+				sectionsMaster: parentSections,
+			},
+		});
+	}
+
 	console.log("Finalizando createPages");
 };
 

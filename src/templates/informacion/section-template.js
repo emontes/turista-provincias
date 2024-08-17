@@ -11,11 +11,6 @@ import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby";
 
-const SectionTest = ({ data, pageContext }) => {
-	console.log("La data es: ", data);
-	console.log("La pageContext es: ", pageContext);
-	return <div>Section {pageContext.title}</div>;
-};
 const Section = ({ data, pageContext }) => {
 	const sectionTitle = data.section.secname;
 	const metadata = data.site.siteMetadata;
