@@ -10,17 +10,17 @@ import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
 
 const createSectionObject = (section) => ({
-  slug: section.secname
-    .replace(/\s+/g, "_")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, ""),
-  title: section.secname,
+	slug: section.secname
+		.replace(/\s+/g, "_")
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, ""),
+	title: section.secname,
 });
 const Article = ({ data, pageContext }) => {
 	const { title, content } = data.article;
 
 	const items = [];
-	pageContext.sectionsMaster.map((section, index) => {	
+	pageContext.sectionsMaster.map((section, index) => {
 		const item = createSectionObject(section);
 		items.push(item);
 	});
@@ -43,6 +43,7 @@ const Article = ({ data, pageContext }) => {
 	return (
 		<Layout linkExterno="/informacion" seoTitle={title}>
 			<Seo title={title} description={content.substring(0, 250)} />
+      <TopNavSec />
 			<ContainerGrecas title={title}>
 				<div className=" xl:flex">
 					<article>
@@ -72,7 +73,7 @@ const Article = ({ data, pageContext }) => {
 				</div>
 				<br />
 			</ContainerGrecas>
-			<TopNavSec />
+			
 		</Layout>
 	);
 };

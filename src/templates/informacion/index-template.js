@@ -24,7 +24,7 @@ const Informacion = ({ data, pageContext }) => {
 
 	return (
 		<Layout
-      heroImg={data.image ? data.image.childImageSharp : ''}
+      		heroImg={data.image ? data.image.childImageSharp : ''}
 			main={t("información")}
 			sub={`${t("Acerca de")} ${t(metadata.estado.name)}`}
 			seoTitle={`${metadata.estado.name} Información`}
@@ -33,7 +33,7 @@ const Informacion = ({ data, pageContext }) => {
 			<Seo
 				title={seoTitle}
 				description={seoDescription}
-        image={data.image ? getSrc(data.image.childImageSharp) : ''}
+        		image={data.image ? getSrc(data.image.childImageSharp) : ''}
 			/>
 			<ContainerGrecas title={seoTitle} sideNavSec>
 				<h3 className="uppercase text-red-500">

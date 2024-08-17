@@ -1,67 +1,79 @@
 // create-nodes.js
 const fetch = require("node-fetch");
 
-async function fetchAllData(
-	baseUrl,
-	maxPages = Number.POSITIVE_INFINITY,
-	lastFetchTime = null,
-) {
-	let page = 1;
-	let allData = [];
-	let hasNextPage = true;
-	console.log("Last Fetch Time: ", lastFetchTime);
+function getEmbeddedData(data, baseUrl) {
+  if (!data._embedded) return null;
 
-	while (hasNextPage && page <= maxPages) {
-		console.log(`Generando Nodos ${baseUrl} Página `, page);
-		let url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}page=${page}`;
+  const urlKey = baseUrl.split("/").pop();
+  if (data._embedded[urlKey]) return data._embedded[urlKey];
 
-		if (lastFetchTime) {
-			url += `&last_updated=${encodeURIComponent(lastFetchTime)}`;
-			console.log("🔗 El url con last_updated es: ", url);
-		}
+  const underscoreKey = urlKey.replace(/-/g, '_');
+  if (data._embedded[underscoreKey]) return data._embedded[underscoreKey];
 
-		try {
-			const response = await fetch(url, {
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-				timeout: 60000, // 60 segundos de timeout
-			});
+  const possibleKey = Object.keys(data._embedded).find(key => key.includes(urlKey));
+  if (possibleKey) return data._embedded[possibleKey];
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
-			const data = await response.json();
-
-			if (
-				data._embedded &&
-				Array.isArray(data._embedded[baseUrl.split("/").pop()])
-			) {
-				allData = allData.concat(data._embedded[baseUrl.split("/").pop()]);
-			} else if (typeof data === "object" && !Array.isArray(data)) {
-				allData = allData.concat(Object.values(data));
-				hasNextPage = false;
-			} else {
-				allData = allData.concat(data);
-				hasNextPage = false;
-			}
-
-			hasNextPage =
-				hasNextPage && data._links && data._links.next !== undefined;
-			page++;
-
-			await new Promise((resolve) => setTimeout(resolve, 1000));
-		} catch (error) {
-			console.error(`❌ Error fetching data from ${url}:`, error);
-			hasNextPage = false;
-		}
-	}
-
-	return allData;
+  return null;
 }
 
+async function fetchAllData(
+  baseUrl,
+  maxPages = Number.POSITIVE_INFINITY,
+  lastFetchTime = null,
+) {
+  let page = 1;
+  let allData = [];
+  let hasNextPage = true;
+  console.log("Last Fetch Time: ", lastFetchTime);
+
+  while (hasNextPage && page <= maxPages) {
+    console.log(`Generando Nodos ${baseUrl} Página`, page);
+    let url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}page=${page}`;
+
+    if (lastFetchTime) {
+      url += `&last_updated=${encodeURIComponent(lastFetchTime)}`;
+      console.log("🔗 El url con last_updated es: ", url);
+    }
+
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        timeout: 60000, // 60 segundos de timeout
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const embeddedData = getEmbeddedData(data, baseUrl);
+      if (embeddedData && Array.isArray(embeddedData)) {
+        allData = allData.concat(embeddedData);
+      } else if (typeof data === "object" && !Array.isArray(data)) {
+        allData = allData.concat(Object.values(data));
+        hasNextPage = false;
+      } else {
+        allData = allData.concat(data);
+        hasNextPage = false;
+      }
+
+      hasNextPage =
+        hasNextPage && data._links && data._links.next !== undefined;
+      page++;
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error(`❌ Error fetching data from ${url}:`, error);
+      hasNextPage = false;
+    }
+  }
+
+  return allData;
+}
 async function createNodes(
 	{ actions, createNodeId, createContentDigest, getNodesByType },
 	lastFetchTime = null,
@@ -91,6 +103,8 @@ async function createNodes(
 			);
 
 			for (const item of updatedData) {
+				
+
 				const nodeId = createNodeId(
 					`${nodeType.toLowerCase()}-${item[idField]}`,
 				);
@@ -105,6 +119,11 @@ async function createNodes(
 					const existingNode = existingNodesMap.get(item[idField]);
 					touchNode(existingNode);
 				}
+
+        if (typeof item !== 'object' || item === null) {
+          console.error(`Item inválido para ${nodeType} ${idField}:`, item);
+          return;
+        }
 				createNode({
 					...item,
 					id: nodeId,
@@ -195,6 +214,29 @@ async function createNodes(
 				),
 			"Category",
 			"catid",
+		);
+
+		// Links
+		await updateOrCreateNodes(
+			() =>
+				fetchAllData(
+					`http://api.${estadoSlug}.turista.com.mx/links`,
+					maxPages,
+					lastFetchTime,
+				),
+			"Link",
+			"lid",
+		);
+
+		await updateOrCreateNodes(
+			() =>
+				fetchAllData(
+					`http://api.${estadoSlug}.turista.com.mx/links-categories`,
+					maxPages,
+					lastFetchTime,
+				),
+			"LinkCategory",
+			"cid",
 		);
 
 		console.log("Finalizando creación de nodos");

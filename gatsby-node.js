@@ -307,6 +307,36 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 	}
 
+	/* --------------------------------------------------
+     ------------ Links  ---------------
+     --------------------------------------------------*/
+
+	const resultLinkCategoryRoot = await graphql(`
+		{
+			allLinkCategory(
+				filter: {parentid: {eq: "0"}}
+			) {
+				nodes {
+				cid
+				parentid
+				title
+				}
+			}
+		}
+	`);
+
+	const linksRoot = resultLinkCategoryRoot.data.allLinkCategory.nodes;
+	console.log('Links Root:', linksRoot);
+
+	// ** Crea el index de links
+	createPage({
+		path: "/links.html",
+		component: path.resolve("./src/templates/links/index-template.js"),
+		context: {
+			linksRoot: linksRoot,
+		},
+	});
+
 	console.log("Finalizando createPages");
 };
 
