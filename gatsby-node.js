@@ -302,6 +302,7 @@ exports.createPages = async ({ graphql, actions }) => {
 				secid: article.secid,
 				title: article.title,
 				sectionsMaster: parentSections,
+				sections: sections,
 			},
 		});
 	}
