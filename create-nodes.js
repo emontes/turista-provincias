@@ -117,6 +117,12 @@ async function createNodes({ actions, createNodeId, createContentDigest, getNode
       'Section',
       'secid'
     );
+
+    await updateOrCreateNodes(
+      () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/articles`, maxPages, lastFetchTime),
+      'SectionArticle',
+      'artid'
+    );
  
 
     // Noticias
@@ -126,14 +132,12 @@ async function createNodes({ actions, createNodeId, createContentDigest, getNode
       'sid'
     );
 
-    // Topics
     await updateOrCreateNodes(
       () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/topics`, maxPages, lastFetchTime),
       'Topic',
       'topicid'
     );
-
-    // Categories
+    
     await updateOrCreateNodes(
       () => fetchAllData(`http://api.${estadoSlug}.turista.com.mx/categories`, maxPages, lastFetchTime),
       'Category',
