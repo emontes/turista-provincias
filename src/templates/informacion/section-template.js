@@ -11,6 +11,7 @@ import Compartir from "../../components/atoms/Compartir";
 import TopNavSec from "../../components/atoms/TopNavSec";
 import { Link } from "gatsby";
 
+
 const Section = ({ data, pageContext }) => {
 	const sectionTitle = data.section.secname;
 	const metadata = data.site.siteMetadata;
@@ -24,13 +25,15 @@ const Section = ({ data, pageContext }) => {
 	const articles = data.articles.nodes;
 	const sections = data.sections.nodes;
 
-	let items = [];
+	const items = [];
 	pageContext.sectionsMaster.map((section, index) => {
 		const slug = section.secname
 			.replace(/\s+/g, "_")
 			.normalize("NFD")
-			.replace(/[\u0300-\u036f]/g, "");
-		let item = {
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/[¿?]/g, "")
+			.replace(/[^\w_-]/g, "");
+		const item = {
 			slug: slug,
 			title: section.secname,
 		};
@@ -43,13 +46,15 @@ const Section = ({ data, pageContext }) => {
 		linkTo: "informacion",
 	};
 
-	let tree = [];
+	const tree = [];
 	if (sectionParent > 0) {
-		let item = {
+		const item = {
 			slug: data.parent.secname
 				.replace(/\s+/g, "_")
 				.normalize("NFD")
-				.replace(/[\u0300-\u036f]/g, ""),
+				.replace(/[\u0300-\u036f]/g, "")
+				.replace(/[¿?]/g, "")
+				.replace(/[^\w_-]/g, ""),
 			title: data.parent.secname,
 		};
 		tree.push(item);
@@ -83,7 +88,9 @@ const Section = ({ data, pageContext }) => {
 										const slug = item.secname
 											.replace(/\s+/g, "_")
 											.normalize("NFD")
-											.replace(/[\u0300-\u036f]/g, "");
+											.replace(/[\u0300-\u036f]/g, "")
+											.replace(/[¿?]/g, "")
+											.replace(/[^\w_-]/g, "");
 										return (
 											<li key={item.secid}>
 												<Link to={`/informacion/${slug}`}>

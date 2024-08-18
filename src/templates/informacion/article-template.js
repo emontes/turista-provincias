@@ -11,9 +11,12 @@ import TopNavSec from "../../components/atoms/TopNavSec";
 
 const createSectionObject = (section) => ({
 	slug: section.secname
-		.replace(/\s+/g, "_")
-		.normalize("NFD")
-		.replace(/[\u0300-\u036f]/g, ""),
+	// .toLowerCase() // Convertir a minúsculas
+	.replace(/\s+/g, "_") // Reemplazar espacios con guiones bajos
+	.normalize("NFD") // Normalizar para separar caracteres diacríticos
+	.replace(/[\u0300-\u036f]/g, "") // Eliminar diacríticos
+	.replace(/[¿?]/g, "") // Eliminar caracteres especiales específicos
+	.replace(/[^\w_-]/g, ""),// Eliminar cualquier carácter que no sea alfanumérico, guion bajo o guion,
 	title: section.secname,
 });
 const Article = ({ data, pageContext }) => {

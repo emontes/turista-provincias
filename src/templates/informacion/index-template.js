@@ -24,7 +24,7 @@ const Informacion = ({ data, pageContext }) => {
 
 	return (
 		<Layout
-      		heroImg={data.image ? data.image.childImageSharp : ''}
+			heroImg={data.image ? data.image.childImageSharp : ""}
 			main={t("información")}
 			sub={`${t("Acerca de")} ${t(metadata.estado.name)}`}
 			seoTitle={`${metadata.estado.name} Información`}
@@ -33,7 +33,7 @@ const Informacion = ({ data, pageContext }) => {
 			<Seo
 				title={seoTitle}
 				description={seoDescription}
-        		image={data.image ? getSrc(data.image.childImageSharp) : ''}
+				image={data.image ? getSrc(data.image.childImageSharp) : ""}
 			/>
 			<ContainerGrecas title={seoTitle} sideNavSec>
 				<h3 className="uppercase text-red-500">
@@ -66,9 +66,13 @@ const Informacion = ({ data, pageContext }) => {
 							<div className="bg-white h-full p-4 flex flex-col justify-between">
 								<p className="text-sm text-gray-700">{item.metadescrip}</p>
 								<Link
-									to={`/informacion/${item.secname.replace(/\s+/g, "_")
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")}`}
+									to={`/informacion/${item.secname
+										.replace(/\s+/g, "_")
+										.normalize("NFD")
+										.replace(/[\u0300-\u036f]/g, "")
+										.replace(/[¿?]/g, "")
+										.replace(/[^\w_-]/g, "")
+										}`}
 									className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300 text-center"
 								>
 									Visitar
@@ -81,7 +85,6 @@ const Informacion = ({ data, pageContext }) => {
 		</Layout>
 	);
 };
-
 
 export default Informacion;
 

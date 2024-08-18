@@ -259,7 +259,14 @@ exports.createPages = async ({ graphql, actions }) => {
 	const sections = resultSection.data.allSection.nodes;
 
 	for (const section of sections) {
-		const slug = section.secname.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		const slug = section.secname
+			// .toLowerCase() // Convertir a minúsculas
+			.replace(/\s+/g, "_") // Reemplazar espacios con guiones bajos
+			.normalize("NFD") // Normalizar para separar caracteres diacríticos
+			.replace(/[\u0300-\u036f]/g, "") // Eliminar diacríticos
+			.replace(/[¿?]/g, "") // Eliminar caracteres especiales específicos
+			.replace(/[^\w_-]/g, ""); // Eliminar cualquier carácter que no sea alfanumérico, guion bajo o guion,
+
 		createPage({
 			path: `/informacion/${slug}`,
 			component: path.resolve(
@@ -291,7 +298,10 @@ exports.createPages = async ({ graphql, actions }) => {
 	const sectionArticles = resultSectionArticles.data.allSectionArticle.nodes;
 
 	for (const article of sectionArticles) {
-				const slug = article.title.replace(/\s+/g, "_").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		const slug = article.title
+			.replace(/\s+/g, "_")
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "");
 		createPage({
 			path: `/info/${slug}`,
 			component: path.resolve(
@@ -352,13 +362,11 @@ exports.createPages = async ({ graphql, actions }) => {
 	const linkCategories = resultLinkCategory.data.allLinkCategory.nodes;
 
 	for (const linkCategory of linkCategories) {
-		const slug = `link-${linkCategory.cid}.html`
-		console.log('Creando link', slug);
+		const slug = `link-${linkCategory.cid}.html`;
+		console.log("Creando link", slug);
 		createPage({
 			path: `/${slug}`,
-			component: path.resolve(
-				"./src/templates/links/links-template.js",
-			),
+			component: path.resolve("./src/templates/links/links-template.js"),
 			context: {
 				cid: linkCategory.cid,
 				parentid: linkCategory.parentid,
