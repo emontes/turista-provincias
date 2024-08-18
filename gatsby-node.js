@@ -37,7 +37,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	console.log("Estado Slug:", estadoSlug);
 
-	// ** crea el index
+	//#region crea el index
 	createPage({
 		path: "/",
 		component: path.resolve("./src/templates/index-template.js"),
@@ -47,9 +47,13 @@ exports.createPages = async ({ graphql, actions }) => {
 	});
 	console.log("Página de índice creada");
 
+	//#endregion
+
+
 	/* ---------------------------------------
      ------------ Noticias  --------------
      --------------------------------------*/
+	 //#region Noticias
 
 	// *** Crea las páginas de los Temas ***
 	const resultTopics = await graphql(`
@@ -214,10 +218,12 @@ exports.createPages = async ({ graphql, actions }) => {
 		}
 	}
 	console.log(`✅ Total de noticias creadas: ${contador}`);
+	//#endregion
 
 	/* --------------------------------------------------
      ------------ Información (Sections)  ---------------
      --------------------------------------------------*/
+	 //#region Información (Sections)
 
 	const resultSectionParents = await graphql(`	
 	{
@@ -317,9 +323,13 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 	}
 
+	//#endregion
+
 	/* --------------------------------------------------
      ------------ Links  ---------------
      --------------------------------------------------*/
+
+	//#region Links
 
 	const resultLinkCategoryRoot = await graphql(`
 		{
@@ -363,7 +373,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	for (const linkCategory of linkCategories) {
 		const slug = `link-${linkCategory.cid}.html`;
-		console.log("Creando link", slug);
 		createPage({
 			path: `/${slug}`,
 			component: path.resolve("./src/templates/links/links-template.js"),
@@ -375,6 +384,8 @@ exports.createPages = async ({ graphql, actions }) => {
 			},
 		});
 	}
+
+	//#endregion
 
 	console.log("Finalizando createPages");
 };
