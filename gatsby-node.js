@@ -326,7 +326,6 @@ exports.createPages = async ({ graphql, actions }) => {
 	`);
 
 	const linksRoot = resultLinkCategoryRoot.data.allLinkCategory.nodes;
-	console.log('Links Root:', linksRoot);
 
 	// ** Crea el index de links
 	createPage({
@@ -336,6 +335,38 @@ exports.createPages = async ({ graphql, actions }) => {
 			linksRoot: linksRoot,
 		},
 	});
+
+	// Crea páginas para cada Link Category
+	const resultLinkCategory = await graphql(`	
+		{
+			allLinkCategory {
+				nodes {
+					cid
+					parentid
+					title
+				}
+			}
+		}
+	  `);
+
+	const linkCategories = resultLinkCategory.data.allLinkCategory.nodes;
+
+	for (const linkCategory of linkCategories) {
+		const slug = `link-${linkCategory.cid}.html`
+		console.log('Creando link', slug);
+		createPage({
+			path: `/${slug}`,
+			component: path.resolve(
+				"./src/templates/links/links-template.js",
+			),
+			context: {
+				cid: linkCategory.cid,
+				parentid: linkCategory.parentid,
+				title: linkCategory.title,
+				linksRoot: linksRoot,
+			},
+		});
+	}
 
 	console.log("Finalizando createPages");
 };

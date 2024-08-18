@@ -1,3 +1,4 @@
+// src/components/Links/index.js
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
@@ -39,20 +40,16 @@ const Links = ({
           <>
             <p style={{ margin: '0 0 -2.2rem' }}>Seleccione una categoría.</p>
             <ul>
-              {linksCategories.map((item) => {
-                let slug = item.slug
-
-                return (
-                  <li key={item.slug}>
-                    <Link
-                      className={`category ${item.featured ? 'featured' : ''}`}
-                      to={`/${slug}`}
-                    >
-                      <FcFolder /> {item.title}
-                    </Link>
-                  </li>
-                )
-              })}
+              {linksCategories.map((item) => (
+                <li key={item.cid}>
+                  <Link
+                    className={`category ${item.featured ? 'featured' : ''}`}
+                    to={`/link-${item.cid}.html`}
+                  >
+                    <FcFolder /> {item.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
             {links.length > 0 && <Title title="Listado de Sitios Web" />}
           </>

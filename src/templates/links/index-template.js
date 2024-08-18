@@ -7,7 +7,6 @@ import Links from '../../components/Links'
 import { Trans, useTranslation } from 'gatsby-plugin-react-i18next'
 
 const Directorio = ({ data, pageContext }) => {
-  console.log('pageContext', pageContext)
   const metadata = data.site.siteMetadata
   const { t } = useTranslation()
   return (
