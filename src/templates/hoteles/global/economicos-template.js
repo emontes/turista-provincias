@@ -9,60 +9,49 @@ import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import Chat from '../../../components/atoms/chat-hubspot'
 
-// const Global = ({ data }) => {
-//   const metadata = data.site.siteMetadata
-//   const seoTitle = `Hoteles económicos en ${metadata.estado.name}`
-//   const seoDescription = `Lista con los hoteles más económicos del Estado de ${metadata.estado.name}`
-//   return (
-//     <Layout
-//       seoTitle={seoTitle}
-//       footerList1={footerList1}
-//       footerList2={footerList2}
-//     >
-//       <Chat />
-//       <Seo title={seoTitle} description={seoDescription} />
-//       <ContainerGrecas
-//         title={`Los Hoteles más Económicos de ${metadata.estado.name}`}
-//       >
-//         <HotelsList hoteles={data.hoteles.nodes} title={seoTitle} />
-//         <br />
-//         <LeyendaPrecios />
-//         <p style={{ marginBottom: '0' }}>{seoDescription}</p>
-//       </ContainerGrecas>
-//     </Layout>
-//   )
-// }
-
-const Global = () => {
-  return <div>Hoteles económicos global</div>
+const Global = ({ data }) => {
+  const metadata = data.site.siteMetadata
+  const seoTitle = `Hoteles económicos en ${metadata.estado.name}`
+  const seoDescription = `Lista con los hoteles más económicos del Estado de ${metadata.estado.name}`
+  return (
+    <Layout
+      seoTitle={seoTitle}
+      footerList1={footerList1}
+      footerList2={footerList2}
+    >
+      <Chat />
+      <Seo title={seoTitle} description={seoDescription} />
+      <ContainerGrecas
+        className="mt-11"
+        title={`Los Hoteles más Económicos de ${metadata.estado.name}`}
+      >
+        <HotelsList hoteles={data.hoteles.nodes} title={seoTitle} />
+        <br />
+        <LeyendaPrecios />
+        <p style={{ marginBottom: '0' }}>{seoDescription}</p>
+      </ContainerGrecas>
+    </Layout>
+  )
 }
 
 export default Global
 
-// export const pageQuery = graphql`
-//   query($estadoSlug: String) {
-//     hoteles: allStrapiHotelHotellook(
-//       filter: {
-//         hotel_location: { location: { estado: { slug: { eq: $estadoSlug } } } }
-//         pricefrom: { gt: 0 }
-//         photoCount: { gt: 0 }
-//       }
-//       sort: { fields: pricefrom, order: ASC }
-//       limit: 60
-//     ) {
-//       nodes {
-//         ...ListaHoteles
-//       }
-//     }
+export const pageQuery = graphql`
+  query {
+    hoteles:  allHotel(filter: {lowestrate: {gt: 0}}, sort: {lowestrate: ASC}, limit: 60)  {
+      nodes {
+        ...ListaHoteles
+      }
+    }
 
-//     site {
-//       siteMetadata {
-//         estado {
-//           name
-//           slug
-//           slogan
-//         }
-//       }
-//     }
-//   }
-// `
+    site {
+      siteMetadata {
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+  }
+`

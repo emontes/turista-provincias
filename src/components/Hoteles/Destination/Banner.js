@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import device from '../../../assets/themes/device'
 
 const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
+  console.log('image', image)
   return (
     <Wrapper className="bannerVista ">
       <GatsbyImage

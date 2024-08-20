@@ -1,9 +1,13 @@
+// src/utilities/stringService.cjs.js
+
+// Notas: Este lo usamos como wrapper para CommonJS y que se pueda usar en Node.js (gatsby-node)
+
 // src/utilities/stringService.js
 
-export const sanearString = (string, blankReplacement = '-') => {
+const sanearString = (string, blankReplacement = '-') => {
     if (!string) return '';
     string = string.trim().toLowerCase();
-  
+
     const map = {
       'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a',
       'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e',
@@ -13,91 +17,90 @@ export const sanearString = (string, blankReplacement = '-') => {
       'ñ': 'n', 'ç': 'c',
       '@': 'at', '&': 'and'
     };
-  
+
     string = string.replace(/[áàäâéèëêíìïîóòöôúùüûñç@&]/g, match => map[match]);
     string = string.replace(/[\W_]+/g, blankReplacement);
-  
+
     return string;
-  };
-  
-  export const vistaToUrl = (vista, currentLang) => {
+};
+
+const vistaToUrl = (vista, currentLang) => {
     const string = vista.alias || vista[`hvi_desc_${currentLang}`];
     return sanearString(string, '+');
-  };
-  
-  export const getFirstChars = (string, length) => {
+};
+
+const getFirstChars = (string, length) => {
     if (string.length <= length) return string;
     return string.substring(0, length) + '...';
-  };
-  
-  export const normalizeString = (string) => {
+};
+
+const normalizeString = (string) => {
     return string
       .normalize('NFD') // Descompone caracteres latinos en su forma base
       .replace(/[\u0300-\u036f]/g, '') // Elimina diacríticos
       .toLowerCase();
-  };
-  
-  export const stripTagsAndTruncate = (string, length) => {
+};
+
+const stripTagsAndTruncate = (string, length) => {
     const strippedString = string.replace(/<\/?[^>]+(>|$)/g, ""); // Elimina etiquetas HTML
     return getFirstChars(strippedString, length);
-  };
+};
 
-  export const hotelToUrlHtml = ($id, $hotelName, $currentlang) => {
-    const stringSano = sanearString($hotelName, '+').toLowerCase;
+const hotelToUrlHtml = ($id, $hotelName, $currentlang) => {
+    const stringSano = sanearString($hotelName, '+').toLowerCase();
     if ($currentlang === 'english') {
       return `${stringSano}-hotel-${$id}.html`;
     } 
     return `hotel-${stringSano}-${$id}.html`;
-  };
+};
 
-
-  export const vistaToUrlHtml = (vista, currentLang, externo = null) => {
+const vistaToUrlHtml = (vista, currentLang, externo = null) => {
     const stringSano = vistaToUrl(vista, currentLang).toLowerCase();
     let hotelesLet;
-  
+
     if (currentLang === 'english') {
       hotelesLet = `${stringSano}-hotels-${vista.hviid}.html`;
     } else {
       hotelesLet = `hoteles-${stringSano}-${vista.hviid}.html`;
     }
-  
+
     let retval;
     if (externo) {
       retval = `${externo.canonical}/${hotelesLet}`;
     } else {
       retval = hotelesLet;
     }
-  
-    return retval;
-  };
 
-  export const vistaActionToUrlHtml = (vista, currentLang, action) => {
+    return retval;
+};
+
+const vistaActionToUrlHtml = (vista, currentLang, action) => {
     const stringSano = vistaToUrl(vista, currentLang).toLowerCase();
     let hotelesLet;
-  
+
     if (currentLang === 'english') {
       hotelesLet = `${stringSano}-hotels-${vista.hviid}`;
     } else {
       hotelesLet = `hoteles-${stringSano}-${vista.hviid}`;
     }
-  
+
     const retval = `${hotelesLet}-${action}.html`;
     return retval;
-  };
-  
-  export const vistaPageToUrl = (vista, currentLang, page, action, stars = null) => {
+};
+
+const vistaPageToUrl = (vista, currentLang, page, action, stars = null) => {
     const stringSano = vistaToUrl(vista, currentLang).toLowerCase();
     let hotelesLet;
-  
+
     if (currentLang === 'english') {
       hotelesLet = `${stringSano}-hotels-${vista.hviid}`;
     } else {
       hotelesLet = `hoteles-${stringSano}-${vista.hviid}`;
     }
-  
+
     let retval;
     let yaEsta = false;
-  
+
     if (action === 'index') {
       if (page === 1) {
         retval = vistaActionToUrlHtml(vista, currentLang, action);
@@ -106,7 +109,7 @@ export const sanearString = (string, blankReplacement = '-') => {
       }
       yaEsta = true;
     }
-  
+
     if (action === 'estrellas' || action === 'stars') {
       if (page === 1) {
         retval = `${hotelesLet}-${action}-${stars}.html`;
@@ -115,7 +118,7 @@ export const sanearString = (string, blankReplacement = '-') => {
       }
       yaEsta = true;
     }
-  
+
     if (!yaEsta) {
       if (page === 1) {
         retval = vistaActionToUrlHtml(vista, currentLang, action);
@@ -123,15 +126,15 @@ export const sanearString = (string, blankReplacement = '-') => {
         retval = `${hotelesLet}-${action}-p${page}.html`;
       }
     }
-  
+
     return retval;
-  };
-  
-  export const vistaStarsToUrl = (vista, currentLang, stars) => {
+};
+
+const vistaStarsToUrl = (vista, currentLang, stars) => {
     const stringSano = vistaToUrl(vista, currentLang).toLowerCase();
     let hotelesLet;
     let starsLet;
-  
+
     if (currentLang === 'english') {
       hotelesLet = `${stringSano}-hotels-${vista.hviid}`;
       starsLet = '-stars-';
@@ -139,8 +142,21 @@ export const sanearString = (string, blankReplacement = '-') => {
       hotelesLet = `hoteles-${stringSano}-${vista.hviid}`;
       starsLet = '-estrellas-';
     }
-  
+
     const retval = `${hotelesLet}${starsLet}${stars}.html`;
     return retval;
-  };
-  
+};
+
+// Exportar funciones
+module.exports = {
+    sanearString,
+    vistaToUrl,
+    getFirstChars,
+    normalizeString,
+    stripTagsAndTruncate,
+    hotelToUrlHtml,
+    vistaToUrlHtml,
+    vistaActionToUrlHtml,
+    vistaPageToUrl,
+    vistaStarsToUrl,
+};

@@ -88,6 +88,10 @@ async function createNodes(
 
 	const newFetchTime = new Date().toISOString();
 
+  // Lista de campos a convertir
+	const floatFields = ['lowestrate', 'otroCampoFloat'];
+	const intFields = ['rating', 'cuartos', 'numhoteles'];
+
 	try {
 		// Función helper para actualizar o crear nodos
 		const updateOrCreateNodes = async (fetchFunction, nodeType, idField) => {
@@ -104,10 +108,23 @@ async function createNodes(
 
 			for (const item of updatedData) {
 				
-
 				const nodeId = createNodeId(
 					`${nodeType.toLowerCase()}-${item[idField]}`,
 				);
+
+        // Convertir campos float
+				floatFields.forEach(field => {
+					if (item[field] !== undefined) {
+						item[field] = Number.parseFloat(item[field]);
+					}
+				});
+
+				// Convertir campos integer
+				intFields.forEach(field => {
+					if (item[field] !== undefined) {
+						item[field] = parseInt(item[field], 10);
+					}
+				});
 
 				// Si el tipo es SectionArticle, obtenemos el content
 				if (nodeType === "SectionArticle") {

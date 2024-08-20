@@ -4,12 +4,14 @@ import device from '../../../assets/themes/device'
 import { Link } from 'gatsby'
 
 const HotelsList = ({ hoteles }) => {
+  console.log('HOTELES', hoteles)
+  const pathCdn = 'https://turista.me'
   return (
     <Wrapper>
       {hoteles.map((hotel, index) => {
         const imagen =
-          hotel.photos.strapi_json_value.length > 0
-            ? hotel.photos.strapi_json_value[0].url
+          hotel.portada
+            ? pathCdn + hotel.portada
             : ''
         return (
           <div
@@ -22,7 +24,7 @@ const HotelsList = ({ hoteles }) => {
               <div>
                 <img
                   src={imagen}
-                  alt={hotel.name.en}
+                  alt={hotel.nombre}
                   className="dealthumb"
                   itemprop="image"
                 />
@@ -30,35 +32,35 @@ const HotelsList = ({ hoteles }) => {
               <div className="center">
                 <div class="dealtitle">
                   <a
-                    href={`//jet.turista.com.mx${hotel.link}`}
+                    href={`//jet.turista.com.mx/hotels?hotelId=${hotel.travelpayoutsid}`}
                     target="_blank"
                     rel="noreferrer"
                     itemprop="url"
                   >
-                    <span itemProp="name"> {hotel.name.en}</span>
+                    <span itemProp="name"> {hotel.nombre}</span>
                   </a>
                 </div>
                 <div className="tipos">
-                  {hotel.stars > 0 && (
-                    <div className="stars">{hotel.stars}★</div>
+                  {hotel.rating > 0 && (
+                    <div className="stars">{hotel.rating}★</div>
                   )}
 
-                  {hotel.rating > 0 && (
-                    <div className="rating-number">{hotel.rating / 10}</div>
+                  {hotel.calificacion > 0 && (
+                    <div className="rating-number">{hotel.calificacion / 10}</div>
                   )}
                   {hotel.cntRooms && (
                     <div className="cuartos">{hotel.cntRooms} Cuartos</div>
                   )}
                 </div>
                 <div className="location">
-                  <Link to={`/${hotel.hotel_location.slug}.html`}>
+                  {/* <Link to={`/${hotel.hotel_location.slug}.html`}>
                     {hotel.hotel_location.location.name}
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
             <div className="price">
-              {hotel.pricefrom > 0 && (
+              {hotel.lowestrate > 0 && (
                 <>
                   Desde
                   <br />
@@ -66,7 +68,7 @@ const HotelsList = ({ hoteles }) => {
                     {new Intl.NumberFormat('es-MX', {
                       style: 'currency',
                       currency: 'MXN',
-                    }).format(hotel.pricefrom * 24)}
+                    }).format(hotel.lowestrate )}
                   </div>
                   por Noche
                 </>

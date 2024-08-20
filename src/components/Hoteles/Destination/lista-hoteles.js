@@ -108,50 +108,24 @@ const Wrapper = styled.div`
 `
 
 export const query = graphql`
-  fragment ListaHoteles on STRAPI_HOTEL_HOTELLOOK {
-    strapi_id
-    cityId
-    name {
-      en
-      es
-    }
-    address {
-      en
-    }
-    stars
-    propertyType
-    yearOpened
-    yearRenovated
-    rating
-    pricefrom
-    popularity
-    distance
-    cntSuites
-    cntRooms
-    cntFloors
-    checkIn
-    checkOut
-    link
-    location {
-      lat
-      lon
-    }
-    facilities {
-      strapi_json_value
-    }
-    photos {
-      strapi_json_value {
-        url
-      }
-    }
-    hotel_location {
-      slug
-      location {
-        name
-        estado {
-          Name
-        }
-      }
-    }
+  fragment ListaHoteles on Hotel {
+    hotelid
+      nombre
+      direccion
+      latitud
+      longitud
+      cadena
+      visible
+      lowestrate
+      travelpayoutsid
+      cuartos
+      rating
+      portada
+      portada_t
+      vista
+      desc_spanish
+      loca_spanish
+      desc_english
+      loca_english
   }
 `

@@ -4,6 +4,7 @@ const path = require("node:path");
 const fs = require("node:fs");
 const { createNodes } = require("./create-nodes");
 const fetch = require("node-fetch");
+const { vistaToUrlHtml, hotelToUrlHtml } = require('./src/utilities/stringService.cjs');
 
 exports.sourceNodes = async (params, { parentSpan }) => {
 	const { actions, createNodeId, createContentDigest, getCache } = params;
@@ -49,12 +50,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
 	//#endregion
 
-
 	/* ---------------------------------------
 	 ------------ Hoteles  --------------	
 	 --------------------------------------*/
 
-	//#region Hoteles	
+	//#region Hoteles
 
 	// Crea la página de índice de hoteles
 	createPage({
@@ -64,13 +64,87 @@ exports.createPages = async ({ graphql, actions }) => {
 			estadoSlug: estadoSlug,
 		},
 	});
+
+	const globalPages1 = [
+		"mapa",
+		"ofertas",
+		"economicos",
+		"completos",
+		"grandes",
+	];
+	const globalPages = ["economicos", "grandes"];
+
+	globalPages.map(async (item) => {
+		createPage({
+			path: `/hoteles/${item}/global`,
+			component: path.resolve(
+				`./src/templates/hoteles/global/${item}-template.js`,
+			),
+			context: {
+				item: item,
+				estadoSlug: estadoSlug,
+			},
+		});
+	});
+
+	//#region crea las páginas de los destinos
+
+	const resultDestinos = await graphql(`
+		query {
+		  allLocation(filter: { travelpayoutsid: { ne: null } }) {
+			totalCount
+			nodes {
+			  hviid
+			  hvi_desc_spanish
+			  banner_spanish
+			  numhoteles
+			  travelpayoutsid
+			}
+		  }
+		}
+	  `);
+
+	const destinos = resultDestinos.data.allLocation.nodes;
+
+	const locationPages = [
+		'lista',
+		'mapa',
+		'ofertas',
+		'economicos',
+		'populares',
+		'valorados',
+		'completos',
+		'grandes',
+		'travel',
+	  ]
+
+	  for (const destino of destinos) {
+		console.log("Destino:", vistaToUrlHtml(destino, 'spanish'));
+
+
+			createPage({
+				path: vistaToUrlHtml(destino, 'spanish'),
+				component: path.resolve(
+					'./src/templates/hoteles/locations/home-template.js',
+				),
+				context: {
+					destino: destino,
+					id: destino.hviid,
+					destinos: destinos,
+				}
+			});
+		
+	  }
+
+	//#endregion
+
 	
 	//#endregion
 
 	/* ---------------------------------------
      ------------ Noticias  --------------
      --------------------------------------*/
-	 //#region Noticias
+	//#region Noticias
 
 	// *** Crea las páginas de los Temas ***
 	const resultTopics = await graphql(`
@@ -240,7 +314,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	/* --------------------------------------------------
      ------------ Información (Sections)  ---------------
      --------------------------------------------------*/
-	 //#region Información (Sections)
+	//#region Información (Sections)
 
 	const resultSectionParents = await graphql(`	
 	{
