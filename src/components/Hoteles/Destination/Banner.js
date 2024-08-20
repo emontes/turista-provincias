@@ -5,10 +5,16 @@ import device from '../../../assets/themes/device'
 
 const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
   console.log('image', image)
+  console.log('Estado', estado)
+  const defaultImage = `https://edomexico.turista.com.mx/img/hoteles/banner/edomexico/hoteles-turista.jpg`
+
+  const imageUrl = image
+            ? `https://turista.me/img/hoteles/banner/${estado.slug}/${image}`
+            : defaultImage
   return (
-    <Wrapper className="bannerVista ">
-      <GatsbyImage
-        image={getImage(image.localFile)}
+    <Wrapper className="bannerVista">
+      <img
+        src={imageUrl}
         alt="Turista"
         placeholder="tracedSVG"
         className="hero-img"
@@ -17,7 +23,7 @@ const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
       <div className="hoteles">
         <div className="subTitle">{subTitle}</div>
         <div className="ciudad">{vistaDesc}</div>
-        <div className="estado">{estado}</div>
+        <div className="estado">{estado.name}</div>
       </div>
     </Wrapper>
   )

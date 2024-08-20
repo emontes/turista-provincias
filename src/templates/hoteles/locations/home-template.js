@@ -40,7 +40,7 @@ const Locations = ({ data, pageContext }) => {
   let cuantosTienenPrecio = 0
   let sumaPrecios = 0
   for (const hotel of data.hoteles.nodes) {
-    if (hotel.lowestprice > 0) {
+    if (hotel.lowestrate > 0) {
       cuantosTienenPrecio = cuantosTienenPrecio + 1
       sumaPrecios = sumaPrecios + hotel.lowestrate
     }
@@ -62,11 +62,11 @@ const Locations = ({ data, pageContext }) => {
       />
 
       <section className="section-center">
-        <div className="back-white">
+        <div className="back-white mt-4">
           <Banner
             image={banner}
             vistaDesc={locationName}
-            estado={metadata.estado.name}
+            estado={metadata.estado}
             subTitle={`${numhoteles} hoteles en `}
             title={`${locationName} Hoteles`}
           />
@@ -85,7 +85,7 @@ const Locations = ({ data, pageContext }) => {
                 {new Intl.NumberFormat('es-MX', {
                   style: 'currency',
                   currency: 'MXN',
-                }).format(precioPromedio * 24)}
+                }).format(precioPromedio)}
               </span>{' '}
               pesos.
             </p>
