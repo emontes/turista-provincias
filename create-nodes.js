@@ -147,6 +147,18 @@ async function createNodes(
 			);
 		};
 
+    // Hoteles
+    await updateOrCreateNodes(
+      () =>
+        fetchAllData(
+          `http://api.${estadoSlug}.turista.com.mx/hotel`,
+          maxPages,
+          lastFetchTime,
+        ),
+      "Hotel",
+      "hotelid",
+    )
+
 		// Locations
 		await updateOrCreateNodes(
 			() =>

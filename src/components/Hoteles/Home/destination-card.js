@@ -1,22 +1,39 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
+import { vistaToUrlHtml } from '../../../utilities/stringService'
 
 const Card = ({ destino }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      allFile(filter: { extension: { regex: "/(jpg|jpeg|png)/" } }) {
+        nodes {
+          relativePath
+          childImageSharp {
+            gatsbyImageData(width: 600)
+          }
+        }
+      }
+    }
+  `)
+  const imageNode = data.allFile.nodes.find(node => node.relativePath === destino.banner_spanish)
+  const image = getImage(imageNode)
+  const slug = vistaToUrlHtml(destino, 'spanish')
   return (
-    <Wrapper to={`/${destino.slug}.html`}>
+    <Wrapper to={`/${slug}`}>
       <div className="card-image">
         <GatsbyImage
-          image={getImage(destino.image.localFile)}
+          image={getImage(image)}
           className="img"
-          alt={`Hoteles en ${destino.location.name}`}
-          title={`Hoteles en ${destino.location.name}`}
+          alt={`Hoteles en ${destino.hvi_desc_spanish}`}
+          title={`Hoteles en ${destino.hvi_desc_spanish}`}
         />
       </div>
 
-      <div className="card-title">{destino.location.name}</div>
+      <div className="card-title">{destino.hvi_desc_spanish}</div>
     </Wrapper>
   )
 }
@@ -45,7 +62,7 @@ const Wrapper = styled(Link)`
   }
 
   .card-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     padding: 1rem;
   }

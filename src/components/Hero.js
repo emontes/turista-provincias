@@ -14,6 +14,7 @@ const Hero = ({
   btnText,
   children,
 }) => {
+  console.log('Component', component)
   return (
     <Wrapper style={{ backgroundColor: `${bgColor || 'var(--clr-white)'}` }}>
       <div className="hero">
@@ -61,7 +62,7 @@ display: none;
     height: 100%;
   }
   .hero {
-    height: 60vh;
+    height: 75vh;
 
     background-color: ${(props) => props.theme.colors.primary9};
     background-size: cover;

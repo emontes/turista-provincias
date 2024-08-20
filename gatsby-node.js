@@ -51,6 +51,23 @@ exports.createPages = async ({ graphql, actions }) => {
 
 
 	/* ---------------------------------------
+	 ------------ Hoteles  --------------	
+	 --------------------------------------*/
+
+	//#region Hoteles	
+
+	// Crea la página de índice de hoteles
+	createPage({
+		path: "/hoteles",
+		component: path.resolve("./src/templates/hoteles/index-template.js"),
+		context: {
+			estadoSlug: estadoSlug,
+		},
+	});
+	
+	//#endregion
+
+	/* ---------------------------------------
      ------------ Noticias  --------------
      --------------------------------------*/
 	 //#region Noticias

@@ -27,8 +27,7 @@ const Wrapper = styled.section`
   justify-content: space-around;
 
   .destinos {
-    margin: 0 0 -13rem;
-
+    margin-top: 8rem;
     width: 50%;
     display: flex;
     gap: 2rem;
