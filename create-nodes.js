@@ -112,19 +112,23 @@ async function createNodes(
 					`${nodeType.toLowerCase()}-${item[idField]}`,
 				);
 
-        // Convertir campos float
-				floatFields.forEach(field => {
-					if (item[field] !== undefined) {
-						item[field] = Number.parseFloat(item[field]);
-					}
-				});
+        	// Convertir campos float
+			floatFields.forEach(field => {
+				if (item[field] !== undefined && !isNaN(parseFloat(item[field]))) {
+				  item[field] = Number.parseFloat(item[field]);
+				} else {
+				  item[field] = 0; // Asignar un valor predeterminado si el valor no es válido
+				}
+			  });
 
-				// Convertir campos integer
-				intFields.forEach(field => {
-					if (item[field] !== undefined) {
-						item[field] = parseInt(item[field], 10);
-					}
-				});
+			// Convertir campos integer
+			intFields.forEach(field => {
+				if (item[field] !== undefined && !isNaN(parseInt(item[field], 10))) {
+				  item[field] = parseInt(item[field], 10);
+				} else {
+				  item[field] = 0; // Asignar un valor predeterminado si el valor no es válido
+				}
+			  });
 
 				// Si el tipo es SectionArticle, obtenemos el content
 				if (nodeType === "SectionArticle") {
