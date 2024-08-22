@@ -1,236 +1,63 @@
 import React from 'react'
-import styled from 'styled-components'
 import HotelType from '../../atoms/hotelType'
-import device from '../../../assets/themes/device'
 
 const Hotel = ({ hotel }) => {
-  const imagen = hotel.portada ? `https://turista.me${hotel.portada}`  : ''
+  const imagen = hotel.portada ? `https://turista.me${hotel.portada}` : ''
   const bookingLink = `//jet.turista.com.mx/hotels?hotelId=${hotel.travelpayoutsid}`
   return (
-    <div itemScope itemtype="https://schema.org/Hotel">
-      <Wrapper>
-        <div className="list-item">
+    <div className="bg-gray-100 shadow-md w-80 flex flex-col mb-8 transition-transform duration-300 hover:shadow-lg hover:scale-105" itemScope itemType="https://schema.org/Hotel">
+      <div className="relative overflow-hidden">
+        <a href={bookingLink} target="_blank" rel="noreferrer">
+          <img
+            src={imagen}
+            alt={hotel.nombre}
+            className="w-full h-60 object-cover transition-transform duration-300 hover:scale-110"
+            itemProp="image"
+          />
+        </a>
+        <div className="absolute top-2 right-2 flex justify-end">
+          {hotel.rating > 0 && <div className="bg-white bg-opacity-80 text-yellow-500 p-1 text-lg font-bold">{hotel.rating}★</div>}
+        </div>
+      </div>
+      <div className="flex justify-between p-4">
+        <div className="text-left">
+          <div className="text-lg font-bold" itemProp="name">{hotel.nombre}</div>
+          {hotel.cuartos && (
+            <p className="text-sm text-gray-700 mt-1">
+              Cuartos: {hotel.cuartos}
+            </p>
+          )}
+          {hotel.desc_spanish && hotel.desc_spanish.length > 200 && (
+            <p className="text-sm text-gray-400 mt-2" dangerouslySetInnerHTML={{ __html: hotel.desc_spanish.substring(0, 200) }} />
+          )}
+        </div>
+        <div className="border-l border-gray-300 pl-4 flex flex-col items-center">
+          <HotelType type={1} />
+          {hotel.lowestrate > 0 && (
+            <div className="text-center text-green-600 text-lg font-bold mt-2">
+              <span className="block text-sm text-gray-500">MXN</span>
+              {new Intl.NumberFormat('es-MX', {
+                style: 'currency',
+                currency: 'MXN',
+              }).format(hotel.lowestrate)}
+              <span className="block text-sm text-gray-500">prom/noche</span>
+            </div>
+          )}
           <a
             href={bookingLink}
             target="_blank"
             rel="noreferrer"
+            className="bg-yellow-500 text-white rounded-lg px-4 py-2 mt-4 text-xs font-semibold hover:shadow-lg transition-shadow duration-300"
           >
-            <img
-              src={imagen}
-              alt={hotel.nombre}
-              className="image"
-              itemprop="image"
-            />
+            Reservar Ahora
           </a>
         </div>
-        <div className="tipos">
-          {hotel.rating > 0 && <div className="stars">{hotel.rating}★</div>}
-
-          {/* {hotel.calificacion > 0 && (
-            <div className="rating-number">{hotel.rating / 10}</div>
-          )} */}
-        </div>
-        <div className="body">
-          <div className="izquierda">
-            <div className="hotel-name" itemprop="name">
-              {hotel.nombre}
-            </div>
-            <p>
-              {hotel.cuartos && (
-                <>
-                  Cuartos: {hotel.cuartos}
-                  <br />
-                </>
-              )}
-              {hotel.desc_spanish && hotel.desc_spanish.length > 200 &&
-                <div dangerouslySetInnerHTML={{ __html: hotel.desc_spanish.substring(0, 200) }} />
-              }
-              
-              {/* {hotel.cntFloors && (
-                <>
-                  Pisos: {hotel.cntFloors}
-                  <br />
-                </>
-              )}
-              {hotel.cntSuites && (
-                <>
-                  Suites: {hotel.cntSuites}
-                  <br />
-                </>
-              )}
-              {hotel.yearOpened && (
-                <>
-                  Apertura: {hotel.yearOpened}
-                  <br />
-                </>
-              )}
-              {hotel.yearRenovated && <>Renovación: {hotel.yearRenovated}</>} */}
-            </p>
-          </div>
-
-          <div className="derecha">
-            {/* <HotelType type={hotel.propertyType} /> */}
-            <HotelType type={1} />
-            {hotel.lowestrate > 0 && (
-              <div className="price">
-                <span className="currency-text">MXN</span>
-                <br />
-                {new Intl.NumberFormat('es-MX', {
-                  style: 'currency',
-                  currency: 'MXN',
-                }).format(hotel.lowestrate)}
-                <br />
-                <span className="currency-text">prom/noche</span>
-              </div>
-            )}
-
-            <a
-              href={bookingLink}
-              target="_blank"
-              rel="noreferrer"
-              className="reservar"
-            >
-              Reservar Ahora{' '}
-            </a>
-          </div>
-        </div>
-        <div className="address" itemprop="address">
-          {hotel.direccion.substring(0, 45)}
-        </div>
-      </Wrapper>
+      </div>
+      <div className="text-center text-gray-500 p-4" itemProp="address">
+        {hotel.direccion.substring(0, 45)}
+      </div>
     </div>
   )
 }
 
 export default Hotel
-
-const Wrapper = styled.div`
-  background: #efefef;
-  box-shadow: var(--light-shadow);
-  width: 320px;
-
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-  transition: var(--transition);
-  :hover {
-    box-shadow: var(--dark-shadow);
-  }
-
-  .image {
-    width: 320px;
-    height: 240px;
-
-    transition: var(--transition);
-    :hover {
-      transform: scale(1.1);
-    }
-  }
-  .list-item {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-  }
-  .body {
-    width: 100%;
-    font-family: 'Open Sans';
-    font-size: 13px;
-    line-height: 15px;
-    overflow: hidden;
-    display: flex;
-
-    justify-content: space-between;
-  }
-
-  .tipos {
-    display: flex;
-    justify-content: flex-end;
-    position: absolute;
-
-    margin: 5px;
-  }
-  .stars {
-    background: var(--clr-white-transparency-8);
-    color: #f9c40a;
-
-    padding: 5px;
-    font-size: 1.2rem;
-  }
-  .rating-number {
-    text-align: center;
-    padding: 5px;
-    color: #fff;
-    background: #79ba00;
-    border-radius: 2px;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  .izquierda {
-    padding: 0.5rem;
-  }
-
-  .hotel-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  p {
-    margin-top: 10px;
-    font-size: 0.8rem;
-  }
-  .address {
-    color: var(--clr-grey-5);
-    width: 100%;
-    padding: 0 0 0.8rem;
-    font-family: 'Open Sans';
-    font-size: 0.9rem;
-    line-height: 15px;
-    text-align: center;
-  }
-
-  .derecha {
-    margin: 0.8rem 0;
-    width: 11rem;
-    @media ${device.lg} {
-      width: 8rem;
-    }
-    border-left: 1px solid var(--clr-grey-8);
-
-    align-self: center;
-    padding: 0 1rem;
-    display: flex;
-
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
-  }
-  .currency-text {
-    font-size: 0.8rem;
-    color: var(--clr-grey-8);
-  }
-  .price {
-    text-align: center;
-    color: #4caf50;
-    font-size: 1.2rem;
-    font-weight: 700;
-    flex-basis: 100%;
-  }
-  .reservar {
-    background-color: #feba31;
-    color: #fff;
-    display: inline-block;
-    padding: 0.5rem;
-
-    white-space: nowrap;
-
-    border-radius: 3px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-
-    :hover {
-      box-shadow: 0 4px 12px rgba(254, 186, 49, 0.5);
-    }
-  }
-`
