@@ -127,5 +127,9 @@ export const query = graphql`
       loca_spanish
       desc_english
       loca_english
+      location {
+        hvi_desc_spanish
+        hvi_desc_english
+      }
   }
 `

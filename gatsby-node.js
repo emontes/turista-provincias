@@ -131,6 +131,7 @@ exports.createPages = async ({ graphql, actions }) => {
 					destino: destino,
 					id: destino.hviid,
 					destinos: destinos,
+					perPage: hotelsPerPage
 				}
 			});
 		

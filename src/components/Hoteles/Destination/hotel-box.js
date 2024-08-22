@@ -4,47 +4,49 @@ import HotelType from '../../atoms/hotelType'
 import device from '../../../assets/themes/device'
 
 const Hotel = ({ hotel }) => {
-  const imagen =
-    hotel.photos.strapi_json_value.length > 0
-      ? hotel.photos.strapi_json_value[0].url
-      : ''
+  const imagen = hotel.portada ? `https://turista.me${hotel.portada}`  : ''
+  const bookingLink = `//jet.turista.com.mx/hotels?hotelId=${hotel.travelpayoutsid}`
   return (
     <div itemScope itemtype="https://schema.org/Hotel">
       <Wrapper>
         <div className="list-item">
           <a
-            href={`//jet.turista.com.mx${hotel.link}`}
+            href={bookingLink}
             target="_blank"
             rel="noreferrer"
           >
             <img
               src={imagen}
-              alt={hotel.name.en}
+              alt={hotel.nombre}
               className="image"
               itemprop="image"
             />
           </a>
         </div>
         <div className="tipos">
-          {hotel.stars > 0 && <div className="stars">{hotel.stars}★</div>}
+          {hotel.rating > 0 && <div className="stars">{hotel.rating}★</div>}
 
-          {hotel.rating > 0 && (
+          {/* {hotel.calificacion > 0 && (
             <div className="rating-number">{hotel.rating / 10}</div>
-          )}
+          )} */}
         </div>
         <div className="body">
           <div className="izquierda">
             <div className="hotel-name" itemprop="name">
-              {hotel.name.en}
+              {hotel.nombre}
             </div>
             <p>
-              {hotel.cntRooms && (
+              {hotel.cuartos && (
                 <>
-                  Cuartos: {hotel.cntRooms}
+                  Cuartos: {hotel.cuartos}
                   <br />
                 </>
               )}
-              {hotel.cntFloors && (
+              {hotel.desc_spanish && hotel.desc_spanish.length > 200 &&
+                <div dangerouslySetInnerHTML={{ __html: hotel.desc_spanish.substring(0, 200) }} />
+              }
+              
+              {/* {hotel.cntFloors && (
                 <>
                   Pisos: {hotel.cntFloors}
                   <br />
@@ -62,27 +64,28 @@ const Hotel = ({ hotel }) => {
                   <br />
                 </>
               )}
-              {hotel.yearRenovated && <>Renovación: {hotel.yearRenovated}</>}
+              {hotel.yearRenovated && <>Renovación: {hotel.yearRenovated}</>} */}
             </p>
           </div>
 
           <div className="derecha">
-            <HotelType type={hotel.propertyType} />
-            {hotel.pricefrom > 0 && (
+            {/* <HotelType type={hotel.propertyType} /> */}
+            <HotelType type={1} />
+            {hotel.lowestrate > 0 && (
               <div className="price">
                 <span className="currency-text">MXN</span>
                 <br />
                 {new Intl.NumberFormat('es-MX', {
                   style: 'currency',
                   currency: 'MXN',
-                }).format(hotel.pricefrom * 24)}
+                }).format(hotel.lowestrate)}
                 <br />
                 <span className="currency-text">prom/noche</span>
               </div>
             )}
 
             <a
-              href={`//jet.turista.com.mx${hotel.link}`}
+              href={bookingLink}
               target="_blank"
               rel="noreferrer"
               className="reservar"
@@ -92,7 +95,7 @@ const Hotel = ({ hotel }) => {
           </div>
         </div>
         <div className="address" itemprop="address">
-          {hotel.address.en.substring(0, 45)}
+          {hotel.direccion.substring(0, 45)}
         </div>
       </Wrapper>
     </div>

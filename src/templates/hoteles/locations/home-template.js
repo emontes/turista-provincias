@@ -106,8 +106,7 @@ const Locations = ({ data, pageContext }) => {
             <>
               <BlockTopHotels data={data} location={location} />
               <BlockStars
-                estrellas={pageContext.estrellas}
-                slug={pageContext.slug}
+                estrellas={data.hoteles.estrellas}
               />
             </>
           )}
@@ -179,8 +178,11 @@ export const pageQuery = graphql`
     # }
 
     hoteles: allHotel(
-      filter: {vista: {eq: $id}, visible: {eq: "1"}, travelpayoutsid: {ne: null}}
+      filter: {vista: {eq: $id}, visible: {eq: "1"}, travelpayoutsid: {ne: null}, rating: {gt: 0}},
+      sort: {rating: DESC}
+
     ) {
+      estrellas: distinct(field: {rating: SELECT})
       nodes {
         ...ListaHoteles
       }

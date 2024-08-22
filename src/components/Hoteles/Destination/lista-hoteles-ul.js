@@ -14,24 +14,24 @@ const ListaHoteles = ({ hoteles, title }) => {
                 href={`//jet.turista.com.mx${hotel.link}`}
                 target="_blank"
                 rel="noreferrer"
-                title={hotel.name.en}
+                title={hotel.nombre}
               >
                 <span className="flex items-center">
-                  <BiChevronRight /> {hotel.name.en.substring(0, 40)}
+                  <BiChevronRight /> {hotel.nombre.substring(0, 40)}
                 </span>
                 <div className="items">
-                  {hotel.rating > 0 && (
+                  {/* {hotel.rating > 0 && (
                     <span className="rating-number">{hotel.rating / 10}</span>
-                  )}
+                  )} */}
                   {hotel.stars > 0 && (
-                    <span className="stars">{hotel.stars}☆</span>
+                    <span className="stars">{hotel.rating}☆</span>
                   )}
                   <span className="precio">
-                    {hotel.pricefrom
+                    {hotel.lowestrate
                       ? new Intl.NumberFormat('es-MX', {
                           style: 'currency',
                           currency: 'MXN',
-                        }).format(hotel.pricefrom * 24)
+                        }).format(hotel.lowestrate * 24)
                       : ''}
                   </span>
                 </div>

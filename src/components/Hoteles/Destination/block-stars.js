@@ -3,7 +3,8 @@ import BlockGrey from '../../atoms/BlockGrey'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-const Stars = ({ estrellas, slug }) => {
+const Stars = ({ estrellas }) => {
+  const { slug } = 'slug-estrellas'
   return (
     <BlockGrey title="Hoteles por Categoría">
       <Wrapper>

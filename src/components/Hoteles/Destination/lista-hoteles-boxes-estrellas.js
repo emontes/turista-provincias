@@ -26,7 +26,7 @@ const Lista = ({ hoteles, perPage }) => {
             return (
               <>
                 <h3>
-                  <i>Hoteles en {hotel.hotel_location.location.name}</i>{' '}
+                  <i>Hoteles en {hotel.location.hvi_desc_spanish}</i>{' '}
                   {hotel.stars} Estrellas
                 </h3>
                 <HotelBox key={hotel.strapi_id} hotel={hotel} />
