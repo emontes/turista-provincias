@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
-import HotelType from '../../atoms/hotelType'
+import HotelType from '../../atoms/HotelType'
 import SearchBox from '../../atoms/search-box'
 
 const Lista = ({ hoteles }) => {

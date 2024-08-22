@@ -1,5 +1,5 @@
 import React from 'react'
-import HotelType from '../../atoms/hotelType'
+import HotelType from '../../atoms/HotelType'
 
 const Hotel = ({ hotel }) => {
   const imagen = hotel.portada ? `https://turista.me${hotel.portada}` : ''
