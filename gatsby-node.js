@@ -491,3 +491,29 @@ exports.onPreBootstrap = () => {
 exports.onPostBuild = () => {
 	console.log("Gatsby ha finalizado el proceso de construcción");
 };
+
+exports.createSchemaCustomization = ({ actions }) => {
+	const { createTypes } = actions;
+	const typeDefs = `
+	  type Location implements Node {
+		hviid: String!
+		parentid: String
+		travelpayoutsid: String
+		bdid: String
+		bdiddestino: String
+		alias: String
+		estado: String
+		hvi_desc_english: String
+		hvi_desc_spanish: String
+		banner_spanish: String
+		banner_english: String
+		latitud: String
+		longitud: String
+		destacado: String
+		numhoteles: Int
+		hijas: [Location] @link(from: "hijas___NODE")
+		parentLocation: Location @link(from: "parentLocation___NODE")
+	  }
+	`;
+	createTypes(typeDefs);
+  };

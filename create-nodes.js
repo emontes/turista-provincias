@@ -96,111 +96,144 @@ async function createNodes(
 
   try {
     // Función helper para actualizar o crear nodos
-    const updateOrCreateNodes = async (fetchFunction, nodeType, idField, createReferences = null) => {
-		const existingNodes = getNodesByType(nodeType);
-		const updatedData = await fetchFunction();
-	  
-		console.log(
-		  `${nodeType}: Existentes: ${existingNodes.length}, Actualizados: ${updatedData.length}`,
-		);
-	  
-		const existingNodesMap = new Map(
-		  existingNodes.map((n) => [n[idField], n]),
-		);
-	  
-		for (const item of updatedData) {
-		  const nodeId = createNodeId(
-			`${nodeType.toLowerCase()}-${item[idField]}`,
-		  );
-	  
-		  // Convertir campos float
-		  floatFields.forEach(field => {
-			if (item[field] !== undefined && !isNaN(parseFloat(item[field]))) {
-			  item[field] = Number.parseFloat(item[field]);
-			} else {
-			  item[field] = 0;
-			}
-		  });
-	  
-		  // Convertir campos integer
-		  intFields.forEach(field => {
-			if (item[field] !== undefined && !isNaN(parseInt(item[field], 10))) {
-			  item[field] = parseInt(item[field], 10);
-			} else {
-			  item[field] = 0;
-			}
-		  });
-	  
-		  // Si el tipo es SectionArticle, obtenemos el content
-		  if (nodeType === "SectionArticle") {
-			const content = await fetchArticleContent(estadoSlug, item[idField]);
-			item.content = content;
-		  }
-	  
-		  if (existingNodesMap.has(item[idField])) {
-			const existingNode = existingNodesMap.get(item[idField]);
-			touchNode(existingNode);
-		  }
-	  
-		  if (typeof item !== 'object' || item === null) {
-			console.error(`Item inválido para ${nodeType} ${idField}:`, item);
-			continue;
-		  }
-	  
-		  const nodeData = {
-			...item,
-			id: nodeId,
-			parent: null,
-			children: [],
-			internal: {
-			  type: nodeType,
-			  content: JSON.stringify(item),
-			  contentDigest: createContentDigest(item),
-			},
-		  };
-	  
-		  // Crear referencias si se proporciona la función
-		  if (createReferences) {
-			createReferences(nodeData, createNodeId);
-		  }
-	  
-		  createNode(nodeData);
-		  existingNodesMap.delete(item[idField]);
-		}
-	  
-		console.log(
-		  `${nodeType}: Nodos no actualizados: ${existingNodesMap.size}`,
-		);
-	  };
+    const updateOrCreateNodes = async (
+      fetchFunction,
+      nodeType,
+      idField,
+      createReferences = null
+    ) => {
+      const existingNodes = getNodesByType(nodeType);
+      const updatedData = await fetchFunction();
 
-	// Locations
+      console.log(
+        `${nodeType}: Existentes: ${existingNodes.length}, Actualizados: ${updatedData.length}`
+      );
+
+      const existingNodesMap = new Map(
+        existingNodes.map((n) => [n[idField], n])
+      );
+
+      for (const item of updatedData) {
+        const nodeId = createNodeId(
+          `${nodeType.toLowerCase()}-${item[idField]}`
+        );
+
+        // Convertir campos float
+        floatFields.forEach((field) => {
+          if (item[field] !== undefined && !isNaN(parseFloat(item[field]))) {
+            item[field] = Number.parseFloat(item[field]);
+          } else {
+            item[field] = 0;
+          }
+        });
+
+        // Convertir campos integer
+        intFields.forEach((field) => {
+          if (item[field] !== undefined && !isNaN(parseInt(item[field], 10))) {
+            item[field] = parseInt(item[field], 10);
+          } else {
+            item[field] = 0;
+          }
+        });
+
+        // Si el tipo es SectionArticle, obtenemos el content
+        if (nodeType === "SectionArticle") {
+          const content = await fetchArticleContent(estadoSlug, item[idField]);
+          item.content = content;
+        }
+
+        if (existingNodesMap.has(item[idField])) {
+          const existingNode = existingNodesMap.get(item[idField]);
+          touchNode(existingNode);
+        }
+
+        if (typeof item !== "object" || item === null) {
+          console.error(`Item inválido para ${nodeType} ${idField}:`, item);
+          continue;
+        }
+
+        const nodeData = {
+          ...item,
+          id: nodeId,
+          parent: null,
+          children: [],
+          internal: {
+            type: nodeType,
+            content: JSON.stringify(item),
+            contentDigest: createContentDigest(item),
+          },
+        };
+
+        // Crear referencias si se proporciona la función
+        if (createReferences) {
+          createReferences(nodeData, createNodeId);
+        }
+
+        createNode(nodeData);
+        existingNodesMap.delete(item[idField]);
+      }
+
+      console.log(
+        `${nodeType}: Nodos no actualizados: ${existingNodesMap.size}`
+      );
+    };
+
+    // Locations
     await updateOrCreateNodes(
-		() =>
-		  fetchAllData(
-			`http://api.${estadoSlug}.turista.com.mx/estado-vistas/1`,
-			maxPages,
-			lastFetchTime
-		  ),
-		"Location",
-		"hviid"
-	  );
+      () =>
+        fetchAllData(
+          `http://api.${estadoSlug}.turista.com.mx/estado-vistas/1`,
+          maxPages,
+          lastFetchTime
+        ),
+      "Location",
+      "hviid",
+      (nodeData, createNodeId) => {
+        // Crear nodos hijos
+        if (nodeData.hijas && Array.isArray(nodeData.hijas)) {
+          nodeData.hijas___NODE = nodeData.hijas.map((hija) =>
+            createNodeId(`location-${hija.hviid}`)
+          );
+
+          // Crear nodos individuales para cada hija
+          nodeData.hijas.forEach((hija) => {
+            const hijaNodeId = createNodeId(`location-${hija.hviid}`);
+            createNode({
+              ...hija,
+              id: hijaNodeId,
+              parent: nodeData.id,
+              children: [],
+              internal: {
+                type: "Location",
+                content: JSON.stringify(hija),
+                contentDigest: createContentDigest(hija),
+              },
+              parentLocation___NODE: nodeData.id,
+            });
+          });
+
+          // Eliminar el array original de hijas para evitar duplicación de datos
+          delete nodeData.hijas;
+        }
+      }
+    );
 
     // Hoteles
-await updateOrCreateNodes(
-	() =>
-	  fetchAllData(
-		`http://api.${estadoSlug}.turista.com.mx/hotel`,
-		maxPages,
-		lastFetchTime,
-	  ),
-	"Hotel",
-	"hotelid",
-	(nodeData, createNodeId) => {
-	  if (nodeData.vista) {
-		nodeData.location___NODE = createNodeId(`location-${nodeData.vista}`);
-	  }
-	}
-  );
+    await updateOrCreateNodes(
+      () =>
+        fetchAllData(
+          `http://api.${estadoSlug}.turista.com.mx/hotel`,
+          maxPages,
+          lastFetchTime
+        ),
+      "Hotel",
+      "hotelid",
+      (nodeData, createNodeId) => {
+        if (nodeData.vista) {
+          nodeData.location___NODE = createNodeId(`location-${nodeData.vista}`);
+        }
+      }
+    );
 
     // Sections
     await updateOrCreateNodes(
