@@ -17,7 +17,6 @@ const index = ({
     <BlockGrey title={title}>
       <aside className="flex gap-4 flex-wrap justify-around">
         {!sinAbout && <About description={description} image={image} />}
-
         {listItems1 && (
           <ListItems
             title={listItems1.title}

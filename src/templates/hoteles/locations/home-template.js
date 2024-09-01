@@ -14,6 +14,7 @@ import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import BlockTopHotels from '../../../components/Hoteles/Destination/block-tophotels'
 import BlockStars from '../../../components/Hoteles/Destination/block-stars'
 import Chat from '../../../components/atoms/chat-hubspot'
+import { vistaToUrlHtml } from '../../../utilities/stringService.cjs'
 
 const Locations = ({ data, pageContext }) => {
   console.log('pageContext', pageContext)
@@ -25,13 +26,21 @@ const Locations = ({ data, pageContext }) => {
 
   const numhoteles = data.hoteles.nodes.length
   const tree = []
+  const items = []
+
+  for (const destino of pageContext.destinos) {
+    const item = {
+      title: destino.hvi_desc_spanish,
+      slug: vistaToUrlHtml(destino, 'spanish'),
+    }
+    items.push(item)
+  }
 
   // Para el sideBanner que liste las ciudades del estado
   const listItems1 = {
     title: `${metadata.estado.name}`,
-    items: pageContext.destinos,
+    items: items,
     linkTo: '',
-    linkToSuffix: '.html',
   }
 
   let titleSeo = `Guía de Hoteles en ${locationName}`
