@@ -496,7 +496,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 	const { createTypes } = actions;
 	const typeDefs = `
 	  type Location implements Node {
-		hviid: String!
+		hviid: String
 		parentid: String
 		travelpayoutsid: String
 		bdid: String

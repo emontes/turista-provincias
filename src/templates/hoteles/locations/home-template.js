@@ -195,7 +195,10 @@ export const pageQuery = graphql`
       banner_english
       banner_spanish
       estado
-      hijas
+      hijas {
+        hviid
+        hvi_desc_spanish
+      }
       hviid
       numhoteles
       parentid

@@ -134,7 +134,10 @@ export const query = graphql`
       }
     }
 
-    locations:allLocation(sort: {hvi_desc_spanish: ASC}) {
+    locations: allLocation(
+    sort: {numhoteles: DESC}
+    filter: {parentid: {eq: "0"}, numhoteles: {gt: 1}}
+  ) {
       nodes {
         hviid
         hvi_desc_spanish
