@@ -140,6 +140,7 @@ export const query = graphql`
   ) {
       nodes {
         hviid
+        alias
         hvi_desc_spanish
         hvi_desc_english
         numhoteles

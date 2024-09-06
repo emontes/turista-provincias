@@ -2,29 +2,26 @@ import React from 'react'
 import BlockGrey from '../../atoms/BlockGrey'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { vistaStarsToUrl } from '../../../utilities/stringService'
 
-const Stars = ({ estrellas }) => {
-  const { slug } = 'slug-estrellas'
+const Stars = ({ estrellas, vista }) => {
+  console.log('estrellas', estrellas)
+  console.log('vista', vista)
   return (
     <BlockGrey title="Hoteles por Categoría">
       <Wrapper>
-        {estrellas.map((item) => {
-          let estrellitas = ''
-          let i
-          for (i = 0; i < item; i++) estrellitas += '★'
-          return (
-            <li key={item}>
-              <Link
-                to={`/${slug}-estrellas-${item}.html`}
-                activeClassName="active"
-                className="stars"
-                title={`Hoteles ${item} estrellas`}
-              >
-                {item} {estrellitas}
-              </Link>
-            </li>
-          )
-        })}
+        {estrellas.map((estrella) => (
+          <li key={estrella}>
+            <Link
+              to={`/${vistaStarsToUrl(vista, 'spanish', estrella)}`}
+              activeClassName="active"
+              className="stars"
+              title={`Hoteles ${estrella} estrellas`}
+            >
+              {estrella} estrellas
+            </Link>
+          </li>
+        ))}
       </Wrapper>
     </BlockGrey>
   )

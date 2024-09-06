@@ -3,8 +3,10 @@ import tabs from '../../../constants/Hoteles/nav-tabs'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import device from '../../../assets/themes/device'
+import { vistaStarsToUrl } from '../../../utilities/stringService'
 
-const NavTabs = ({ url, estrellas }) => {
+const NavTabs = ({ vista, estrellas }) => {
+  console.log('vista', vista)
   return (
     <Wrapper>
       <ul className="flex justify-around">
@@ -16,7 +18,7 @@ const NavTabs = ({ url, estrellas }) => {
               return (
                 <li key={item}>
                   <Link
-                    to={`/${url}-estrellas-${item}.html`}
+                    to={`/${vistaStarsToUrl(vista, 'spanish', item)}`}
                     activeClassName="active"
                     className="stars"
                     title={`Hoteles ${item} estrellas`}
@@ -30,7 +32,7 @@ const NavTabs = ({ url, estrellas }) => {
               return (
                 <li key={tab.url}>
                   <Link
-                    to={`/${url}-${tab.url}.html`}
+                    // to={`/${url}-${tab.url}.html`}
                     activeClassName="active"
                     className="flex items-center"
                   >

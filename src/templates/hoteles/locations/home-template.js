@@ -17,8 +17,6 @@ import Chat from '../../../components/atoms/chat-hubspot'
 import { vistaToUrlHtml } from '../../../utilities/stringService.cjs'
 
 const Locations = ({ data, pageContext }) => {
-  console.log('pageContext', pageContext)
-  console.log('data', data)
   const { location,  image } = data.location
   const locationName = data.location.hvi_desc_spanish 
   const banner = data.location.banner_spanish
@@ -116,6 +114,7 @@ const Locations = ({ data, pageContext }) => {
               <BlockTopHotels data={data} location={location} />
               <BlockStars
                 estrellas={data.hoteles.estrellas}
+                vista={data.location}
               />
             </>
           )}

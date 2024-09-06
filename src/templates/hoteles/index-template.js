@@ -86,6 +86,7 @@ export const query = graphql`
     sum(field: {numhoteles: SELECT})
     nodes {
       hviid
+      alias
       hvi_desc_spanish
       banner_spanish
       numhoteles
@@ -95,6 +96,7 @@ export const query = graphql`
     topDestinos: allLocation(filter: {destacado: {eq: "1"}}, limit: 2) {
     nodes {
       hviid
+      alias
       hvi_desc_spanish
       banner_spanish
       numhoteles

@@ -12,160 +12,150 @@ import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hot
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
 import Chat from '../../../components/atoms/chat-hubspot'
+import { vistaToUrlHtml } from '../../../utilities/stringService'
 
-// const Estrellas = ({ data, pageContext }) => {
-//   const { location, banner, image } = data.location
+const Estrellas = ({ data, pageContext }) => {
+  console.log('pageContext', pageContext)
+  console.log('data', data)
+  const { location, banner, image } = data.location
+  const locationName = data.location.hvi_desc_spanish
+  const metadata = data.site.siteMetadata;
 
-//   const numhoteles = data.hoteles.nodes.length
-//   const estrellas = pageContext.estrellas
+  const numhoteles = data.hoteles.nodes.length
+  const estrellas = pageContext.estrellas
 
-//   // Para el sideBanner que liste las ciudades del estado
+  const tree = []
+  const items = []
 
-//   let items = []
-//   pageContext.destinos.forEach((item) => {
-//     if (data.destinosMismasEstrellas.distinct.indexOf(item.id) > -1)
-//       items.push(item)
-//   })
+  for (const destino of pageContext.destinos) {
+    const item = {
+      title: destino.hvi_desc_spanish,
+      slug: vistaToUrlHtml(destino, 'spanish'),
+    }
+    items.push(item)
+  }
 
-//   const listItems1 = {
-//     title: `${location.estado.Name}`,
-//     items: items,
-//     linkTo: '',
-//     linkToSuffix: `-estrellas-${estrellas}.html`,
-//   }
+  // Para el sideBanner que liste las ciudades del estado
+  const listItems1 = {
+    title: `${metadata.estado.name}`,
+    items: items,
+    linkTo: '',
+  }
 
-//   let titleSeo = `Hoteles ${estrellas} Estrellas en ${location.name}`
+  let titleSeo = `Hoteles ${estrellas} Estrellas en ${locationName}`
 
-//   let description1 = ''
-//   if (estrellas === 1)
-//     description1 = `Hoteles de Paso en ${location.name}, son hoteles estríctamente funcionales para dormir y seguir el viaje, `
-//   if (estrellas === 2)
-//     description1 = `Hoteles baratos en ${location.name}, son hoteles de mediana categoría y servicios básicos, `
-//   if (estrellas === 3)
-//     description1 = `Hoteles económicos en ${location.name}, son hoteles que tienen un precio razonable y son cómodos y limpios, `
-//   if (estrellas === 4)
-//     description1 = `Hoteles de primera clase en ${location.name}, son hoteles lujosos, con comodidades amplias para una estancia placentera, `
-//   if (estrellas === 5)
-//     description1 = `Hoteles de lujo en ${location.name}, son hoteles que se caracterizan por ofrefcerle la mejor atención y la más amplia gama de servicios, `
-//   const descriptionSeo =
-//     description1 +
-//     `encuentre su hotel ${estrellas} estrellas en ${location.name}.`
-//   return (
-//     <Layout
-//       linkExterno="/hoteles"
-//       seoTitle={`Hoteles ${location.name} ${estrellas} estrellas`}
-//       footerList1={footerList1}
-//       footerList2={footerList2}
-//     >
-//       <Chat />
-//       <Seo
-//         title={titleSeo}
-//         description={descriptionSeo}
-//         image={image ? getSrc(image.localFile.childImageSharp) : ''}
-//       />
-//       <section className="section-center">
-//         <div className="back-white">
-//           <Banner
-//             image={banner}
-//             vistaDesc={location.name}
-//             estado={location.estado.Name}
-//             subTitle={`${numhoteles} hoteles en `}
-//             title={`${location.name} Hoteles`}
-//           />
-//           <HotelBreadCrumbs
-//             location={location}
-//             endTitle={`hoteles ${estrellas} estrellas`}
-//           />
-//           <div className="padding-1">
-//             <h2>Hoteles {estrellas} estrellas</h2>
-//             <p>{description1}</p>
-//           </div>
-//           <NavTabs
-//             url={data.location.slug}
-//             estrellas={pageContext.diferentesEstrellas}
-//           />
-//           <div className="back-white">
-//             <ListaHotelesBoxes
-//               hoteles={data.hoteles.nodes}
-//               perPage={pageContext.perPage}
-//             />
-//             <Leyenda location={location.name} />
-//           </div>
-//         </div>
-//         <div>
-//           <SideBanner
-//             title={location.name}
-//             description={`Hoteles ${estrellas} estrellas en ${location.name}`}
-//             image={image ? image : ''}
-//             listItems1={listItems1}
-//           />
-//         </div>
-//       </section>
-//     </Layout>
-//   )
-// }
-
-const Estrellas = () => {
-  return <div>Estrellas</div>
+  let description1 = ''
+  if (estrellas === 1)
+    description1 = `Hoteles de Paso en ${locationName}, son hoteles estríctamente funcionales para dormir y seguir el viaje, `
+  if (estrellas === 2)
+    description1 = `Hoteles baratos en ${locationName}, son hoteles de mediana categoría y servicios básicos, `
+  if (estrellas === 3)
+    description1 = `Hoteles económicos en ${locationName}, son hoteles que tienen un precio razonable y son cómodos y limpios, `
+  if (estrellas === 4)
+    description1 = `Hoteles de primera clase en ${locationName}, son hoteles lujosos, con comodidades amplias para una estancia placentera, `
+  if (estrellas === 5)
+    description1 = `Hoteles de lujo en ${locationName}, son hoteles que se caracterizan por ofrefcerle la mejor atención y la más amplia gama de servicios, `
+  const descriptionSeo =
+    description1 +
+    `encuentre su hotel ${estrellas} estrellas en ${locationName}.`
+  return (
+    <Layout
+      linkExterno="/hoteles"
+      seoTitle={`Hoteles ${locationName} ${estrellas} estrellas`}
+      footerList1={footerList1}
+      footerList2={footerList2}
+    >
+      <Chat />
+      <Seo
+        title={titleSeo}
+        description={descriptionSeo}
+        image={image ? getSrc(image.localFile.childImageSharp) : ''}
+      />
+      <section className="section-center">
+        <div className="back-white">
+          <Banner
+            image={banner}
+            vistaDesc={locationName}
+            estado={data.site.siteMetadata.estado.name}
+            subTitle={`${numhoteles} hoteles en `}
+            title={`${locationName} Hoteles`}
+          />
+          {/* <HotelBreadCrumbs
+            location={location}
+            endTitle={`hoteles ${estrellas} estrellas`}
+          /> */}
+          <div className="padding-1">
+            <h2>Hoteles {estrellas} estrellas</h2>
+            <p>{description1}</p>
+          </div>
+          <NavTabs
+            vista={data.location}
+            estrellas={pageContext.diferentesEstrellas}
+          />
+          <div className="back-white">
+            <ListaHotelesBoxes
+              hoteles={data.hoteles.nodes}
+              perPage={pageContext.perPage}
+            />
+            <Leyenda location={locationName} />
+          </div>
+        </div>
+        <div>
+          <SideBanner
+            title={locationName}
+            description={`Hoteles ${estrellas} estrellas en ${locationName}`}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
+      </section>
+    </Layout>
+  )
 }
 
 export default Estrellas
 
-// export const pageQuery = graphql`
-//   query($id: String, $estrellas: Int, $estadoSlug: String) {
-//     hoteles: allStrapiHotelHotellook(
-//       filter: {
-//         cityId: { eq: $id }
-//         stars: { eq: $estrellas }
-//         photoCount: { gt: 0 }
-//       }
-//       sort: { fields: stars, order: DESC }
-//     ) {
-//       nodes {
-//         ...ListaHoteles
-//       }
-//     }
+export const pageQuery = graphql`
+  query($id: String, $estrellas: Int) {
+    
 
-//     destinosMismasEstrellas: allStrapiHotelHotellook(
-//       filter: {
-//         stars: { eq: $estrellas }
-//         photoCount: { gt: 0 }
-//         hotel_location: { location: { estado: { slug: { eq: $estadoSlug } } } }
-//       }
-//       sort: { fields: pricefrom, order: DESC }
-//     ) {
-//       distinct(field: cityId)
-//     }
+    hoteles: allHotel(
+      filter: {vista: {eq: $id}, visible: {eq: "1"}, travelpayoutsid: {ne: null}, rating: {eq: $estrellas}},
+      sort: {rating: DESC}
 
-//     location: strapiHotelLocation(hotellookId: { eq: $id }) {
-//       banner {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       image {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       hotellookId
-//       numhoteles
-//       slug
-//       location {
-//         name
-//         latitude
-//         longitude
-//         hotel_location {
-//           slug
-//         }
-//         estado {
-//           Name
-//         }
-//       }
-//     }
-//   }
-// `
+    ) {
+      nodes {
+        ...ListaHoteles
+      }
+    }
+
+    location(hviid: {eq: $id}) {
+      alias
+      hvi_desc_english
+      hvi_desc_spanish
+      banner_english
+      banner_spanish
+      estado
+      hijas {
+        hviid
+        hvi_desc_spanish
+      }
+      hviid
+      numhoteles
+      parentid
+      travelpayoutsid
+    }
+
+    site {
+      siteMetadata {
+        title
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+  }
+`
