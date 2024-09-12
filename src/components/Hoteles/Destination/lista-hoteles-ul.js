@@ -31,7 +31,7 @@ const ListaHoteles = ({ hoteles, title }) => {
                       ? new Intl.NumberFormat('es-MX', {
                           style: 'currency',
                           currency: 'MXN',
-                        }).format(hotel.lowestrate * 24)
+                        }).format(hotel.lowestrate)
                       : ''}
                   </span>
                 </div>

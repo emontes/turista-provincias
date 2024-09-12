@@ -4,8 +4,6 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import device from '../../../assets/themes/device'
 
 const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
-  console.log('image', image)
-  console.log('Estado', estado)
   const defaultImage = `https://edomexico.turista.com.mx/img/hoteles/banner/edomexico/hoteles-turista.jpg`
 
   const imageUrl = image

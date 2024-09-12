@@ -99,7 +99,7 @@ const Locations = ({ data, pageContext }) => {
             </p>
           </div>
 
-          <NavTabs url={data.location.slug} />
+          <NavTabs vista={data.location} />
           <div className="back-white">
             <ListaHotelesBoxes
               hoteles={data.hoteles.nodes}

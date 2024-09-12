@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import tabs from '../../../constants/Hoteles/nav-tabs'
 import { Link } from 'gatsby'
-import { vistaStarsToUrl } from '../../../utilities/stringService'
+import { vistaStarsToUrl, vistaActionToUrlHtml } from '../../../utilities/stringService'
 
 const StyledLink = styled(Link)`
   color: ${(props) => props.theme.colors.primary1};
@@ -35,6 +35,7 @@ const NavTabs = ({ vista, estrellas }) => {
               return (
                 <li key={tab.url} className="relative z-10">
                   <StyledLink
+                    to={`/${vistaActionToUrlHtml(vista, 'spanish', tab.url)}`}
                     activeClassName="bg-white border-t border-x border-gray-300 border-b-white"
                     className="flex items-center px-4 py-2 rounded-t transition duration-300"
                   >

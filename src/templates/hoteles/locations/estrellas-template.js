@@ -11,15 +11,13 @@ import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
-import Chat from '../../../components/atoms/chat-hubspot'
 import { vistaToUrlHtml } from '../../../utilities/stringService'
 
 const Estrellas = ({ data, pageContext }) => {
-  const { location, image } = data.location
+  const { image } = data.location
   const locationName = data.location.hvi_desc_spanish
   const banner = data.location.banner_spanish
   const metadata = data.site.siteMetadata;
-  console.log('Metadata', metadata)
 
   const numhoteles = data.hoteles.nodes.length
   const estrellas = pageContext.estrellas
@@ -69,7 +67,6 @@ const Estrellas = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      {/* <Chat /> */}
       <Seo
         title={titleSeo}
         description={descriptionSeo}
