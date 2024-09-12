@@ -6,7 +6,7 @@ import { getSrc } from 'gatsby-plugin-image'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import Banner from '../../../components/Hoteles/Destination/Banner'
-import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
+import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import NavTabs from '../../../components/Hoteles/Destination/NavTabs'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
@@ -15,19 +15,23 @@ import Chat from '../../../components/atoms/chat-hubspot'
 import { vistaToUrlHtml } from '../../../utilities/stringService'
 
 const Estrellas = ({ data, pageContext }) => {
-  console.log('pageContext', pageContext)
-  console.log('data', data)
   const { location, image } = data.location
   const locationName = data.location.hvi_desc_spanish
   const banner = data.location.banner_spanish
   const metadata = data.site.siteMetadata;
+  console.log('Metadata', metadata)
 
   const numhoteles = data.hoteles.nodes.length
   const estrellas = pageContext.estrellas
 
   const tree = []
-  const items = []
+  const treeItem1 = {
+    title: locationName,
+    slug: vistaToUrlHtml(data.location, 'spanish') ,
+  }
+  tree.push(treeItem1)
 
+  const items = []
   for (const destino of pageContext.destinos) {
     const item = {
       title: destino.hvi_desc_spanish,
@@ -76,14 +80,17 @@ const Estrellas = ({ data, pageContext }) => {
           <Banner
             image={banner}
             vistaDesc={locationName}
-            estado={data.site.siteMetadata.estado.name}
+            estado={metadata.estado}
             subTitle={`${numhoteles} hoteles en `}
             title={`${locationName} Hoteles`}
           />
-          {/* <HotelBreadCrumbs
-            location={location}
+          <Breadcrumbs
+            homeLink="/hoteles"
+            homeTitle="Hoteles"
+            tree={tree}
             endTitle={`hoteles ${estrellas} estrellas`}
-          /> */}
+            singleUrl={true}
+          />
           <div className="padding-1">
             <h2>Hoteles {estrellas} estrellas</h2>
             <p>{description1}</p>

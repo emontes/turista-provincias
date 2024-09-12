@@ -7,6 +7,7 @@ const fetch = require("node-fetch");
 const {
 	vistaToUrlHtml,
 	vistaStarsToUrl,
+  vistaActionToUrlHtml,
 	hotelToUrlHtml,
 } = require("./src/utilities/stringService.cjs");
 
@@ -94,20 +95,20 @@ exports.createPages = async ({ graphql, actions }) => {
 	//#region crea las páginas de los destinos
 
 	const resultDestinos = await graphql(`
-    query {
-      allLocation(filter: { travelpayoutsid: { ne: null } }) {
-        totalCount
-        nodes {
-          hviid
-          alias
-          hvi_desc_spanish
-          banner_spanish
-          numhoteles
-          travelpayoutsid
-        }
+  query {
+    allLocation(filter: { travelpayoutsid: { ne: null } }) {
+      totalCount
+      nodes {
+        hviid
+        alias
+        hvi_desc_spanish
+        banner_spanish
+        numhoteles
+        travelpayoutsid
       }
     }
-  `);
+  }
+`);
 
 	const destinos = resultDestinos.data.allLocation.nodes;
 
@@ -124,6 +125,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	];
 
 	for (const destino of destinos) {
+		// Crea la página principal del destino
 		console.log("Destino:", vistaToUrlHtml(destino, "spanish"));
 
 		createPage({
@@ -140,17 +142,20 @@ exports.createPages = async ({ graphql, actions }) => {
 		});
 
 		// ** Páginas de Estrellas
-		const resultEstrellas = await graphql(
-			`
-		query MyQuery {
-		allHotel(
-		  filter: {vista: {eq: "${destino.hviid}"}, visible: {eq: "1"}, travelpayoutsid: {ne: null}, rating: {gt: 0}}) {
-			distinct(field: {rating: SELECT})
-		}
-		}
-
-		`,
-		);
+		const resultEstrellas = await graphql(`
+    query {
+      allHotel(
+        filter: {
+          vista: { eq: "${destino.hviid}" },
+          visible: { eq: "1" },
+          travelpayoutsid: { ne: null },
+          rating: { gt: 0 }
+        }
+      ) {
+        distinct(field: { rating: SELECT })
+      }
+    }
+  `);
 
 		const diferentesEstrellas = resultEstrellas.data.allHotel.distinct;
 		const diferentesEstrellasInvertidas = [...diferentesEstrellas].reverse();
@@ -173,6 +178,27 @@ exports.createPages = async ({ graphql, actions }) => {
 				},
 			});
 		}
+
+		// ** Páginas por cada tipo en locationPages
+		locationPages.map((pageType) => {
+			const pagePath2 = `/hoteles/${destino.alias}/${pageType}`;
+      const pagePath = vistaActionToUrlHtml(destino, 'spanish', pageType)
+			console.log("Page Type:", pagePath);
+
+			createPage({
+				path: pagePath,
+				component: path.resolve(
+					`./src/templates/hoteles/locations/${pageType}-template.js`,
+				),
+				context: {
+					destino: destino,
+					id: destino.hviid,
+					pageType: pageType,
+					destinos: destinos,
+					perPage: hotelsPerPage,
+				},
+			});
+		});
 	}
 
 	//#endregion

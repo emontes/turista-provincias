@@ -62,7 +62,7 @@ const Locations = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      <Chat />
+      {/* <Chat /> */}
       <Seo
         title={titleSeo}
         description={descriptionSeo}
