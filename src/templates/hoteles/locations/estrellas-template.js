@@ -17,8 +17,9 @@ import { vistaToUrlHtml } from '../../../utilities/stringService'
 const Estrellas = ({ data, pageContext }) => {
   console.log('pageContext', pageContext)
   console.log('data', data)
-  const { location, banner, image } = data.location
+  const { location, image } = data.location
   const locationName = data.location.hvi_desc_spanish
+  const banner = data.location.banner_spanish
   const metadata = data.site.siteMetadata;
 
   const numhoteles = data.hoteles.nodes.length
@@ -42,7 +43,7 @@ const Estrellas = ({ data, pageContext }) => {
     linkTo: '',
   }
 
-  let titleSeo = `Hoteles ${estrellas} Estrellas en ${locationName}`
+  const titleSeo = `Hoteles ${estrellas} Estrellas en ${locationName}`
 
   let description1 = ''
   if (estrellas === 1)
@@ -56,8 +57,7 @@ const Estrellas = ({ data, pageContext }) => {
   if (estrellas === 5)
     description1 = `Hoteles de lujo en ${locationName}, son hoteles que se caracterizan por ofrefcerle la mejor atención y la más amplia gama de servicios, `
   const descriptionSeo =
-    description1 +
-    `encuentre su hotel ${estrellas} estrellas en ${locationName}.`
+    `${description1}encuentre su hotel ${estrellas} estrellas en ${locationName}.`
   return (
     <Layout
       linkExterno="/hoteles"
@@ -65,7 +65,7 @@ const Estrellas = ({ data, pageContext }) => {
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      <Chat />
+      {/* <Chat /> */}
       <Seo
         title={titleSeo}
         description={descriptionSeo}

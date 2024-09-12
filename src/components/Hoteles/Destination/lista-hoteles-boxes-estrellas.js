@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import HotelBox from './hotel-box'
 import ButtonMoreHotels from '../../atoms/ButtonMoreHotels'
 
 const Lista = ({ hoteles, perPage }) => {
-  let hotelStars = ''
-
   const [currentPage, setCurrentPage] = useState(1)
   const [dataHoteles, setDataHoteles] = useState(
-    hoteles.slice(0, perPage * currentPage),
+    hoteles.slice(0, perPage * currentPage)
   )
 
   const onMoreHotels = () => {
@@ -17,44 +14,33 @@ const Lista = ({ hoteles, perPage }) => {
     setCurrentPage(newPage)
   }
 
+  let lastRating = null
+
   return (
-    <Wrapper>
-      <div className="hotels-list">
+    <div className="flex flex-col items-center">
+      <div className="hotels-list flex flex-wrap justify-around w-full">
         {dataHoteles.map((hotel) => {
-          if (hotelStars !== hotel.stars) {
-            hotelStars = hotel.stars
-            return (
-              <>
-                <h3>
+          const showHeader = hotel.rating !== lastRating
+          lastRating = hotel.rating
+
+          return (
+            <React.Fragment key={hotel.strapi_id}>
+              {showHeader && (
+                <h3 className="w-full p-4 text-lg font-semibold">
                   <i>Hoteles en {hotel.location.hvi_desc_spanish}</i>{' '}
-                  {hotel.stars} Estrellas
+                  {hotel.rating} Estrellas
                 </h3>
-                <HotelBox key={hotel.strapi_id} hotel={hotel} />
-              </>
-            )
-          } else {
-            hotelStars = hotel.stars
-            return <HotelBox key={hotel.strapi_id} hotel={hotel} />
-          }
+              )}
+              <HotelBox hotel={hotel} />
+            </React.Fragment>
+          )
         })}
       </div>
       {dataHoteles.length < hoteles.length && (
         <ButtonMoreHotels onClick={onMoreHotels} title="Más Hoteles..." />
       )}
-    </Wrapper>
+    </div>
   )
 }
 
 export default Lista
-
-const Wrapper = styled.div`
-  .hotels-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    h3 {
-      flex-basis: 100%;
-      padding: 1rem;
-    }
-  }
-`

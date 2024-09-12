@@ -23,6 +23,7 @@ const Locations = ({ data, pageContext }) => {
   const metadata = data.site.siteMetadata;
 
   const numhoteles = data.hoteles.nodes.length
+  const estrellasInvertidas = [...data.hoteles.estrellas].reverse();
   const tree = []
   const items = []
 
@@ -113,7 +114,7 @@ const Locations = ({ data, pageContext }) => {
             <>
               <BlockTopHotels data={data} location={location} />
               <BlockStars
-                estrellas={data.hoteles.estrellas}
+                estrellas={estrellasInvertidas}
                 vista={data.location}
               />
             </>
