@@ -187,7 +187,12 @@ export const pageQuery = graphql`
     # }
 
     hoteles: allHotel(
-      filter: {vista: {eq: $id}, visible: {eq: "1"}, travelpayoutsid: {ne: null}, rating: {gt: 0}},
+      filter: {
+        vista: {eq: $id}, 
+        visible: {eq: "1"}, 
+        travelpayoutsid: {ne: null}, 
+        rating: {gt: 0}
+      },
       sort: {rating: DESC}
 
     ) {

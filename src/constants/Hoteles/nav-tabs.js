@@ -32,16 +32,16 @@ const Tabs = [
     title: 'Económicos',
     url: 'economicos',
   },
-  {
-    icon: <FaUserPlus />,
-    title: 'Populares',
-    url: 'populares',
-  },
-  {
-    icon: <FaRegHeart />,
-    title: 'Valorados',
-    url: 'valorados',
-  },
+  // {
+  //   icon: <FaUserPlus />,
+  //   title: 'Populares',
+  //   url: 'populares',
+  // },
+  // {
+  //   icon: <FaRegHeart />,
+  //   title: 'Valorados',
+  //   url: 'valorados',
+  // },
   // {
   //   icon: <GrDiamond />,
   //   title: 'Completos',

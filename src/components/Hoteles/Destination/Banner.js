@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import device from '../../../assets/themes/device'
 
 const Banner = ({ image, vistaDesc, estado, subTitle, title }) => {
-  const defaultImage = `https://edomexico.turista.com.mx/img/hoteles/banner/edomexico/hoteles-turista.jpg`
+  const defaultImage = `https://turista.me/img/hoteles/banner/edomexico/hoteles-turista.jpg`
 
   const imageUrl = image
             ? `https://turista.me/img/hoteles/banner/${estado.slug}/${image}`

@@ -10,138 +10,158 @@ import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
 import ListaHotelesBoxes from '../../../components/Hoteles/Destination/lista-hoteles-boxes'
 import SideBanner from '../../../components/Banner'
-import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
-import Chat from '../../../components/atoms/chat-hubspot'
+import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
+import { vistaToUrlHtml, vistaActionToUrlHtml } from '../../../utilities/stringService'
 
-// const Locations = ({ data, pageContext }) => {
-//   const { location, banner, image } = data.location
-//   const numhoteles = data.hoteles.nodes.length
-//   const listItems1 = {
-//     title: 'Otros destinos ',
-//     items: pageContext.destinos,
-//     linkTo: '',
-//     linkToSuffix: '-economicos.html',
-//   }
+const Locations = ({ data, pageContext }) => {
+  const { image } = data.location
+  const numhoteles = data.hoteles.nodes.length
+  const hoteles = data.hoteles
+  const locationName = data.location.hvi_desc_spanish 
+  const banner = data.location.banner_spanish
+  const metadata = data.site.siteMetadata;
 
-//   let letreroPricefrom = ''
-//   if (data.hoteles.nodes[0]) {
-//     letreroPricefrom = new Intl.NumberFormat('es-MX', {
-//       style: 'currency',
-//       currency: 'MXN',
-//     }).format(data.hoteles.nodes[0].pricefrom * 24)
-//   }
-//   let descriptionSeo = `Encuentre hoteles económicos en ${location.name} con esta lista ordenada a partir del precio más barato para su hotel en ${location.name}. Hospedaje desde ${letreroPricefrom} Pesos prom/noche`
+  const tree = []
+  const treeItem1 = {
+    title: locationName,
+    slug: vistaToUrlHtml(data.location, 'spanish') ,
+  }
+  tree.push(treeItem1)
 
-//   return (
-//     <Layout
-//       linkExterno="/hoteles"
-//       seoTitle={`Hoteles ${location.name} Económicos`}
-//       footerList1={footerList1}
-//       footerList2={footerList2}
-//     >
-//       <Chat />
-//       <Seo
-//         title={`Hoteles económicos en ${location.name}`}
-//         description={descriptionSeo}
-//         image={image ? getSrc(image.localFile.childImageSharp) : ''}
-//       />
+  const items = []
+  for (const destino of pageContext.destinos) {
+    const item = {
+      title: destino.hvi_desc_spanish,
+      slug: vistaActionToUrlHtml(destino, 'spanish', 'economicos'),
+    }
+    items.push(item)
+  }
 
-//       <section className="section-center">
-//         <div className="back-white">
-//           <Banner
-//             image={banner}
-//             vistaDesc={location.name}
-//             estado={location.estado.Name}
-//             subTitle={`Los ${numhoteles} hoteles más económicos de `}
-//             title="Económicos"
-//           />
-//           <HotelBreadCrumbs location={location} endTitle="Económicos" />
+  const listItems1 = {
+    title: 'Otros destinos ',
+    items: items,
+    linkTo: '',
+    linkToSuffix: '',
+  }
 
-//           <div className="padding-1">
-//             <h2>Hoteles económicos en {location.name}</h2>
+  let letreroPricefrom = ''
+  if (hoteles.nodes[0]) {
+    letreroPricefrom = new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+    }).format(hoteles.nodes[0].lowestrate)
+  }
+  let descriptionSeo = `Encuentre hoteles económicos en ${locationName} con esta lista ordenada a partir del precio más barato para su hotel en ${locationName}. Hospedaje desde ${letreroPricefrom} Pesos prom/noche`
 
-//             {data.hoteles.nodes[0] && (
-//               <p>
-//                 Hoteles desde{' '}
-//                 <span className="green-text">{letreroPricefrom}</span>
-//               </p>
-//             )}
-//           </div>
-
-//           <NavTabs url={data.location.slug} />
-//           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
-//           <Leyenda location={location.name} />
-//         </div>
-//         <div>
-//           <SideBanner
-//             title={location.name}
-//             description={descriptionSeo}
-//             image={image ? image : ''}
-//             listItems1={listItems1}
-//           />
-//         </div>
-//       </section>
-//     </Layout>
-//   )
-// }
-
-const Locations = () => {
-  return (  
+  return (
     <Layout
       linkExterno="/hoteles"
+      seoTitle={`Hoteles ${locationName} Económicos`}
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      Location Económicos
+      <Seo
+        title={`Hoteles económicos en ${locationName}`}
+        description={descriptionSeo}
+        image={image ? getSrc(image.localFile.childImageSharp) : ''}
+      />
+
+      <section className="section-center">
+        <div className="back-white">
+          <Banner
+            image={banner}
+            vistaDesc={locationName}
+            estado={metadata.estado}
+            subTitle={`Los ${numhoteles} hoteles más económicos de `}
+            title="Económicos"
+          />
+           <Breadcrumbs
+            homeLink="/hoteles"
+            homeTitle="Hoteles"
+            tree={tree}
+            endTitle="Economicos"
+            singleUrl={true}
+          />
+
+          <div className="padding-1">
+            <h2>Hoteles económicos en {locationName}</h2>
+
+            {data.hoteles.nodes[0] && (
+              <p>
+                Hoteles desde{' '}
+                <span className="green-text">{letreroPricefrom}</span>
+              </p>
+            )}
+          </div>
+
+          <NavTabs vista={data.location} />
+          <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+          <Leyenda location={locationName} />
+        </div>
+        <div>
+          <SideBanner
+            title={locationName}
+            description={descriptionSeo}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
+      </section>
     </Layout>
   )
 }
 
+
 export default Locations
 
-// export const pageQuery = graphql`
-//   query($id: String) {
-//     hoteles: allStrapiHotelHotellook(
-//       filter: {
-//         cityId: { eq: $id }
-//         pricefrom: { gt: 0 }
-//         photoCount: { gt: 0 }
-//       }
-//       sort: { fields: pricefrom, order: ASC }
-//     ) {
-//       nodes {
-//         ...ListaHoteles
-//       }
-//     }
-//     location: strapiHotelLocation(hotellookId: { eq: $id }) {
-//       banner {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       image {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       hotellookId
-//       numhoteles
-//       slug
-//       location {
-//         name
-//         latitude
-//         longitude
-//         hotel_location {
-//           slug
-//         }
-//         estado {
-//           Name
-//         }
-//       }
-//     }
-//   }
-// `
+
+export const pageQuery = graphql`
+  query($id: String) {
+    hoteles: allHotel(
+      filter: {
+        vista: {eq: $id}, 
+        visible: {eq: "1"}, 
+        travelpayoutsid: {ne: null}, 
+        lowestrate: {gt: 0}
+      },
+      sort: {lowestrate: ASC}
+
+    ) {
+      estrellas: distinct(field: {rating: SELECT})
+      nodes {
+        ...ListaHoteles
+      }
+    }
+
+    location(hviid: {eq: $id}) {
+      alias
+      hvi_desc_english
+      hvi_desc_spanish
+      banner_english
+      banner_spanish
+      estado
+      hijas {
+        hviid
+        hvi_desc_spanish
+      }
+      hviid
+      numhoteles
+      parentid
+      travelpayoutsid
+      latitud
+      longitud
+    }
+
+    site {
+      siteMetadata {
+        title
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+  }
+`;

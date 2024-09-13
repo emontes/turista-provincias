@@ -10,126 +10,147 @@ import Leyenda from '../../../components/Hoteles/Destination/leyenda-precios'
 import SideBanner from '../../../components/Banner'
 import footerList1 from '../../../constants/Hoteles/global-hotels-links'
 import footerList2 from '../../../constants/especialistas-links'
-import HotelBreadCrumbs from '../../../components/Hoteles/HotelBreadCrumbs'
-import Chat from '../../../components/atoms/chat-hubspot'
+import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
+import { vistaToUrlHtml, vistaActionToUrlHtml } from '../../../utilities/stringService'
 
-// const Locations = ({ data, pageContext }) => {
-//   const { location, banner, image } = data.location
-//   const numhoteles = data.hoteles.nodes.length
-//   const listItems1 = {
-//     title: 'Otros Destinos',
-//     items: pageContext.destinos,
-//     linkTo: '',
-//     linkToSuffix: '-grandes.html',
-//   }
 
-//   return (
-//     <Layout
-//       linkExterno="/hoteles"
-//       seoTitle={`Hoteles grandes ${location.name}`}
-//       footerList1={footerList1}
-//       footerList2={footerList2}
-//     >
-//       <Chat />
-//       <Seo
-//         title={`Los hoteles más grandes de ${location.name}`}
-//         description={`Listado de hoteles que cuentan con mayor número de habitaciones en ${location.name}. Encuentre el hotel más grande de ${location.name}`}
-//         image={image ? getSrc(image.localFile.childImageSharp) : ''}
-//       />
+const Locations = ({ data, pageContext }) => {
+  const { image } = data.location
+  const numhoteles = data.hoteles.nodes.length
+  const hoteles = data.hoteles
+  const locationName = data.location.hvi_desc_spanish 
+  const banner = data.location.banner_spanish
+  const metadata = data.site.siteMetadata;
 
-//       <section className="section-center">
-//         <div className="back-white">
-//           <Banner
-//             image={banner}
-//             vistaDesc={location.name}
-//             estado={location.estado.Name}
-//             subTitle={`${numhoteles} hoteles en `}
-//             title={`${location.name} Hoteles`}
-//           />
-//           <HotelBreadCrumbs location={location} endTitle="Grandes" />
-//           <div className="padding-1">
-//             <h2>Los Hoteles más grandes de {location.name}</h2>
-//             <p>
-//               Los Hoteles mostrados suman {data.hoteles.sum} cuartos. En
-//               promedio un hotel tiene{' '}
-//               <span className="green-text">
-//                 {(data.hoteles.sum / data.hoteles.nodes.length).toFixed(0)}
-//               </span>{' '}
-//               cuartos.
-//             </p>
-//           </div>
-//           <NavTabs url={data.location.slug} />
-//           <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
-//           <Leyenda location={location.name} />
-//         </div>
-//         <div>
-//           <SideBanner
-//             title={location.name}
-//             description={`Los hoteles más grandes de ${location.name}, basado en el número de cuartos de cada hotel`}
-//             image={image ? image : ''}
-//             listItems1={listItems1}
-//           />
-//         </div>
-//       </section>
-//     </Layout>
-//   )
-// }
+  const tree = []
+  const treeItem1 = {
+    title: locationName,
+    slug: vistaToUrlHtml(data.location, 'spanish') ,
+  }
+  tree.push(treeItem1)
 
-const Locations = () => {
-  return (  
+  const items = []
+  for (const destino of pageContext.destinos) {
+    const item = {
+      title: destino.hvi_desc_spanish,
+      slug: vistaActionToUrlHtml(destino, 'spanish', 'grandes'),
+    }
+    items.push(item)
+  }
+
+  const listItems1 = {
+    title: 'Otros destinos ',
+    items: items,
+    linkTo: '',
+    linkToSuffix: '',
+  }
+
+  return (
     <Layout
       linkExterno="/hoteles"
+      seoTitle={`Hoteles grandes ${locationName}`}
       footerList1={footerList1}
       footerList2={footerList2}
     >
-      Location Grandes
+      <Seo
+        title={`Los hoteles más grandes de ${locationName}`}
+        description={`Listado de hoteles que cuentan con mayor número de habitaciones en ${locationName}. Encuentre el hotel más grande de ${locationName}`}
+        image={image ? getSrc(image.localFile.childImageSharp) : ''}
+      />
+
+      <section className="section-center">
+        <div className="back-white">
+          <Banner
+            image={banner}
+            vistaDesc={locationName}
+            estado={metadata.estado}
+            subTitle={`${numhoteles} hoteles en `}
+            title={`${locationName} Hoteles`}
+          />
+          <Breadcrumbs
+            homeLink="/hoteles"
+            homeTitle="Hoteles"
+            tree={tree}
+            endTitle="Grandes"
+            singleUrl={true}
+          />
+          <div className="padding-1">
+            <h2>Los Hoteles más grandes de {locationName}</h2>
+            <p>
+              Los Hoteles mostrados suman {data.hoteles.sum} cuartos. En
+              promedio un hotel tiene{' '}
+              <span className="green-text">
+                {(data.hoteles.sum / data.hoteles.nodes.length).toFixed(0)}
+              </span>{' '}
+              cuartos.
+            </p>
+          </div>
+          <NavTabs vista={data.location} />
+          <ListaHotelesBoxes hoteles={data.hoteles.nodes} />
+          <Leyenda location={locationName} />
+        </div>
+        <div>
+          <SideBanner
+            title={locationName}
+            description={`Los hoteles más grandes de ${locationName}, basado en el número de cuartos de cada hotel`}
+            image={image ? image : ''}
+            listItems1={listItems1}
+          />
+        </div>
+      </section>
     </Layout>
   )
 }
 
 export default Locations
 
-// export const pageQuery = graphql`
-//   query($id: String) {
-//     hoteles: allStrapiHotelHotellook(
-//       filter: { cityId: { eq: $id }, cntRooms: { gt: 0 } }
-//       sort: { fields: cntRooms, order: DESC }
-//     ) {
-//       nodes {
-//         ...ListaHoteles
-//       }
-//       sum(field: cntRooms)
-//     }
+export const pageQuery = graphql`
+  query($id: String) {
+    hoteles: allHotel(
+      filter: {
+        vista: {eq: $id}, 
+        visible: {eq: "1"}, 
+        travelpayoutsid: {ne: null}, 
+        cuartos: {gt: 0}
+      },
+      sort: {cuartos: DESC}
 
-//     location: strapiHotelLocation(hotellookId: { eq: $id }) {
-//       banner {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       image {
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//       }
-//       hotellookId
-//       numhoteles
-//       slug
-//       location {
-//         name
-//         latitude
-//         longitude
-//         hotel_location {
-//           slug
-//         }
-//         estado {
-//           Name
-//         }
-//       }
-//     }
-//   }
-// `
+    ) {
+      estrellas: distinct(field: {rating: SELECT})
+      nodes {
+        ...ListaHoteles
+      }
+    }
+
+    location(hviid: {eq: $id}) {
+      alias
+      hvi_desc_english
+      hvi_desc_spanish
+      banner_english
+      banner_spanish
+      estado
+      hijas {
+        hviid
+        hvi_desc_spanish
+      }
+      hviid
+      numhoteles
+      parentid
+      travelpayoutsid
+      latitud
+      longitud
+    }
+
+    site {
+      siteMetadata {
+        title
+        description
+        estado {
+          name
+          slug
+          slogan
+        }
+      }
+    }
+  }
+`;
