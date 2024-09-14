@@ -32,10 +32,10 @@ async function fetchAllData(
     console.log(`Generando Nodos ${baseUrl} Página`, page);
     let url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}page=${page}`;
 
-    if (lastFetchTime) {
-      url += `&last_updated=${encodeURIComponent(lastFetchTime)}`;
-      console.log("🔗 El url con last_updated es: ", url);
-    }
+    // if (lastFetchTime) {
+    //   url += `&last_updated=${encodeURIComponent(lastFetchTime)}`;
+    //   console.log("🔗 El url con last_updated es: ", url);
+    // }
 
     try {
       const response = await fetch(url, {
