@@ -11,7 +11,7 @@ const LogoNav = (
     alt="Turista Chiapas"
     title="Turista Chiapas"
     layout="fullWidth"
-    className="logo"
+    // className="logo"
   />
 )
 const LogoSmal2 = (
