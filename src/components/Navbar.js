@@ -27,8 +27,8 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <nav 
-      className={`fixed bg-white top-0 left-0 w-full z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
-      // style={{ backgroundColor: themeContext.colors.primary10 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
+      style={{ backgroundColor: themeContext.colors.primary10 }}
     >
       <div className={'w-full px-4 py-4 mx-auto flex justify-between items-center border-b-2 shadow-md'}
            style={{ borderColor: themeContext.colors.primary1 }}>

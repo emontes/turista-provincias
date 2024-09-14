@@ -136,12 +136,6 @@ async function createNodes(
           }
         });
 
-        // Si el tipo es SectionArticle, obtenemos el content
-        if (nodeType === "SectionArticle") {
-          const content = await fetchArticleContent(estadoSlug, item[idField]);
-          item.content = content;
-        }
-
         if (existingNodesMap.has(item[idField])) {
           const existingNode = existingNodesMap.get(item[idField]);
           touchNode(existingNode);
@@ -324,26 +318,3 @@ async function createNodes(
 }
 
 module.exports = { fetchAllData, createNodes };
-
-async function fetchArticleContent(estadoSlug, artid) {
-  const url = `http://api.${estadoSlug}.turista.com.mx/articles/${artid}`;
-  try {
-    const response = await fetch(url, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      timeout: 60000, // 60 segundos de timeout
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.content || null;
-  } catch (error) {
-    console.error(`❌ Error fetching content for article ${artid}:`, error);
-    return null;
-  }
-}

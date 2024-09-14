@@ -76,6 +76,7 @@ const Layout = ({
 export default Layout
 
 const Wrapper = styled.main`
+
   background: url(${(props) => props.theme.images.bodyBg})
     ${(props) => props.theme.colors.primary10};
   .outer-top {

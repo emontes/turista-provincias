@@ -11,7 +11,7 @@ const {
 	hotelToUrlHtml,
 } = require("./src/utilities/stringService.cjs");
 
-exports.sourceNodes = async (params, { parentSpan }) => {
+exports.sourceNodesOld = async (params, { parentSpan }) => {
 	const { actions, createNodeId, createContentDigest, getCache } = params;
 	const { createNode, touchNode } = actions;
 
@@ -27,6 +27,26 @@ exports.sourceNodes = async (params, { parentSpan }) => {
 
 		await cache.set("lastFetchTime", newFetchTime);
 		console.log("Nueva fecha de fetching guardada:", newFetchTime);
+	} catch (error) {
+		console.error("Error al crear nodos:", error);
+		throw error;
+	}
+	console.log("✅ Finalizando sourceNodes");
+};
+
+exports.sourceNodes = async (params, { parentSpan }) => {
+	const { actions, createNodeId, createContentDigest } = params;
+	const { createNode } = actions;
+
+	console.log("Iniciando sourceNodes");
+	try {
+		// Elimina la lógica del cache y siempre crea nodos nuevos
+		console.log("Creando nodos");
+		const newFetchTime = await createNodes(params, null); // Ya no necesitas `lastFetchTime`
+		console.log("Nodos creados exitosamente");
+
+		// No necesitas guardar la fecha del nuevo fetch
+		console.log("Fetch completado sin uso de caché");
 	} catch (error) {
 		console.error("Error al crear nodos:", error);
 		throw error;
