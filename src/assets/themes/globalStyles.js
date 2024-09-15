@@ -69,7 +69,7 @@ body {
   font-family: roboto;  
   color: var(--clr-black);
   line-height: 1.5;
-  margin-top: 5.8rem;
+  margin-top: 3.8rem;
 }
 
 ul {

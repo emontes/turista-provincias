@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState} from 'react'
 import GlobalStyle from '../assets/themes/globalStyles'
 import { useStaticQuery, graphql } from 'gatsby'
 
@@ -76,7 +76,6 @@ const Layout = ({
 export default Layout
 
 const Wrapper = styled.main`
-
   background: url(${(props) => props.theme.images.bodyBg})
     ${(props) => props.theme.colors.primary10};
   .outer-top {

@@ -10,12 +10,19 @@ const Navbar = ({ toggleSidebar }) => {
   const themeContext = useContext(ThemeContext)
   const [prevScrollPos, setPrevScrollPos] = useState(0)
   const [visible, setVisible] = useState(true)
+  const [atTop, setAtTop] = useState(true) // Nuevo estado para detectar si estamos en la parte superior
   const { t } = useTranslation()
 
   const handleScroll = debounce(() => {
     const currentScrollPos = window.pageYOffset
+    const isAtTop = currentScrollPos < 10
+
+    // Detecta si estamos en la parte superior de la página
+    setAtTop(isAtTop)
+
+    // Actualiza la visibilidad del navbar
     setVisible(
-      prevScrollPos > currentScrollPos || currentScrollPos < 10
+      prevScrollPos > currentScrollPos || isAtTop
     )
     setPrevScrollPos(currentScrollPos)
   }, 250)
@@ -27,13 +34,17 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
-      style={{ backgroundColor: themeContext.colors.primary10 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+        visible ? 'translate-y-0' : '-translate-y-full'
+      } ${!atTop && 'border-b-2 shadow-md'}`} // Agrega border y shadow solo si no estamos en el top
+      style={{ backgroundColor: themeContext.colors.primary10, borderColor: themeContext.colors.primary1 }}
     >
-      <div className={'w-full px-4 py-4 mx-auto flex justify-between items-center border-b-2 shadow-md'}
-           style={{ borderColor: themeContext.colors.primary1 }}>
+      <div 
+        className={'w-full px-4 py-4 mx-auto flex justify-between items-center'}
+        style={{ borderColor: themeContext.colors.primary1 }}
+      >
         <div className="flex justify-between w-full lg:w-auto">
-        <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <LogoContainer>
               {themeContext.images.logoNav}
             </LogoContainer>
