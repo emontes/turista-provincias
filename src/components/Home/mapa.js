@@ -1,6 +1,6 @@
 import React from 'react'
 import Banner from '../Banner'
-import Map from '../../components/Hoteles/partial/Map'
+import MapaHoteles from '../../components/Hoteles/partial/Map'
 import { Trans } from 'gatsby-plugin-react-i18next'
 
 const estadoSlug = process.env.GATSBY_ESTADO_SLUG
@@ -9,22 +9,23 @@ const travelData = require(`../../constants/configs/${estadoSlug}/travelPayouts`
 const Mapa = ({ metadata, pageContext, seoDescription }) => {
   let textos = {
     chiapas:
-      'Chiapas es auténtico por naturaleza.  Chiapas es, y ha sido, siempre la última frontera de México, el lugar que aparece en tus seños cuando la selva tapa el cielo con el verde de su follaje, cascadas maravillosas, lagos de colores, un estado que no puedes dejar de visitar.',
+      'Descubre Chiapas, la última frontera de México y un paraíso auténtico por naturaleza. Aquí, selvas exuberantes abrazan el cielo, cascadas majestuosas danzan entre montañas y lagos multicolores reflejan una belleza infinita. Sumérgete en ruinas milenarias, pueblos mágicos y una biodiversidad asombrosa. Chiapas no solo se visita, se vive; cada rincón promete aventuras inolvidables y experiencias que cautivan el alma. Ven y déjate maravillar por este tesoro natural y cultural.',
     edomexico:
-      'El estado de México tiene mucho para ver, desde los más impresionantes sitios arqueológicos, museos y maravillas naturales; hasta los más modernos desarrollos urbanos.',
+      'Experimente la fascinante diversidad del Estado de México, donde la historia prehispánica se fusiona con la modernidad urbana. Desde majestuosos sitios arqueológicos y museos que narran siglos de cultura, hasta impresionantes maravillas naturales y desarrollos contemporáneos, cada rincón ofrece una aventura única. Descubra un destino que combina perfectamente el pasado y el presente en un solo viaje inolvidable.',
     yucatan:
-      'Yucatán es la tierra del faisán y del venado, es poesía... es música... el lugar de las Maravilas, imponente arqueología, la cuna de la trova. No dejes de visitar la tierra de los elegidos.',
+      'Yucatán, tierra de maravillas, fusiona historia y naturaleza en un paraíso único. Descubre imponentes ruinas mayas, playas de ensueño y cenotes cristalinos. Deléitate con su rica gastronomía, música tradicional y cálida hospitalidad. Explora coloridos pueblos mágicos y sumérgete en una cultura milenaria que cautiva a cada paso.',
   }
   if (pageContext.language === 'en') {
     textos = {
       chiapas:
-        'Chiapas is authentic by nature. Chiapas is, and has always been, the last frontier of Mexico, the place that appears in your dreams when the jungle covers the sky with the green of its foliage, wonderful waterfalls, colored lakes, a state that you cannot miss.',
+        'Discover Chiapas, The last frontier of Mexico and a paradise authentic by nature. Here, lush jungles embrace the sky, majestic waterfalls dance among mountains, and multicolored lakes reflect infinite beauty. Immerse yourself in ancient ruins, magical towns, and astounding biodiversity. Chiapas is not just visited, it is experienced; every corner promises unforgettable adventures and soul-stirring moments. Come and be amazed by this natural and cultural treasure.',
       edomexico:
-        'The state of Mexico has much to see, from the most impressive archaeological sites, museums and natural wonders; to the most modern urban developments.',
+        'Experience the captivating diversity of Estado de México, where ancient history blends with urban modernity. From majestic archaeological sites and museums narrating centuries of culture to breathtaking natural wonders and contemporary developments, every corner offers a unique adventure. Discover a destination that perfectly combines past and present in one unforgettable journey.',
       yucatan:
-        'Yucatan is the land of the pheasant and the deer, it is poetry... it is music... the place of wonders, imposing archeology, the cradle of trova. Be sure to visit the land of the chosen ones.',
+        'Yucatan, a land of wonders, blends history and nature into a unique paradise. Discover impressive Mayan ruins, dreamy beaches, and crystal-clear cenotes. Delight in its rich cuisine, traditional music, and warm hospitality. Explore colorful magical towns and immerse yourself in an ancient culture that captivates at every turn.',
     }
   }
+  console.log('Travel Data: ', travelData)
 
   return (
     <section className="2xl:flex">
@@ -36,8 +37,8 @@ const Mapa = ({ metadata, pageContext, seoDescription }) => {
         <h3 className="text-red-600 text-center uppercase">
           <Trans>¿Conoces</Trans> {metadata.estado.name}?
         </h3>
-        <Map location={travelData.location} zoom={7} />
-        <div className="mt-16">
+        <MapaHoteles location={travelData.location} zoom={7} />
+        <div className="mt-4">
           <p>{textos[metadata.estado.slug]}</p>
         </div>
       </div>
