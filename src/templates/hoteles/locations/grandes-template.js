@@ -117,6 +117,7 @@ export const pageQuery = graphql`
 
     ) {
       estrellas: distinct(field: {rating: SELECT})
+      sum(field: {cuartos: SELECT})
       nodes {
         ...ListaHoteles
       }
