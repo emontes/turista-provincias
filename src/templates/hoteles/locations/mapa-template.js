@@ -4,13 +4,14 @@ import { graphql } from "gatsby";
 import Seo from "../../../components/Seo";
 import { getSrc } from "gatsby-plugin-image";
 import Banner from "../../../components/Hoteles/Destination/Banner";
-import Map from "../../../components/Hoteles/partial/Map";
+import MapaHoteles from "../../../components/Hoteles/partial/Map";
 import NavTabs from "../../../components/Hoteles/Destination/NavTabs";
 import SideBanner from "../../../components/Banner";
 import footerList1 from "../../../constants/Hoteles/global-hotels-links";
 import footerList2 from "../../../constants/especialistas-links";
 import Breadcrumbs from '../../../components/atoms/Breadcrumbs'
 import { vistaToUrlHtml, vistaActionToUrlHtml } from '../../../utilities/stringService'
+import Mapa from "../../../components/Home/mapa";
 
 const Locations = ({ data, pageContext }) => {
 	
@@ -79,7 +80,7 @@ const Locations = ({ data, pageContext }) => {
 						</p>
 					</div>
 					<NavTabs vista={data.location} />
-					<Map location={data.location} />
+					<MapaHoteles location={data.location} />
 				</div>
 				<div>
 					<SideBanner
