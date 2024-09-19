@@ -1,8 +1,8 @@
 const data = {
   location: {
     name: 'Estado de México',
-    latitude: '19.288333',
-    longitude: '-99.667222',
+    latitud: '19.288333',
+    longitud: '-99.667222',
   },
 
   mapa:
